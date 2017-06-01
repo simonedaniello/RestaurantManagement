@@ -1,0 +1,9 @@
+SU ANGULAR, SE IO PARTENDO DALLA CREAZIONE DI DI UNA QUALSIASI MVC ENTITY FACCIO: angular.module("MyApp",[]) il secondo parametro [] sta ad indicare il modulo da iniettare.
+Tuttavia, se non è specificato alcun modulo, il modulo "MyApp" viene creato o ricreato se già presente, perdendo tutti i controller e services registrati.
+Per evitare che ciò accada, usare angular.module("MyApp").controller... con un solo argomento su tutti i controller successivi al primo caricato.
+########################
+ATTENZIONE all'ordine in cui vengono caricate le librerie angular sull'html, se si caricano prima quelle di angular-route e poi quelle di angular, angular non troverà il modulo da iniettare.
+########################
+Su SPRING BOOT, se vogliamo gestire un POST, l'unica annotazione possibile per prendere i data del messaggio è @RequestBody. Se si usa @RequestParam, un messaggio POST non ha i params!!!
+########################
+Se si vuole dichiarare una key che è una String, va specificata la size con l'annotazione hibernate @Size(max=32) specificando il massimo.
