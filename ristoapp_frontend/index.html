@@ -18,10 +18,11 @@
       <link href="lib/bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet">
       <link href="lib/css/project.css" rel="stylesheet">
       <link href="lib/css/registerForm.css" rel="stylesheet">
+     <link href="lib/css/sideMenu.css" rel="stylesheet">
    </head>
    <body ng-controller="pageController">
       <header ng-controller="headerController">
-         <nav role="navigation" class="navbar navbar-default">
+         <nav role="navigation" class="navbar navbar-default navbar-fixed-top">
             <div class="container-fluid">
                <div class="navbar-header">
                   <a class="navbar-brand" href="#">RistoApp</a>
@@ -121,4 +122,14 @@
             </div>
          </nav>
       </header>
+     <div class="nav-side-menu">
+        <div class="menu-list">
+            <ul id="menu-content" class="menu-content collapse out">
+                <li><a href="#" class="active">Dashboard</a></li>
+              <li><a href="#">Dashboard</a></li>
+              <li><a href="#">Dashboard</a></li>
+              <li><a href="#">Dashboard</a></li>
+            </ul>
+     </div>
+</div>
    </body>
