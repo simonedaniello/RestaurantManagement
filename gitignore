@@ -1,0 +1,10 @@
+Per evitare di mettere la cartella .idea in git:
+
+1. Da terminale sulla stessa path di .git eseguire:
+touch .gitignore
+
+2. git rm -r --cached ./ristoapp/.idea
+
+3. git rm -r --cached ./ristoapp_frontend/.idea
+
+4. git status         // per verificare
