@@ -1,0 +1,26 @@
+CONFIGURAZIONE MARIADB
+
+1) Installare mariadb per il proprio OS. link: https://downloads.mariadb.org/mariadb/repositories/#mirror=digitalocean-lon
+Provare a lanciare il comando mysql ed uscire dalla console scrivendo exit
+
+2) Se installato correttamente, entrare nella console come utente root. Su sistemi
+Linux: sudo mysql --password. La password di default è vuota, quindi se vi chiede la password premete enter senza digitare nulla.
+
+3) Eseguire lo script create_springuser.sql eseguendo:
+
+source path_to_script;
+
+Nel mio caso, avevo lo script su home quindi: source /home/alberto/create_springuser.sql;
+
+LA CONFIGURAZIONE FINISCE QUI, tuttavia, è bene notare una cosa:
+In SPRING, is src/main/resources c'è un file chiamato application.properties.
+
+spring.jpa.hibernate.ddl-auto=update
+spring.datasource.url=jdbc:mysql://localhost:3306/maindb
+spring.datasource.username=isssr
+spring.datasource.password=password
+spring.jpa.show-sql=true
+
+La modalità "update" fa in modo che se non c'è la table, viene creata e quando si stoppa il server e si fa ripartire non viene modificato nulla.
+Se per testing trovate comodo che ogni volta che si fa ripartire spring la tabella
+venga ricreata vuota, metterci "create".
