@@ -1,5 +1,5 @@
 <!doctype html>
-<html ng-app="ristoApp" lang="en">
+<html lang="en">
    <head>
       <title>RistoApp</title>
       <meta charset="utf-8">
@@ -11,6 +11,7 @@
       <meta http-equiv="pragma" content="no-cache" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
        <script src="node_modules/angular/angular.js"></script>
+       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
        <script src="node_modules/angular-cookies/angular-cookies.js"></script>
       <script src="js/controllers/pageController.js"></script>
        <script src="js/controllers/headerController.js"></script>
@@ -19,8 +20,28 @@
       <link href="lib/css/project.css" rel="stylesheet">
       <link href="lib/css/registerForm.css" rel="stylesheet">
      <link href="lib/css/sideMenu.css" rel="stylesheet">
+
+       <style>
+           #navLeft{
+               float: left;
+               max-width: 160px;
+               margin: 0;
+               padding: 1em;
+           }
+
+           #mainPage{
+               margin-left: 300px;
+               border-left: 1px solid gray;
+               padding: 50px;
+           }
+
+       </style>
    </head>
-   <body ng-controller="pageController">
+
+
+   <body ng-app="ristoApp">
+
+
       <header ng-controller="headerController">
          <nav role="navigation" class="navbar navbar-default navbar-fixed-top">
             <div class="container-fluid">
@@ -122,14 +143,20 @@
             </div>
          </nav>
       </header>
-     <div class="nav-side-menu">
+
+    <div id="navLeft">
+      <div class="nav-side-menu">
         <div class="menu-list">
             <ul id="menu-content" class="menu-content collapse out">
-                <li><a href="#" class="active">Dashboard</a></li>
-              <li><a href="#">Dashboard</a></li>
-              <li><a href="#">Dashboard</a></li>
-              <li><a href="#">Dashboard</a></li>
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#monday">Research Menu</a></li>
+                <li><a href="#table">Composite Category</a></li>
             </ul>
-     </div>
-</div>
+        </div>
+      </div>
+    </div>
+      <div id="mainPage">
+        <div ng-view></div>
+      </div>
+
    </body>
