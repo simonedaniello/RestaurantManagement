@@ -5,6 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="lib/css/sidebarBootstrap.css" rel="stylesheet">
+    <link href="lib/css/generalCSS.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
@@ -13,76 +15,110 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
     <script src="js/temporaryJS.js"></script>
 
-    <style>
-
-
-        table, th , td  {
-            border: 1px solid grey;
-            border-collapse: collapse;
-            padding: 5px;
-            text-align: left;
-        }
-        table tr:nth-child(odd) {
-            background-color: #f1f1f1;
-        }
-        table tr:nth-child(even) {
-            background-color: #ffffff;
-        }
-
-        /* Remove the navbar's default rounded borders and increase the bottom margin */
-        .navbar {
-            margin-bottom: 50px;
-            border-radius: 0;
-        }
-
-        /* Remove the jumbotron's default bottom margin */
-        .jumbotron {
-            margin-bottom: 0;
-        }
-
-        /* Add a gray background color and some padding to the footer */
-        footer {
-            background-color: #f2f2f2;
-            padding: 25px;
-        }
-
-        .row.content {height: 1500px}
-
-        /* Set gray background color and 100% height */
-        .sidenav {
-            background-color: #f1f1f1;
-            height: 100%;
-        }
-
-        /* Set black background color, white text and some padding */
-        footer {
-            background-color: #555;
-            color: white;
-            padding: 15px;
-        }
-
-        /* On small screens, set height to 'auto' for sidenav and grid */
-        @media screen and (max-width: 767px) {
-            .sidenav {
-                height: auto;
-                padding: 15px;
-            }
-
-            .row.content {
-                height: auto;
-            }
-        }
-    </style>
-
 
 </head>
 <body ng-app="ristoApp">
+
+
+<nav class="main-menu">
+    <ul>
+        <li>
+            <a href="#">
+                <i class="fa fa-home fa-2x"></i>
+                <span class="nav-text">
+                            Home
+                        </span>
+            </a>
+
+        </li>
+        <li class="has-subnav">
+            <a href="#table">
+                <i class="fa fa-laptop fa-2x"></i>
+                <span class="nav-text">
+                            Ricerca Menù
+                        </span>
+            </a>
+
+        </li>
+        <li class="has-subnav">
+            <a href="#monday">
+                <i class="fa fa-list fa-2x"></i>
+                <span class="nav-text">
+                            Aggiungi Categoria
+                        </span>
+            </a>
+
+        </li>
+        <li class="has-subnav">
+            <a href="#">
+                <i class="fa fa-folder-open fa-2x"></i>
+                <span class="nav-text">
+                            Aggiungi funzione
+                        </span>
+            </a>
+
+        </li>
+        <li>
+            <a href="#">
+                <i class="fa fa-bar-chart-o fa-2x"></i>
+                <span class="nav-text">
+                            Aggiungi funzione
+                        </span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class="fa fa-font fa-2x"></i>
+                <span class="nav-text">
+                            Aggiungi funzione
+                        </span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class="fa fa-table fa-2x"></i>
+                <span class="nav-text">
+                            Aggiungi funzione
+                        </span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class="fa fa-map-marker fa-2x"></i>
+                <span class="nav-text">
+                            Aggiungi funzione
+                        </span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class="fa fa-info fa-2x"></i>
+                <span class="nav-text">
+                            Aggiungi funzione
+                        </span>
+            </a>
+        </li>
+    </ul>
+
+    <!--<ul class="logout">
+        <li>
+            <a href="#">
+                <i class="fa fa-power-off fa-2x"></i>
+                <span class="nav-text">
+                            Logout
+                        </span>
+            </a>
+        </li>
+    </ul>-->
+</nav>
+
 
 <div class="jumbotron" style="background-size: 100% 100%; background: url('http://thesocietycafe.in/wp-content/uploads/2014/05/food-header-1.jpg')">
     <div class="container text-center">
         <h1 style="color: white; text-align: left">Ristorante Cantone</h1>
     </div>
 </div>
+
 
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
@@ -110,19 +146,26 @@
     </div>
 </nav>
 
-<div id="navLeft">
+<!--<div id="navLeft" style="display:none">
     <div class="nav-side-menu">
         <div class="menu-list">
             <ul id="menu-content" class="menu-content collapse out">
+                <button class="w3-bar-item w3-button w3-large"
+                        onclick="w3_close()">Close &times;</button>
                 <li class="active"><a href="#">Home</a></li>
                 <li><a href="#monday">Research Menu</a></li>
                 <li><a href="#table">Composite Category</a></li>
             </ul>
         </div>
     </div>
-</div>
-<div id="mainPage">
-    <div ng-view></div>
+</div>-->
+
+<!--<button class="w3-button w3-white w3-xxlarge" onclick="w3_open()">&#9776;</button>-->
+
+
+
+<div style="padding-left: 60px">
+<div ng-view></div>
 </div>
 
 
