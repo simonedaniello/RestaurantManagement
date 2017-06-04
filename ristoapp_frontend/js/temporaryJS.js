@@ -1,11 +1,8 @@
-var myApp = angular.module("ristoApp", ["ngCookies", "ngRoute"]);
+/**
+ * Created by dandi on 13/05/17.
+ */
 
-myApp.controller("pageController", function ($scope, $cookies) {
-    if ($cookies.getObject("credentials") != null){
-        alert("COOKIE FOUND!!!");
-        $cookies.remove("credentials");
-    }
-});
+var myApp = angular.module("ristoApp", ["ngRoute"]);
 
 
 myApp.config(function($routeProvider) {
@@ -28,9 +25,9 @@ myApp.controller('ajaxController', function($scope, $http) {
     /* var recipe = $scope.namerecipe;
      var itemInList = $scope.itemInList.Country;*/
 
-    $http.get("list.txt").then(function (response) {
+    /*$http.get("list.txt").then(function (response) {
         $scope.myData = response.data.records;
-    });
+    });*/
 
     $scope.researchInText = function() {
         return /*itemInList.isEqual(recipe);*/ true;
@@ -145,6 +142,7 @@ myApp.controller('repeatController', function($scope) {
         {Name:"Pollo alla romana",           Category:"Secondo",     Chef:"Cracco" }
     ]
 });
+
 
 
 
