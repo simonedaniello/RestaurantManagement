@@ -9,6 +9,7 @@
   height: 100%;
   color: #e1ffff;
   padding-top: 1.5cm;
+  z-index: 1;
 }
 
 .nav-side-menu ul,
