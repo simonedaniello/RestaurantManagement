@@ -1,0 +1,60 @@
+{
+  "nomeMenu": "Menu Estivo",
+  "categorie": [
+    {
+      "nomeCategoria": "Primi",
+      "pietanze": [
+        {
+          "nomePietanza": "Spaghetti allo scoglio",
+          "prezzo": 13,
+          "prodotti": ["spaghetti", "cozze", "seppie", "calamari", "gamberetti", "aglio", "prezzemolo"]
+        },
+        {
+          "nomePietanza": "Tagliatelle ai funghi porcini",
+          "prezzo": 12,
+          "prodotti": ["pasta all'uovo", "funghi porcini", "panna", "prezzemolo"]
+        },
+        {
+          "nomePietanza": "Pasta al pesto",
+          "prezzo": 7,
+          "prodotti": ["pasta", "basilico", "pinoli", "parmigiano", "olio d'oliva"]
+        }
+      ]
+    },
+    {
+      "nomeCategoria": "Secondi",
+      "pietanze": [
+        {
+          "nomePietanza": "Cotoletta alla milanese",
+          "prezzo": 12,
+          "prodotti": ["vitello", "pomodori", "rucola"]
+        },
+        {
+          "nomePietanza": "Fritto misto di mare",
+          "prezzo": 16,
+          "prodotti": ["totani", "gamberi", "scampi", "seppie"]
+        },
+        {
+          "nomePietanza": "Fritto misto di verdure*",
+          "prezzo": 7,
+          "prodotti": ["zucchine", "carote", "cavoli", "melanzana"]
+        }
+      ]
+    },
+    {
+      "nomeCategoria": "Dolci",
+      "pietanze": [
+        {
+          "nomePietanza": "Tiramisù",
+          "prezzo": 4,
+          "prodotti": ["savoiardi", "caffè", "cacao in polvere", "mascarpone"]
+        },
+        {
+          "nomePietanza": "Crostata ai frutti di bosco",
+          "prezzo": 5,
+          "prodotti": ["pastafrolla", "mirtilli", "lamponi", "more", "crema"]
+        }
+      ]
+    }
+  ]
+}
