@@ -1,9 +1,7 @@
 package uni.isssr.entities;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Ingrediente {
@@ -23,6 +21,7 @@ public class Ingrediente {
     // quantità è in grammi
     private double quantita;
 
+    @ManyToOne
     private Prodotto prodotto;
 
     public Long getId() {

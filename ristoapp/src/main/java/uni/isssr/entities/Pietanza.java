@@ -1,5 +1,7 @@
 package uni.isssr.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 import java.util.List;
 import java.util.Set;
@@ -18,14 +20,18 @@ public class Pietanza {
 
     @Id
     @GeneratedValue
+    @JsonProperty
     private Long id;
 
     @OneToMany
+    @JsonProperty
     private List<Ingrediente> ingredienti;
 
+    @JsonProperty
     private String nome;
 
     @ManyToMany
+    @JsonProperty
     private Set<Etichetta> etichette;
 
     public Long getId() {

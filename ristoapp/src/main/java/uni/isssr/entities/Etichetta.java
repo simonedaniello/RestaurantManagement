@@ -19,7 +19,7 @@ public class Etichetta {
     @Size(max = 32)
     private String classificatore;
 
-    @ManyToMany(mappedBy = "pietanza")
+    @ManyToMany(mappedBy = "etichette")
     private List<Pietanza> pietanza;
 
     public List<Pietanza> getPietanza() {

@@ -1,15 +1,14 @@
 package uni.isssr.entities;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
-
-@MappedSuperclass
+import javax.persistence.*;
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
+//@MappedSuperclass
 public abstract class Categoria {
 
     @Id
-    @GeneratedValue
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.TABLE)
+    protected Long id;
 
-    private String nome;
+    protected String nome;
 }
