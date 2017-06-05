@@ -8,16 +8,55 @@ var myApp = angular.module("ristoApp", ["ngRoute"]);
 myApp.config(function($routeProvider) {
     $routeProvider
         .when("/monday", {
-            templateUrl : "htmlFiles/aggiungiCategoria.html"
+            templateUrl : "htmlFiles/aggiungiCategoria.html",
+            controller: "myCtrl"
         })
         .when("/table", {
             templateUrl : "htmlFiles/ricercaMenu.html"
             /*controller:"table_controller"*/
         })
+        .when("/table/:nomeMenu", {
+            templateUrl : "htmlFiles/visualizzaMenu.html",
+            css : "cssFiles/menu.css",
+            controller : "MenuController"
+        })
         .otherwise({
             templateUrl : "htmlFiles/mainPage.html"
         });
 });
+
+myApp.service('MenuService', ["$http", function($http) {
+
+    this.getMenu = function(url) {
+        return $http.get(url);
+    };
+}]);
+
+myApp.controller("MenuController", ["$scope", "MenuService", function ($scope, MenuService) {
+
+    $scope.menu = {nomeMenu: undefined, categorie: undefined};
+    //var nomeMenu = $routeParams.nomeMenu;
+
+
+    MenuService.getMenu("jsonFiles/menu_mock.json").then(function (response) {
+        var data = response.data;
+        $scope.menu.nomeMenu = data.nomeMenu;
+        $scope.menu.categorie = data.categorie;
+    }, function (error) {
+        console.log(error);
+    });
+
+
+    /*
+     ajaxService.getResource("../jsonFiles/menu_mock.json", nomeMenu).then(function (response) {
+     var data = response.data;
+     $scope.menu.nomeMenu = data.nomeMenu;
+     $scope.menu.categorie = data.categorie;
+     }, function (error) {
+     console.log(error);
+     });
+     */
+}]);
 
 
 myApp.controller('ajaxController', function($scope, $http) {
@@ -37,7 +76,37 @@ myApp.controller('ajaxController', function($scope, $http) {
 function checkCountry(country1, country2) {
     return country1 === country2;
 }
-
+myApp.controller("myCtrl", function($scope) {
+    $scope.records = [
+        {Name:"Carbonara",                   Category:"Pasta",       Chef:"Cracco" },
+        {Name:"Amatriciana",                 Category:"Pasta",       Chef:"Cracco" },
+        {Name:"Pasta con lo scoglio",        Category:"Pasta",       Chef:"Cracco" },
+        {Name:"Spaghetti agli scampi",       Category:"Pasta",       Chef:"Cracco" },
+        {Name:"Lasagne",                     Category:"Primo",       Chef:"Cracco" },
+        {Name:"Krapfen",                     Category:"Dolce",       Chef:"Cracco" },
+        {Name:"Purea di patate",             Category:"Secondo",     Chef:"Cracco" },
+        {Name:"Banana Split",                Category:"Dolce",       Chef:"Cracco" },
+        {Name:"Bollito di asparagi",         Category:"Secondo",     Chef:"Cracco" },
+        {Name:"Spremuta di arance",          Category:"Bevanda",     Chef:"Cracco" },
+        {Name:"Biscotti alla Carlo",         Category:"Dolce",       Chef:"Cracco" },
+        {Name:"Pasta al tonno",              Category:"Primo",       Chef:"Cracco" },
+        {Name:"Linguine con lumache",        Category:"Primo",       Chef:"Cracco" },
+        {Name:"Spaghetti di soia",           Category:"Primo",       Chef:"Cracco" },
+        {Name:"Pollo alla romana",           Category:"Secondo",     Chef:"Cracco" }
+    ];
+    $scope.selected = [];
+    $scope.records.sort();
+    $scope.updateSelected = function(idPietanza){
+        var checkBox = document.getElementById(idPietanza);
+        var name = idPietanza;
+        if(checkBox.checked) {
+            $scope.selected.push(name);
+            $scope.selected.sort();
+        }else{
+            $scope.selected.splice($scope.selected.indexOf(name),1);
+        }
+    }
+});
 myApp.controller('researchController', function($scope) {
     $scope.researchInText = function(tag, written) {
         return tag.contains(written);
@@ -140,7 +209,7 @@ myApp.controller('repeatController', function($scope) {
         {Name:"Linguine con lumache",        Category:"Primo",       Chef:"Cracco" },
         {Name:"Spaghetti di soia",           Category:"Primo",       Chef:"Cracco" },
         {Name:"Pollo alla romana",           Category:"Secondo",     Chef:"Cracco" }
-    ]
+    ];
 });
 
 

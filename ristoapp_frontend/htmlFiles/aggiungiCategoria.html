@@ -1,6 +1,41 @@
+<script>
+    var app = angular.module("ristoApp", []);
+    app.controller("myCtrl", function($scope) {
+        $scope.records = [
+            {Name:"Carbonara",                   Category:"Pasta",       Chef:"Cracco" },
+            {Name:"Amatriciana",                 Category:"Pasta",       Chef:"Cracco" },
+            {Name:"Pasta con lo scoglio",        Category:"Pasta",       Chef:"Cracco" },
+            {Name:"Spaghetti agli scampi",       Category:"Pasta",       Chef:"Cracco" },
+            {Name:"Lasagne",                     Category:"Primo",       Chef:"Cracco" },
+            {Name:"Krapfen",                     Category:"Dolce",       Chef:"Cracco" },
+            {Name:"Purea di patate",             Category:"Secondo",     Chef:"Cracco" },
+            {Name:"Banana Split",                Category:"Dolce",       Chef:"Cracco" },
+            {Name:"Bollito di asparagi",         Category:"Secondo",     Chef:"Cracco" },
+            {Name:"Spremuta di arance",          Category:"Bevanda",     Chef:"Cracco" },
+            {Name:"Biscotti alla Carlo",         Category:"Dolce",       Chef:"Cracco" },
+            {Name:"Pasta al tonno",              Category:"Primo",       Chef:"Cracco" },
+            {Name:"Linguine con lumache",        Category:"Primo",       Chef:"Cracco" },
+            {Name:"Spaghetti di soia",           Category:"Primo",       Chef:"Cracco" },
+            {Name:"Pollo alla romana",           Category:"Secondo",     Chef:"Cracco" }
+        ];
+        $scope.selected = [];
+        $scope.records.sort();
+        $scope.updateSelected = function(idPietanza){
+            var checkBox = document.getElementById(idPietanza);
+            var name = idPietanza;
+            if(checkBox.checked) {
+                $scope.selected.push(name);
+                $scope.selected.sort();
+            }else{
+                $scope.selected.splice($scope.selected.indexOf(name),1);
+            }
+        }
+    });
+</script>
+
 
 <div class="container-fluid">
-    <div class="row content" ng-app="ajaxApp" ng-controller="ajaxController">
+    <div class="row content" ng-app="ristoApp" ng-controller="ajaxController">
         <div class="col-sm-3 sidenav">
             <br>
             <h4>Crea Categoria</h4>
@@ -14,8 +49,8 @@
             </div>
         </div>
 
-        <div class="col-sm-9">
-            <div ng-controller="repeatController">
+        <div class="col-sm-9" ng-controller="myCtrl">
+
                 <h4><small>RECIPIES</small></h4>
                 <hr>
                 There are {{records.length}} recipies :
@@ -38,36 +73,48 @@
                     </div>
                 </div>
                 <br><br>
-                <div class="panel panel-default">
-                    <div class="panel-heading"><p><b>Seleziona pietanza</b></p></div>
-                    <div class="panel-body" style="overflow-y: auto; height: 420px">
-                        <table class="table table-striped">
-                            <tbody>
-                            <tr ng-repeat="pietanza in records | orderBy:'Category' | filter:q">
-                                <td><p style="font-style: italic">{{pietanza.Name}}</p></td>
-                                <td><div class="checkbox">
-                                    <label><input type="checkbox" ng-click="updateSelected(pietanza)" id="{{pietanza}}"></label>
-                                </div></td>
-                            </tr>
-                            </tbody>
-                        </table>
+
+                <!-- Inizia riga -->
+                <div class="row">
+                    <div class="col-md-8">
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading"><p><b>Seleziona pietanza</b></p></div>
+                            <div class="panel-body" style="overflow-y: auto; height: 420px">
+                                <table class="table table-striped">
+                                    <tbody>
+                                    <tr ng-repeat="pietanza in records | orderBy:'Category' | filter:q">
+                                        <td><p style="font-style: italic">{{pietanza.Name}}</p></td>
+                                        <td><div class="checkbox">
+                                            <label><input type="checkbox" ng-click="updateSelected(pietanza.Name)" id="{{pietanza.Name}}"></label>
+                                        </div></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Colonna destra pietanze -->
+                    <div class="col-md-4">
+                        <div class="panel panel-default">
+                            <div class="panel-heading"><p><b>Pietanze selezionate</b></p></div>
+                            <div class="panel-body" style="overflow-y: auto; height: 350px">
+                                <table class="table table-striped">
+                                    <tbody>
+                                    <tr ng-repeat="selezionata in selected">
+                                        <td><p style="font-style: italic">{{selezionata}}</p></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
+                <!-- Fine riga -->
 
-
-                <br><br><br>
-                <h4><small>MY RECIPIES</small></h4>
-                <hr>
-                <div style="overflow:scroll; height:400px;">
-                    <table class="table table-hover" id="choosenTable">
-                        <tr>
-                            <th>Name</th>
-                            <th>Category</th>
-                            <th>Chef</th>
-                        </tr>
-                    </table>
-                </div>
-            </div>
         </div>
     </div>
 </div>
