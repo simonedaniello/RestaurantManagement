@@ -1,0 +1,73 @@
+
+<div class="container-fluid">
+    <div class="row content" ng-app="ajaxApp" ng-controller="ajaxController">
+        <div class="col-sm-3 sidenav">
+            <br>
+            <h4>Crea Categoria</h4>
+            <br><br>
+            <div class="form-group">
+                <label for="usr1">Nome categoria:</label>
+                <input type="text" ng-model="namecategory" class="form-control" id="usr1">
+            </div>
+            <div class="form-group">
+                <button type="button" ng-model="saveButton" class="btn btn-success">Salva</button>
+            </div>
+        </div>
+
+        <div class="col-sm-9">
+            <div ng-controller="repeatController">
+                <h4><small>RECIPIES</small></h4>
+                <hr>
+                There are {{records.length}} recipies :
+                <div class="form-inline">
+                    <div class="form-group">
+                <input type="search" ng-model="q"
+                       placeholder="filter records..."
+                       aria-label="filter recipe"
+                       class="form-control"/>
+                    </div>
+                    <div class="form-group dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Tag <span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                        <li>Pasta</li>
+                        <li>Primo</li>
+                        <li>Dolce</li>
+                        <li>Secondo</li>
+                        <li>Bevanda</li>
+                        </ul>
+                    </div>
+                </div>
+                <br><br>
+                <div class="panel panel-default">
+                    <div class="panel-heading"><p><b>Seleziona pietanza</b></p></div>
+                    <div class="panel-body" style="overflow-y: auto; height: 420px">
+                        <table class="table table-striped">
+                            <tbody>
+                            <tr ng-repeat="pietanza in records | orderBy:'Category' | filter:q">
+                                <td><p style="font-style: italic">{{pietanza.Name}}</p></td>
+                                <td><div class="checkbox">
+                                    <label><input type="checkbox" ng-click="updateSelected(pietanza)" id="{{pietanza}}"></label>
+                                </div></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+                <br><br><br>
+                <h4><small>MY RECIPIES</small></h4>
+                <hr>
+                <div style="overflow:scroll; height:400px;">
+                    <table class="table table-hover" id="choosenTable">
+                        <tr>
+                            <th>Name</th>
+                            <th>Category</th>
+                            <th>Chef</th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

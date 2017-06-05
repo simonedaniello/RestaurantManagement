@@ -8,7 +8,7 @@ var myApp = angular.module("ristoApp", ["ngRoute"]);
 myApp.config(function($routeProvider) {
     $routeProvider
         .when("/monday", {
-            templateUrl : "htmlFiles/componiCategoria.html"
+            templateUrl : "htmlFiles/aggiungiCategoria.html"
         })
         .when("/table", {
             templateUrl : "htmlFiles/ricercaMenu.html"
