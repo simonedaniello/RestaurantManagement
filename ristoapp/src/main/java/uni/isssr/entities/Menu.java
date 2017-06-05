@@ -13,6 +13,8 @@ public class Menu {
 
     private String descrizione;
 
+    private String chef;
+
     @OneToMany
     private List<Categoria> categorie;
 }
