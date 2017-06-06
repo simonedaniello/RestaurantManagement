@@ -19,6 +19,7 @@
     <script src="node_modules/ngstorage/ngStorage.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="lib/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- Our script section -->
     <!--<script src="js/controllers/pageController.js"></script>-->
@@ -39,96 +40,30 @@
 </head>
 <body ng-app="ristoApp">
 
+<!--
 
-<nav class="main-menu">
-    <ul>
-        <li>
-            <a href="#">
-                <i class="fa fa-home fa-2x"></i>
-                <span class="nav-text">
-                            Home
-                        </span>
-            </a>
-
-        </li>
-        <li class="has-subnav">
-            <a href="#!table">
-                <i class="fa fa-laptop fa-2x"></i>
-                <span class="nav-text">
-                            Ricerca Menù
-                        </span>
-            </a>
-
-        </li>
-        <li class="has-subnav">
-            <a href="#!monday">
-                <i class="fa fa-list fa-2x"></i>
-                <span class="nav-text">
-                            Aggiungi Categoria
-                        </span>
-            </a>
-
-        </li>
-        <li class="has-subnav">
-            <a href="#">
-                <i class="fa fa-folder-open fa-2x"></i>
-                <span class="nav-text">
-                            Aggiungi funzione
-                        </span>
-            </a>
-
-        </li>
-        <li>
-            <a href="#">
-                <i class="fa fa-bar-chart-o fa-2x"></i>
-                <span class="nav-text">
-                            Aggiungi funzione
-                        </span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <i class="fa fa-font fa-2x"></i>
-                <span class="nav-text">
-                            Aggiungi funzione
-                        </span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <i class="fa fa-table fa-2x"></i>
-                <span class="nav-text">
-                            Aggiungi funzione
-                        </span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <i class="fa fa-map-marker fa-2x"></i>
-                <span class="nav-text">
-                            Aggiungi funzione
-                        </span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <i class="fa fa-info fa-2x"></i>
-                <span class="nav-text">
-                            Aggiungi funzione
-                        </span>
-            </a>
-        </li>
-    </ul>
-</nav>
-
-
-<header ng-controller="headerController">
 <div class="jumbotron" style="background-size: 100% 100%; background: url('http://thesocietycafe.in/wp-content/uploads/2014/05/food-header-1.jpg')">
     <div class="container text-center">
         <h1 style="color: white; text-align: left">Ristorante</h1>
     </div>
 </div>
 
+-->
+
+<header class="w3-display-container w3-content w3-wide" style="max-width:1600px;min-width:500px" id="home">
+    <img class="w3-image" src="http://www.karismahotels.com/gourmetinclusive/images/main/platemain.jpg" alt="Hamburger Catering" width="1600" height="800">
+    <div class="w3-display-bottomleft w3-padding-large w3-opacity">
+        <h1 class="w3-xxlarge">RistoApp</h1>
+    </div>
+</header>
+
+
+<div ng-controller="headerController">
+    <nav role="navigation" class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">RistoApp</a>
+            </div>
     <nav role="navigation" class="navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -136,14 +71,24 @@
             </div>
             <ul class="nav navbar-nav">
                 <li class="active"><a href="#">Home</a></li>
-                <li><a href="#">Page 1</a></li>
-                <li><a href="#">Page 2</a></li>
+                <li><a href="#monday">Categories</a></li>
+                <li><a href="#table">Menu</a></li>
                 <li><a href="#">Page 3</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a ng-click="registerClick()" href=""><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                <li><a ng-click="loginClick()" href=""><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-user"></span> Your Account</a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
             </ul>
+            <form class="navbar-form navbar-right">
+                <div class="input-group">
+                    <input type="text" class="form-control search-input" placeholder="Search">
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" type="submit">
+                            <i class="glyphicon glyphicon-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
             <form class="navbar-form navbar-right">
                 <div class="input-group">
                     <input type="text" class="form-control search-input" placeholder="Search">
@@ -228,8 +173,9 @@
             </div>
         </div>
     </nav>
-</header>
-
+        </div>
+    </nav>
+</div>
 <!--<div id="navLeft" style="display:none">
     <div class="nav-side-menu">
         <div class="menu-list">
@@ -247,10 +193,17 @@
 <!--<button class="w3-button w3-white w3-xxlarge" onclick="w3_open()">&#9776;</button>-->
 
 
+            <div ng-view></div>
 
-<div style="padding-left: 60px">
-<div ng-view></div>
-</div>
+            <footer class="w3-container w3-padding-64 w3-light-grey w3-center w3-large">
+                <i class="fa fa-facebook-official w3-hover-opacity"></i>
+                <i class="fa fa-instagram w3-hover-opacity"></i>
+                <i class="fa fa-snapchat w3-hover-opacity"></i>
+                <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+                <i class="fa fa-twitter w3-hover-opacity"></i>
+                <i class="fa fa-linkedin w3-hover-opacity"></i>
+            </footer>
+
 
 
 

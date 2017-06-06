@@ -212,6 +212,23 @@ myApp.controller('repeatController', function($scope) {
     ];
 });
 
+myApp.controller("headerController", function ($scope) {
+
+    $scope.loghide = true;
+    $scope.reghide = true;
+
+    $scope.registerClick = function () {
+        $scope.loghide = true;
+        $scope.reghide = !$scope.reghide;
+    };
+
+    $scope.loginClick = function () {
+        $scope.reghide = true;
+        $scope.loghide = !$scope.loghide;
+    };
+
+});
+
 
 
 
