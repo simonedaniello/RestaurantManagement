@@ -1,7 +1,10 @@
-angular.module("ristoApp").controller("headerController", function ($scope, $cookies, ajaxService) {
+angular.module("ristoApp").controller("headerController", function ($scope, $localStorage, ajaxService) {
 
     $scope.loghide = true;
     $scope.reghide = true;
+
+    $scope.$storage = $localStorage;
+
 
     $scope.registerClick = function () {
         $scope.loghide = true;
@@ -13,6 +16,19 @@ angular.module("ristoApp").controller("headerController", function ($scope, $coo
         $scope.loghide = !$scope.loghide;
     };
 
+    $scope.loginButton = function () {
+        var nome = $scope.loginNome;
+        var pass = $scope.loginPass;
+        var data = {name: nome, password: pass};
+        ajaxService.getResource("http://localhost:8080/login", data).then(
+            function (response) {
+                console.log("loggato: " + nome);
+            }
+            , function (response) {
+                alert("Username o Password non corretti");
+            });
+    };
+
     $scope.registerButton = function () {
         var e = document.getElementById("typeChoicer");
         var typec = e.options[e.selectedIndex].text;
@@ -21,7 +37,7 @@ angular.module("ristoApp").controller("headerController", function ($scope, $coo
         password: $scope.password, type: typec};
         ajaxService.sendResource("http://localhost:8080/register/add", data).then(
             function (response) {
-                $cookies.putObject("credentials", data);
+                $localStorage.data = data;
             }
         , function (response) {
                 alert(response);

@@ -1,28 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Bootstrap Example</title>
+    <title>RistoApp</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- CSS section -->
+    <link rel="stylesheet" href="lib/bootstrap-3.3.7-dist/css/bootstrap.css">
     <link href="lib/css/sidebarBootstrap.css" rel="stylesheet">
     <link href="lib/css/generalCSS.css" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-    <!--script di angularjs e di angularjs-route-->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
-    <script src="js/temporaryJS.js"></script>
+    <link href="lib/css/project.css" rel="stylesheet">
+    <link href="lib/css/registerForm.css" rel="stylesheet">
     <link href="cssFiles/menu.css" rel="stylesheet">
 
+    <!--libraries section-->
+    <script src="node_modules/angular/angular.js"></script>
+    <script src="node_modules/angular-route/angular-route.js"></script>
+    <script src="node_modules/ngstorage/ngStorage.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="lib/js/bootstrap.js"></script>
+
+    <!-- Our script section -->
+    <!--<script src="js/controllers/pageController.js"></script>-->
+    <script src="js/temporaryJS.js"></script>
+    <script src="js/controllers/headerController.js"></script>
+    <script src="js/services/ajaxService.js"></script>
+
+<!--
     <style>
         .container {
-            background-image: url(/imgFiles/menu_background.jpg);
+            background-image: url(imgFiles/menu_background.jpg);
             background-size: cover;
         }
     </style>
-
+-->
 
 
 </head>
@@ -41,7 +52,7 @@
 
         </li>
         <li class="has-subnav">
-            <a href="#table">
+            <a href="#!table">
                 <i class="fa fa-laptop fa-2x"></i>
                 <span class="nav-text">
                             Ricerca Menù
@@ -50,7 +61,7 @@
 
         </li>
         <li class="has-subnav">
-            <a href="#monday">
+            <a href="#!monday">
                 <i class="fa fa-list fa-2x"></i>
                 <span class="nav-text">
                             Aggiungi Categoria
@@ -108,52 +119,116 @@
             </a>
         </li>
     </ul>
-
-    <!--<ul class="logout">
-        <li>
-            <a href="#">
-                <i class="fa fa-power-off fa-2x"></i>
-                <span class="nav-text">
-                            Logout
-                        </span>
-            </a>
-        </li>
-    </ul>-->
 </nav>
 
 
+<header ng-controller="headerController">
 <div class="jumbotron" style="background-size: 100% 100%; background: url('http://thesocietycafe.in/wp-content/uploads/2014/05/food-header-1.jpg')">
     <div class="container text-center">
         <h1 style="color: white; text-align: left">Ristorante</h1>
     </div>
 </div>
 
-
-<nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">Logo</a>
-        </div>
-        <div class="collapse navbar-collapse" id="myNavbar">
+    <nav role="navigation" class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">RistoApp</a>
+            </div>
             <ul class="nav navbar-nav">
                 <li class="active"><a href="#">Home</a></li>
-                <li><a href="#monday">Monday</a></li>
-                <li><a href="#table">Table</a></li>
-                <!--                <li><a href="#">Stores</a></li>
-                                <li><a href="#">Contact</a></li>-->
+                <li><a href="#">Page 1</a></li>
+                <li><a href="#">Page 2</a></li>
+                <li><a href="#">Page 3</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#"><span class="glyphicon glyphicon-user"></span> Your Account</a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
+                <li><a ng-click="registerClick()" href=""><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                <li><a ng-click="loginClick()" href=""><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             </ul>
+            <form class="navbar-form navbar-right">
+                <div class="input-group">
+                    <input type="text" class="form-control search-input" placeholder="Search">
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" type="submit">
+                            <i class="glyphicon glyphicon-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
         </div>
-    </div>
-</nav>
+        <div ng-hide="loghide" id="myDropdown" class="dropdown-content-login">
+            <div class="wrapper">
+                <form  method="get" name="Login_Form" class="form-signin-login">
+                    <h3 class="form-signin-heading-login">Welcome Back!</h3>
+                    <hr class="colorgraph">
+                    <br>
+                    <input ng-model="loginNome" type="text" class="form-control form-control-login" name="Username" placeholder="Username" required="" autofocus="" />
+                    <input ng-model="loginPass" type="password" class="form-control form-control-login" name="Password" placeholder="Password" required=""/>
+                    <button ng-click="loginButton()" class="btn btn-lg btn-primary btn-block"  name="Submit" value="Login" type="Submit">Login</button>
+                </form>
+            </div>
+        </div>
+        <div ng-hide="reghide" class="dropdown-content-register">
+            <div class="main-login main-center">
+                <h3>Registration form</h3>
+                <form class="" method="post"  name="registerForm">
+                    <div class="form-group">
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <select id="typeChoicer">
+                                    <option value="user">user</option>
+                                    <option value="admin">admin</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-user" aria-hidden="true"></i></span>
+                                <input ng-model="name" type="text" class="form-control form-control-register" name="name" id="name"  placeholder="Your name"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i></span>
+                                <input ng-model="email" type="text" class="form-control form-control-register" name="email" id="email"  placeholder="Your mail" required/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-user" aria-hidden="true"></i></span>
+                                <input ng-model="username" type="text" class="form-control form-control-register" name="username" id="username"  placeholder="Username"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-lock" aria-hidden="true"></i></span>
+                                <input ng-model="password" type="password" class="form-control form-control-register" name="password" id="password"  placeholder="Password"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-lock" aria-hidden="true"></i></span>
+                                <input type="password" class="form-control form-control-register" name="confirm" id="confirm"  placeholder="Confirm your password"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <a ng-click="registerButton()" target="_blank" type="button" id="button" class="btn btn-primary btn-lg btn-block login-button">Sign Up</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </nav>
+</header>
 
 <!--<div id="navLeft" style="display:none">
     <div class="nav-side-menu">
