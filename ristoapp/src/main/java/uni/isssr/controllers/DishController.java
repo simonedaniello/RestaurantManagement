@@ -14,7 +14,7 @@ import java.util.List;
  * Created by francesco on 03/06/17.
  */
 @Controller
-public class dishController {
+public class DishController {
 
     @RequestMapping(path = "dishes", method  = RequestMethod.GET)
     @ResponseBody public List<Pietanza> getDishes() {
@@ -22,7 +22,8 @@ public class dishController {
         "Bruschetta al pomodoro",
                 "Moscardini fritti",
                 "Risotto alla pescatora",
-                "Spaghetti alle vongole", "Spaghetti allo scoglio",
+                "Spaghetti alle vongole",
+                "Spaghetti allo scoglio",
                 "Frittura di paranza"
         };
         List<Pietanza> dishes = new ArrayList<Pietanza>();

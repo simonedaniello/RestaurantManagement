@@ -1,14 +1,17 @@
 package uni.isssr.entities;
 
 import javax.persistence.*;
+import java.util.Set;
+
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
-//@MappedSuperclass
-public abstract class Categoria {
+public class Categoria {
 
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
-    protected Long id;
+    private Long id;
 
-    protected String nome;
+    private String nome;
+
+    @OneToMany
+    private Set<Pietanza> pientanze;
 }

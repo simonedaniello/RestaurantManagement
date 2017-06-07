@@ -74,7 +74,7 @@
 
 
 
-<div ng-controller="myCtrl">
+<div ng-controller="creaCategoriaCtrl">
     <form class="form-horizontal" name="myForm">
         <div class="form-group">
             <!-- <label class="col-md-2 control-label" style="margin-left: 20px">Nome Categoria</label>
@@ -105,9 +105,9 @@
                         <table class="table table-striped">
                             <tbody>
                             <tr ng-repeat="pietanza in records">
-                                <td><p style="font-style: italic">{{pietanza}}</p></td>
+                                <td><p style="font-style: italic">{{pietanza.Name}}</p></td>
                                 <td><div class="checkbox">
-                                    <label><input type="checkbox" ng-click="updateSelected(pietanza)" id="{{pietanza}}"></label>
+                                    <label><input type="checkbox" ng-click="updateSelected(pietanza.Name)" id="{{pietanza.Name}}"></label>
                                 </div></td>
                             </tr>
                             </tbody>

@@ -15,6 +15,9 @@ public class Menu {
 
     private String chef;
 
+    private String imageString;
+
+    /*da ricontrollare in quanto ci sono dubbi sul mappaggio sul db*/
     @OneToMany
     private List<Categoria> categorie;
 }
