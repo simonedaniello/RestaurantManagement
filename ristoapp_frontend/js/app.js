@@ -24,6 +24,10 @@ myApp.config(function($routeProvider) {
             templateUrl : "htmlFiles/creaMenu.html",
             controller:"creaCtrl"
         })
+        .when("/creaPietanza", {
+            templateUrl : "htmlFiles/creaPietanza.html",
+            controller:"CreaPietanzaController"
+        })
         .otherwise({
             templateUrl : "htmlFiles/mainPage.html"
         });
