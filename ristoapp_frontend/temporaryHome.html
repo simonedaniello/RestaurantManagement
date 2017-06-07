@@ -1,40 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>RistoApp</title>
+    <title>Bootstrap Example</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- CSS section -->
-    <link rel="stylesheet" href="lib/bootstrap-3.3.7-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link href="lib/css/sidebarBootstrap.css" rel="stylesheet">
     <link href="lib/css/generalCSS.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- Script di angularjs e di angularjs-route-->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+
+
+    <!-- Per far girare tutta l'app -->
+    <script src="js/temporaryJS.js"></script>
+
+    <!-- Inizio script visualizzazione menu -->
+    <script src="js/controllers/MenuController.js"></script>
+    <script src="js/services/MenuService.js"></script>
+    <script src="lib/js/html2canvas.js"></script>
+    <script src="lib/js/pdfmake.min.js"></script>
+    <script src="lib/js/vfs_fonts.js"></script>
+    <!-- Fine script visualizzazione menu -->
+
+    <link href="cssFiles/menu.css" rel="stylesheet">
     <link href="lib/css/project.css" rel="stylesheet">
     <link href="lib/css/registerForm.css" rel="stylesheet">
-    <link href="cssFiles/menu.css" rel="stylesheet">
-
-    <!--libraries section-->
-    <script src="node_modules/angular/angular.js"></script>
-    <script src="node_modules/angular-route/angular-route.js"></script>
-    <script src="node_modules/ngstorage/ngStorage.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="lib/js/bootstrap.js"></script>
+    <link href="lib/css/sideMenu.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-    <!-- Our script section -->
-    <!--<script src="js/controllers/pageController.js"></script>-->
-    <script src="js/temporaryJS.js"></script>
-    <script src="js/controllers/headerController.js"></script>
-    <script src="js/services/ajaxService.js"></script>
-
-<!--
-    <style>
-        .container {
-            background-image: url(imgFiles/menu_background.jpg);
-            background-size: cover;
-        }
-    </style>
--->
 
 
 </head>
@@ -64,11 +61,6 @@
             <div class="navbar-header">
                 <a class="navbar-brand" href="#">RistoApp</a>
             </div>
-    <nav role="navigation" class="navbar navbar-default">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#">RistoApp</a>
-            </div>
             <ul class="nav navbar-nav">
                 <li class="active"><a href="#">Home</a></li>
                 <li><a href="#monday">Categories</a></li>
@@ -76,8 +68,8 @@
                 <li><a href="#">Page 3</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#"><span class="glyphicon glyphicon-user"></span> Your Account</a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
+                <li><a ng-click="registerClick()" href=""><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                <li><a ng-click="loginClick()" href=""><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             </ul>
             <form class="navbar-form navbar-right">
                 <div class="input-group">
@@ -89,33 +81,23 @@
                     </div>
                 </div>
             </form>
-            <form class="navbar-form navbar-right">
-                <div class="input-group">
-                    <input type="text" class="form-control search-input" placeholder="Search">
-                    <div class="input-group-btn">
-                        <button class="btn btn-default" type="submit">
-                            <i class="glyphicon glyphicon-search"></i>
-                        </button>
-                    </div>
-                </div>
-            </form>
         </div>
-        <div ng-hide="loghide" id="myDropdown" class="dropdown-content-login">
+        <div ng-hide="loghide" ng-click="checkBounds()" id="myDropdown" class="dropdown-content-login">
             <div class="wrapper">
-                <form  method="get" name="Login_Form" class="form-signin-login">
+                <form action="" method="post" name="Login_Form" class="form-signin-login">
                     <h3 class="form-signin-heading-login">Welcome Back!</h3>
                     <hr class="colorgraph">
                     <br>
-                    <input ng-model="loginNome" type="text" class="form-control form-control-login" name="Username" placeholder="Username" required="" autofocus="" />
-                    <input ng-model="loginPass" type="password" class="form-control form-control-login" name="Password" placeholder="Password" required=""/>
-                    <button ng-click="loginButton()" class="btn btn-lg btn-primary btn-block"  name="Submit" value="Login" type="Submit">Login</button>
+                    <input type="text" class="form-control form-control-login" name="Username" placeholder="Username" required="" autofocus="" />
+                    <input type="password" class="form-control form-control-login" name="Password" placeholder="Password" required=""/>
+                    <button class="btn btn-lg btn-primary btn-block"  name="Submit" value="Login" type="Submit">Login</button>
                 </form>
             </div>
         </div>
         <div ng-hide="reghide" class="dropdown-content-register">
             <div class="main-login main-center">
                 <h3>Registration form</h3>
-                <form class="" method="post"  name="registerForm">
+                <form class="" method="post" action="#">
                     <div class="form-group">
                         <div class="cols-sm-10">
                             <div class="input-group">
@@ -138,7 +120,7 @@
                         <div class="cols-sm-10">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i></span>
-                                <input ng-model="email" type="text" class="form-control form-control-register" name="email" id="email"  placeholder="Your mail" required/>
+                                <input ng-model="email" type="text" class="form-control form-control-register" name="email" id="email"  placeholder="Your mail"/>
                             </div>
                         </div>
                     </div>
@@ -173,37 +155,18 @@
             </div>
         </div>
     </nav>
-        </div>
-    </nav>
 </div>
-<!--<div id="navLeft" style="display:none">
-    <div class="nav-side-menu">
-        <div class="menu-list">
-            <ul id="menu-content" class="menu-content collapse out">
-                <button class="w3-bar-item w3-button w3-large"
-                        onclick="w3_close()">Close &times;</button>
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#monday">Research Menu</a></li>
-                <li><a href="#table">Composite Category</a></li>
-            </ul>
-        </div>
-    </div>
-</div>-->
 
-<!--<button class="w3-button w3-white w3-xxlarge" onclick="w3_open()">&#9776;</button>-->
+<div ng-view></div>
 
-
-            <div ng-view></div>
-
-            <footer class="w3-container w3-padding-64 w3-light-grey w3-center w3-large">
-                <i class="fa fa-facebook-official w3-hover-opacity"></i>
-                <i class="fa fa-instagram w3-hover-opacity"></i>
-                <i class="fa fa-snapchat w3-hover-opacity"></i>
-                <i class="fa fa-pinterest-p w3-hover-opacity"></i>
-                <i class="fa fa-twitter w3-hover-opacity"></i>
-                <i class="fa fa-linkedin w3-hover-opacity"></i>
-            </footer>
-
+<footer class="w3-container w3-padding-64 w3-light-grey w3-center w3-large">
+    <i class="fa fa-facebook-official w3-hover-opacity"></i>
+    <i class="fa fa-instagram w3-hover-opacity"></i>
+    <i class="fa fa-snapchat w3-hover-opacity"></i>
+    <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+    <i class="fa fa-twitter w3-hover-opacity"></i>
+    <i class="fa fa-linkedin w3-hover-opacity"></i>
+</footer>
 
 
 

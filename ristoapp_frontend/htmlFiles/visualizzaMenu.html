@@ -1,28 +1,24 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="ristoApp">
+<html>
   <head>
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
     <title>Menu</title>
-
-      <!-- Bootstrap
-      <link href="../lib/css/bootstrap.min.css" rel="stylesheet">-->
-
-      <!--<link href="/cssFiles/menu.css" rel="stylesheet" type="text/css"> -->
-
 
       <style>
           .panel-body {
               background:#FAFAFA;
           }
-          .panel-heading {
-              font-size: large;
-          }
-          .container {
-              background-image: url(/imgFiles/menu_background.jpg);
-              background-size: cover;
+          .panel-heading h3 {
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              line-height: normal;
+              width: 75%;
+              padding-top: 8px;
           }
       </style>
 
@@ -32,7 +28,6 @@
 
   <!-- Page Content -->
   <div class="container" ng-controller="MenuController">
-
       <div class="row">
           <div class="col-md-2"></div>
 
@@ -40,11 +35,18 @@
 
               <br>
               <div class="panel panel-info">
-                  <div class="panel-heading"><b>{{menu.nomeMenu}}</b></div>
+                  <div class="panel-heading">
+                      <h3 class="panel-title pull-left">
+                          <b>{{menu.nomeMenu}}</b>
+                      </h3>
+
+                      <button ng-click="pdf()" class="btn btn-default pull-right">Download</button>
+                      <div class="clearfix"></div>
+                  </div>
                   <div class="panel-body">
 
                       <!-- Menu starts -->
-                      <div class="menu-body">
+                      <div class="menu-body" id="toPdf">
                           <!-- Categoria starts -->
                           <div class="menu-category" ng-repeat="categoria in menu.categorie">
                               <h2 class="menu-category-title">{{categoria.nomeCategoria}}</h2>
@@ -82,18 +84,5 @@
   </div>
   <!-- /.container -->
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins)
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>-->
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <!-- <script src="../lib/js/bootstrap.js"></script>-->
-  <!--<script src="../js/temporaryJS.js"></script> -->
-    <!--<script src="lib/js/angular-route.js"></script>
-    <script src="../lib/js/angular.js"></script>
-
-    <script src="../js/controllers/menu_controller.js"></script>
-    <script src="../js/services/menu_service.js"></script>
-    <script src="../lib/js/angular-route.js"></script>
-    <script src="../js/services/ajaxService.js"></script>
-    -->
   </body>
 </html>

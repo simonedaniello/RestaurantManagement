@@ -5,6 +5,10 @@
     color: rgb(92, 92, 92);
 }
 
+.container {
+    background-image: url("../imgFiles/menu_background.jpg");
+}
+
 .menu-category {
     margin-bottom: 50px;
 }
