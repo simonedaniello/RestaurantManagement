@@ -1,4 +1,4 @@
-angular.module("ristoApp").controller("headerController", function ($scope, $localStorage, ajaxService) {
+myApp.controller("headerController", function ($scope, $localStorage, ajaxService) {
 
     $scope.loghide = true;
     $scope.reghide = true;

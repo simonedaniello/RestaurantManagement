@@ -2,13 +2,13 @@
  * Created by dandi on 13/05/17.
  */
 
-var myApp = angular.module("ristoApp", ["ngRoute", "ngStorage"]);
+var myApp = angular.module("ristoApp", ["ngRoute"]);
 
 
 myApp.config(function($routeProvider) {
     $routeProvider
         .when("/monday", {
-            templateUrl : "htmlFiles/aggiungiCategoria.html",
+            templateUrl : "htmlFiles/tempCategoria.html",
             controller: "myCtrl"
         })
         .when("/table", {
@@ -198,3 +198,29 @@ myApp.controller("headerController", function ($scope) {
     };
 
 });
+
+myApp.controller("myCtrl", function($scope) {
+    $scope.records = [
+        "Bruschetta al pomodoro",
+        "Moscardini fritti",
+        "Risotto alla pescatora",
+        "Spagetti alle vongole", "Spaghetti allo scoglio",
+        "Frittura di paranza"
+    ];
+    $scope.selected = [];
+    $scope.records.sort();
+    $scope.updateSelected = function(idPietanza){
+        var checkBox = document.getElementById(idPietanza);
+        var name = idPietanza;
+        if(checkBox.checked) {
+            $scope.selected.push(name);
+            $scope.selected.sort();
+        }else{
+            $scope.selected.splice($scope.selected.indexOf(name),1);
+        }
+    }
+});
+
+
+
+

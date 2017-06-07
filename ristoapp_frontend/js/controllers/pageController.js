@@ -1,4 +1,3 @@
-var myApp = angular.module("ristoApp", ["ngCookies", "ngRoute"]);
 
 myApp.controller("pageController", function ($scope, $cookies) {
     if ($cookies.getObject("credentials") != null){

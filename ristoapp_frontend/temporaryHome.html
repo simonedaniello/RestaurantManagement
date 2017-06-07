@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>RistoApp</title>
+    <title>Bootstrap Example</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
     <link href="lib/css/sidebarBootstrap.css" rel="stylesheet">
     <link href="lib/css/generalCSS.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="lib/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <!-- Script di angularjs e di angularjs-route-->
-    <script src="node_modules/angular/angular.js"></script>
-    <script src="node_modules/ngstorage/ngStorage.js"></script>
-    <script src="node_modules/angular-route/angular-route.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
 
 
     <!-- aggiunto mario per crea menu-->
@@ -30,14 +30,14 @@
     <script src="lib/js/html2canvas.js"></script>
     <script src="lib/js/pdfmake.min.js"></script>
     <script src="lib/js/vfs_fonts.js"></script>
-    <script src="js/services/ajaxService.js"></script>
-    <script src="js/controllers/headerController.js"></script>
     <!-- Fine script visualizzazione menu -->
 
     <link href="cssFiles/menu.css" rel="stylesheet">
     <link href="lib/css/project.css" rel="stylesheet">
     <link href="lib/css/registerForm.css" rel="stylesheet">
+<!--
     <link href="lib/css/sideMenu.css" rel="stylesheet">
+-->
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -81,22 +81,22 @@
                 </div>
             </form>
         </div>
-        <div ng-hide="loghide" id="myDropdown" class="dropdown-content-login">
+        <div ng-hide="loghide" ng-click="checkBounds()" id="myDropdown" class="dropdown-content-login">
             <div class="wrapper">
-                <form name="Login_Form" class="form-signin-login">
+                <form action="" method="post" name="Login_Form" class="form-signin-login">
                     <h3 class="form-signin-heading-login">Welcome Back!</h3>
                     <hr class="colorgraph">
                     <br>
-                    <input ng-model="loginNome" type="text" class="form-control form-control-login" name="Username" placeholder="Username" required="" autofocus="" />
-                    <input ng-model="loginPass" type="password" class="form-control form-control-login" name="Password" placeholder="Password" required=""/>
-                    <button ng-click="loginButton()" class="btn btn-lg btn-primary btn-block"  name="Submit" value="Login" type="Submit">Login</button>
+                    <input type="text" class="form-control form-control-login" name="Username" placeholder="Username" required="" autofocus="" />
+                    <input type="password" class="form-control form-control-login" name="Password" placeholder="Password" required=""/>
+                    <button class="btn btn-lg btn-primary btn-block"  name="Submit" value="Login" type="Submit">Login</button>
                 </form>
             </div>
         </div>
         <div ng-hide="reghide" class="dropdown-content-register">
             <div class="main-login main-center">
                 <h3>Registration form</h3>
-                <form>
+                <form class="" method="post" action="#">
                     <div class="form-group">
                         <div class="cols-sm-10">
                             <div class="input-group">

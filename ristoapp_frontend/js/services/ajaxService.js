@@ -1,4 +1,4 @@
-angular.module("ristoApp").service("ajaxService", function ($q, $http) {
+myApp.service("ajaxService", function ($q, $http) {
 
     var ajax = function(method,url,data) {
 
