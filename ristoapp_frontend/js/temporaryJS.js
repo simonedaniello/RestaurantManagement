@@ -2,7 +2,7 @@
  * Created by dandi on 13/05/17.
  */
 
-var myApp = angular.module("ristoApp", ["ngRoute"]);
+var myApp = angular.module("ristoApp", ["ngRoute", "ngStorage"]);
 
 
 myApp.config(function($routeProvider) {

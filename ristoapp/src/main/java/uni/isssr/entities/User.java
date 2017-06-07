@@ -7,7 +7,6 @@ import javax.validation.constraints.Size;
 public class User {
 
     @Id
-    @Size(max = 32)
     private String username;
 
     private String name;
