@@ -17,6 +17,9 @@ myApp.config(function($routeProvider) {
             templateUrl : "htmlFiles/ricercaMenu.html"
             /*controller:"table_controller"*/
         })
+        .when("/creamenu", {
+            templateUrl : "htmlFiles/creaMenu.html"
+        })
         .otherwise({
             templateUrl : "htmlFiles/mainPage.html"
         });

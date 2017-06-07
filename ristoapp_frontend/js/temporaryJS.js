@@ -20,6 +20,9 @@ myApp.config(function($routeProvider) {
             css : "cssFiles/menu.css",
             controller : "MenuController"
         })
+        .when("/creamenu", {
+            templateUrl : "htmlFiles/creaMenu.html"
+        })
         .otherwise({
             templateUrl : "htmlFiles/mainPage.html"
         });
