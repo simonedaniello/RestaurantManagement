@@ -36,7 +36,7 @@
 
 <div class="container-fluid">
     <div class="row content" ng-app="ristoApp" ng-controller="ajaxController">
-        <div class="col-sm-3 sidenav">
+        <!--<div class="col-sm-3 sidenav">
             <br>
             <h4>Crea Categoria</h4>
             <br><br>
@@ -47,9 +47,9 @@
             <div class="form-group">
                 <button type="button" ng-model="saveButton" class="btn btn-success">Salva</button>
             </div>
-        </div>
+        </div>-->
 
-        <div class="col-sm-9" ng-controller="myCtrl">
+        <div class="col-sm-12" ng-controller="myCtrl">
 
                 <h4><small>RECIPIES</small></h4>
                 <hr>
@@ -76,7 +76,7 @@
 
                 <!-- Inizia riga -->
                 <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-sm-6">
 
                         <div class="panel panel-default">
                             <div class="panel-heading"><p><b>Seleziona pietanza</b></p></div>
@@ -97,10 +97,10 @@
                     </div>
 
                     <!-- Colonna destra pietanze -->
-                    <div class="col-md-4">
+                    <div class="col-sm-6">
                         <div class="panel panel-default">
                             <div class="panel-heading"><p><b>Pietanze selezionate</b></p></div>
-                            <div class="panel-body" style="overflow-y: auto; height: 350px">
+                            <div class="panel-body" style="overflow-y: auto; height: 420px">
                                 <table class="table table-striped">
                                     <tbody>
                                     <tr ng-repeat="selezionata in selected">
