@@ -1,6 +1,5 @@
-
 <div class="container">
-    <div class="panel panel-primary" ng-controller="tryCtrl">
+    <div class="panel panel-primary" ng-controller="creaCtrl">
         <div class="panel-heading"><b>Crea un nuovo menu</b>
         </div>
         <div class="panel-body">
@@ -49,8 +48,10 @@
                         <div class="menu-item-name col-sm-10">
                             <b>{{pietanza.name}}</b>
                         </div>
-                        <div class="menu-item-description col-sm-10" ng-repeat="prodotto in pietanza.prodotti">
-                            {{prodotto.name}}{{$last ? '' : ', '}}
+                        <div class="col-sm-10">
+                            <span class="menu-item-description" ng-repeat="prodotto in pietanza.prodotti">
+                                {{prodotto.name}}{{$last ? '' : ', '}}
+                            </span>
                         </div>
                         <div class=" menu-item-price col-sm-2">
                             <input type="number" class="form-control" id="price1" placeholder="prezzo" step="0.1" ng-model="pietanzaPrice">

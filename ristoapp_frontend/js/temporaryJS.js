@@ -21,7 +21,8 @@ myApp.config(function($routeProvider) {
             controller : "MenuController"
         })
         .when("/creamenu", {
-            templateUrl : "htmlFiles/creaMenu.html"
+            templateUrl : "htmlFiles/creaMenu.html",
+            controller:"creaCtrl"
         })
         .otherwise({
             templateUrl : "htmlFiles/mainPage.html"
@@ -197,7 +198,3 @@ myApp.controller("headerController", function ($scope) {
     };
 
 });
-
-
-
-
