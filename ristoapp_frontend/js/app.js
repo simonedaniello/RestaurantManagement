@@ -12,8 +12,8 @@ myApp.config(function($routeProvider) {
             controller: "creaCategoriaCtrl"
         })
         .when("/table", {
-            templateUrl : "htmlFiles/ricercaMenu.html"
-            /*controller:"table_controller"*/
+            templateUrl : "htmlFiles/ricercaMenu.html",
+            controller:"RicercaMenuController"
         })
         .when("/table/:nomeMenu", {
             templateUrl : "htmlFiles/visualizzaMenu.html",

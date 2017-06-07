@@ -1,5 +1,6 @@
 {
   "nomeMenu": "Menu Estivo",
+  "immagineMenu": "imgFiles/menu_background.jpg",
   "categorie": [
     {
       "nomeCategoria": "Primi",
