@@ -1,0 +1,62 @@
+<div ng-controller="CreaPietanzaController">
+    <form class="form-horizontal" name="myForm">
+        <div class="form-group">
+            <div class="container">
+                <div class="row" style="margin-bottom: 10px">
+                    <div class="col-md-12">
+                        <div class="input-group">
+                            <span class="input-group-addon">Pietanza</span>
+                            <input id="msg" type="text" class="form-control" name="msg" placeholder="Inserire nome pietanza creata">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <!--<div class="panel-group"> -->
+                <div class="panel panel-default">
+                    <div class="panel-heading"><p><b>Seleziona prodotti</b></p></div>
+                    <div class="panel-body" style="overflow-y: auto; height: 420px">
+                        <table class="table table-striped">
+                            <tbody>
+                            <tr ng-repeat="prodotto in prodotti">
+                                <td><p style="font-style: italic">{{prodotto.name}}</p></td>
+                                <td><div class="checkbox">
+                                    <label><input type="checkbox" ng-click="updateSelected(prodotto.name)" id="check.{{prodotto.name}}"></label>
+                                </div></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading"><p><b>Prodotti selezionate</b></p></div>
+                    <div class="panel-body" class="row" style="overflow-y: auto; height: 350px">
+                        <table class="table table-striped">
+                            <tbody>
+                            <tr ng-repeat="prod in selectedProd">
+                                <td class="col-sm-9"><p style="font-style: italic">{{prod.name}}</p></td>
+                                <td class="col-sm-3"><input required type="number" class="form-control" id="qnt.{{prodotto.name}}" placeholder="grammi" step="1" ng-model="prodottoQuantity"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row" style="padding-top: 15px">
+                    <div class="col-md-6">
+                        <button type="button" class="btn btn-success">Salva</button>
+                    </div>
+                    <div class="col-md-6">
+                        <button type="button" class="btn btn-danger">Annulla</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

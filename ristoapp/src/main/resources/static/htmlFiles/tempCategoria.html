@@ -1,0 +1,68 @@
+
+
+<div ng-controller="creaCategoriaCtrl">
+    <form class="form-horizontal" name="myForm">
+        <div class="form-group">
+            <!-- <label class="col-md-2 control-label" style="margin-left: 20px">Nome Categoria</label>
+            <div class="col-md-9">
+                <input class="form-control" id="focusedInput" type="text" placeholder="Inserire nome categoria">
+            </div>
+            <div class="col-md-1"></div> -->
+            <div class="container">
+                <div class="row" style="margin-bottom: 10px">
+                    <div class="col-md-12">
+                        <div class="input-group">
+                            <span class="input-group-addon">Categoria</span>
+                            <input id="msg" type="text" class="form-control" name="msg" placeholder="Inserire nome categoria">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <!--<div class="panel-group"> -->
+                <div class="panel panel-default">
+                    <div class="panel-heading"><p><b>Seleziona pietanza</b></p></div>
+                    <div class="panel-body" style="overflow-y: auto; height: 420px">
+                        <table class="table table-striped">
+                            <tbody>
+                            <tr ng-repeat="pietanza in records">
+                                <td><p style="font-style: italic">{{pietanza.nome}}</p></td>
+                                <td><div class="checkbox">
+                                    <label><input type="checkbox" ng-click="updateSelected(pietanza.nome)" id="{{pietanza.nome}}"></label>
+                                </div></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading"><p><b>Pietanze selezionate</b></p></div>
+                    <div class="panel-body" class="row" style="overflow-y: auto; height: 350px">
+                        <table class="table table-striped">
+                            <tbody>
+                            <tr ng-repeat="selezionata in selected">
+                                <td><p style="font-style: italic">{{selezionata}}</p></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row" style="padding-top: 15px">
+                    <div class="col-md-6">
+                        <button type="button" class="btn btn-success">Salva</button>
+                    </div>
+                    <div class="col-md-6">
+                        <button type="button" class="btn btn-danger">Annulla</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

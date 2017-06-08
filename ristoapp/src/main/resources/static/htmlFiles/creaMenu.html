@@ -1,0 +1,81 @@
+<div class="container">
+    <div class="panel panel-info" ng-controller="creaCtrl">
+        <div class="panel-heading"><b>Crea un nuovo menu</b>
+        </div>
+        <div class="panel-body">
+            <div class="container-fluid">
+                <p>
+                <div class="row">
+                    <div class="form-group">
+                        <label class="col-sm-2" for="name">Nome menu:</label>
+                        <div>
+                            <input class="col-sm-10" type="text" class="form-control" id="name" placeholder="Inserisci nome" ng-model="menuName">
+                        </div>
+                    </div>
+                </div>
+                </p>
+                <p>
+                <div class="row">
+                    <div class="form-group">
+                        <label class="col-sm-2" for="creator">Chef creatore:</label>
+                        <div>
+                            <input class="col-sm-10" type="text" class="form-control" id="creator" placeholder="Inserisci creatore" ng-model="manuChef">
+                        </div>
+                    </div>
+                </div>
+                </p>
+                <p>
+                    <div class="row" ng-repeat="categoria in categorie">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <div class="container-fluid">
+                                    <div class="col-sm-8">
+                                        <b>{{categoria.name}}</b>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <button type="button" class="btn btn-default" ng-model="ModifyCatButton">Modifica</button>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <button type="button" class="btn btn-danger" ng-model="deleteCatButton">Elimina</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <div class="container-fluid">
+                <p>
+                <div class="row" ng-repeat="pietanza in categoria.pietanze">
+                    <div class="container-fluid">
+                        <div class="menu-item-name col-sm-10">
+                            <b>{{pietanza.name}}</b>
+                        </div>
+                        <div class="col-sm-10">
+                            <span class="menu-item-description" ng-repeat="prodotto in pietanza.prodotti">
+                                {{prodotto.name}}{{$last ? '' : ', '}}
+                            </span>
+                        </div>
+                        <div class=" menu-item-price col-sm-2">
+                            <input required type="number" class="form-control" id="price1" placeholder="prezzo" step="0.1" ng-model="pietanzaPrice">
+                        </div>
+                    </div>
+                </div>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<p>
+<div class="row">
+    <button type="button" class="btn btn-info btn-block" ng-model="addCatButton">Aggiungi categoria</button>
+</div>
+</p>
+<p>
+<div class="row" style="margin-left: 20%">
+    <button type="button" class="btn btn-success col-sm-3" ng-model="saveButton">Salva menu</button>
+    <button type="button" class="btn btn-default col-sm-3" ng-model="resetButton">Reset</button>
+    <button type="button" class="btn btn-danger col-sm-3" ng-model="cancelButton">Annulla</button>
+</div>
+</p>
+</div>
+</div>
+</div>
+</div>

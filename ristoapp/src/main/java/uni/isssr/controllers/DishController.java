@@ -36,6 +36,6 @@ public class DishController {
 
     @RequestMapping(path = "/", method = RequestMethod.GET)
     public String getCategoriaFile() {
-        return "categoria.html";
+        return "index.html";
     }
 }
