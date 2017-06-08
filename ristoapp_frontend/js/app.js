@@ -40,3 +40,4 @@ myApp.controller('researchController', function($scope) {
         return tag.contains(written);
     }
 });
+
