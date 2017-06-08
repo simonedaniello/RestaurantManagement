@@ -1,6 +1,6 @@
 
 
-myApp.controller("creaCtrl", function($scope) {
+myApp.controller("creaMenuCtrl", function($scope) {
 
     $scope.categorie = [
         {name:"Primo",

@@ -7,7 +7,7 @@ var myApp = angular.module("ristoApp", ["ngRoute", "ngStorage"]);
 
 myApp.config(function($routeProvider) {
     $routeProvider
-        .when("/monday", {
+        .when("/creaCategoria", {
             templateUrl : "htmlFiles/tempCategoria.html",
             controller: "creaCategoriaCtrl"
         })
@@ -22,7 +22,7 @@ myApp.config(function($routeProvider) {
         })
         .when("/creamenu", {
             templateUrl : "htmlFiles/creaMenu.html",
-            controller:"creaCtrl"
+            controller:"creaMenuCtrl"
         })
         .when("/creaPietanza", {
             templateUrl : "htmlFiles/creaPietanza.html",

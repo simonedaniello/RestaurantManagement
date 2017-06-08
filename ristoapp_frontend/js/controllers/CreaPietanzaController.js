@@ -1,4 +1,6 @@
-myApp.controller("CreaPietanzaController", function($scope) {
+myApp.controller("CreaPietanzaController", function($scope, ajaxService) {
+
+    //prodotti e tag dovrebbero essere vuoti e riempiti con una richiesta al server
     $scope.prodotti = [
         {name:"uovo",                   id:1},
         {name:"sale",                   id:2},
@@ -9,7 +11,13 @@ myApp.controller("CreaPietanzaController", function($scope) {
         {name:"prosciutto crudo",       id:7},
         {name:"pomodoro",               id:8}
     ];
+    $scope.tags = ["piccante", "alah", "cristiano", "pesce", "carne", "riso"];
+
+
     $scope.selectedProd = [];
+    $scope.associatedTags = [];
+    $scope.nomePietanza = "";
+    $scope.nomeNewTag = "";
 
      var searchIndex = function(searchTerm){
          for(var i = 0, len = $scope.selectedProd.length; i < len; i++) {
@@ -19,7 +27,7 @@ myApp.controller("CreaPietanzaController", function($scope) {
          }
      };
 
-    $scope.updateSelected = function(nomeProd){
+    $scope.updateSelectedProd = function(nomeProd){
         var checkBox = document.getElementById("check.".concat(nomeProd));
         if(checkBox.checked) {
             var ingrediente = {name:nomeProd,       quantita:0};
@@ -31,5 +39,34 @@ myApp.controller("CreaPietanzaController", function($scope) {
             var i = searchIndex(nomeProd);
             $scope.selectedProd.splice(i,1);
         }
+    };
+
+    $scope.updateSelectedTag = function(nomeTag){
+        var checkBox = document.getElementById("check.".concat(nomeTag));
+        if(checkBox.checked) {
+            $scope.associatedTags.push(nomeTag);
+            $scope.associatedTags.sort()
+        }else{
+            $scope.associatedTags.splice($scope.associatedTags.indexOf(nomeTag),1);
+        }
+    };
+
+    $scope.saveDish = function(){
+        var dtoPietanza = {
+            nome:$scope.nomePietanza,
+            tagList: $scope.associatedTags,
+            prodList: $scope.selectedProd
+        };
+        var jsonPiet = JSON.stringify(dtoPietanza);
+        //CONTROLLA DEL URL SE PATH VA BENE
+        ajaxService.sendResource("url", jsonPiet)
     }
+
+    $scope.saveTag = function(){
+        var dtoTag = {nome:$scope.nomeNewTag};
+        var jsonTag = JSON.stringify(dtoTag);
+        //CONTROLLA DEL URL SE PATH VA BENE
+        ajaxService.sendResource("url", jsonTag)
+    }
+
 });
