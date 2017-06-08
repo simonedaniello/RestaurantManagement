@@ -1,0 +1,34 @@
+.form-group{
+	margin-bottom: 15px;
+}
+
+.main-login{
+  background-color: white;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.form-control-register {
+  height: auto!important;
+  padding: 8px 12px !important;
+}
+
+.main-center{
+  right: 0px;
+ 	margin: 0 auto;
+ 	max-width: 400px;
+    padding: 10px 40px;
+	background-color: inherit;
+    text-shadow: none;
+
+}
+
+.dropdown-content-register{
+  position: absolute;
+  background-color: inherit;
+  border-color: black;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  right: 0px;
+  min-height: 400px;
+  min-width: 400px;
+  z-index: 1;
+}

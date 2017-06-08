@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>RistoApp</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <link href="cssFiles/sidebarBootstrap.css" rel="stylesheet">
+    <link href="cssFiles/generalCSS.css" rel="stylesheet">
+
+    <!-- Script di angularjs e di angularjs-route-->
+    <script src="lib/node_modules/angular/angular.js"></script>
+    <script src="lib/node_modules/ngstorage/ngStorage.js"></script>
+    <script src="lib/node_modules/angular-route/angular-route.js"></script>
+    <script src="lib/node_modules/jquery/dist/jquery.js"></script>
+    <script src="lib/js/bootstrap.js"></script>
+
+    <!-- Per far girare tutta l'app -->
+    <script src="js/app.js"></script>
+
+    <script src="js/services/ajaxService.js"></script>
+    <script src="js/controllers/CreaPietanzaController.js"></script>
+    <script src="js/controllers/creaMenuController.js"></script>
+    <script src="js/controllers/CreaCategoriaController.js"></script>
+    <script src="js/controllers/headerController.js"></script>
+
+    <!-- Inizio script visualizzazione menu -->
+    <script src="js/controllers/MenuController.js"></script>
+    <script src="js/services/MenuService.js"></script>
+    <script src="lib/js/html2canvas.js"></script>
+    <script src="lib/js/pdfmake.min.js"></script>
+    <script src="lib/js/vfs_fonts.js"></script>
+    <script src="js/controllers/CreaCategoriaController.js"></script>
+    <!-- Fine script visualizzazione menu -->
+
+    <!-- Inizio script ricerca menu -->
+    <script src="js/controllers/RicercaMenuController.js"></script>
+    <!-- Fine script ricerca menu -->
+
+    <link href="cssFiles/menu.css" rel="stylesheet">
+    <link href="cssFiles/project.css" rel="stylesheet">
+    <link href="cssFiles/registerForm.css" rel="stylesheet">
+    <!--
+        <link href="lib/css/sideMenu.css" rel="stylesheet">
+    -->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+</head>
+<body ng-app="ristoApp">
+
+<header class="w3-display-container w3-content w3-wide" style="max-width:1600px;min-width:500px" id="home">
+    <img class="w3-image" src="http://www.karismahotels.com/gourmetinclusive/images/main/platemain.jpg" alt="Hamburger Catering" width="1600" height="800">
+    <div class="w3-display-bottomleft w3-padding-large w3-opacity">
+        <h1 class="w3-xxlarge">RistoApp</h1>
+    </div>
+</header>
+
+
+<div ng-controller="headerController">
+    <nav role="navigation" class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">RistoApp</a>
+
+            </div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#!monday">Categories</a></li>
+                <li><a href="#!table">Menu</a></li>
+                <li><a href="#!creamenu">Crea Menu</a></li>
+                <li><a href="#!creaPietanza">Crea Pietanza</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a ng-click="registerClick()" href=""><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                <li><a ng-click="loginClick()" href=""><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            </ul>
+            <form class="navbar-form navbar-right">
+                <div class="input-group">
+                    <input type="text" class="form-control search-input" placeholder="Search">
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" type="submit">
+                            <i class="glyphicon glyphicon-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div ng-hide="loghide" ng-click="checkBounds()" id="myDropdown" class="dropdown-content-login">
+            <div class="wrapper">
+                <form action="" method="post" name="Login_Form" class="form-signin-login">
+                    <h3 class="form-signin-heading-login">Welcome Back!</h3>
+                    <hr class="colorgraph">
+                    <br>
+                    <input type="text" class="form-control form-control-login" name="Username" placeholder="Username" required="" autofocus="" />
+                    <input type="password" class="form-control form-control-login" name="Password" placeholder="Password" required=""/>
+                    <button class="btn btn-lg btn-primary btn-block"  name="Submit" value="Login" type="Submit">Login</button>
+                </form>
+            </div>
+        </div>
+        <div ng-hide="reghide" class="dropdown-content-register">
+            <div class="main-login main-center">
+                <h3>Registration form</h3>
+                <form class="" method="post" action="#">
+                    <div class="form-group">
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <select id="typeChoicer">
+                                    <option value="user">user</option>
+                                    <option value="admin">admin</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-user" aria-hidden="true"></i></span>
+                                <input ng-model="name" type="text" class="form-control form-control-register" name="name" id="name"  placeholder="Your name"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i></span>
+                                <input ng-model="email" type="text" class="form-control form-control-register" name="email" id="email"  placeholder="Your mail"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-user" aria-hidden="true"></i></span>
+                                <input ng-model="username" type="text" class="form-control form-control-register" name="username" id="username"  placeholder="Username"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-lock" aria-hidden="true"></i></span>
+                                <input ng-model="password" type="password" class="form-control form-control-register" name="password" id="password"  placeholder="Password"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-lock" aria-hidden="true"></i></span>
+                                <input type="password" class="form-control form-control-register" name="confirm" id="confirm"  placeholder="Confirm your password"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <a ng-click="registerButton()" target="_blank" type="button" id="button" class="btn btn-primary btn-lg btn-block login-button">Sign Up</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </nav>
+</div>
+
+<div ng-view></div>
+
+<footer class="w3-container w3-padding-64 w3-light-grey w3-center w3-large">
+    <i class="fa fa-facebook-official w3-hover-opacity"></i>
+    <i class="fa fa-instagram w3-hover-opacity"></i>
+    <i class="fa fa-snapchat w3-hover-opacity"></i>
+    <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+    <i class="fa fa-twitter w3-hover-opacity"></i>
+    <i class="fa fa-linkedin w3-hover-opacity"></i>
+</footer>
+
+
+</body>
+</html>

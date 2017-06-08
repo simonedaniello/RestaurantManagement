@@ -6,6 +6,11 @@ import java.util.Set;
 @Entity
 public class Categoria {
 
+    public Categoria(String nome) {
+        this.nome = nome;
+    }
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
