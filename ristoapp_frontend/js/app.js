@@ -2,7 +2,7 @@
  * Created by dandi on 13/05/17.
  */
 
-var myApp = angular.module("ristoApp", ["ngRoute"]);
+var myApp = angular.module("ristoApp", ["ngRoute", "ngStorage"]);
 
 
 myApp.config(function($routeProvider) {
@@ -39,25 +39,4 @@ myApp.controller('researchController', function($scope) {
     $scope.researchInText = function(tag, written) {
         return tag.contains(written);
     }
-});
-
-/*c'è un problema con l'header. Vedi da qui giù. Non appena
-* risolvi puoi cancellare tutto da qui giù in poi*/
-
-
-myApp.controller("headerController", function ($scope) {
-
-    $scope.loghide = true;
-    $scope.reghide = true;
-
-    $scope.registerClick = function () {
-        $scope.loghide = true;
-        $scope.reghide = !$scope.reghide;
-    };
-
-    $scope.loginClick = function () {
-        $scope.reghide = true;
-        $scope.loghide = !$scope.loghide;
-    };
-
 });
