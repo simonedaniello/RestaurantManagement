@@ -11,6 +11,14 @@ myApp.controller("CreaPietanzaController", function($scope) {
     ];
     $scope.selectedProd = [];
 
+     var searchIndex = function(searchTerm){
+         for(var i = 0, len = $scope.selectedProd.length; i < len; i++) {
+             if ($scope.selectedProd[i].name === searchTerm) {
+                 return i;
+             }
+         }
+     };
+
     $scope.updateSelected = function(nomeProd){
         var checkBox = document.getElementById("check.".concat(nomeProd));
         if(checkBox.checked) {
@@ -20,15 +28,7 @@ myApp.controller("CreaPietanzaController", function($scope) {
                 return (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)
             });
         }else{
-            /*var searchTerm = nomeProd, in = -1;
-             for(var i = 0, len = selectedProd.length; i < len; i++) {
-             if (selectedProd[i].name === searchTerm) {
-             in = i;
-             break;
-             }
-             }*/
-
-            var i = selectedProd.findIndex( function(elem) { return elem === nomeProd; });
+            var i = searchIndex(nomeProd);
             $scope.selectedProd.splice(i,1);
         }
     }
