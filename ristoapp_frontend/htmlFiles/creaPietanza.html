@@ -79,9 +79,9 @@
                         <table class="table table-striped">
                             <tbody>
                             <tr ng-repeat="prodotto in prodotti">
-                                <td><p style="font-style: italic">{{prodotto.name}}</p></td>
+                                <td><p style="font-style: italic">{{prodotto}}</p></td>
                                 <td><div class="checkbox">
-                                    <label><input type="checkbox" ng-click="updateSelectedProd(prodotto.name)" id="check.{{prodotto.name}}"></label>
+                                    <label><input type="checkbox" ng-click="updateSelectedProd(prodotto)" id="check.{{prodotto}}"></label>
                                 </div></td>
                             </tr>
                             </tbody>

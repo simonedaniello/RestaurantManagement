@@ -1,21 +1,11 @@
 myApp.controller("CreaPietanzaController", function($scope, ajaxService, CreaPietanzaService) {
 
-    //prodotti e tag dovrebbero essere vuoti e riempiti con una richiesta al server
-    $scope.prodotti = [
-        {name:"uovo",                   id:1},
-        {name:"sale",                   id:2},
-        {name:"olio",                   id:3},
-        {name:"pasta",                  id:4},
-        {name:"aceto",                  id:5},
-        {name:"zucchina",               id:6},
-        {name:"prosciutto crudo",       id:7},
-        {name:"pomodoro",               id:8}
-    ];
 
     var updateListaProdotti = function () {
         ajaxService.getResource("http://localhost:8080/creaPietanza/getProdotti", null).then(
             function (response) {
-                $scope.tags = CreaPietanzaService.parseProductList(response);
+                console.log($scope.prodotti);
+                $scope.prodotti = CreaPietanzaService.parseProductList(response);
             }
             , function (response) {
                 alert("Couldn't get products");
@@ -88,7 +78,6 @@ myApp.controller("CreaPietanzaController", function($scope, ajaxService, CreaPie
     $scope.saveTag = function(){
         var dtoTag = {classificatore:$scope.nomeNewTag};
         var jsonTag = JSON.stringify(dtoTag);
-        //CONTROLLA DEL URL SE PATH VA BENE
         ajaxService.sendResource("http://localhost:8080/creaPietanza/addTag", jsonTag).then(function (response) {
             updateTagList();
         }, function (response) {
