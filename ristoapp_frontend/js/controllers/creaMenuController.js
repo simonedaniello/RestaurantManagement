@@ -158,7 +158,6 @@ myApp.controller("creaMenuCtrl", function($scope, creaMenuService) {
 
 
     $scope.saveMenu = function(){
-        $scope.categorieMenu = creaMenuService.getCategories();
         if ($scope.categorieMenu.length === 0) {
             $scope.errorMessageMenu = "Il menu deve contenere almeno una categoria.";
             return;
