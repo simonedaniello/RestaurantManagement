@@ -4,7 +4,6 @@ myApp.controller("CreaPietanzaController", function($scope, ajaxService, CreaPie
     var updateListaProdotti = function () {
         ajaxService.getResource("http://localhost:8080/creaPietanza/getProdotti", null).then(
             function (response) {
-                console.log($scope.prodotti);
                 $scope.prodotti = CreaPietanzaService.parseProductList(response);
             }
             , function (response) {
