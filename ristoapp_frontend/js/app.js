@@ -9,7 +9,7 @@ myApp.config(function($routeProvider) {
     $routeProvider
         .when("/creaCategoria", {
             templateUrl : "htmlFiles/tempCategoria.html",
-            controller: "creaCategoriaCtrl"
+            controller: "creaCategoriaController"
         })
         .when("/table", {
             templateUrl : "htmlFiles/ricercaMenu.html",

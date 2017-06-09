@@ -22,7 +22,7 @@
             <div ng-controller="repeatController">
                 <h4><small>RECIPIES</small></h4>
                 <hr>
-                There are {{records.length}} recipies :
+                There are {{pietanze.length}} recipies :
                 <input type="search" ng-model="q"
                        placeholder="filter records..."
                        aria-label="filter recipe"
@@ -36,7 +36,7 @@
                             <th>Category</th>
                             <th>Chef</th>
                         </tr>
-                        <tr ng-repeat="record in records | orderBy : 'Category' | filter:q as results">
+                        <tr ng-repeat="record in pietanze | orderBy : 'Category' | filter:q as results">
                             <td><button ng-click="Myclick(record)">Add</button></td>
                             <td>{{ record.Name }}</td>
                             <td>{{ record.Category }}</td>

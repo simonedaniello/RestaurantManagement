@@ -18,8 +18,8 @@
 
                 <h4><small>RECIPIES</small></h4>
                 <hr>
-                There are {{records.length}} recipies :
-                <div class="form-inline">
+            There are {{pietanze.length}} recipies :
+            <div class="form-inline">
                     <div class="form-group">
                 <input type="search" ng-model="q"
                        placeholder="filter records..."
@@ -48,7 +48,7 @@
                             <div class="panel-body" style="overflow-y: auto; height: 420px">
                                 <table class="table table-striped">
                                     <tbody>
-                                    <tr ng-repeat="pietanza in records | orderBy:'Category' | filter:q">
+                                    <tr ng-repeat="pietanza in pietanze | orderBy:'Category' | filter:q">
                                         <td><p style="font-style: italic">{{pietanza.Name}}</p></td>
                                         <td><div class="checkbox">
                                             <label><input type="checkbox" ng-click="updateSelected(pietanza.Name)" id="{{pietanza.Name}}"></label>

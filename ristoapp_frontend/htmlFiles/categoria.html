@@ -19,11 +19,10 @@
 
             var ajax = function(method,url,data) {
 
-                var deferred = $q.defer();
-                var request = {
-                    method: method,
+             pietanzedeferred = $q.defer();
+                var request =pietanze                method: method,
                     url: url,
-                    headers: {
+  pietanze           headers: {
                         'Content-Type': 'application/json'
                     }
                 };
@@ -53,11 +52,12 @@
 
         app.controller("myCtrl",function($scope, myAjax) {
 
-            var init = function () {
+    pietanze var init = function () {
                 $scope.records = [];
                 $scope.selected = [];
                 $scope.names = [];
                 var param = null;
+                myAjax.get(param).then(function (data) {
                 myAjax.get(param).then(function (data) {
                     $scope.records = data;
                     for(i = 1; i <= $scope.records.length; i++){
@@ -88,7 +88,7 @@
     <script>
         var app = angular.module("myApp", []);
         app.controller("creaCategoriaCtrl", function($scope) {
-            $scope.records = [
+            $scope.pietanze = [
                 "Bruschetta al pomodoro",
                 "Moscardini fritti",
                 "Risotto alla pescatora",
@@ -96,7 +96,7 @@
                 "Frittura di paranza"
             ];
             $scope.selected = [];
-            $scope.records.sort();
+            $scope.pietanze.sort();
             $scope.updateSelected = function(idPietanza){
                 var checkBox = document.getElementById(idPietanza);
                 var name = idPietanza;
@@ -140,7 +140,7 @@
                     <div class="panel-body" style="overflow-y: auto; height: 420px">
                         <table class="table table-striped">
                             <tbody>
-                            <tr ng-repeat="pietanza in records">
+                            <tr ng-repeat="pietanza in pietanze">
                                 <td><p style="font-style: italic">{{pietanza}}</p></td>
                                 <td><div class="checkbox">
                                     <label><input type="checkbox" ng-click="updateSelected(pietanza)" id="{{pietanza}}"></label>

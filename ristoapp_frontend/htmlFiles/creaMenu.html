@@ -9,7 +9,7 @@
                     <div class="form-group">
                         <label class="col-sm-2" for="name">Nome menu:</label>
                         <div>
-                            <input class="col-sm-10" type="text" class="form-control" id="name" placeholder="Inserisci nome" ng-model="menuName">
+                            <input class="col-sm-10" type="text" class="form-control" id="name" placeholder="Inserisci nome" ng-model="nomeMenu">
                         </div>
                     </div>
                 </div>
@@ -19,18 +19,18 @@
                     <div class="form-group">
                         <label class="col-sm-2" for="creator">Chef creatore:</label>
                         <div>
-                            <input class="col-sm-10" type="text" class="form-control" id="creator" placeholder="Inserisci creatore" ng-model="manuChef">
+                            <input class="col-sm-10" type="text" class="form-control" id="creator" placeholder="Inserisci creatore" ng-model="chef">
                         </div>
                     </div>
                 </div>
                 </p>
                 <p>
-                    <div class="row" ng-repeat="categoria in categorie">
+                    <div class="row" ng-repeat="categoria in categorieMenu">
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <div class="container-fluid">
                                     <div class="col-sm-8">
-                                        <b>{{categoria.name}}</b>
+                                        <b>{{categoria.Name}}</b>
                                     </div>
                                     <div class="col-sm-2">
                                         <button type="button" class="btn btn-default" ng-model="ModifyCatButton">Modifica</button>
@@ -43,18 +43,18 @@
                             <div class="panel-body">
                                 <div class="container-fluid">
                 <p>
-                <div class="row" ng-repeat="pietanza in categoria.pietanze">
+                <div class="row" ng-repeat="pietanza in categoria.Pietanze">
                     <div class="container-fluid">
                         <div class="menu-item-name col-sm-10">
-                            <b>{{pietanza.name}}</b>
+                            <b>{{pietanza.Name}}</b>
                         </div>
                         <div class="col-sm-10">
-                            <span class="menu-item-description" ng-repeat="prodotto in pietanza.prodotti">
-                                {{prodotto.name}}{{$last ? '' : ', '}}
+                            <span class="menu-item-description" ng-repeat="prodotto in pietanza.Prodotti">
+                                {{prodotto}}{{$last ? '' : ', '}}
                             </span>
                         </div>
                         <div class=" menu-item-price col-sm-2">
-                            <input required type="number" class="form-control" id="price1" placeholder="prezzo" step="0.1" ng-model="pietanzaPrice">
+                            {{pietanza.Prezzo}} €
                         </div>
                     </div>
                 </div>
@@ -65,15 +65,90 @@
 </div>
 <p>
 <div class="row">
-    <button type="button" class="btn btn-info btn-block" onclick="location.href = '#!creaCategoria';">Aggiungi categoria</button>
+    <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#categoryModal">Aggiungi categoria</button>
 </div>
+
+<div id="categoryModal" class="modal fade">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Aggiungi categoria al menu</h4>
+            </div>
+            <div class="modal-body" style="background-color: lightgoldenrodyellow">
+                            <div class="row" style="margin-bottom: 10px">
+                                <div class="container-fluid">
+                                    <p><div class="input-group">
+                                        <span class="input-group-addon">Categoria</span>
+                                        <select class="btn btn-default dropdown-toggle" data-ng-model="nomeCategoria">
+                                            <option value=""> -- seleziona nome categoria -- </option>
+                                            <option ng-repeat="cat in categorie">{{cat}}</option>
+                                        </select>
+                                    </div>
+                                    <p><div class="input-group">
+                                        <span class="input-group-addon">Selezione filtro</span>
+                                        <select class="btn btn-default dropdown-toggle" data-ng-model="filtro" ng-click="updateVisibleElements()">
+                                            <option disabled selected value> -- seleziona un Tag -- </option>
+                                            <option value="all">Mostra tutti</option>
+                                            <option ng-repeat="tag in tags">{{tag}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading"><p><b>Seleziona pietanza</b></p></div>
+                                    <div class="panel-body" style="overflow-y: auto; height: 420px">
+                                        <table class="table table-striped">
+                                            <tbody>
+                                            <tr ng-repeat="pietanza in pietanzeFiltrate">
+                                                <td><p style="font-style: italic">{{pietanza.Name}}</p></td>
+                                                <td><div class="checkbox">
+                                                    <label><input type="checkbox" ng-click="updateSelected(pietanza)" id="{{pietanza.Name}}"></label>
+                                                </div></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading"><p><b>Pietanze selezionate</b></p></div>
+                                    <div class="panel-body" style="overflow-y: auto; height: 350px">
+                                        <table class="table table-striped">
+                                            <tbody>
+                                            <tr ng-repeat="selezionata in selected">
+                                                <td class="col-sm-9"><p style="font-style: italic">{{selezionata.Name}}</p></td>
+                                                <td class="col-sm-3"><p style="font-style: italic">{{selezionata.Prezzo}} €</p></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" ng-click="addToMenu()">Aggiungi</button>
+                <button type="button" class="btn btn-default">Reset</button>
+            </div>
+            <p><div  class="alert alert-danger" ng-if="errorMessageCat">{{ errorMessageCat }}</div>
+            </p>
+        </div>
+    </div>
+</div>
+
 </p>
 <p>
 <div class="row" style="margin-left: 20%">
-    <button type="button" class="btn btn-success col-sm-3" ng-model="saveButton">Salva menu</button>
-    <button type="button" class="btn btn-default col-sm-3" ng-model="resetButton">Reset</button>
-    <button type="button" class="btn btn-danger col-sm-3" ng-model="cancelButton">Annulla</button>
+    <button type="button" class="btn btn-success col-sm-3" ng-click="saveMenu()">Salva menu</button>
+    <button type="button" class="btn btn-default col-sm-3" ng-click="resetCat()">Reset</button>
+    <button type="button" class="btn btn-danger col-sm-3" onclick="location.href = '#';">Annulla</button>
 </div>
+</p>
+<p><div  class="alert alert-danger" ng-if="errorMessageMenu">{{ errorMessageMenu }}</div>
 </p>
 </div>
 </div>

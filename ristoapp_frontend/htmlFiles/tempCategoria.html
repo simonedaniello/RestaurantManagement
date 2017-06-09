@@ -1,13 +1,13 @@
-    <!--<script src="app.js"></script> -->
-    <!-- <script>
+    <!--<script src="app.js"></script>
+    <script>
          var app = angular.module("myApp",[]);
 
-         app.service("myAjax", function($q,$http) {
+         app.service("myAjaxpietanzetion($q,$http) {
 
-             var ajax = function(method,url,data) {
+             var ajax = function(mepietanzel,data) {
 
                  var deferred = $q.defer();
-                 var request = {
+          pietanzevar request = {
                      method: method,
                      url: url,
                      headers: {
@@ -38,7 +38,7 @@
          });
 
 
-         app.controller("myCtrl",function($scope, myAjax) {
+         app.controller("myCtrl"pietanzeon($scope, myAjax) {
 
              var init = function () {
                  $scope.records = [];
@@ -72,23 +72,28 @@
          });
      </script> -->
 
-
-
-<div ng-controller="creaCategoriaCtrl">
+<div ng-controller="creaCategoriaController">
     <form class="form-horizontal" name="myForm">
         <div class="form-group">
-            <!-- <label class="col-md-2 control-label" style="margin-left: 20px">Nome Categoria</label>
-            <div class="col-md-9">
-                <input class="form-control" id="focusedInput" type="text" placeholder="Inserire nome categoria">
-            </div>
-            <div class="col-md-1"></div> -->
+
             <div class="container">
                 <div class="row" style="margin-bottom: 10px">
-                    <div class="col-md-12">
-                        <div class="input-group">
+                    <div class="container-fluid">
+                        <p><div class="input-group">
                             <span class="input-group-addon">Categoria</span>
-                            <input id="msg" type="text" class="form-control" name="msg" placeholder="Inserire nome categoria">
-                        </div>
+                            <select class="btn btn-default dropdown-toggle" ng-model="nomeCategoria">
+                                <option disabled selected value> -- seleziona nome categoria -- </option>
+                                <option ng-repeat="cat in categorie">{{cat}}</option>
+                            </select>
+                        </div></p>
+                        <p><div class="input-group">
+                            <span class="input-group-addon">Selezione filtro</span>
+                            <select class="btn btn-default dropdown-toggle" ng-model="filtro" ng-click="updateVisibleElements()">
+                                <option disabled selected value> -- seleziona un Tag -- </option>
+                                <option value="all">Mostra tutti</option>
+                                <option ng-repeat="tag in tags">{{tag}}</option>
+                            </select>
+                        </div></p>
                     </div>
                 </div>
             </div>
@@ -98,13 +103,12 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <!--<div class="panel-group"> -->
                 <div class="panel panel-default">
                     <div class="panel-heading"><p><b>Seleziona pietanza</b></p></div>
                     <div class="panel-body" style="overflow-y: auto; height: 420px">
                         <table class="table table-striped">
                             <tbody>
-                            <tr ng-repeat="pietanza in records">
+                            <tr ng-repeat="pietanza in pietanzeFiltrate">
                                 <td><p style="font-style: italic">{{pietanza.Name}}</p></td>
                                 <td><div class="checkbox">
                                     <label><input type="checkbox" ng-click="updateSelected(pietanza.Name)" id="{{pietanza.Name}}"></label>
@@ -130,7 +134,7 @@
                 </div>
                 <div class="row" style="padding-top: 15px">
                     <div class="col-md-6">
-                        <button type="button" class="btn btn-success">Salva</button>
+                        <button type="button" class="btn btn-success" ng-click="addToMenu()">Aggiungi</button>
                     </div>
                     <div class="col-md-6">
                         <button type="button" class="btn btn-danger">Annulla</button>
