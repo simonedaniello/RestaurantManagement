@@ -1,4 +1,4 @@
-myApp.controller("CreaPietanzaController", function($scope, ajaxService) {
+myApp.controller("CreaPietanzaController", function($scope, ajaxService, CreaPietanzaService) {
 
     //prodotti e tag dovrebbero essere vuoti e riempiti con una richiesta al server
     $scope.prodotti = [
@@ -11,8 +11,31 @@ myApp.controller("CreaPietanzaController", function($scope, ajaxService) {
         {name:"prosciutto crudo",       id:7},
         {name:"pomodoro",               id:8}
     ];
-    $scope.tags = ["piccante", "alah", "cristiano", "pesce", "carne", "riso"];
 
+    var updateListaProdotti = function () {
+        ajaxService.getResource("http://localhost:8080/creaPietanza/getProdotti", null).then(
+            function (response) {
+                $scope.tags = CreaPietanzaService.parseProductList(response);
+            }
+            , function (response) {
+                alert("Couldn't get products");
+            });
+    };
+
+    updateListaProdotti();
+
+
+    var updateTagList = function() {
+        ajaxService.getResource("http://localhost:8080/creaPietanza/getTags", null).then(
+            function (response) {
+                $scope.tags = CreaPietanzaService.parseTagArray(response);
+            }
+            , function (response) {
+                alert("Couldn't get tags");
+            });
+    };
+
+    updateTagList();
 
     $scope.selectedProd = [];
     $scope.associatedTags = [];
@@ -60,13 +83,18 @@ myApp.controller("CreaPietanzaController", function($scope, ajaxService) {
         var jsonPiet = JSON.stringify(dtoPietanza);
         //CONTROLLA DEL URL SE PATH VA BENE
         ajaxService.sendResource("url", jsonPiet)
-    }
+    };
 
     $scope.saveTag = function(){
-        var dtoTag = {nome:$scope.nomeNewTag};
+        var dtoTag = {classificatore:$scope.nomeNewTag};
         var jsonTag = JSON.stringify(dtoTag);
         //CONTROLLA DEL URL SE PATH VA BENE
-        ajaxService.sendResource("url", jsonTag)
+        ajaxService.sendResource("http://localhost:8080/creaPietanza/addTag", jsonTag).then(function (response) {
+            updateTagList();
+        }, function (response) {
+            console.log(response)
+        });
+        $scope.nomeNewTag = "";
     }
 
 });
