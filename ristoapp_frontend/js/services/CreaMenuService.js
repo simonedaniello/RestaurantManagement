@@ -1,4 +1,5 @@
 myApp.service('creaMenuService', function() {
+
     var pietanzeList = [
         {Name:"Carbonara",                   Prodotti:["uovo", "pasta", "guanciale"],       Category:"Pasta",       Tags:["cristiano"], Prezzo:18},
         {Name:"Amatriciana",                 Prodotti:["sugo", "pasta", "olio"],            Category:"Pasta",       Tags:["carne"], Prezzo:18},
@@ -12,6 +13,7 @@ myApp.service('creaMenuService', function() {
         {Name:"Spremuta di arance",          Prodotti:["arancia"],                          Category:"Bevanda",     Tags:["vegano", "vegetariano"], Prezzo:18 },
         {Name:"Pollo alla romana",           Prodotti:["pollo", "roma", "romana"],          Category:"Secondo",     Tags:["piccante", "riso", "carne"], Prezzo:18 }
     ];
+
 
     var getPietanze = function(){
         return pietanzeList;
