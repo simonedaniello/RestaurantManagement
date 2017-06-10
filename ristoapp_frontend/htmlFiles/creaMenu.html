@@ -36,7 +36,7 @@
                                         <button type="button" class="btn btn-default" ng-model="ModifyCatButton">Modifica</button>
                                     </div>
                                     <div class="col-sm-2">
-                                        <button type="button" class="btn btn-danger" ng-model="deleteCatButton">Elimina</button>
+                                        <button type="button" class="btn btn-danger" ng-model="deleteCatButton" ng-click="removeFromMenu(categoria.Name)">Elimina</button>
                                     </div>
                                 </div>
                             </div>
@@ -82,15 +82,15 @@
                                         <span class="input-group-addon">Categoria</span>
                                         <select class="btn btn-default dropdown-toggle" data-ng-model="nomeCategoria">
                                             <option value=""> -- seleziona nome categoria -- </option>
-                                            <option ng-repeat="cat in categorie">{{cat}}</option>
+                                            <option ng-repeat="cat in categorie |orderBy">{{cat}}</option>
                                         </select>
                                     </div>
                                     <p><div class="input-group">
                                         <span class="input-group-addon">Selezione filtro</span>
-                                        <select class="btn btn-default dropdown-toggle" data-ng-model="filtro" ng-click="updateVisibleElements()">
+                                        <select class="btn btn-default dropdown-toggle" data-ng-model="filtro"> <!--ng-click="updateVisibleElements()"-->
                                             <option disabled selected value> -- seleziona un Tag -- </option>
-                                            <option value="all">Mostra tutti</option>
-                                            <option ng-repeat="tag in tags">{{tag}}</option>
+                                            <option value="all">Mostra tutte le pietanze</option>
+                                            <option ng-repeat="tag in tags | orderBy">{{tag}}</option>
                                         </select>
                                     </div>
                                 </div>
@@ -102,10 +102,22 @@
                                     <div class="panel-body" style="overflow-y: auto; height: 420px">
                                         <table class="table table-striped">
                                             <tbody>
-                                            <tr ng-repeat="pietanza in pietanzeFiltrate">
-                                                <td><p style="font-style: italic">{{pietanza.Name}}</p></td>
+                                            <tr ng-repeat="pietanza in pietanze | filter: filterPietanze | orderBy: 'Name'">
+                                                <td>
+                                                    <div class="container-fluid">
+                                                        <div class="menu-item-name">
+                                                            <b>{{pietanza.Name}}</b>
+                                                        </div>
+                                                        <div>
+                                                            <span class="menu-item-description" ng-repeat="prodotto in pietanza.Prodotti">
+                                                                {{prodotto}}{{$last ? '' : ', '}}
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </td>
                                                 <td><div class="checkbox">
                                                     <label><input type="checkbox" ng-click="updateSelected(pietanza)" id="{{pietanza.Name}}"></label>
+                                                    {{updateCheckboxFiltered(pietanza)}}
                                                 </div></td>
                                             </tr>
                                             </tbody>
@@ -119,7 +131,7 @@
                                     <div class="panel-body" style="overflow-y: auto; height: 350px">
                                         <table class="table table-striped">
                                             <tbody>
-                                            <tr ng-repeat="selezionata in selected">
+                                            <tr ng-repeat="selezionata in selected | orderBy: 'Name'">
                                                 <td class="col-sm-9"><p style="font-style: italic">{{selezionata.Name}}</p></td>
                                                 <td class="col-sm-3"><p style="font-style: italic">{{selezionata.Prezzo}} €</p></td>
                                             </tr>

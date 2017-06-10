@@ -1,123 +1,71 @@
 
-
 myApp.controller("creaMenuCtrl", function($scope, creaMenuService) {
     $scope.categorieMenu = [];
-
-    /*$scope.categorie =[
-     {"name": "Primi",
-     "pietanze": [
-     {
-     "name": "Spaghetti allo scoglio",
-     "prezzo": 13,
-     "prodotti": ["spaghetti", "cozze", "seppie", "calamari", "gamberetti", "aglio", "prezzemolo"]
-     },
-     {
-     "name": "Tagliatelle ai funghi porcini",
-     "prezzo": 12,
-     "prodotti": ["pasta all'uovo", "funghi porcini", "panna", "prezzemolo"]
-     },
-     {
-     "name": "Pasta al pesto",
-     "prezzo": 7,
-     "prodotti": ["pasta", "basilico", "pinoli", "parmigiano", "olio d'oliva"]
-     }
-     ]
-     },
-     {"name": "Secondi",
-     "pietanze": [
-     {
-     "name": "Cotoletta alla milanese",
-     "prezzo": 12,
-     "prodotti": ["vitello", "pomodori", "rucola"]
-     },
-     {
-     "name": "Fritto misto di mare",
-     "prezzo": 16,
-     "prodotti": ["totani", "gamberi", "scampi", "seppie"]
-     },
-     {
-     "name": "Fritto misto di verdure*",
-     "prezzo": 7,
-     "prodotti": ["zucchine", "carote", "cavoli", "melanzana"]
-     }
-     ]
-     },
-     {"name": "Dolci",
-     "pietanze": [
-     {
-     "name": "Tiramisù",
-     "prezzo": 4,
-     "prodotti": ["savoiardi", "caffè", "cacao in polvere", "mascarpone"]
-     },
-     {
-     "name": "Crostata ai frutti di bosco",
-     "prezzo": 5,
-     "prodotti": ["pastafrolla", "mirtilli", "lamponi", "more", "crema"]
-     }
-     ]
-     }
-     ]*/
 
     $scope.nomeMenu = "";
     $scope.chef = "";
 
     $scope.pietanze = creaMenuService.getPietanze();
-    $scope.pietanze.sort();
-
-    $scope.pietanzeFiltrate = $scope.pietanze.slice();
-    $scope.pietanzeFiltrate.sort();
 
     $scope.categorie = creaMenuService.getCategorieList();
-    $scope.categorie.sort();
 
     $scope.tags = creaMenuService.getTagList();
-    $scope.tags.sort();
 
     $scope.nomeCategoria = "";
-    $scope.filtro = "";
+    $scope.filtro = "all";
 
     $scope.selected = [];
 
-    var searchIndex = function(searchTerm){
-        for(var i = 0, len = $scope.selected.length; i < len; i++) {
-            if ($scope.selected[i].name === searchTerm) {
+    $scope.filterPietanze = function(element) {
+        if ($scope.filtro === "all") {
+            return true;
+        }
+        for(var i = 0, len = element.Tags.length; i < len; i++) {
+            if (element.Tags[i] === $scope.filtro) {
+                return true;
+            }
+        }
+        return false;
+    };
+
+
+    var searchIndex = function(searchTerm, array){
+        for(var i = 0, len = array.length; i < len; i++) {
+            if (array[i].Name === searchTerm) {
                 return i;
             }
         }
     };
 
+    $scope.updateCheckboxFiltered = function(pietanza) {
+        for(var i = 0, len = $scope.selected.length; i < len; i++) {
+            //se la pietanza è tra le selezionate
+            if ($scope.selected[i].Name === pietanza.Name) {
+                //e il filtro è all sarà visibile e la devo chekkare
+                if ($scope.filtro === "all") {
+                    document.getElementById(pietanza.Name).checked = true;
+                    return;
+                }
+                //oppure se ha il filtro selezionato sarà visibile e la devo chekkare
+                for(var j = 0, lenT = $scope.selected[i].Tags.length; j < lenT; j++) {
+                    if ($scope.selected[i].Tags[j] === $scope.filtro) {
+                        document.getElementById(pietanza.Name).checked = true;
+                        return;
+                    }
+                }
+            }
+        }
+    };
 
     $scope.updateSelected = function(pietanza){
         var checkBox = document.getElementById(pietanza.Name);
         if(checkBox.checked) {
             $scope.selected.push(pietanza);
-            $scope.selected.sort(function(a, b){
-                return (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)
-            });
+            $scope.selected.sort(function(a, b){return (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)});
         }else{
-            var i = searchIndex(pietanza);
+            var i = searchIndex(pietanza.Name, $scope.selected);
             $scope.selected.splice(i,1);
         }
-    };
-
-
-    $scope.updateVisibleElements = function(){
-        if ($scope.filtro === "all") {
-            $scope.pietanzeFiltrate = $scope.pietanze.slice();
-            $scope.pietanzeFiltrate.sort();
-            return;
-        }
-        var list = [];
-        for(var i = 0, lenP = $scope.pietanze.length; i < lenP; i++) {
-            for(var j = 0, lenT = $scope.pietanze[i].Tags.length; j < lenT; j++) {
-                if ($scope.pietanze[i].Tags[j] === $scope.filtro) {
-                    list.push($scope.pietanze[i]);
-                    break;
-                }
-            }
-        }
-        $scope.pietanzeFiltrate = list;
-        $scope.pietanzeFiltrate.sort();
     };
 
 
@@ -128,6 +76,11 @@ myApp.controller("creaMenuCtrl", function($scope, creaMenuService) {
         $scope.selected = [];
     };
 
+
+    $scope.removeFromMenu = function(nomeCat){
+        var i = searchIndex(nomeCat, $scope.categorieMenu);
+        $scope.categorieMenu.splice(i,1);
+    };
 
     $scope.addToMenu = function(){
         if ($scope.nomeCategoria === "") {
@@ -148,7 +101,7 @@ myApp.controller("creaMenuCtrl", function($scope, creaMenuService) {
         $scope.categorieMenu.push(newCategory);
         $scope.nomeCategoria = "";
         uncheckAll();
-        $scope.filtro = "";
+        $scope.filtro = "all";
     };
 
 
