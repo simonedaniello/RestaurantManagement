@@ -1,11 +1,12 @@
 
 // Controller per la visualizzazione del menu e salvataggio come pdf.
 
-myApp.controller("MenuController", ["$scope", "MenuService", function ($scope, MenuService) {
+myApp.controller("VisualizzaMenuController", ["$scope", "MenuService", "$routeParams", function ($scope, MenuService, $routeParams) {
 
     $scope.menu = {nomeMenu: undefined, immagineMenu: undefined, categorie: undefined};
-    //var nomeMenu = $routeParams.nomeMenu;
 
+    // Nome del menù con cui fare la get al backend
+    var nomeMenu = $routeParams.nomeMenu;
 
     $scope.visualizza = function () {
         MenuService.getMenu("jsonFiles/menu_mock.json").then(function (response) {

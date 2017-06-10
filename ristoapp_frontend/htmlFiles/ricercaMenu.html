@@ -1,4 +1,7 @@
-
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css">
+</head>
 
 <body>
 
@@ -6,27 +9,27 @@
     <div class="row content" ng-controller="RicercaMenuController">
 
         <div class="col-sm-4">
-        <div class="panel panel-default">
-            <div class="panel-heading">Ricerca Menu</div>
-            <div class="panel-body">
+            <div class="panel panel-default">
+                <div class="panel-heading">Ricerca Menu</div>
+                <div class="panel-body">
 
-                <div class="form-group">
-                    <label for="nome">Nome:</label>
-                    <input type="text" class="form-control" id="nome">
-                </div>
-                <div class="form-group">
-                    <label for="usr2">Ingredienti:</label>
-                    <input type="text" class="form-control" id="usr2">
-                </div>
-                <div class="form-group">
-                    <label for="usr4">Chef:</label>
-                    <input type="text" class="form-control" id="usr4">
-                </div>
-                <button type="submit" ng-click="ricerca()" class="btn btn-primary">Cerca</button>
+                    <div class="form-group">
+                        <label for="nome">Nome:</label>
+                        <input type="text" class="form-control" id="nome">
+                    </div>
+                    <div class="form-group">
+                        <label for="usr2">Ingredienti:</label>
+                        <input type="text" class="form-control" id="usr2">
+                    </div>
+                    <div class="form-group">
+                        <label for="usr4">Chef:</label>
+                        <input type="text" class="form-control" id="usr4">
+                    </div>
+                    <button type="submit" ng-click="ricerca()" class="btn btn-primary">Cerca</button>
 
 
+                </div>
             </div>
-        </div>
         </div>
 
         <div class="col-sm-8">
@@ -38,12 +41,14 @@
                             <br>
                             <div class="col-md-8 col-md-offset-2">
 
-                                <a href="#/table/:nomeMenu" class="card" ng-repeat="menu in listaMenu">
+                                <div class="card" style="width: 35rem;" ng-repeat="menu in listaMenu">
                                     <img class="card-img-top" ng-src="{{menu.immagine}}" style="height: 200px; width: 100%; display: block;">
                                     <div class="card-block">
+                                        <h4 class="card-title">{{menu.nomeMenu}}</h4>
                                         <p class="card-text">{{menu.descrizione}}</p>
+                                        <button type="submit" class="btn btn-primary" ng-click="pickMenu(menu.nomeMenu)">Visualizza</button>
                                     </div>
-                                </a>
+                                </div>
 
                             </div>
 
@@ -56,4 +61,7 @@
 </div>
 
 
+</body>
+
+</html>
 

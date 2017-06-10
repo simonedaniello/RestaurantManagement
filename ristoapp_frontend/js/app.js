@@ -11,14 +11,14 @@ myApp.config(function($routeProvider) {
             templateUrl : "htmlFiles/tempCategoria.html",
             controller: "creaCategoriaController"
         })
-        .when("/table", {
+        .when("/ricercaMenu", {
             templateUrl : "htmlFiles/ricercaMenu.html",
             controller:"RicercaMenuController"
         })
-        .when("/table/:nomeMenu", {
+        .when("/ricercaMenu/:nomeMenu", {
             templateUrl : "htmlFiles/visualizzaMenu.html",
             css : "cssFiles/menu.css",
-            controller : "MenuController"
+            controller : "VisualizzaMenuController"
         })
         .when("/creamenu", {
             templateUrl : "htmlFiles/creaMenu.html",
