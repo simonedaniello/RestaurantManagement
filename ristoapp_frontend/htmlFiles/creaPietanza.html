@@ -5,14 +5,14 @@
                 <div class="row" style="margin-bottom: 10px">
                     <div class="col-md-12">
                         <p><div class="input-group">
-                            <span class="input-group-addon">Pietanza</span>
-                            <input required id="nomePietanza" type="text" class="form-control" placeholder="Inserire nome pietanza creata" ng-model="nomePietanza">
-                        </div></p>
+                        <span class="input-group-addon">Pietanza</span>
+                        <input required id="nomePietanza" type="text" class="form-control" placeholder="Inserire nome pietanza creata" ng-model="nomePietanza">
+                    </div></p>
                         <p><div class="input-group">
-                            <span class="input-group-addon" style="background-color:lightskyblue">Tag</span>
-                            <span class="input-group-addon" style="background-color:lightcyan" ng-repeat="elem in associatedTags">{{elem}}</span>
-                            <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-default">Gestisci Tag</button>
-                        </div></p>
+                        <span class="input-group-addon" style="background-color:lightskyblue">Tag</span>
+                        <span class="input-group-addon" style="background-color:lightcyan" ng-repeat="elem in associatedTags">{{elem}}</span>
+                        <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-default">Gestisci Tag</button>
+                    </div></p>
 
                         <div id="myModal" class="modal fade">
                             <div class="modal-dialog">
@@ -70,49 +70,49 @@
             </div>
         </div>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="panel panel-default">
-                    <div class="panel-heading"><p><b>Seleziona prodotti</b></p></div>
-                    <div class="panel-body" style="overflow-y: auto; height: 420px">
-                        <table class="table table-striped">
-                            <tbody>
-                            <tr ng-repeat="prodotto in prodotti">
-                                <td><p style="font-style: italic">{{prodotto}}</p></td>
-                                <td><div class="checkbox">
-                                    <label><input type="checkbox" ng-click="updateSelectedProd(prodotto)" id="check.{{prodotto}}"></label>
-                                </div></td>
-                            </tr>
-                            </tbody>
-                        </table>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading"><p><b>Seleziona prodotti</b></p></div>
+                        <div class="panel-body" style="overflow-y: auto; height: 420px">
+                            <table class="table table-striped">
+                                <tbody>
+                                <tr ng-repeat="prodotto in prodotti">
+                                    <td><p style="font-style: italic">{{prodotto}}</p></td>
+                                    <td><div class="checkbox">
+                                        <label><input type="checkbox" ng-click="updateSelectedProd(prodotto)" id="check.{{prodotto}}"></label>
+                                    </div></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-6">
-                <div class="panel panel-default">
-                    <div class="panel-heading"><p><b>Prodotti selezionate</b></p></div>
-                    <div class="panel-body" class="row" style="overflow-y: auto; height: 350px">
-                        <table class="table table-striped">
-                            <tbody>
-                            <tr ng-repeat="prod in selectedProd">
-                                <td class="col-sm-9"><p style="font-style: italic">{{prod.name}}</p></td>
-                                <td class="col-sm-3"><input required type="number" class="form-control" id="qnt.{{prodotto.name}}" step="1" ng-model="prod.quantita"></td>
-                            </tr>
-                            </tbody>
-                        </table>
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading"><p><b>Prodotti selezionate</b></p></div>
+                        <div class="panel-body" class="row" style="overflow-y: auto; height: 350px">
+                            <table class="table table-striped">
+                                <tbody>
+                                <tr ng-repeat="prod in selectedProd">
+                                    <td class="col-sm-9"><p style="font-style: italic">{{prod.name}}</p></td>
+                                    <td class="col-sm-3"><input required type="number" class="form-control" id="qnt.{{prodotto.name}}" step="1" ng-model="prod.quantita"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                </div>
-                <div class="container-fluid">
-                    <div class="col-sm-6">
-                        <button type="button" class="btn btn-success" ng-click="saveDish()">Salva</button>
-                    </div>
-                    <div class="col-sm-6">
-                        <button type="button" class="btn btn-danger">Annulla</button>
+                    <div class="container-fluid">
+                        <div class="col-sm-6">
+                            <button type="button" class="btn btn-success" ng-click="saveDish()">Salva</button>
+                        </div>
+                        <div class="col-sm-6">
+                            <button type="button" class="btn btn-danger">Annulla</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     </form>
 </div>

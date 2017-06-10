@@ -132,6 +132,7 @@ myApp.controller("creaMenuCtrl", function($scope, creaMenuService) {
         };
         var jsonMenu = JSON.stringify(dtoMenu);
         ajaxService.sendResource("url", jsonPiet)
-        /*implementare passaggio dati al server*/
+        /*implementare passaggio dati al server
+        **/
     };
 });
