@@ -1,5 +1,5 @@
 
-myApp.controller("creaMenuCtrl", function($scope, creaMenuService) {
+myApp.controller("creaMenuCtrl", function($scope, ajaxService, creaMenuService, CreaPietanzaService) {
     $scope.categorieMenu = [];
 
     $scope.nomeMenu = "";
@@ -7,9 +7,43 @@ myApp.controller("creaMenuCtrl", function($scope, creaMenuService) {
 
     $scope.pietanze = creaMenuService.getPietanze();
 
-    $scope.categorie = creaMenuService.getCategorieList();
+    //$scope.categorie = creaMenuService.getCategorieList();
 
-    $scope.tags = creaMenuService.getTagList();
+    var getTagList = function() {
+        ajaxService.getResource("http://localhost:8080/creaPietanza/getTags", null).then(
+            function (response) {
+                $scope.etichette = CreaPietanzaService.parseTagArray(response);
+            }
+            , function (response) {
+                alert("Couldn't get tags");
+            });
+    };
+
+    getTagList();
+
+    var getCatNamesList = function() {
+        ajaxService.getResource("http://localhost:8080/createMenu/getPossibleCategories", null).then(
+            function (response) {
+                $scope.categorie = creaMenuService.parseCatNamesArray(response);
+            }
+            , function (response) {
+                alert("Couldn't get categories names");
+            });
+    };
+
+    getCatNamesList();
+
+    /*var getPietanzeList = function() {
+        ajaxService.getResource("http://localhost:8080/createMenu/getDishes", null).then(
+            function (response) {
+                $scope.pietanze = creaMenuService.parsePietanzeArray(response);
+            }
+            , function (response) {
+                alert("Couldn't get dishes");
+            });
+    };
+
+    getPietanzeList();*/
 
     $scope.nomeCategoria = "";
     $scope.filtro = "all";
@@ -20,8 +54,8 @@ myApp.controller("creaMenuCtrl", function($scope, creaMenuService) {
         if ($scope.filtro === "all") {
             return true;
         }
-        for(var i = 0, len = element.Tags.length; i < len; i++) {
-            if (element.Tags[i] === $scope.filtro) {
+        for(var i = 0, len = element.etichette.length; i < len; i++) {
+            if (element.etichette[i] === $scope.filtro) {
                 return true;
             }
         }
@@ -31,7 +65,7 @@ myApp.controller("creaMenuCtrl", function($scope, creaMenuService) {
 
     var searchIndex = function(searchTerm, array){
         for(var i = 0, len = array.length; i < len; i++) {
-            if (array[i].Name === searchTerm) {
+            if (array[i].nome === searchTerm) {
                 return i;
             }
         }
@@ -40,16 +74,16 @@ myApp.controller("creaMenuCtrl", function($scope, creaMenuService) {
     $scope.updateCheckboxFiltered = function(pietanza) {
         for(var i = 0, len = $scope.selected.length; i < len; i++) {
             //se la pietanza è tra le selezionate
-            if ($scope.selected[i].Name === pietanza.Name) {
+            if ($scope.selected[i].nome === pietanza.nome) {
                 //e il filtro è all sarà visibile e la devo chekkare
                 if ($scope.filtro === "all") {
-                    document.getElementById(pietanza.Name).checked = true;
+                    document.getElementById(pietanza.nome).checked = true;
                     return;
                 }
                 //oppure se ha il filtro selezionato sarà visibile e la devo chekkare
-                for(var j = 0, lenT = $scope.selected[i].Tags.length; j < lenT; j++) {
-                    if ($scope.selected[i].Tags[j] === $scope.filtro) {
-                        document.getElementById(pietanza.Name).checked = true;
+                for(var j = 0, lenT = $scope.selected[i].etichette.length; j < lenT; j++) {
+                    if ($scope.selected[i].etichette[j] === $scope.filtro) {
+                        document.getElementById(pietanza.nome).checked = true;
                         return;
                     }
                 }
@@ -58,12 +92,12 @@ myApp.controller("creaMenuCtrl", function($scope, creaMenuService) {
     };
 
     $scope.updateSelected = function(pietanza){
-        var checkBox = document.getElementById(pietanza.Name);
+        var checkBox = document.getElementById(pietanza.nome);
         if(checkBox.checked) {
             $scope.selected.push(pietanza);
-            $scope.selected.sort(function(a, b){return (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)});
+            $scope.selected.sort(function(a, b){return (a.nome > b.nome) ? 1 : ((b.nome > a.nome) ? -1 : 0)});
         }else{
-            var i = searchIndex(pietanza.Name, $scope.selected);
+            var i = searchIndex(pietanza.nome, $scope.selected);
             $scope.selected.splice(i,1);
         }
     };
@@ -71,7 +105,7 @@ myApp.controller("creaMenuCtrl", function($scope, creaMenuService) {
 
     var uncheckAll = function(){
         for(var i = 0, len = $scope.selected.length; i < len; i++) {
-            document.getElementById($scope.selected[i].Name).checked = false;
+            document.getElementById($scope.selected[i].nome).checked = false;
         }
         $scope.selected = [];
     };
@@ -80,6 +114,24 @@ myApp.controller("creaMenuCtrl", function($scope, creaMenuService) {
     $scope.removeFromMenu = function(nomeCat){
         var i = searchIndex(nomeCat, $scope.categorieMenu);
         $scope.categorieMenu.splice(i,1);
+    };
+
+
+    $scope.moveUp = function(nomeCat){
+        var i = searchIndex(nomeCat, $scope.categorieMenu);
+        if (i === 0) return;
+        var temp = $scope.categorieMenu[i];
+        $scope.categorieMenu[i] = $scope.categorieMenu[i-1];
+        $scope.categorieMenu[i-1] = temp;
+    };
+
+
+    $scope.moveDown = function(nomeCat){
+        var i = searchIndex(nomeCat, $scope.categorieMenu);
+        if (i === $scope.categorieMenu.length-1) return;
+        var temp = $scope.categorieMenu[i];
+        $scope.categorieMenu[i] = $scope.categorieMenu[i+1];
+        $scope.categorieMenu[i+1] = temp;
     };
 
     $scope.addToMenu = function(){
@@ -92,12 +144,12 @@ myApp.controller("creaMenuCtrl", function($scope, creaMenuService) {
             return;
         }
         for(var i = 0, len = $scope.categorieMenu.length; i < len; i++) {
-            if($scope.categorieMenu[i].Name === $scope.nomeCategoria) {
+            if($scope.categorieMenu[i].nome === $scope.nomeCategoria) {
                 $scope.errorMessageCat = "La categoria selezionata esiste già nel menu.";
                 return;
             }
         }
-        var newCategory = {Name: $scope.nomeCategoria, Pietanze:$scope.selected};
+        var newCategory = {nome: $scope.nomeCategoria, pietanze:$scope.selected};
         $scope.categorieMenu.push(newCategory);
         $scope.nomeCategoria = "";
         uncheckAll();
@@ -128,11 +180,13 @@ myApp.controller("creaMenuCtrl", function($scope, creaMenuService) {
         var dtoMenu = {
             nome:$scope.nomeMenu,
             chef: $scope.chef,
-            categorieMenu: $scope.categorieMenu
+            categorie: $scope.categorieMenu
         };
         var jsonMenu = JSON.stringify(dtoMenu);
-        ajaxService.sendResource("url", jsonPiet)
-        /*implementare passaggio dati al server
-        **/
+        ajaxService.sendResource("http://localhost:8080/createMenu/saveMenu", jsonMenu).then(function (response) {
+            console.log("fatto")
+        }, function (response) {
+            console.log(response)
+        });
     };
 });

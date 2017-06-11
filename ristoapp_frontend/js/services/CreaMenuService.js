@@ -1,17 +1,28 @@
 myApp.service('creaMenuService', function() {
 
     var pietanzeList = [
-        {Name:"Carbonara",                   Prodotti:["uovo", "pasta", "guanciale"],       Category:"Pasta",       Tags:["cristiano"], Prezzo:18},
-        {Name:"Amatriciana",                 Prodotti:["sugo", "pasta", "olio"],            Category:"Pasta",       Tags:["carne"], Prezzo:18},
-        {Name:"Pasta con lo scoglio",        Prodotti:["scoglio", "pasta", "acqua marina", "sale marino", "nemo"], Category:"Pasta",       Tags:["pesce"], Prezzo:18 },
-        {Name:"Spaghetti agli scampi",       Prodotti:["spaghetti", "scampi"],              Category:"Pasta",       Tags:["pesce"], Prezzo:18 },
-        {Name:"Lasagne",                     Prodotti:["sfoglia", "ragu", "mozzarella"],    Category:"Primo",       Tags:[], Prezzo:18 },
-        {Name:"Krapfen",                     Prodotti:["crema pasticcera", "bo", "altro"],  Category:"Dolce",       Tags:[], Prezzo:18 },
-        {Name:"Purea di patate",             Prodotti:["patate", "latte", "formaggio"],     Category:"Secondo",     Tags:[], Prezzo:18 },
-        {Name:"Banana Split",                Prodotti:["banana", "cioccolato"],             Category:"Dolce",       Tags:["vegano"], Prezzo:18 },
-        {Name:"Bollito di asparagi",         Prodotti:["asparagi", "spezie varie"],         Category:"Secondo",     Tags:["vegano", "vegetariano"], Prezzo:18 },
-        {Name:"Spremuta di arance",          Prodotti:["arancia"],                          Category:"Bevanda",     Tags:["vegano", "vegetariano"], Prezzo:18 },
-        {Name:"Pollo alla romana",           Prodotti:["pollo", "roma", "romana"],          Category:"Secondo",     Tags:["piccante", "riso", "carne"], Prezzo:18 }
+        {nome:"Carbonara",                   etichette:["Cristiano"], prezzo:18,
+            ingredienti:[{nome:"uovo", quantita:15}, {nome:"pasta", quantita:15}, {nome:"guanciale", quantita:15}]},
+        {nome:"Amatriciana",                 etichette:["Carne"], prezzo:18,
+            ingredienti:[{nome:"sugo", quantita:15}, {nome:"pasta", quantita:15}, {nome:"olio", quantita:15}]},
+        {nome:"Pasta con lo scoglio",        etichette:["Pesce"], prezzo:18,
+            ingredienti:[{nome:"scoglio", quantita:15}, {nome:"pasta", quantita:15}, {nome:"acqua marina", quantita:15}, {nome:"sale marino", quantita:15}, {nome:"nemo", quantita:15}]},
+        {nome:"Spaghetti agli scampi",       etichette:["Pesce"], prezzo:18,
+            ingredienti:[{nome:"spaghetti", quantita:15}, {nome:"scampi", quantita:15}]},
+        {nome:"Lasagne",                     etichette:[], prezzo:18,
+            ingredienti:[{nome:"sfoglia", quantita:15}, {nome:"ragu", quantita:15}, {nome:"mozzarella", quantita:15}]},
+        {nome:"Krapfen",                     etichette:[], prezzo:18,
+            ingredienti:[{nome:"crema pasticcera", quantita:15}, {nome:"bo", quantita:15}, {nome:"altro", quantita:15}]},
+        {nome:"Purea di patate",             etichette:[], prezzo:18 ,
+            ingredienti:[{nome:"patate", quantita:15}, {nome:"latte", quantita:15}, {nome:"formaggio", quantita:15}]},
+        {nome:"Banana Split",                etichette:["Vegano"], prezzo:18,
+            ingredienti:[{nome:"banana", quantita:15}, {nome:"cioccolato", quantita:15}]},
+        {nome:"Bollito di asparagi",         etichette:["Vegano", "Vegetariano"], prezzo:18,
+            ingredienti:[{nome:"asparagi", quantita:15}, {nome:"spezie varie", quantita:15}]},
+        {nome:"Spremuta di arance",          etichette:["Vegano", "Vegetariano"], prezzo:18,
+            ingredienti:[{nome:"arancia", quantita:15}]},
+        {nome:"Pollo alla romana",           etichette:["Piccante", "Riso", "Carne"], prezzo:18,
+            ingredienti:[{nome:"pollo", quantita:15}, {nome:"roma", quantita:15}, {nome:"romana", quantita:15}]}
     ];
 
 
@@ -19,21 +30,23 @@ myApp.service('creaMenuService', function() {
         return pietanzeList;
     };
 
-    var categorieList = ["Primo", "Secondo", "Dolce", "Vino Bianco", "Antipasto"];
+    var parseCatNamesArray = function (array) {
+        var namesArray = [];
+        for (i in array){
+            namesArray.push(array[i]);
+        }
+        return namesArray;
+    };
 
-    var getCategorieList = function(){
+    //var categorieList = ["Primo", "Secondo", "Dolce", "Vino Bianco", "Antipasto"];
+
+    /*var getCategorieList = function(){
         return categorieList;
-    };
-
-    var TagList = ["piccante", "vegano", "vegetariano", "riso", "pesce", "carne", "cristiano", "alaha"];
-
-    var getTagList = function(){
-        return TagList;
-    };
+    };*/
 
     return {
-        getCategorieList: getCategorieList,
-        getTagList:getTagList,
+        //getCategorieList: getCategorieList,
+        parseCatNamesArray: parseCatNamesArray,
         getPietanze: getPietanze
     };
 

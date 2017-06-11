@@ -29,32 +29,32 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <div class="container-fluid">
-                                    <div class="col-sm-8">
-                                        <b>{{categoria.Name}}</b>
+                                    <div class="col-sm-7">
+                                        <b>{{categoria.nome}}</b>
                                     </div>
-                                    <div class="col-sm-2">
-                                        <button type="button" class="btn btn-default" ng-model="ModifyCatButton">Modifica</button>
-                                    </div>
-                                    <div class="col-sm-2">
-                                        <button type="button" class="btn btn-danger" ng-model="deleteCatButton" ng-click="removeFromMenu(categoria.Name)">Elimina</button>
+                                    <div class="col-sm-5">
+                                        <button type="button" class="btn btn-default">Modifica</button>
+                                        <button type="button" class="btn" ng-click="moveUp(categoria.nome)">Sposta sopra</button>
+                                        <button type="button" class="btn" ng-click="moveDown(categoria.nome)">Sposta sotto</button>
+                                        <button type="button" class="btn btn-danger" ng-click="removeFromMenu(categoria.nome)">Elimina</button>
                                     </div>
                                 </div>
                             </div>
                             <div class="panel-body">
                                 <div class="container-fluid">
                 <p>
-                <div class="row" ng-repeat="pietanza in categoria.Pietanze">
+                <div class="row" ng-repeat="pietanza in categoria.pietanze">
                     <div class="container-fluid">
-                        <div class="menu-item-name col-sm-10">
-                            <b>{{pietanza.Name}}</b>
+                        <div class="menu-item-name col-sm-11">
+                            <b>{{pietanza.nome}}</b>
                         </div>
                         <div class="col-sm-10">
-                            <span class="menu-item-description" ng-repeat="prodotto in pietanza.Prodotti">
-                                {{prodotto}}{{$last ? '' : ', '}}
+                            <span class="menu-item-description" ng-repeat="ingrediente in pietanza.ingredienti">
+                                {{ingrediente.nome}}{{$last ? '' : ', '}}
                             </span>
                         </div>
-                        <div class=" menu-item-price col-sm-2">
-                            {{pietanza.Prezzo}} €
+                        <div class=" menu-item-price col-sm-1">
+                            {{pietanza.prezzo}} €
                         </div>
                     </div>
                 </div>
@@ -90,7 +90,7 @@
                                         <select class="btn btn-default dropdown-toggle" data-ng-model="filtro"> <!--ng-click="updateVisibleElements()"-->
                                             <option disabled selected value> -- seleziona un Tag -- </option>
                                             <option value="all">Mostra tutte le pietanze</option>
-                                            <option ng-repeat="tag in tags | orderBy">{{tag}}</option>
+                                            <option ng-repeat="tag in etichette | orderBy">{{tag}}</option>
                                         </select>
                                     </div>
                                 </div>
@@ -106,17 +106,17 @@
                                                 <td>
                                                     <div class="container-fluid">
                                                         <div class="menu-item-name">
-                                                            <b>{{pietanza.Name}}</b>
+                                                            <b>{{pietanza.nome}}</b>
                                                         </div>
                                                         <div>
-                                                            <span class="menu-item-description" ng-repeat="prodotto in pietanza.Prodotti">
-                                                                {{prodotto}}{{$last ? '' : ', '}}
+                                                            <span class="menu-item-description" ng-repeat="ingrediente in pietanza.ingredienti">
+                                                                {{ingrediente.nome}}{{$last ? '' : ', '}}
                                                             </span>
                                                         </div>
                                                     </div>
                                                 </td>
                                                 <td><div class="checkbox">
-                                                    <label><input type="checkbox" ng-click="updateSelected(pietanza)" id="{{pietanza.Name}}"></label>
+                                                    <label><input type="checkbox" ng-click="updateSelected(pietanza)" id="{{pietanza.nome}}"></label>
                                                     {{updateCheckboxFiltered(pietanza)}}
                                                 </div></td>
                                             </tr>
@@ -132,8 +132,8 @@
                                         <table class="table table-striped">
                                             <tbody>
                                             <tr ng-repeat="selezionata in selected | orderBy: 'Name'">
-                                                <td class="col-sm-9"><p style="font-style: italic">{{selezionata.Name}}</p></td>
-                                                <td class="col-sm-3"><p style="font-style: italic">{{selezionata.Prezzo}} €</p></td>
+                                                <td class="col-sm-9"><p style="font-style: italic">{{selezionata.nome}}</p></td>
+                                                <td class="col-sm-3"><p style="font-style: italic">{{selezionata.prezzo}} €</p></td>
                                             </tr>
                                             </tbody>
                                         </table>

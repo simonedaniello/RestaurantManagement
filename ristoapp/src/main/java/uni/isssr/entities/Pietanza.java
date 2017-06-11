@@ -30,6 +30,9 @@ public class Pietanza {
     @JsonProperty
     private String nome;
 
+    @JsonProperty
+    private String prezzo;
+
     @ManyToMany
     @JsonProperty
     private Set<Etichetta> etichette;
@@ -56,6 +59,14 @@ public class Pietanza {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public String getPrezzo() {
+        return prezzo;
+    }
+
+    public void setPrezzo(String prezzo) {
+        this.prezzo = prezzo;
     }
 
     public Set<Etichetta> getEtichette() {
