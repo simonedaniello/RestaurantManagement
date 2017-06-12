@@ -7,10 +7,6 @@ var myApp = angular.module("ristoApp", ["ngRoute", "ngStorage"]);
 
 myApp.config(function($routeProvider) {
     $routeProvider
-        .when("/creaCategoria", {
-            templateUrl : "htmlFiles/tempCategoria.html",
-            controller: "creaCategoriaController"
-        })
         .when("/ricercaMenu", {
             templateUrl : "htmlFiles/ricercaMenu.html",
             controller:"RicercaMenuController"
