@@ -12,7 +12,7 @@ public class Categoria {
 
     private String nome;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Pietanza> pientanze;
 
     public Categoria() {

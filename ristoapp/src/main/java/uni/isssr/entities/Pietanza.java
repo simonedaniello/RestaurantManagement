@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -18,8 +19,8 @@ public class Pietanza {
 
     private double prezzo;
 
-    @ManyToMany
-    private Set<Etichetta> etichette;
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<Etichetta> etichette;
 
     @OneToMany
     private List<Ingrediente> ingredienti;
@@ -27,7 +28,13 @@ public class Pietanza {
     public Pietanza() {
     }
 
-    public Pietanza(String nome, Set<Etichetta> etichette) {
+    public Pietanza(String nome) {
+        this.nome = nome;
+        this.etichette = new ArrayList<>();
+        this.ingredienti = new ArrayList<>();
+    }
+
+    public Pietanza(String nome, List<Etichetta> etichette) {
         this.ingredienti = new ArrayList<>();
         this.nome = nome;
         this.etichette = etichette;
@@ -65,11 +72,11 @@ public class Pietanza {
         this.prezzo = prezzo;
     }
 
-    public Set<Etichetta> getEtichette() {
+    public List<Etichetta> getEtichette() {
         return etichette;
     }
 
-    public void setEtichette(Set<Etichetta> etichette) {
+    public void setEtichette(List<Etichetta> etichette) {
         this.etichette = etichette;
     }
 
@@ -81,9 +88,12 @@ public class Pietanza {
         this.ingredienti.remove(ingrediente);
     }
 
+
+
     public void addEtichetta(Etichetta etichetta) {
         this.etichette.add(etichetta);
     }
+
 
     public void removeEtichetta(Etichetta etichetta) {
         this.etichette.remove(etichetta);

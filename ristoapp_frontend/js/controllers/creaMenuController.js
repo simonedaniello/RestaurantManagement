@@ -187,7 +187,7 @@ myApp.controller("creaMenuCtrl", function($scope, ajaxService, creaMenuService, 
         /*implementare passaggio dati al server*/
         var dtoMenu = {
             nome:$scope.nomeMenu,
-            chef: $scope.chef,
+            //chef: $scope.chef,
             categorie: $scope.categorieMenu
         };
         var jsonMenu = JSON.stringify(dtoMenu);

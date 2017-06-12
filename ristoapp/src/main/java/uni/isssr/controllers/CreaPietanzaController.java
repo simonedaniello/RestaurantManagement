@@ -45,7 +45,7 @@ public class CreaPietanzaController {
         p1.setNome("aaaa");
         ArrayList<Pietanza> list = new ArrayList<>();
         list.add(p1);
-        e1.setPietanza(list);
+        //e1.setPietanza(list);
         e1.setClassificatore("Piccante");
         e2.setClassificatore("Vegetariano");
         e3.setClassificatore("Carne");

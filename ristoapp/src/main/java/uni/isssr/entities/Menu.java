@@ -1,5 +1,6 @@
 package uni.isssr.entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -22,7 +23,7 @@ public class Menu {
 
     private Date dataCreazione;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Categoria> categorie;
 
     public Menu() {
