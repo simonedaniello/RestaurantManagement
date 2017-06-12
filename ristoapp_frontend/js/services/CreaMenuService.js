@@ -30,23 +30,16 @@ myApp.service('creaMenuService', function() {
         return pietanzeList;
     };
 
-    var parseCatNamesArray = function (array) {
+    /*var parseCatNamesArray = function (array) {
         var namesArray = [];
         for (i in array){
             namesArray.push(array[i]);
         }
         return namesArray;
-    };
-
-    //var categorieList = ["Primo", "Secondo", "Dolce", "Vino Bianco", "Antipasto"];
-
-    /*var getCategorieList = function(){
-        return categorieList;
     };*/
 
     return {
-        //getCategorieList: getCategorieList,
-        parseCatNamesArray: parseCatNamesArray,
+        //parseCatNamesArray: parseCatNamesArray,
         getPietanze: getPietanze
     };
 

@@ -7,8 +7,6 @@ myApp.controller("creaMenuCtrl", function($scope, ajaxService, creaMenuService, 
 
     $scope.pietanze = creaMenuService.getPietanze();
 
-    //$scope.categorie = creaMenuService.getCategorieList();
-
     var getTagList = function() {
         ajaxService.getResource("http://localhost:8080/creaPietanza/getTags", null).then(
             function (response) {
@@ -24,7 +22,8 @@ myApp.controller("creaMenuCtrl", function($scope, ajaxService, creaMenuService, 
     var getCatNamesList = function() {
         ajaxService.getResource("http://localhost:8080/createMenu/getPossibleCategories", null).then(
             function (response) {
-                $scope.categorie = creaMenuService.parseCatNamesArray(response);
+                //$scope.categorie = creaMenuService.parseCatNamesArray(response);
+                $scope.categorie = response;
             }
             , function (response) {
                 alert("Couldn't get categories names");
@@ -108,6 +107,15 @@ myApp.controller("creaMenuCtrl", function($scope, ajaxService, creaMenuService, 
             document.getElementById($scope.selected[i].nome).checked = false;
         }
         $scope.selected = [];
+    };
+
+
+    var modifyCat = function(nomeCat){
+        var i = searchIndex(pietanza.nome, $scope.categorieMenu);
+        /*
+        quella categoria a quellindex ci aggiorno i selected e i checke nome
+         */
+        $scope.categorieMenu[i]
     };
 
 
