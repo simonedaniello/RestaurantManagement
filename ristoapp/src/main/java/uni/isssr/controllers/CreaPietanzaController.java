@@ -18,9 +18,18 @@ public class CreaPietanzaController {
     @Autowired
     private EtichettaRepository etichettaRepository;
 
+    @Autowired
+    private PietanzaRepository pietanzaRepository;
+
     @RequestMapping(method = RequestMethod.POST, path = "/addTag")
     public void addTag(@RequestBody Etichetta etichetta){
         etichettaRepository.save(etichetta);
+    }
+
+
+    @RequestMapping(method = RequestMethod.POST, path = "/addDish")
+    public void addTag(@RequestBody Pietanza pietanza){
+        pietanzaRepository.save(pietanza);
     }
 
     @GetMapping(path = "/getTags")

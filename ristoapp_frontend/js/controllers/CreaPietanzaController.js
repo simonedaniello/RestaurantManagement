@@ -1,12 +1,15 @@
-myApp.controller("CreaPietanzaController", function($scope, ajaxService, CreaPietanzaService) {
+myApp.controller("CreaPietanzaController", function($scope, ajaxService, CreaPietanzaService, $http) {
 
 
     var updateListaProdotti = function () {
-        ajaxService.getResource("http://localhost:8080/creaPietanza/getProdotti", null).then(
+        //ajaxService.getResource("http://localhost:8080/creaPietanza/getProdotti", null).then(
+        $http.get("jsonFiles/prodotti.json").then(
             function (response) {
-                $scope.prodotti = CreaPietanzaService.parseProductList(response);
+                //$scope.prodotti = CreaPietanzaService.parseProductList(response);
+                var data = response.data;
+                $scope.prodotti = data.prodotti;
             }
-            , function (response) {
+        , function (response) {
                 alert("Couldn't get products");
             });
     };
@@ -42,7 +45,7 @@ myApp.controller("CreaPietanzaController", function($scope, ajaxService, CreaPie
     $scope.updateSelectedProd = function(nomeProd){
         var checkBox = document.getElementById("check.".concat(nomeProd));
         if(checkBox.checked) {
-            var ingrediente = {name:nomeProd,       quantita:0};
+            var ingrediente = {nome:nomeProd,       quantita:0};
             $scope.selectedProd.push(ingrediente);
             $scope.selectedProd.sort(function(a, b){
                 return (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)
@@ -70,8 +73,11 @@ myApp.controller("CreaPietanzaController", function($scope, ajaxService, CreaPie
             prodList: $scope.selectedProd
         };
         var jsonPiet = JSON.stringify(dtoPietanza);
-        //CONTROLLA DEL URL SE PATH VA BENE
-        ajaxService.sendResource("url", jsonPiet)
+        ajaxService.sendResource("http://localhost:8080/creaPietanza/addTag", jsonPiet).then(function (response) {
+            console.log("successo");
+        }, function (response) {
+            console.log(response)
+        });
     };
 
     $scope.saveTag = function(){

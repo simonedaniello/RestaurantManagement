@@ -19,6 +19,6 @@ myApp.service("CreaPietanzaService", [function () {
             productArray.push(array[i].nome);
         }
         return productArray;
-    }
+    };
 
 }]);

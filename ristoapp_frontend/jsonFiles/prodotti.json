@@ -1,0 +1,44 @@
+{
+  "prodotti": [
+    {
+      "nome": "Uovo",
+      "descrizione": "Descrizione prodotto bla bla",
+      "id": 0
+    },
+    {
+      "nome": "Pomodoro",
+      "descrizione": "Descrizione prodotto bla bla",
+      "id": 1
+    },
+    {
+      "nome": "Spaghetti",
+      "descrizione": "Descrizione prodotto bla bla",
+      "id": 2
+    },
+    {
+      "nome": "Zucchina",
+      "descrizione": "Descrizione prodotto bla bla",
+      "id": 3
+    },
+    {
+      "nome": "Tonno mar ionio",
+      "descrizione": "Descrizione prodotto bla bla",
+      "id": 4
+    },
+    {
+      "nome": "Coscia pollo",
+      "descrizione": "Descrizione prodotto bla bla",
+      "id": 5
+    },
+    {
+      "nome": "Pane grano duro",
+      "descrizione": "Descrizione prodotto bla bla",
+      "id": 6
+    },
+    {
+      "nome": "Banana",
+      "descrizione": "Descrizione prodotto bla bla",
+      "id": 7
+    }
+  ]
+}
