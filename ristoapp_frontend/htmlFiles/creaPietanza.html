@@ -79,8 +79,17 @@
                             <table class="table table-striped">
                                 <tbody>
                                 <tr ng-repeat="prodotto in prodotti">
-                                    <td><p style="font-style: italic">{{prodotto.nome}}</p></td>
-                                    <td><div class="checkbox">
+                                    <td>
+                                        <div class="menu-item-name">
+                                            <b>{{prodotto.nome}}</b>
+                                        </div>
+                                        <div>
+                                            <span class="menu-item-description">
+                                                {{prodotto.descrizione}}
+                                            </span>
+                                        </div>
+                                    </td>
+                                    <td><div class="checkbox menu-item-price">
                                         <label><input type="checkbox" ng-click="updateSelectedProd(prodotto.nome)" id="check.{{prodotto.nome}}"></label>
                                     </div></td>
                                 </tr>

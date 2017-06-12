@@ -27,6 +27,7 @@ public class Prova {
 
     @GetMapping
     public void populateMenu(){
+        /*
         Menu menu1 = new Menu("bbbbb", "hbwhkebckjc", "jnjecn", "jnlejcnj");
         Menu menu2 = new Menu("aaaaa", "hbwhkebckjc", "jnjecn", "jnlejcnj");
         Categoria categoria = new Categoria("a");
@@ -37,5 +38,6 @@ public class Prova {
         menu1.addCategoria(categoria1);
         menuRepository.save(menu1);
         menuRepository.save(menu2);
+        */
     }
 }
