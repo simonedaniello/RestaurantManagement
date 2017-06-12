@@ -1,13 +1,14 @@
 package uni.isssr.entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 public class Categoria {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue
     private Long id;
 
     private String nome;
@@ -22,9 +23,10 @@ public class Categoria {
 
     public Categoria(String nome) {
         this.nome = nome;
+        this.pientanze = new ArrayList<>();
     }
 
-    public Categoria(List<Pietanza> pietanze, String nome) {
+    public Categoria(String nome, List<Pietanza> pietanze) {
         this.nome = nome;
         this.pientanze = pietanze;
     }

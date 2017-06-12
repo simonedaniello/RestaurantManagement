@@ -1,12 +1,8 @@
 package uni.isssr.entities;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 public class Pietanza {
@@ -22,22 +18,23 @@ public class Pietanza {
     @ManyToMany(cascade = CascadeType.ALL)
     private List<Etichetta> etichette;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Ingrediente> ingredienti;
 
-    public Pietanza() {
-    }
+    public Pietanza() {}
 
-    public Pietanza(String nome) {
+    public Pietanza(String nome, double prezzo) {
         this.nome = nome;
+        this.prezzo = prezzo;
         this.etichette = new ArrayList<>();
         this.ingredienti = new ArrayList<>();
     }
 
-    public Pietanza(String nome, List<Etichetta> etichette) {
+    public Pietanza(String nome, double prezzo, List<Etichetta> etichette) {
         this.ingredienti = new ArrayList<>();
         this.nome = nome;
         this.etichette = etichette;
+        this.prezzo = prezzo;
     }
 
     public Long getId() {
@@ -88,12 +85,9 @@ public class Pietanza {
         this.ingredienti.remove(ingrediente);
     }
 
-
-
     public void addEtichetta(Etichetta etichetta) {
         this.etichette.add(etichetta);
     }
-
 
     public void removeEtichetta(Etichetta etichetta) {
         this.etichette.remove(etichetta);

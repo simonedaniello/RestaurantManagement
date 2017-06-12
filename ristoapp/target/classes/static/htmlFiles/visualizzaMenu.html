@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Menu</title>
+
+      <style>
+          .panel-body {
+              background:#FAFAFA;
+          }
+          .panel-heading h3 {
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              line-height: normal;
+              width: 75%;
+              padding-top: 8px;
+          }
+      </style>
+
+  </head>
+
+  <body>
+
+  <!-- Page Content -->
+  <div class="MenuContainer" ng-controller="MenuController" ng-style="{'background-image':'url(' + menu.immagineMenu + ')'}">
+      <div class="row">
+          <div class="col-md-2"></div>
+
+          <div class="col-md-8">
+
+              <br>
+              <div class="panel panel-info">
+                  <div class="panel-heading">
+                      <h3 class="panel-title pull-left">
+                          <b>{{menu.nomeMenu}}</b>
+                      </h3>
+
+                      <button ng-click="pdf()" class="btn btn-default pull-right">Download</button>
+                      <div class="clearfix"></div>
+                  </div>
+                  <div class="panel-body">
+
+                      <!-- Menu starts -->
+                      <div class="menu-body" id="toPdf">
+                          <!-- Categoria starts -->
+                          <div class="menu-category" ng-repeat="categoria in menu.categorie">
+                              <h2 class="menu-category-title">{{categoria.nomeCategoria}}</h2>
+                              <!-- Pietanza starts -->
+                              <div class="menu-item" ng-repeat="pietanza in categoria.pietanze">
+                                  <div class="menu-item-name">
+                                      {{pietanza.nomePietanza}}
+                                  </div>
+                                  <div class="menu-item-price">
+                                      €{{pietanza.prezzo}}
+                                  </div>
+                                  <span class="menu-item-description" ng-repeat="prodotto in pietanza.prodotti">
+                                      {{prodotto}}{{$last ? '' : ', '}}
+                                  </span>
+                              </div>
+                              <!-- Item ends -->
+                          </div>
+                          <!-- Categoria ends -->
+                      </div>
+                      <!-- Menu ends -->
+
+                  </div>
+
+                  <div class="panel-footer">* Piatti vegani</div>
+
+              </div>
+
+          </div>
+
+          <div class="col-md-2"></div>
+
+      </div>
+
+
+  </div>
+  <!-- /.container -->
+
+  </body>
+</html>

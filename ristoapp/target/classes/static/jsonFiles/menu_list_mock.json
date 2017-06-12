@@ -1,0 +1,12 @@
+[
+  {
+    "nomeMenu": "Menu estivo",
+    "descrizione": "Descrizione del menu estivo dai sapori eleganti e decisi",
+    "immagine": "imgFiles/menu_background.jpg"
+  },
+  {
+    "nomeMenu": "Menu autunnale",
+    "descrizione": "Descrizione del menu autunnale",
+    "immagine": "imgFiles/default.svg"
+  }
+]
