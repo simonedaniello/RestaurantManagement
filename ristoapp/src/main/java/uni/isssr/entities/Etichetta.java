@@ -9,9 +9,6 @@ import java.util.List;
 @Entity
 public class Etichetta {
 
-    public Etichetta() {
-    }
-
     /* Valori tipici sono:
         carne, pesce, piccante, vegetariano
          */
@@ -21,6 +18,13 @@ public class Etichetta {
 
     @ManyToMany(mappedBy = "etichette")
     private List<Pietanza> pietanza;
+
+    public Etichetta() {
+    }
+
+    public Etichetta(String classificatore) {
+        this.classificatore = classificatore;
+    }
 
     public List<Pietanza> getPietanza() {
         return pietanza;

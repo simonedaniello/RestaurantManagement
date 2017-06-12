@@ -15,13 +15,8 @@ import java.util.ArrayList;
 @RequestMapping(path = "/creaPietanza")
 public class CreaPietanzaController {
 
-    private boolean first = true;
-
     @Autowired
     private EtichettaRepository etichettaRepository;
-
-    @Autowired
-    private ProdottoRepository prodottoRepository;
 
     @RequestMapping(method = RequestMethod.POST, path = "/addTag")
     public void addTag(@RequestBody Etichetta etichetta){
@@ -58,37 +53,9 @@ public class CreaPietanzaController {
         return etichettaRepository.findAll();
     }
 
+    /*
     @GetMapping(path = "/getProdotti")
-    public @ResponseBody Iterable<Prodotto> getAllProdotti(){
-        // Inserimenti per test
-        if (first){
-            first = false;
-            Prodotto p1 = new Prodotto();
-            Prodotto p2 = new Prodotto();
-            Prodotto p3 = new Prodotto();
-            Prodotto p4 = new Prodotto();
-            Prodotto p5 = new Prodotto();
-            Prodotto p6 = new Prodotto();
-            Prodotto p7 = new Prodotto();
-            Prodotto p8 = new Prodotto();
-            p1.setNome("uova");
-            p2.setNome("sale");
-            p3.setNome("olio");
-            p4.setNome("pasta");
-            p5.setNome("aceto");
-            p6.setNome("zucchina");
-            p7.setNome("prosciutto crudo");
-            p8.setNome("pomodoro");
-            prodottoRepository.save(p1);
-            prodottoRepository.save(p2);
-            prodottoRepository.save(p3);
-            prodottoRepository.save(p4);
-            prodottoRepository.save(p5);
-            prodottoRepository.save(p6);
-            prodottoRepository.save(p7);
-            prodottoRepository.save(p8);
-        }
-        //
-        return prodottoRepository.findAll();
+    public @ResponseBody Iterable<Prodotto> getAllProdotti() {
     }
+    */
 }

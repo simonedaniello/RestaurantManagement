@@ -3,39 +3,35 @@ package uni.isssr.entities;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 @Entity
 public class Pietanza {
 
+    @Id
+    @GeneratedValue
+    private Long id;
+
+    private String nome;
+
+    private double prezzo;
+
+    @ManyToMany
+    private Set<Etichetta> etichette;
+
+    @OneToMany
+    private List<Ingrediente> ingredienti;
+
     public Pietanza() {
     }
 
-    public Pietanza(List<Ingrediente> ingredienti, String nome, Set<Etichetta> etichette) {
-        this.ingredienti = ingredienti;
+    public Pietanza(String nome, Set<Etichetta> etichette) {
+        this.ingredienti = new ArrayList<>();
         this.nome = nome;
         this.etichette = etichette;
     }
-
-    @Id
-    @GeneratedValue
-    @JsonProperty
-    private Long id;
-
-    @OneToMany
-    @JsonProperty
-    private List<Ingrediente> ingredienti;
-
-    @JsonProperty
-    private String nome;
-
-    @JsonProperty
-    private String prezzo;
-
-    @ManyToMany
-    @JsonProperty
-    private Set<Etichetta> etichette;
 
     public Long getId() {
         return id;
@@ -61,11 +57,11 @@ public class Pietanza {
         this.nome = nome;
     }
 
-    public String getPrezzo() {
+    public double getPrezzo() {
         return prezzo;
     }
 
-    public void setPrezzo(String prezzo) {
+    public void setPrezzo(double prezzo) {
         this.prezzo = prezzo;
     }
 
@@ -75,5 +71,21 @@ public class Pietanza {
 
     public void setEtichette(Set<Etichetta> etichette) {
         this.etichette = etichette;
+    }
+
+    public void addIngrediente(Ingrediente ingrediente) {
+        this.ingredienti.add(ingrediente);
+    }
+
+    public void removeIngrediente(Ingrediente ingrediente) {
+        this.ingredienti.remove(ingrediente);
+    }
+
+    public void addEtichetta(Etichetta etichetta) {
+        this.etichette.add(etichetta);
+    }
+
+    public void removeEtichetta(Etichetta etichetta) {
+        this.etichette.remove(etichetta);
     }
 }

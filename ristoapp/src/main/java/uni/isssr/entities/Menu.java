@@ -4,34 +4,51 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
 public class Menu {
-
-    public Menu(String nome, String descrizione, String chef, String imageString) {
-        this.nome = nome;
-        this.descrizione = descrizione;
-        this.chef = chef;
-        this.imageString = imageString;
-        this.categorie = new ArrayList<>();
-    }
-
-    public Menu() {
-    }
 
     @Id
     private String nome;
 
     private String descrizione;
 
-    private String chef;
-
     private String imageString;
 
-    /*da ricontrollare in quanto ci sono dubbi sul mappaggio sul db*/
+    /* Lo sviluppatore deve assicurarsi che ci sia un solo menù attivo per volta */
+    private boolean isActive;
+
+    private Date dataCreazione;
+
     @OneToMany
     private List<Categoria> categorie;
+
+    public Menu() {
+
+    }
+
+    public Menu(String nome, String descrizione) {
+        this.nome = nome;
+        this.descrizione = descrizione;
+        this.categorie = new ArrayList<>();
+        this.dataCreazione = new Date();
+    }
+
+    public Menu(String nome, String descrizione, List<Categoria> categorie) {
+        this.nome = nome;
+        this.descrizione = descrizione;
+        this.categorie = categorie;
+        this.dataCreazione = new Date();
+    }
+
+
+    public Menu(String nome, String descrizione, String imageString) {
+        this(nome, descrizione);
+        this.imageString = imageString;
+    }
+
 
     public void addCategoria(Categoria c){
         categorie.add(c);
@@ -53,14 +70,6 @@ public class Menu {
         this.descrizione = descrizione;
     }
 
-    public String getChef() {
-        return chef;
-    }
-
-    public void setChef(String chef) {
-        this.chef = chef;
-    }
-
     public String getImageString() {
         return imageString;
     }
@@ -75,5 +84,17 @@ public class Menu {
 
     public void setCategorie(List<Categoria> categorie) {
         this.categorie = categorie;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
+    public Date getDataCreazione() {
+        return dataCreazione;
     }
 }

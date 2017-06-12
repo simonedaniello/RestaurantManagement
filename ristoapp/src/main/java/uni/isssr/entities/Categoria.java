@@ -1,33 +1,55 @@
 package uni.isssr.entities;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 public class Categoria {
-    public Categoria() {
-    }
-
-    public Categoria(String nome) {
-        this.nome = nome;
-    }
-
-    public Categoria(Set<Pietanza> pietanze, String nome) {
-        this.nome = nome;
-        this.pientanze = pietanze;
-    }
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
 
-    @JsonProperty
     private String nome;
 
     @OneToMany
-    @JsonProperty
-    private Set<Pietanza> pientanze;
+    private List<Pietanza> pientanze;
+
+    public Categoria() {
+
+    }
+
+
+    public Categoria(String nome) {
+        this.nome = nome;
+    }
+
+    public Categoria(List<Pietanza> pietanze, String nome) {
+        this.nome = nome;
+        this.pientanze = pietanze;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public List<Pietanza> getPientanze() {
+        return pientanze;
+    }
+
+    public void setPientanze(List<Pietanza> pientanze) {
+        this.pientanze = pientanze;
+    }
+
+    public void addPietanza(Pietanza pietanza) {
+        this.pientanze.add(pietanza);
+    }
+
+    public void removePietanza(Pietanza pietanza) {
+        this.pientanze.remove(pietanza);
+    }
 }

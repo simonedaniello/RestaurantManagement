@@ -6,23 +6,28 @@ import javax.persistence.*;
 @Entity
 public class Ingrediente {
 
-    public Ingrediente() {
-    }
-
-    public Ingrediente(double quantita, Prodotto prodotto) {
-        this.quantita = quantita;
-        this.prodotto = prodotto;
-    }
 
     @Id
     @GeneratedValue
     private Long id;
 
+    /*
+        Attributi seguenti sono presi dal Json
+     */
+    private Long idProdotto;
+    private String nomeProdotto;
+
     // quantità è in grammi
     private double quantita;
 
-    @ManyToOne
-    private Prodotto prodotto;
+    public Ingrediente() {
+    }
+
+    public Ingrediente(Long idProdotto, String nomeProdotto, double quantita) {
+        this.idProdotto = idProdotto;
+        this.nomeProdotto = nomeProdotto;
+        this.quantita = quantita;
+    }
 
     public Long getId() {
         return id;
@@ -40,11 +45,19 @@ public class Ingrediente {
         this.quantita = quantita;
     }
 
-    public Prodotto getProdotto() {
-        return prodotto;
+    public Long getIdProdotto() {
+        return idProdotto;
     }
 
-    public void setProdotto(Prodotto prodotto) {
-        this.prodotto = prodotto;
+    public void setIdProdotto(Long idProdotto) {
+        this.idProdotto = idProdotto;
+    }
+
+    public String getNomeProdotto() {
+        return nomeProdotto;
+    }
+
+    public void setNomeProdotto(String nomeProdotto) {
+        this.nomeProdotto = nomeProdotto;
     }
 }
