@@ -1,6 +1,7 @@
-package uni.isssr.entities;
+package uni.isssr.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import uni.isssr.entities.Menu;
 
 /**
  * Created by alberto on 05/06/17.

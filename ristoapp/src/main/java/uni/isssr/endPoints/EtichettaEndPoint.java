@@ -1,38 +1,25 @@
-package uni.isssr.controllers;
+package uni.isssr.endPoints;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import uni.isssr.entities.*;
-
-import java.util.ArrayList;
-
-/**
- * Created by alberto on 09/06/17.
- */
+import uni.isssr.entities.Etichetta;
+import uni.isssr.repositories.EtichettaRepository;
 
 @RestController
 @CrossOrigin
-@RequestMapping(path = "/creaPietanza")
-public class CreaPietanzaController {
+@RequestMapping(path = "/tags")
+public class EtichettaEndPoint {
 
     @Autowired
     private EtichettaRepository etichettaRepository;
 
-    @Autowired
-    private PietanzaRepository pietanzaRepository;
-
-    @RequestMapping(method = RequestMethod.POST, path = "/addTag")
+    @RequestMapping(method = RequestMethod.POST)
     public void addTag(@RequestBody Etichetta etichetta){
         etichettaRepository.save(etichetta);
     }
 
 
-    @RequestMapping(method = RequestMethod.POST, path = "/addDish")
-    public void addTag(@RequestBody Pietanza pietanza){
-        pietanzaRepository.save(pietanza);
-    }
-
-    @GetMapping(path = "/getTags")
+    @RequestMapping(method = RequestMethod.GET)
     public @ResponseBody Iterable<Etichetta> getAllTags(){
         // Inserimenti per test
         Etichetta e1 = new Etichetta();
@@ -41,11 +28,6 @@ public class CreaPietanzaController {
         Etichetta e4 = new Etichetta();
         Etichetta e5 = new Etichetta();
         Etichetta e6 = new Etichetta();
-        Pietanza p1 = new Pietanza();
-        p1.setNome("aaaa");
-        ArrayList<Pietanza> list = new ArrayList<>();
-        list.add(p1);
-        //e1.setPietanza(list);
         e1.setClassificatore("Piccante");
         e2.setClassificatore("Vegetariano");
         e3.setClassificatore("Carne");
@@ -61,10 +43,4 @@ public class CreaPietanzaController {
         etichettaRepository.save(e6);
         return etichettaRepository.findAll();
     }
-
-    /*
-    @GetMapping(path = "/getProdotti")
-    public @ResponseBody Iterable<Prodotto> getAllProdotti() {
-    }
-    */
 }

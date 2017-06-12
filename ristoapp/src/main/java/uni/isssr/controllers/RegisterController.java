@@ -1,10 +1,9 @@
 package uni.isssr.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import uni.isssr.entities.User;
-import uni.isssr.entities.UserRepository;
+import uni.isssr.repositories.UserRepository;
 
 @RestController
 @CrossOrigin

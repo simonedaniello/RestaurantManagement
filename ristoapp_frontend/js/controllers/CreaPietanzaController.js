@@ -18,7 +18,7 @@ myApp.controller("CreaPietanzaController", function($scope, ajaxService, CreaPie
 
 
     var updateTagList = function() {
-        ajaxService.getResource("http://localhost:8080/creaPietanza/getTags", null).then(
+        ajaxService.getResource("http://localhost:8080/tags", null).then(
             function (response) {
                 $scope.tags = CreaPietanzaService.parseTagArray(response);
             }
@@ -73,7 +73,7 @@ myApp.controller("CreaPietanzaController", function($scope, ajaxService, CreaPie
             prodList: $scope.selectedProd
         };
         var jsonPiet = JSON.stringify(dtoPietanza);
-        ajaxService.sendResource("http://localhost:8080/creaPietanza/addTag", jsonPiet).then(function (response) {
+        ajaxService.sendResource("http://localhost:8080/dish", jsonPiet).then(function (response) {
             console.log("successo");
         }, function (response) {
             console.log(response)
@@ -83,7 +83,7 @@ myApp.controller("CreaPietanzaController", function($scope, ajaxService, CreaPie
     $scope.saveTag = function(){
         var dtoTag = {classificatore:$scope.nomeNewTag};
         var jsonTag = JSON.stringify(dtoTag);
-        ajaxService.sendResource("http://localhost:8080/creaPietanza/addTag", jsonTag).then(function (response) {
+        ajaxService.sendResource("http://localhost:8080/tags", jsonTag).then(function (response) {
             updateTagList();
         }, function (response) {
             console.log(response)

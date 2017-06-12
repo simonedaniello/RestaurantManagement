@@ -1,9 +1,10 @@
-package uni.isssr.entities;
+package uni.isssr.repositories;
 
 // This will be AUTO IMPLEMENTED by Spring into a Bean called userRepository
 // CRUD refers Create, Read, Update, Delete
 
 import org.springframework.data.repository.CrudRepository;
+import uni.isssr.entities.User;
 
 // Methods auto-implemented by Spring
 /*

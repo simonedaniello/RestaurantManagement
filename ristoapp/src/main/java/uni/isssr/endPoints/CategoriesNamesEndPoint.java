@@ -1,36 +1,16 @@
-package uni.isssr.controllers;
+package uni.isssr.endPoints;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import uni.isssr.entities.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @CrossOrigin
-@RequestMapping(path = "/createMenu")
-public class CreaMenuController {
-    @Autowired
-    private MenuRepository menuRepository;
+@RequestMapping(path = "/categoriesNames")
+public class CategoriesNamesEndPoint {
 
-    @Autowired
-    private CategoriaRepository categoriaRepository;
-
-    @Autowired
-    private PietanzaRepository pietanzaRepository;
-
-    @RequestMapping(method = RequestMethod.POST, path = "/saveMenu")
-    public void addTag(@RequestBody Menu menu){
-        menuRepository.save(menu);
-    }
-
-    @GetMapping(path = "/getDishes")
-    public @ResponseBody Iterable<Pietanza> getAllPietanze(){
-        return pietanzaRepository.findAll();
-    }
-
-    @GetMapping(path = "/getPossibleCategories")
+    @RequestMapping(method = RequestMethod.GET)
     public @ResponseBody Iterable<String> getAllCategoriesNames(){
         String nomeCat1 = "Antipasti";
         String nomeCat2 = "Primi";
@@ -59,5 +39,4 @@ public class CreaMenuController {
         nomiCategorie.add(nomeCat12);
         return nomiCategorie;
     }
-
 }

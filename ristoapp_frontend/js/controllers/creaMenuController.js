@@ -8,7 +8,7 @@ myApp.controller("creaMenuCtrl", function($scope, ajaxService, creaMenuService, 
     $scope.pietanze = creaMenuService.getPietanze();
 
     var getTagList = function() {
-        ajaxService.getResource("http://localhost:8080/creaPietanza/getTags", null).then(
+        ajaxService.getResource("http://localhost:8080/tags", null).then(
             function (response) {
                 $scope.etichette = CreaPietanzaService.parseTagArray(response);
             }
@@ -20,7 +20,7 @@ myApp.controller("creaMenuCtrl", function($scope, ajaxService, creaMenuService, 
     getTagList();
 
     var getCatNamesList = function() {
-        ajaxService.getResource("http://localhost:8080/createMenu/getPossibleCategories", null).then(
+        ajaxService.getResource("http://localhost:8080/categoriesNames", null).then(
             function (response) {
                 //$scope.categorie = creaMenuService.parseCatNamesArray(response);
                 $scope.categorie = response;
@@ -191,7 +191,7 @@ myApp.controller("creaMenuCtrl", function($scope, ajaxService, creaMenuService, 
             categorie: $scope.categorieMenu
         };
         var jsonMenu = JSON.stringify(dtoMenu);
-        ajaxService.sendResource("http://localhost:8080/createMenu/saveMenu", jsonMenu).then(function (response) {
+        ajaxService.sendResource("http://localhost:8080/menu", jsonMenu).then(function (response) {
             console.log("fatto")
         }, function (response) {
             console.log(response)

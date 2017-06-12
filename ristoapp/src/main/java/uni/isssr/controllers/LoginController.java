@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import uni.isssr.entities.User;
-import uni.isssr.entities.UserRepository;
+import uni.isssr.repositories.UserRepository;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;

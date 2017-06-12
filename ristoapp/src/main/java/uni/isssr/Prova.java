@@ -6,9 +6,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import uni.isssr.entities.*;
-
-import java.util.HashSet;
-import java.util.Set;
+import uni.isssr.repositories.CategoriaRepository;
+import uni.isssr.repositories.EtichettaRepository;
+import uni.isssr.repositories.MenuRepository;
+import uni.isssr.repositories.PietanzaRepository;
 
 /**
  * Created by alberto on 08/06/17.
