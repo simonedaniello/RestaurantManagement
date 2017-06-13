@@ -24,11 +24,13 @@
     <script src="js/controllers/CreaPietanzaController.js"></script>
     <script src="js/controllers/creaMenuController.js"></script>
     <script src="js/controllers/headerController.js"></script>
+    <script src="js/controllers/prendiComandaController.js"></script>
 
     <!-- Inizio script visualizzazione menu -->
     <script src="js/controllers/VisualizzaMenuController.js"></script>
     <script src="js/services/MenuService.js"></script>
     <script src="js/services/CreaMenuService.js"></script>
+    <script src="js/services/PrendiComandaService.js"></script>
     <script src="lib/js/html2canvas.js"></script>
     <script src="lib/js/pdfmake.min.js"></script>
     <script src="lib/js/vfs_fonts.js"></script>
@@ -72,12 +74,14 @@
                 <li><a href="#!ricercaMenu">Menu</a></li>
                 <li><a href="#!creamenu">Crea Menu</a></li>
                 <li><a href="#!creaPietanza">Crea Pietanza</a></li>
+                <li><a href="#!prendiComanda">Prendi Comanda</a></li>
+                <li><a href="#!comandecuoco">Lista Comande Cuoco</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a ng-click="registerClick()" href=""><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
                 <li><a ng-click="loginClick()" href=""><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             </ul>
-            <form class="navbar-form navbar-right">
+            <!--<form class="navbar-form navbar-right">
                 <div class="input-group">
                     <input type="text" class="form-control search-input" placeholder="Search">
                     <div class="input-group-btn">
@@ -86,7 +90,7 @@
                         </button>
                     </div>
                 </div>
-            </form>
+            </form>-->
         </div>
         <div ng-hide="loghide" ng-click="checkBounds()" id="myDropdown" class="dropdown-content-login">
             <div class="wrapper">

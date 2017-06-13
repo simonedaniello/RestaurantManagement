@@ -1,0 +1,87 @@
+{
+  "menuAttuale": [
+    {
+      "nome": "Primo al sugo",
+      "descrizione": "Pennette, sugo, pancetta",
+      "id": 0
+    },
+    {
+      "nome": "Primo bianco",
+      "descrizione": "Apaghetti, uovo, pancetta",
+      "id": 1
+    },
+    {
+      "nome": "Secondo di carne",
+      "descrizione": "Descrizione prodotto bla bla",
+      "id": 2
+    },
+    {
+      "nome": "Secondo di pesce",
+      "descrizione": "Descrizione prodotto bla bla",
+      "id": 3
+    },
+    {
+      "nome": "Contorno vegano",
+      "descrizione": "Descrizione prodotto bla bla",
+      "id": 4
+    },
+    {
+      "nome": "Contorno di prosciutto",
+      "descrizione": "Descrizione prodotto bla bla",
+      "id": 5
+    },
+    {
+      "nome": "Dolce della casa",
+      "descrizione": "Descrizione prodotto bla bla",
+      "id": 6
+    },
+    {
+      "nome": "Dolce esterno",
+      "descrizione": "Descrizione prodotto bla bla",
+      "id": 7
+    }
+  ],
+
+  "selectedProdForChef": [
+    {
+      "nome": "Primo al sugo",
+      "descrizione": "Pennette, sugo, pancetta",
+      "id": 0
+    },
+    {
+      "nome": "Primo bianco",
+      "descrizione": "Apaghetti, uovo, pancetta",
+      "id": 1
+    },
+    {
+      "nome": "Secondo di carne",
+      "descrizione": "Descrizione prodotto bla bla",
+      "id": 2
+    },
+    {
+      "nome": "Secondo di pesce",
+      "descrizione": "Descrizione prodotto bla bla",
+      "id": 3
+    },
+    {
+      "nome": "Contorno vegano",
+      "descrizione": "Descrizione prodotto bla bla",
+      "id": 4
+    },
+    {
+      "nome": "Contorno di prosciutto",
+      "descrizione": "Descrizione prodotto bla bla",
+      "id": 5
+    },
+    {
+      "nome": "Dolce della casa",
+      "descrizione": "Descrizione prodotto bla bla",
+      "id": 6
+    },
+    {
+      "nome": "Dolce esterno",
+      "descrizione": "Descrizione prodotto bla bla",
+      "id": 7
+    }
+  ]
+}

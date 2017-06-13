@@ -1,0 +1,26 @@
+<div>
+    <form class="form-horizontal">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading"><p><b>Pietanze da cucinare</b></p></div>
+                        <div class="panel-body" class="row" style="overflow-y: auto; height: 350px">
+                            <table class="table table-striped" id="tabellaCuoco">
+                                <tbody>
+                                <tr ng-repeat="prod in selectedProdForChef" >
+                                    <td class="col-sm-9"><p style="font-style: italic" id="pietanza.{{prod.nome}}" >{{prod.nome}} x {{prod.quantita}}</p></td>
+                                    <td><button type="button" class="btn btn-success" ng-click="selectedProdForChef.splice($index,1)" id="button.{{prod.nome}}">Fatto</button></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12" style="text-align: center; padding: 10px">
+                <button type="button" class="btn btn-primary" ng-click="updateListaProdottiForChef()">Manual Refresh</button>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,58 @@
+<div>
+    <form class="form-horizontal">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading"><p><b>Seleziona pietanze</b></p></div>
+                        <div class="panel-body" style="overflow-y: auto; height: 420px">
+                            <table class="table table-striped">
+                                <tbody>
+                                <tr ng-repeat="prodotto in menuAttuale">
+                                    <td>
+                                        <div class="menu-item-name">
+                                            <b>{{prodotto.nome}}</b>
+                                        </div>
+                                        <div>
+                                            <span class="menu-item-description">
+                                                {{prodotto.descrizione}}
+                                            </span>
+                                        </div>
+                                    </td>
+                                    <td><div class="checkbox menu-item-price">
+                                        <label><input type="checkbox" ng-click="updateSelectedProd(prodotto.nome)" id="check.{{prodotto.nome}}"></label>
+                                    </div></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading"><p><b>Pietanze selezionate</b></p></div>
+                        <div class="panel-body" class="row" style="overflow-y: auto; height: 350px">
+                            <table class="table table-striped">
+                                <tbody>
+                                <tr ng-repeat="prod in selectedProd">
+                                    <td class="col-sm-9"><p style="font-style: italic">{{prod.nome}}</p></td>
+                                    <td class="col-sm-3"><input required type="number" class="form-control" id="qnt.{{prodotto.nome}}" step="1" ng-model="prod.quantita"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="container-fluid">
+                        <div class="col-sm-6">
+                            <button type="button" class="btn btn-success" ng-click="inviaComanda()">Salva</button>
+                        </div>
+                        <div class="col-sm-6">
+                            <button type="button" class="btn btn-danger">Annulla</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
