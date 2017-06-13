@@ -27,7 +27,7 @@ public class Menu {
     private List<Categoria> categorie;
 
     public Menu() {
-
+        this.dataCreazione = new Date();
     }
 
     public Menu(String nome, String descrizione) {
@@ -87,11 +87,11 @@ public class Menu {
         this.categorie = categorie;
     }
 
-    public boolean isActive() {
+    public boolean getIsActive() {
         return isActive;
     }
 
-    public void setActive(boolean active) {
+    public void setIsActive(boolean active) {
         isActive = active;
     }
 

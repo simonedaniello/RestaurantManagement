@@ -30,16 +30,7 @@ myApp.service('creaMenuService', function() {
         return pietanzeList;
     };
 
-    /*var parseCatNamesArray = function (array) {
-        var namesArray = [];
-        for (i in array){
-            namesArray.push(array[i]);
-        }
-        return namesArray;
-    };*/
-
     return {
-        //parseCatNamesArray: parseCatNamesArray,
         getPietanze: getPietanze
     };
 
