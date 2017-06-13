@@ -55,9 +55,10 @@ public class Prova {
         Pietanza p2 = new Pietanza("pasta alla carbonara", 12.50);
         Pietanza p3 = new Pietanza("verdure grigliate", 8.00);
 
-        p1.addIngrediente(i1);
+
+/*        p1.addIngrediente(i1);
         p1.addIngrediente(i2);
-        p1.addIngrediente(i3);
+        p1.addIngrediente(i3);*/
 
         /*
         Equivalentemente posso modificare il db dal non owning side
@@ -68,13 +69,12 @@ public class Prova {
         e2.addPietanza(p2);
         e3.addPietanza(p3);
 
-        */
 
         p1.addEtichetta(e1);
         p2.addEtichetta(e1);
         p2.addEtichetta(e2);
         p3.addEtichetta(e3);
-
+        */
         Categoria categoria1 = new Categoria("Primi");
         Categoria categoria2 = new Categoria("Secondi");
 

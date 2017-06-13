@@ -15,7 +15,16 @@ public class Pietanza {
 
     private double prezzo;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
+    @JoinTable(
+            name = "pietanze_tags",
+            joinColumns = {
+                    @JoinColumn(name = "Pietanze_key", referencedColumnName = "id")
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name = "Tag_key", referencedColumnName = "classificatore")
+            }
+    )
     private List<Etichetta> etichette;
 
     @OneToMany(cascade = CascadeType.ALL)
@@ -77,19 +86,5 @@ public class Pietanza {
         this.etichette = etichette;
     }
 
-    public void addIngrediente(Ingrediente ingrediente) {
-        this.ingredienti.add(ingrediente);
-    }
 
-    public void removeIngrediente(Ingrediente ingrediente) {
-        this.ingredienti.remove(ingrediente);
-    }
-
-    public void addEtichetta(Etichetta etichetta) {
-        this.etichette.add(etichetta);
-    }
-
-    public void removeEtichetta(Etichetta etichetta) {
-        this.etichette.remove(etichetta);
-    }
 }

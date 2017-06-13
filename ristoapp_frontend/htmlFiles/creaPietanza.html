@@ -1,12 +1,14 @@
 <div>
-    <form class="form-horizontal">
+    <form name="creaPietanzaForm" class="form-horizontal">
         <div class="form-group">
             <div class="container">
                 <div class="row" style="margin-bottom: 10px">
                     <div class="col-md-12">
                         <p><div class="input-group">
                         <span class="input-group-addon">Pietanza</span>
-                        <input required id="nomePietanza" type="text" class="form-control" placeholder="Inserire nome pietanza creata" ng-model="nomePietanza">
+                        <input required name="nomePietanza" type="text" class="form-control" placeholder="Inserire nome pietanza creata" ng-model="nomePietanza">
+                        <span class="input-group-addon">Prezzo</span>
+                        <input required name="prezzoPietanza" type="number" min="1" class="form-control" style="max-width: 100px" placeholder="€" ng-model="prezzoPietanza">
                     </div></p>
                         <p><div class="input-group">
                         <span class="input-group-addon" style="background-color:lightskyblue">Tag</span>
@@ -105,8 +107,8 @@
                             <table class="table table-striped">
                                 <tbody>
                                 <tr ng-repeat="prod in selectedProd">
-                                    <td class="col-sm-9"><p style="font-style: italic">{{prod.nome}}</p></td>
-                                    <td class="col-sm-3"><input required type="number" class="form-control" id="qnt.{{prodotto.nome}}" step="1" ng-model="prod.quantita"></td>
+                                    <td class="col-sm-9"><p style="font-style: italic">{{prod.nomeProdotto}}</p></td>
+                                    <td class="col-sm-3"><input name="quantita" required="" type="number" min="1" class="form-control" step="1" ng-model="prod.quantita"></td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -114,7 +116,7 @@
                     </div>
                     <div class="container-fluid">
                         <div class="col-sm-6">
-                            <button type="button" class="btn btn-success" ng-click="saveDish()">Salva</button>
+                            <button ng-disabled="creaPietanzaForm.nomePietanza.$invalid || creaPietanzaForm.prezzoPietanza.$invalid || creaPietanzaForm.quantita.$invalid || selectedProd.length == 0" type="button" class="btn btn-success" ng-click="saveDish()">Salva</button>
                         </div>
                         <div class="col-sm-6">
                             <button type="button" class="btn btn-danger">Annulla</button>

@@ -1,9 +1,6 @@
 package uni.isssr.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +15,7 @@ public class Etichetta {
     @Size(max = 32)
     private String classificatore;
 
-    @ManyToMany(mappedBy = "etichette")
+    @ManyToMany(mappedBy = "etichette", fetch = FetchType.EAGER)
     private List<Pietanza> pietanze;
 
     public Etichetta() {
@@ -48,4 +45,11 @@ public class Etichetta {
         pietanza.getEtichette().remove(this);
     }
 
+    public List<Pietanza> getPietanze() {
+        return pietanze;
+    }
+
+    public void setPietanze(List<Pietanza> pietanze) {
+        this.pietanze = pietanze;
+    }
 }

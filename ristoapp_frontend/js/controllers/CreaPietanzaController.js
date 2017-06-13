@@ -45,7 +45,7 @@ myApp.controller("CreaPietanzaController", function($scope, ajaxService, CreaPie
     $scope.updateSelectedProd = function(nomeProd){
         var checkBox = document.getElementById("check.".concat(nomeProd));
         if(checkBox.checked) {
-            var ingrediente = {nome:nomeProd,       quantita:0};
+            var ingrediente = {nomeProdotto:nomeProd, quantita:1};
             $scope.selectedProd.push(ingrediente);
             $scope.selectedProd.sort(function(a, b){
                 return (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)
@@ -67,14 +67,10 @@ myApp.controller("CreaPietanzaController", function($scope, ajaxService, CreaPie
     };
 
     $scope.saveDish = function(){
-        var dtoPietanza = {
-            nome:$scope.nomePietanza,
-            tagList: $scope.associatedTags,
-            prodList: $scope.selectedProd
-        };
-        var jsonPiet = JSON.stringify(dtoPietanza);
+        var dtoPietanza = {nome: $scope.nomePietanza, prezzo: $scope.prezzoPietanza, etichette: $scope.associatedTags, ingredienti: $scope.selectedProd};
+        var jsonPiet = angular.toJson(dtoPietanza);
         ajaxService.sendResource("http://localhost:8080/dish", jsonPiet).then(function (response) {
-            console.log("successo");
+            console.log(response);
         }, function (response) {
             console.log(response)
         });
