@@ -16,4 +16,9 @@ public class MenuEndPoint {
     public void addTag(@RequestBody Menu menu){
         menuRepository.save(menu);
     }
+
+    @RequestMapping(method = RequestMethod.GET)
+    public @ResponseBody Iterable<Menu> getAllMenu(){
+        return menuRepository.findAll();
+    }
 }

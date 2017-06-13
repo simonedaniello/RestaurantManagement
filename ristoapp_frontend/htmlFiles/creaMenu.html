@@ -17,9 +17,13 @@
                 <p>
                 <div class="row">
                     <div class="form-group">
-                        <label class="col-sm-2" for="creator">Chef creatore:</label>
+                        <!--<label class="col-sm-2" for="creator">Chef creatore:</label>
                         <div>
                             <input class="col-sm-10" type="text" class="form-control" id="creator" placeholder="Inserisci creatore" ng-model="chef">
+                        </div>-->
+                        <label class="col-sm-2" for="description">Descrizione:</label>
+                        <div>
+                            <input class="col-sm-10" type="text" class="form-control" id="description" placeholder="Inserisci breve descrizione" ng-model="descrizione">
                         </div>
                     </div>
                 </div>
@@ -33,7 +37,7 @@
                                         <b>{{categoria.nome}}</b>
                                     </div>
                                     <div class="col-sm-5">
-                                        <button type="button" class="btn btn-default">Modifica</button>
+                                        <button type="button" class="btn btn-default" ng-click="modifyCat(categoria.nome)" data-toggle="modal" data-target="#categoryModal">Modifica</button>
                                         <button type="button" class="btn" ng-click="moveUp(categoria.nome)">Sposta sopra</button>
                                         <button type="button" class="btn" ng-click="moveDown(categoria.nome)">Sposta sotto</button>
                                         <button type="button" class="btn btn-danger" ng-click="removeFromMenu(categoria.nome)">Elimina</button>
@@ -42,127 +46,126 @@
                             </div>
                             <div class="panel-body">
                                 <div class="container-fluid">
-                <p>
-                <div class="row" ng-repeat="pietanza in categoria.pietanze">
-                    <div class="container-fluid">
-                        <div class="menu-item-name col-sm-11">
-                            <b>{{pietanza.nome}}</b>
-                        </div>
-                        <div class="col-sm-10">
-                            <span class="menu-item-description" ng-repeat="ingrediente in pietanza.ingredienti">
-                                {{ingrediente.nome}}{{$last ? '' : ', '}}
-                            </span>
-                        </div>
-                        <div class=" menu-item-price col-sm-1">
-                            {{pietanza.prezzo}} €
+                                    <p>
+                                        <div class="row" ng-repeat="pietanza in categoria.pietanze">
+                                            <div class="container-fluid">
+                                                <div class="menu-item-name col-sm-11">
+                                                    <b>{{pietanza.nome}}</b>
+                                                </div>
+                                                <div class="col-sm-10">
+                                                    <span class="menu-item-description" ng-repeat="ingrediente in pietanza.ingredienti">
+                                                        {{ingrediente.nome}}{{$last ? '' : ', '}}
+                                                    </span>
+                                                </div>
+                                                <div class=" menu-item-price col-sm-1">
+                                                    {{pietanza.prezzo}} €
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                </p>
-            </div>
-        </div>
-    </div>
-</div>
-<p>
-<div class="row">
-    <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#categoryModal">Aggiungi categoria</button>
-</div>
-
-<div id="categoryModal" class="modal fade">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Aggiungi categoria al menu</h4>
-            </div>
-            <div class="modal-body" style="background-color: lightgoldenrodyellow">
-                            <div class="row" style="margin-bottom: 10px">
-                                <div class="container-fluid">
-                                    <p><div class="input-group">
-                                        <span class="input-group-addon">Categoria</span>
-                                        <select class="btn btn-default dropdown-toggle" data-ng-model="nomeCategoria">
-                                            <option value=""> -- seleziona nome categoria -- </option>
-                                            <option ng-repeat="cat in categorie |orderBy">{{cat}}</option>
-                                        </select>
-                                    </div>
-                                    <p><div class="input-group">
-                                        <span class="input-group-addon">Selezione filtro</span>
-                                        <select class="btn btn-default dropdown-toggle" data-ng-model="filtro"> <!--ng-click="updateVisibleElements()"-->
-                                            <option disabled selected value> -- seleziona un Tag -- </option>
-                                            <option value="all">Mostra tutte le pietanze</option>
-                                            <option ng-repeat="tag in etichette | orderBy">{{tag}}</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
+                    <p>
                         <div class="row">
-                            <div class="col-md-6">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading"><p><b>Seleziona pietanza</b></p></div>
-                                    <div class="panel-body" style="overflow-y: auto; height: 420px">
-                                        <table class="table table-striped">
-                                            <tbody>
-                                            <tr ng-repeat="pietanza in pietanze | filter: filterPietanze | orderBy: 'Name'">
-                                                <td>
-                                                    <div class="container-fluid">
-                                                        <div class="menu-item-name">
-                                                            <b>{{pietanza.nome}}</b>
-                                                        </div>
-                                                        <div>
-                                                            <span class="menu-item-description" ng-repeat="ingrediente in pietanza.ingredienti">
-                                                                {{ingrediente.nome}}{{$last ? '' : ', '}}
-                                                            </span>
-                                                        </div>
+                            <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#categoryModal" data-backdrop="static" data-keyboard="false">Aggiungi categoria</button>
+                        </div>
+                        <div id="categoryModal" class="modal fade">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
+                                        <h4 class="modal-title">Aggiungi categoria al menu</h4>
+                                    </div>
+                                    <div class="modal-body" style="background-color: lightgoldenrodyellow">
+                                        <div class="row" style="margin-bottom: 10px">
+                                            <div class="container-fluid">
+                                                <p><div class="input-group">
+                                                    <span class="input-group-addon">Categoria</span>
+                                                        <select class="btn btn-default dropdown-toggle" data-ng-model="nomeCategoria">
+                                                            <option value=""> -- seleziona nome categoria -- </option>
+                                                            <option ng-repeat="cat in categorie |orderBy">{{cat}}</option>
+                                                        </select>
                                                     </div>
-                                                </td>
-                                                <td><div class="checkbox">
-                                                    <label><input type="checkbox" ng-click="updateSelected(pietanza)" id="{{pietanza.nome}}"></label>
-                                                    {{updateCheckboxFiltered(pietanza)}}
-                                                </div></td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
+                                                <p><div class="input-group">
+                                                    <span class="input-group-addon">Selezione filtro</span>
+                                                        <select class="btn btn-default dropdown-toggle" data-ng-model="filtro"> <!--ng-click="updateVisibleElements()"-->
+                                                            <option selected value="all">Mostra tutte le pietanze</option>
+                                                            <option ng-repeat="tag in etichette | orderBy">{{tag}}</option>
+                                                        </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading"><p><b>Seleziona pietanza</b></p></div>
+                                                        <div class="panel-body" style="overflow-y: auto; height: 420px">
+                                                            <table class="table table-striped">
+                                                                <tbody>
+                                                                <tr ng-repeat="pietanza in pietanze | filter: filterPietanze | orderBy: 'Name'">
+                                                                    <td>
+                                                                        <div class="container-fluid">
+                                                                            <div class="menu-item-name">
+                                                                                <b>{{pietanza.nome}}</b>
+                                                                            </div>
+                                                                            <div>
+                                                                                <span class="menu-item-description" ng-repeat="ingrediente in pietanza.ingredienti">
+                                                                                    {{ingrediente.nome}}{{$last ? '' : ', '}}
+                                                                                </span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td><div class="checkbox">
+                                                                        <label><input type="checkbox" ng-click="updateSelected(pietanza)" id="{{pietanza.nome}}"></label>
+                                                                            {{updateCheckboxFiltered(pietanza)}}
+                                                                    </div></td>
+                                                                </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading"><p><b>Pietanze selezionate</b></p></div>
+                                                    <div class="panel-body" style="overflow-y: auto; height: 350px">
+                                                        <table class="table table-striped">
+                                                            <tbody>
+                                                                <tr ng-repeat="selezionata in selected | orderBy: 'Name'">
+                                                                    <td class="col-sm-9"><p style="font-style: italic">{{selezionata.nome}}</p></td>
+                                                                    <td class="col-sm-3"><p style="font-style: italic">{{selezionata.prezzo}} €</p></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading"><p><b>Pietanze selezionate</b></p></div>
-                                    <div class="panel-body" style="overflow-y: auto; height: 350px">
-                                        <table class="table table-striped">
-                                            <tbody>
-                                            <tr ng-repeat="selezionata in selected | orderBy: 'Name'">
-                                                <td class="col-sm-9"><p style="font-style: italic">{{selezionata.nome}}</p></td>
-                                                <td class="col-sm-3"><p style="font-style: italic">{{selezionata.prezzo}} €</p></td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-success" ng-click="addToMenu()">Aggiungi</button>
+                                        <button type="button" class="btn btn-default" ng-click="resetActCat()">Reset</button>
+                                        <button type="button" class="btn" data-dismiss="modal" ng-click="resetActCat()">Chiudi</button>
                                     </div>
+                                    <p><div  class="alert alert-danger" ng-if="errorMessageCat">{{ errorMessageCat }}</div>
+                                    </p>
                                 </div>
                             </div>
                         </div>
+                    </p>
+                    <p>
+                        <div class="row">
+                            <button type="button" class="btn btn-success col-sm-3" ng-click="saveMenu(0)">Salva menu</button>
+                            <button type="button" class="btn btn-success col-sm-3" ng-click="saveMenu(1)">Salva menu e rendi attivo</button>
+                            <button type="button" class="btn btn-default col-sm-3" ng-click="resetCat()">Reset</button>
+                            <button type="button" class="btn btn-danger col-sm-3" onclick="location.href = '#';">Annulla</button>
+                        </div>
+                    </p>
+                    <p><div  class="alert alert-danger" ng-if="errorMessageMenu">{{ errorMessageMenu }}</div>
+                    </p>
+                </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-success" ng-click="addToMenu()">Aggiungi</button>
-                <button type="button" class="btn btn-default">Reset</button>
-            </div>
-            <p><div  class="alert alert-danger" ng-if="errorMessageCat">{{ errorMessageCat }}</div>
-            </p>
         </div>
     </div>
-</div>
-
-</p>
-<p>
-<div class="row" style="margin-left: 20%">
-    <button type="button" class="btn btn-success col-sm-3" ng-click="saveMenu()">Salva menu</button>
-    <button type="button" class="btn btn-default col-sm-3" ng-click="resetCat()">Reset</button>
-    <button type="button" class="btn btn-danger col-sm-3" onclick="location.href = '#';">Annulla</button>
-</div>
-</p>
-<p><div  class="alert alert-danger" ng-if="errorMessageMenu">{{ errorMessageMenu }}</div>
-</p>
-</div>
-</div>
-</div>
-</div>
