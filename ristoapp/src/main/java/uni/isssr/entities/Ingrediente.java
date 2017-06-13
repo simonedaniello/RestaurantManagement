@@ -29,6 +29,11 @@ public class Ingrediente {
         this.quantita = quantita;
     }
 
+    public Ingrediente(String nomeProdotto, double quantita) {
+        this.nomeProdotto = nomeProdotto;
+        this.quantita = quantita;
+    }
+
     public Long getId() {
         return id;
     }
