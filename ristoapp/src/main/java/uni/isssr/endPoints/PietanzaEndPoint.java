@@ -4,11 +4,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import uni.isssr.controllers.LoginController;
-import uni.isssr.entities.Ingrediente;
+import uni.isssr.entities.Etichetta;
 import uni.isssr.entities.Pietanza;
+import uni.isssr.repositories.EtichettaRepository;
 import uni.isssr.repositories.PietanzaRepository;
 
+import java.util.ArrayList;
+import java.util.List;
 
 
 @RestController
@@ -17,6 +19,8 @@ public class PietanzaEndPoint {
 
     @Autowired
     private PietanzaRepository pietanzaRepository;
+
+    @Autowired EtichettaRepository etichettaRepository;
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
@@ -30,9 +34,39 @@ public class PietanzaEndPoint {
     }
 
 
-    @RequestMapping(method = RequestMethod.GET)
+    /*@RequestMapping(method = RequestMethod.GET)
+
     public @ResponseBody Iterable<Pietanza> getAllPietanze() {
+        Etichetta e = new Etichetta("mhgjhghj tPiccante");
+        etichettaRepository.save(e);
+        Pietanza p = new Pietanza("Pasta al sugo",15.0, new ArrayList<Etichetta>() {
+        });
+        Pietanza p1 = new Pietanza("Pasta al pesto", 15.0, new ArrayList<Etichetta>() {
+        });
+        p.addEtichetta(e);
+        p1.addEtichetta(e);
+        pietanzaRepository.save(p);
+        pietanzaRepository.save(p1);
+        //e.addPietanza(p);
+        //e.addPietanza(p1);  ---- non bisogna farlo -> bisogna aggiungere solo alle pietanze ----
         return pietanzaRepository.findAll();
+    } */
+
+    @RequestMapping(method = RequestMethod.GET)
+
+    public @ResponseBody
+    List<Pietanza> getAllPietanze() {
+        Etichetta e = new Etichetta("mhgjhghj tPiccante");
+        etichettaRepository.save(e);
+        Pietanza p = new Pietanza("Pasta al sugo",15.0, new ArrayList<Etichetta>() {
+        });
+        Pietanza p1 = new Pietanza("Pasta al pesto", 15.0, new ArrayList<Etichetta>() {
+        });
+        p.addEtichetta(e);
+        p1.addEtichetta(e);
+        pietanzaRepository.save(p);
+        pietanzaRepository.save(p1);
+        return etichettaRepository.findAll().get(0).getPietanze();
     }
 
 }

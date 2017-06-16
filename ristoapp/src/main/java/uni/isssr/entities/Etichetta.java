@@ -1,9 +1,14 @@
 package uni.isssr.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Etichetta {
@@ -11,14 +16,13 @@ public class Etichetta {
     /* Valori tipici sono:
         carne, pesce, piccante, vegetariano
          */
-    @Id
-    @Size(max = 32)
+
     private String classificatore;
 
-    @ManyToMany(mappedBy = "etichette", fetch = FetchType.EAGER)
     private List<Pietanza> pietanze;
 
     public Etichetta() {
+        this.pietanze = new ArrayList<>();
     }
 
     public Etichetta(String classificatore) {
@@ -27,6 +31,8 @@ public class Etichetta {
 
     }
 
+    @Id
+    @Size(max = 32)
     public String getClassificatore() {
         return classificatore;
     }
@@ -45,6 +51,9 @@ public class Etichetta {
         pietanza.getEtichette().remove(this);
     }
 
+    @ManyToMany(mappedBy = "etichette")
+    @JsonBackReference/* non sarà inviato nel json:necessario per evitare ricorsione e stackoverflow
+    //in caso si dovranno usare dei dto */
     public List<Pietanza> getPietanze() {
         return pietanze;
     }

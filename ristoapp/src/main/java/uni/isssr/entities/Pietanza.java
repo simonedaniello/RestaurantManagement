@@ -1,51 +1,45 @@
 package uni.isssr.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Pietanza {
 
-    @Id
-    @GeneratedValue
     private Long id;
 
     private String nome;
 
-    private double prezzo;
+    private Double prezzo;
 
-    @ManyToMany
-    @JoinTable(
-            name = "pietanze_tags",
-            joinColumns = {
-                    @JoinColumn(name = "Pietanze_key", referencedColumnName = "id")
-            },
-            inverseJoinColumns = {
-                    @JoinColumn(name = "Tag_key", referencedColumnName = "classificatore")
-            }
-    )
     private List<Etichetta> etichette;
 
-    @OneToMany(cascade = CascadeType.ALL)
     private List<Ingrediente> ingredienti;
 
     public Pietanza() {}
 
     public Pietanza(String nome, double prezzo) {
         this.nome = nome;
-        this.prezzo = prezzo;
+        this.prezzo = new Double(prezzo);
         this.etichette = new ArrayList<>();
         this.ingredienti = new ArrayList<>();
     }
 
-    public Pietanza(String nome, double prezzo, List<Etichetta> etichette) {
+    public Pietanza(String nome, double prezzo, ArrayList<Etichetta> etichette) {
         this.ingredienti = new ArrayList<>();
         this.nome = nome;
         this.etichette = etichette;
         this.prezzo = prezzo;
     }
 
+    @Id
+    @GeneratedValue
     public Long getId() {
         return id;
     }
@@ -54,6 +48,7 @@ public class Pietanza {
         this.id = id;
     }
 
+    @OneToMany(cascade = CascadeType.ALL)
     public List<Ingrediente> getIngredienti() {
         return ingredienti;
     }
@@ -71,19 +66,30 @@ public class Pietanza {
     }
 
     public double getPrezzo() {
-        return prezzo;
+        return prezzo.doubleValue();
     }
 
-    public void setPrezzo(double prezzo) {
+    public void setPrezzo(Double prezzo) {
         this.prezzo = prezzo;
     }
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "pietanza_etichette", joinColumns = {
+            @JoinColumn(name = "id", referencedColumnName = "id", nullable = false, updatable = false) },
+            inverseJoinColumns = { @JoinColumn(name = "classificatore", referencedColumnName = "classificatore",
+                    nullable = false, updatable = false) })
+
+    @JsonManagedReference // serve per mostrare le etichette tramite json senza che si vada in ricorsione
     public List<Etichetta> getEtichette() {
         return etichette;
     }
 
     public void setEtichette(List<Etichetta> etichette) {
         this.etichette = etichette;
+    }
+
+    public void addEtichetta(Etichetta etichetta) {
+        this.etichette.add(etichetta);
     }
 
 
