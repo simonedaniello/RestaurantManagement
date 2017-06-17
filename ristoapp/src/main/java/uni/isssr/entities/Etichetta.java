@@ -16,9 +16,12 @@ public class Etichetta {
     /* Valori tipici sono:
         carne, pesce, piccante, vegetariano
          */
-
+    @Id
+    @Size(max = 32)
     private String classificatore;
 
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "etichette")
+    @JsonBackReference (value = "Pietanza")
     private List<Pietanza> pietanze;
 
     public Etichetta() {
@@ -31,8 +34,7 @@ public class Etichetta {
 
     }
 
-    @Id
-    @Size(max = 32)
+
     public String getClassificatore() {
         return classificatore;
     }
@@ -51,9 +53,6 @@ public class Etichetta {
         pietanza.getEtichette().remove(this);
     }
 
-    @ManyToMany(mappedBy = "etichette")
-    @JsonBackReference/* non sarà inviato nel json:necessario per evitare ricorsione e stackoverflow
-    //in caso si dovranno usare dei dto */
     public List<Pietanza> getPietanze() {
         return pietanze;
     }

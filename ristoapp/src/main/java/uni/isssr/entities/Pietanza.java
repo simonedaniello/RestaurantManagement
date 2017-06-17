@@ -12,14 +12,25 @@ import java.util.Set;
 @Entity
 public class Pietanza {
 
+    @Id
+    @GeneratedValue
     private Long id;
 
     private String nome;
 
     private Double prezzo;
 
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "pietanza_etichette", joinColumns = {
+            @JoinColumn(name = "id", updatable = false) },
+            inverseJoinColumns = { @JoinColumn(name = "classificatore",
+                    updatable = false)
+            })
+
+    @JsonManagedReference (value = "Etichetta")// serve per mostrare le etichette tramite json senza che
     private List<Etichetta> etichette;
 
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Ingrediente> ingredienti;
 
     public Pietanza() {}
@@ -38,8 +49,7 @@ public class Pietanza {
         this.prezzo = prezzo;
     }
 
-    @Id
-    @GeneratedValue
+
     public Long getId() {
         return id;
     }
@@ -48,7 +58,6 @@ public class Pietanza {
         this.id = id;
     }
 
-    @OneToMany(cascade = CascadeType.ALL)
     public List<Ingrediente> getIngredienti() {
         return ingredienti;
     }
@@ -73,13 +82,6 @@ public class Pietanza {
         this.prezzo = prezzo;
     }
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "pietanza_etichette", joinColumns = {
-            @JoinColumn(name = "id", referencedColumnName = "id", nullable = false, updatable = false) },
-            inverseJoinColumns = { @JoinColumn(name = "classificatore", referencedColumnName = "classificatore",
-                    nullable = false, updatable = false) })
-
-    @JsonManagedReference // serve per mostrare le etichette tramite json senza che si vada in ricorsione
     public List<Etichetta> getEtichette() {
         return etichette;
     }
@@ -91,6 +93,8 @@ public class Pietanza {
     public void addEtichetta(Etichetta etichetta) {
         this.etichette.add(etichetta);
     }
+
+    public void removeEtichetta(Etichetta etichetta){this.etichette.remove(etichetta);}
 
 
 }
