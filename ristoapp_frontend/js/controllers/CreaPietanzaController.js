@@ -42,10 +42,10 @@ myApp.controller("CreaPietanzaController", function($scope, ajaxService, CreaPie
         }
     };
 
-    $scope.updateSelectedProd = function(nomeProd){
+    $scope.updateSelectedProd = function(nomeProd, id){
         var checkBox = document.getElementById("check.".concat(nomeProd));
         if(checkBox.checked) {
-            var ingrediente = {nomeProdotto:nomeProd, quantita:1};
+            var ingrediente = {nomeProdotto:nomeProd, quantita:1, prodottoId: id};
             $scope.selectedProd.push(ingrediente);
             $scope.selectedProd.sort(function(a, b){
                 return (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)
