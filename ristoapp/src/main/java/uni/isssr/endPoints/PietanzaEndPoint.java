@@ -40,28 +40,12 @@ public class PietanzaEndPoint {
     }
 
 
-   //@RequestMapping(method = RequestMethod.GET)
+   @RequestMapping(method = RequestMethod.GET)
 
-    /*public @ResponseBody Iterable<Pietanza> getAllPietanze() {
-        Etichetta e = new Etichetta("mhgjhghj tPiccante");
-        Etichetta e1 = new Etichetta("Piccantissimo");
-        //etichettaRepository.save(e);
-        //etichettaRepository.save(e1); // ci apettimao che etichette siano già salvate
-        Pietanza p = new Pietanza("Pasta al sugo",15.0, new ArrayList<Etichetta>() {
-        });
-        Pietanza p1 = new Pietanza("Pasta al pesto", 15.0, new ArrayList<Etichetta>() {
-        });
-        p.addEtichetta(e);
-        p1.addEtichetta(e);
-        pietanzaRepository.save(p);
-        pietanzaRepository.save(p1);
-        p1.addEtichetta(e1);
-        p.addEtichetta(e1);
-        //e.addPietanza(p);
-        //e.addPietanza(p1);  //---- non bisogna farlo -> bisogna aggiungere solo alle pietanze ----
-        p.removeEtichetta(e);
+    public @ResponseBody Iterable<Pietanza> getAllPietanze() {
+
         return pietanzaRepository.findAll();
-    } *//**/
+    }
 
     /*@RequestMapping(method = RequestMethod.GET)
 
