@@ -3,14 +3,20 @@ package uni.isssr.endPoints;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
 import org.springframework.web.bind.annotation.*;
+import uni.isssr.dto.PietanzaDto;
 import uni.isssr.entities.Etichetta;
 import uni.isssr.entities.Pietanza;
 import uni.isssr.repositories.EtichettaRepository;
 import uni.isssr.repositories.PietanzaRepository;
+import uni.isssr.springRepositories.SpringPietanzaRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+
+
+import org.springframework.hateoas.*;
 
 
 @RestController
@@ -18,7 +24,7 @@ import java.util.List;
 public class PietanzaEndPoint {
 
     @Autowired
-    private PietanzaRepository pietanzaRepository;
+    private SpringPietanzaRepository pietanzaRepository;
 
     @Autowired EtichettaRepository etichettaRepository;
 
@@ -26,17 +32,17 @@ public class PietanzaEndPoint {
 
 
     @RequestMapping(method = RequestMethod.POST)
-    public void addPietanza(@RequestBody Pietanza received){
+    public void addPietanza(@RequestBody PietanzaDto received){
         log.info(received.toString());
-        log.info(received.getNome());
+        //log.info(received.getNome());
         //log.info(received.getEtichette().get(0).getClassificatore());
-        pietanzaRepository.save(received);
+        pietanzaRepository.salva(received);
     }
 
 
-    @RequestMapping(method = RequestMethod.GET)
+   //@RequestMapping(method = RequestMethod.GET)
 
-    public @ResponseBody Iterable<Pietanza> getAllPietanze() {
+    /*public @ResponseBody Iterable<Pietanza> getAllPietanze() {
         Etichetta e = new Etichetta("mhgjhghj tPiccante");
         Etichetta e1 = new Etichetta("Piccantissimo");
         //etichettaRepository.save(e);
@@ -55,9 +61,9 @@ public class PietanzaEndPoint {
         //e.addPietanza(p1);  //---- non bisogna farlo -> bisogna aggiungere solo alle pietanze ----
         p.removeEtichetta(e);
         return pietanzaRepository.findAll();
-    } /*
+    } *//**/
 
-    @RequestMapping(method = RequestMethod.GET)
+    /*@RequestMapping(method = RequestMethod.GET)
 
     public @ResponseBody
     List<Pietanza> getAllPietanze() {
