@@ -9,12 +9,15 @@ public class IngredienteDto {
 
     private Double quantita;
 
+    private Long prodottoId;
+
     public IngredienteDto(){
     }
 
-    public IngredienteDto(String nomeProdotto, double quantita) {
+    public IngredienteDto(String nomeProdotto, double quantita, long prodottoId) {
         this.nomeProdotto = nomeProdotto;
         this.quantita = new Double(quantita);
+        this.prodottoId = new Long(prodottoId);
     }
 
     public String getNomeProdotto() {
@@ -31,5 +34,13 @@ public class IngredienteDto {
 
     public void setQuantita(double quantita) {
         this.quantita = new Double(quantita);
+    }
+
+    public Long getProdottoId() {
+        return prodottoId;
+    }
+
+    public void setProdottoId(Long prodottoId) {
+        this.prodottoId = prodottoId;
     }
 }
