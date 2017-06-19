@@ -16,9 +16,8 @@ public class Ingrediente {
     /*
         Attributi seguenti sono presi dal Json
      */
-    private Long idProdotto;
-
-    private String nomeProdotto;
+    @OneToOne
+    private Prodotto prodotto;
 
     // quantità è in grammi
     private double quantita;
@@ -26,14 +25,9 @@ public class Ingrediente {
     public Ingrediente() {
     }
 
-    public Ingrediente(Long idProdotto, String nomeProdotto, double quantita) {
-        this.idProdotto = idProdotto;
-        this.nomeProdotto = nomeProdotto;
-        this.quantita = quantita;
-    }
+    public Ingrediente(Prodotto prodotto, double quantita) {
+        this.prodotto = prodotto;
 
-    public Ingrediente(String nomeProdotto, double quantita) {
-        this.nomeProdotto = nomeProdotto;
         this.quantita = quantita;
     }
 
@@ -53,19 +47,7 @@ public class Ingrediente {
         this.quantita = quantita;
     }
 
-    public Long getIdProdotto() {
-        return idProdotto;
-    }
-
-    public void setIdProdotto(Long idProdotto) {
-        this.idProdotto = idProdotto;
-    }
-
-    public String getNomeProdotto() {
-        return nomeProdotto;
-    }
-
-    public void setNomeProdotto(String nomeProdotto) {
-        this.nomeProdotto = nomeProdotto;
+    public Prodotto getProdotto() {
+        return prodotto;
     }
 }
