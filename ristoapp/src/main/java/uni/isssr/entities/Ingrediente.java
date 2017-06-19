@@ -1,6 +1,8 @@
 package uni.isssr.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -15,6 +17,7 @@ public class Ingrediente {
         Attributi seguenti sono presi dal Json
      */
     private Long idProdotto;
+
     private String nomeProdotto;
 
     // quantità è in grammi
