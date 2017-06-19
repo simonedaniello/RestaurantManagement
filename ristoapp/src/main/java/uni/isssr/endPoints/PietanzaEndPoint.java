@@ -3,20 +3,12 @@ package uni.isssr.endPoints;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
 import org.springframework.web.bind.annotation.*;
 import uni.isssr.dto.PietanzaDto;
-import uni.isssr.entities.Etichetta;
 import uni.isssr.entities.Pietanza;
 import uni.isssr.repositories.EtichettaRepository;
 import uni.isssr.repositories.PietanzaRepository;
-import uni.isssr.springRepositories.SpringPietanzaRepository;
-
-import java.util.ArrayList;
-import java.util.List;
-
-
-import org.springframework.hateoas.*;
+import uni.isssr.service.PietanzaService;
 
 
 @RestController
@@ -24,9 +16,13 @@ import org.springframework.hateoas.*;
 public class PietanzaEndPoint {
 
     @Autowired
-    private SpringPietanzaRepository pietanzaRepository;
+    private PietanzaRepository pietanzaRepository;
 
-    @Autowired EtichettaRepository etichettaRepository;
+    @Autowired
+    private EtichettaRepository etichettaRepository;
+
+    @Autowired
+    private PietanzaService pietanzaService;
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
@@ -36,7 +32,7 @@ public class PietanzaEndPoint {
         log.info(received.toString());
         //log.info(received.getNome());
         //log.info(received.getEtichette().get(0).getClassificatore());
-        pietanzaRepository.salva(received);
+        pietanzaRepository.save(pietanzaService.unmarshall(received));
     }
 
 
