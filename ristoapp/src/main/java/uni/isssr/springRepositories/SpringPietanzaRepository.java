@@ -40,4 +40,8 @@ public class SpringPietanzaRepository {
         pietanza.setIngredienti(ingredientes);
         pietanzaRepository.save(pietanza);
     }
+
+    public Iterable<Pietanza> findAll(){
+        return pietanzaRepository.findAll();
+    }
 }
