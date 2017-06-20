@@ -35,9 +35,13 @@ public class PietanzaEndPoint {
         pietanzaRepository.save(pietanzaService.unmarshall(received));
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/delete/{ID}")
+    public void deletePietanza(@PathVariable(value = "ID") Long id){
+        pietanzaRepository.delete(id);
+    }
+
 
    @RequestMapping(method = RequestMethod.GET)
-
     public @ResponseBody Iterable<Pietanza> getAllPietanze() {
 
         return pietanzaRepository.findAll();

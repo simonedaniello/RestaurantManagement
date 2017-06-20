@@ -32,6 +32,11 @@ myApp.config(function($routeProvider) {
             templateUrl : "htmlFiles/RisolviComandeCuoco.html",
             controller:"prendiComandaController"
         })
+        .when("/cercaPietanza", {
+            templateUrl: "htmlFiles/ricercaPietanze.html",
+            css : "cssFiles/ricercaPietanzaTabs.css",
+            controller: "ricercaPietanzaController"
+        })
         .otherwise({
             templateUrl : "htmlFiles/mainPage.html"
         });

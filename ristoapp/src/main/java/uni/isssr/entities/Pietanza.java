@@ -20,7 +20,7 @@ public class Pietanza {
 
     private Double prezzo;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinTable(name = "pietanza_etichette", joinColumns = {
             @JoinColumn(name = "id", updatable = false) },
             inverseJoinColumns = { @JoinColumn(name = "classificatore",

@@ -40,6 +40,7 @@ public class Prova {
 
      */
 
+    /*
     @GetMapping
     public Iterable<Menu> populateMenu(){
 
@@ -74,7 +75,7 @@ public class Prova {
         p2.addEtichetta(e1);
         p2.addEtichetta(e2);
         p3.addEtichetta(e3);
-        */
+
         Categoria categoria1 = new Categoria("Primi");
         Categoria categoria2 = new Categoria("Secondi");
 
@@ -90,5 +91,6 @@ public class Prova {
         menuRepository.save(menu1);
 
         return menuRepository.findAll();
-    }
+    } */
 }
+

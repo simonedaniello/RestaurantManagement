@@ -8,6 +8,7 @@
 
     <link href="cssFiles/sidebarBootstrap.css" rel="stylesheet">
     <link href="cssFiles/generalCSS.css" rel="stylesheet">
+    <link rel="stylesheet" href="cssFiles/ricercaPietanzaTabs.css">
 
     <!-- Script di angularjs e di angularjs-route-->
     <script src="lib/node_modules/angular/angular.js"></script>
@@ -25,12 +26,14 @@
     <script src="js/controllers/creaMenuController.js"></script>
     <script src="js/controllers/headerController.js"></script>
     <script src="js/controllers/prendiComandaController.js"></script>
+    <script src="js/controllers/ricercaPietanzaController.js"></script>
 
     <!-- Inizio script visualizzazione menu -->
     <script src="js/controllers/VisualizzaMenuController.js"></script>
     <script src="js/services/MenuService.js"></script>
     <script src="js/services/CreaMenuService.js"></script>
     <script src="js/services/PrendiComandaService.js"></script>
+    <script src="js/services/RicercaPietanzaService.js"></script>
     <script src="lib/js/html2canvas.js"></script>
     <script src="lib/js/pdfmake.min.js"></script>
     <script src="lib/js/vfs_fonts.js"></script>
@@ -72,7 +75,13 @@
                 <li class="active"><a href="#">Home</a></li>
                 <li><a href="#!ricercaMenu">Menu</a></li>
                 <li><a href="#!creamenu">Crea Menu</a></li>
-                <li><a href="#!creaPietanza">Crea Pietanza</a></li>
+                <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="">Pietanze
+                <span class="caret"></span> </a>
+                <ul class="dropdown-menu">
+                    <li><a href="#!creaPietanza">Crea Pietanza</a></li>
+                    <li><a href="#!cercaPietanza">Le mie Pietanze</a> </li>
+                </ul>
+                </li>
                 <li><a href="#!prendiComanda">Prendi Comanda</a></li>
                 <li><a href="#!comandecuoco">Lista Comande Cuoco</a></li>
             </ul>
