@@ -37,8 +37,20 @@ myApp.config(function($routeProvider) {
             css : "cssFiles/ricercaPietanzaTabs.css",
             controller: "ricercaPietanzaController"
         })
-        .when("/dovesiamo", {
-            templateUrl: "htmlFiles/dovesiamo.html"
+        /*.when("/dovesiamo", {
+            templateUrl: "htmlFiles/dovesiamo.html",
+            controller: "doveSiamoController"
+        })*/
+        .when('/dovesiamo', {
+            controller: 'doveSiamoController',
+            templateUrl: "htmlFiles/dovesiamo.html",
+            resolve: {
+                init: function() {
+                    return function() {
+                        console.log('Loading Blog');
+                    }
+                }
+            }
         })
         .otherwise({
             templateUrl : "htmlFiles/mainPage.html"

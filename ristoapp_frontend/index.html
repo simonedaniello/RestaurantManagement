@@ -27,6 +27,7 @@
     <script src="js/controllers/headerController.js"></script>
     <script src="js/controllers/prendiComandaController.js"></script>
     <script src="js/controllers/ricercaPietanzaController.js"></script>
+    <script src="js/controllers/doveSiamoController.js"></script>
 
     <!-- Inizio script visualizzazione menu -->
     <script src="js/controllers/VisualizzaMenuController.js"></script>
@@ -59,6 +60,7 @@
 
 </head>
 <body ng-app="ristoApp">
+
 
 <!--<header class="w3-display-container w3-content w3-wide" style="max-width:1600px;min-width:500px" id="home">
     <img class="w3-image" src="http://www.karismahotels.com/gourmetinclusive/images/main/platemain.jpg" alt="Hamburger Catering" width="1600" height="800">
@@ -99,6 +101,8 @@
                 <li id="mostramenu"><a href="#">Mostra il Menu</a></li>
                 <li id="contattaci"><a href="#">Contattaci</a></li>
                 <li id="dovesiamo"><a href="#!dovesiamo">Dove Siamo</a></li>
+
+
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a ng-click="registerClick()" href=""><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
@@ -202,7 +206,16 @@
 </footer>
 
 <script src="js/navbarControl/userAdminChoice.js"></script>
-
+<script src="lib/js/OpenLayers-2.13.1/OpenLayers.js"></script>
+<script>
+    function init()
+    {
+        map = new OpenLayers.Map("demoMap");
+        map.addLayer(new OpenLayers.Layer.OSM());
+        map.zoomToMaxExtent();
+    }
+    init();
+</script>
 
 </body>
 </html>

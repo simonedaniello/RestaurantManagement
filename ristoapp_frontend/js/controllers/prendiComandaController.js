@@ -1,6 +1,6 @@
 myApp.controller("prendiComandaController", function($scope, ajaxService, PrendiComandaService, $http) {
 
-    var stompClient = null;
+    /*var stompClient = null;*/
     $scope.currentItems = [];
 
 
@@ -60,8 +60,16 @@ myApp.controller("prendiComandaController", function($scope, ajaxService, Prendi
     };*/
 
     $scope.sendComanda = function () {
-        var jsonComanda = angular.toJson($scope.selectedProd);
-        stompClient.send("/app/nuoveComande", {}, jsonComanda);
+        var socket = new SockJS('http://localhost:8080/websocket');
+        var stompClient = Stomp.over(socket);
+        stompClient.connect({}, function (frame) {
+            /*setConnected(true);*/
+            console.log('Connected: ' + frame);
+            var jsonComanda = angular.toJson($scope.selectedProd);
+            console.log(stompClient);
+            stompClient.send("http://localhost:8080/app/nuoveComande", {}, jsonComanda);
+        });
+
     };
 
 
@@ -89,12 +97,14 @@ myApp.controller("prendiComandaController", function($scope, ajaxService, Prendi
 
 
     $scope.connect = function() {
-        var socket = new SockJS('/websocket');
+        var stompClient = null;
+        var socket = new SockJS('http://localhost:8080/websocket');
         stompClient = Stomp.over(socket);
         stompClient.connect({}, function (frame) {
             /*setConnected(true);*/
             console.log('Connected: ' + frame);
-            stompClient.subscribe('/topic/comande', function (comande) {
+            stompClient.subscribe('http://localhost:8080/topic/comande', function (comande) {
+                console.log("arivato qualcosa");
                 var parsed = JSON.parse((angular.toJson(comande)));
                 for(var i in parsed){
                     console.log(parsed[i]);
