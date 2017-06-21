@@ -1,7 +1,5 @@
-myApp.controller("prendiComandaController", function($scope, ajaxService, PrendiComandaService, $http) {
+myApp.controller("PrendiComandaController", function($scope, ajaxService, PrendiComandaService, $http, Pubnub) {
 
-    /*var stompClient = null;*/
-    $scope.currentItems = [];
 
 
     var updateListaProdotti = function () {
@@ -49,7 +47,8 @@ myApp.controller("prendiComandaController", function($scope, ajaxService, Prendi
 
 
 
-/*    $scope.inviaComanda = function(){
+    /*
+    $scope.inviaComanda = function(){
         var jsonComanda = angular.toJson($scope.selectedProd);
         ajaxService.sendResource("http://localhost:8080/comanda", jsonComanda).then(function (response) {
             console.log("successo : " + jsonComanda);
@@ -59,17 +58,24 @@ myApp.controller("prendiComandaController", function($scope, ajaxService, Prendi
         });
     };*/
 
-    $scope.sendComanda = function () {
-        var socket = new SockJS('http://localhost:8080/websocket');
-        var stompClient = Stomp.over(socket);
-        stompClient.connect({}, function (frame) {
-            /*setConnected(true);*/
-            console.log('Connected: ' + frame);
-            var jsonComanda = angular.toJson($scope.selectedProd);
-            console.log(stompClient);
-            stompClient.send("http://localhost:8080/app/nuoveComande", {}, jsonComanda);
-        });
 
+    // Inizializzazione delle credenziali per PubNub
+
+    Pubnub.init({
+        publishKey: 'pub-c-18cb2897-1549-41e9-9011-c0c17480a1e4',
+        subscribeKey: 'sub-c-23206a28-56ae-11e7-97fe-02ee2ddab7fe'
+    });
+
+    // Manda la comanda
+    $scope.publish = function () {
+        var jsonComanda = angular.toJson($scope.selectedProd);
+        Pubnub.publish({
+            channel: 'channel_comande',
+            message: jsonComanda
+        }, function (status, response){
+            console.log(response);
+            alert("COMANDA INVIATA");
+        });
     };
 
 
@@ -92,29 +98,6 @@ myApp.controller("prendiComandaController", function($scope, ajaxService, Prendi
             , function (response) {
                 alert("Couldn't get products");
             });
-    };
-
-
-
-    $scope.connect = function() {
-        var stompClient = null;
-        var socket = new SockJS('http://localhost:8080/websocket');
-        stompClient = Stomp.over(socket);
-        stompClient.connect({}, function (frame) {
-            /*setConnected(true);*/
-            console.log('Connected: ' + frame);
-            stompClient.subscribe('http://localhost:8080/topic/comande', function (comande) {
-                console.log("arivato qualcosa");
-                var parsed = JSON.parse((angular.toJson(comande)));
-                for(var i in parsed){
-                    console.log(parsed[i]);
-                    $scope.currentItems.push(parsed[i]);
-                }
-
-                $scope.selectedProdForChef = $scope.currentItems;
-/*                showComande(comanda.body);*/
-            });
-        });
     };
 
 });

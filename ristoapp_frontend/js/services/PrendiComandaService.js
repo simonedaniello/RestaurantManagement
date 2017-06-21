@@ -1,12 +1,6 @@
 
 myApp.service("PrendiComandaService", [function () {
 
-
-
-    this.getStomp = function () {
-
-    };
-
     this.parseTagArray = function (array) {
         var tagArray = [];
         for (i in array){

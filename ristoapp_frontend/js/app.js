@@ -2,7 +2,7 @@
  * Created by dandi on 13/05/17.
  */
 
-var myApp = angular.module("ristoApp", ["ngRoute", "ngStorage"]);
+var myApp = angular.module("ristoApp", ["ngRoute", "ngStorage", "pubnub.angular.service"]);
 
 
 myApp.config(function($routeProvider) {
@@ -26,11 +26,11 @@ myApp.config(function($routeProvider) {
         })
         .when("/prendiComanda", {
             templateUrl : "htmlFiles/prendiComanda.html",
-            controller:"prendiComandaController"
+            controller:"PrendiComandaController"
         })
         .when("/comandecuoco", {
-            templateUrl : "htmlFiles/RisolviComandeCuoco.html",
-            controller:"prendiComandaController"
+            templateUrl : "htmlFiles/risolviComandeCuoco.html",
+            controller:"RisolviComandeController"
         })
         .when("/cercaPietanza", {
             templateUrl: "htmlFiles/ricercaPietanze.html",
