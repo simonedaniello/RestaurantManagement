@@ -52,7 +52,6 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-
 </head>
 <body ng-app="ristoApp">
 
@@ -63,7 +62,6 @@
     </div>
 </header>-->
 
-
 <div ng-controller="headerController">
     <nav role="navigation" class="navbar navbar-default">
         <div class="container-fluid">
@@ -73,17 +71,29 @@
             </div>
             <ul class="nav navbar-nav">
                 <li class="active"><a href="#">Home</a></li>
-                <li><a href="#!ricercaMenu">Menu</a></li>
-                <li><a href="#!creamenu">Crea Menu</a></li>
-                <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="">Pietanze
+                <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown"
+                                        href="" id="useradmin">
+                    <span class="caret"></span> </a>
+                    <ul class="dropdown-menu">
+                        <li><input type="radio" name="utenteadmin" id="utente"
+                                   onclick="utenteadminfunzione();">Utente</input></li>
+                        <li><input type="radio" name="utenteadmin" id="amministratore"
+                                   onclick="utenteadminfunzione();">Amministratore</input></li>
+                    </ul>
+                <li id="menu"><a href="#!ricercaMenu" >Menu</a></li>
+                <li id="creamenu"><a href="#!creamenu">Crea Menu</a></li>
+                <li class="dropdown" id="pietanze"><a class="dropdown-toggle" data-toggle="dropdown" href="">Pietanze
                 <span class="caret"></span> </a>
                 <ul class="dropdown-menu">
                     <li><a href="#!creaPietanza">Crea Pietanza</a></li>
                     <li><a href="#!cercaPietanza">Le mie Pietanze</a> </li>
                 </ul>
                 </li>
-                <li><a href="#!prendiComanda">Prendi Comanda</a></li>
-                <li><a href="#!comandecuoco">Lista Comande Cuoco</a></li>
+                <li id="prendicomanda"><a href="#!prendiComanda">Prendi Comanda</a></li>
+                <li id="listacomandecuoco"><a href="#!comandecuoco">Lista Comande Cuoco</a></li>
+                <li id="mostramenu"><a href="#">Mostra il Menu</a></li>
+                <li id="contattaci"><a href="#">Contattaci</a></li>
+                <li id="dovesiamo"><a href="#!dovesiamo">Dove Siamo</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a ng-click="registerClick()" href=""><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
@@ -185,6 +195,8 @@
     <i class="fa fa-twitter w3-hover-opacity"></i>
     <i class="fa fa-linkedin w3-hover-opacity"></i>
 </footer>
+
+<script src="js/navbarControl/userAdminChoice.js"></script>
 
 
 </body>

@@ -1,0 +1,43 @@
+
+<!-- Page content -->
+<div class="w3-content" style="max-width:1100px">
+
+    <div class="w3-row w3-padding-64" id="about">
+        <div class="w3-col m6 w3-padding-large w3-hide-small">
+            <div id="map" style="width:400px;height:400px;background:yellow"></div>
+        </div>
+
+        <div class="w3-col m6 w3-padding-large">
+            <h1 class="w3-center">Find us in Rome</h1>
+            <hr><br>
+            <p class="w3-large"> Our chef is working to find another way to enjoy the food,
+                looking for new dishes but loving the tradition. There's something unusual in this kind
+                of work and now I'm writing something that I don't know only to fill this section.
+                In the edn of this text there is a grey part that is very beautiful
+            </p>
+        </div>
+    </div>
+
+
+    <hr>
+</div>
+
+<script>
+
+
+    function myMap() {
+        var mapOptions = {
+            center: new google.maps.LatLng(41.919584, 12.545530),
+            zoom: 10,
+            mapTypeId: google.maps.MapTypeId.HYBRID
+        };
+        var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+    }
+
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHijUOXOa1wNoGoSePep95GjWdBX7GwGw&callback=myMap"></script>
+<!--
+To use this code on your website, get a free API key from Google.
+Read more at: https://www.w3schools.com/graphics/google_maps_basic.asp
+-->
