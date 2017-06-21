@@ -1,5 +1,8 @@
 myApp.controller("prendiComandaController", function($scope, ajaxService, PrendiComandaService, $http) {
 
+    var stompClient = null;
+    $scope.currentItems = [];
+
 
     var updateListaProdotti = function () {
         //ajaxService.getResource("http://localhost:8080/creaPietanza/getProdotti", null).then(
@@ -44,9 +47,9 @@ myApp.controller("prendiComandaController", function($scope, ajaxService, Prendi
         }
     };
 
-    $scope.currentItems = [];
 
-    $scope.inviaComanda = function(){
+
+/*    $scope.inviaComanda = function(){
         var jsonComanda = angular.toJson($scope.selectedProd);
         ajaxService.sendResource("http://localhost:8080/comanda", jsonComanda).then(function (response) {
             console.log("successo : " + jsonComanda);
@@ -54,6 +57,11 @@ myApp.controller("prendiComandaController", function($scope, ajaxService, Prendi
             console.log("fallimento : " + jsonComanda);
             console.log(response)
         });
+    };*/
+
+    $scope.sendComanda = function () {
+        var jsonComanda = angular.toJson($scope.selectedProd);
+        stompClient.send("/app/nuoveComande", {}, jsonComanda);
     };
 
 
@@ -76,6 +84,27 @@ myApp.controller("prendiComandaController", function($scope, ajaxService, Prendi
             , function (response) {
                 alert("Couldn't get products");
             });
+    };
+
+
+
+    $scope.connect = function() {
+        var socket = new SockJS('/websocket');
+        stompClient = Stomp.over(socket);
+        stompClient.connect({}, function (frame) {
+            /*setConnected(true);*/
+            console.log('Connected: ' + frame);
+            stompClient.subscribe('/topic/comande', function (comande) {
+                var parsed = JSON.parse((angular.toJson(comande)));
+                for(var i in parsed){
+                    console.log(parsed[i]);
+                    $scope.currentItems.push(parsed[i]);
+                }
+
+                $scope.selectedProdForChef = $scope.currentItems;
+/*                showComande(comanda.body);*/
+            });
+        });
     };
 
 });
