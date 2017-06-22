@@ -8,9 +8,7 @@ public class Comanda {
     @Id
     @GeneratedValue
     private Long id;
-
     private String nome;
-
     private int quantita;
 
     public Comanda() {}

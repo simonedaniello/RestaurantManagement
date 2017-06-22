@@ -10,6 +10,16 @@
     <link href="cssFiles/generalCSS.css" rel="stylesheet">
     <link rel="stylesheet" href="cssFiles/ricercaPietanzaTabs.css">
 
+
+    <!--roba per le mappe-->
+    <link rel="stylesheet" href="https://openlayers.org/en/v4.2.0/css/ol.css" type="text/css">
+    <!-- The line below is only needed for old environments like Internet Explorer and Android 4.x -->
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
+    <script src="https://openlayers.org/en/v4.2.0/build/ol.js"></script>
+
+
+    <!--roba per le mappe-->
+
     <!-- Script di angularjs e di angularjs-route-->
     <script src="lib/node_modules/angular/angular.js"></script>
     <script src="lib/node_modules/ngstorage/ngStorage.js"></script>
@@ -25,8 +35,8 @@
     <script src="js/controllers/CreaPietanzaController.js"></script>
     <script src="js/controllers/creaMenuController.js"></script>
     <script src="js/controllers/headerController.js"></script>
-    <script src="js/controllers/prendiComandaController.js"></script>
     <script src="js/controllers/ricercaPietanzaController.js"></script>
+    <script src="js/controllers/doveSiamoController.js"></script>
 
     <!-- Inizio script visualizzazione menu -->
     <script src="js/controllers/VisualizzaMenuController.js"></script>
@@ -43,6 +53,13 @@
     <script src="js/controllers/RicercaMenuController.js"></script>
     <!-- Fine script ricerca menu -->
 
+    <!--inizio script comande-->
+    <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.12.0.js"></script>
+    <script src="https://cdn.pubnub.com/sdk/pubnub-angular/pubnub-angular-4.0.2.min.js"></script>
+    <script src="js/controllers/prendiComandaController.js"></script>
+    <script src="js/controllers/RisolviComandeController.js"></script>
+    <!--fine script comande-->
+
     <link href="cssFiles/menu.css" rel="stylesheet">
     <link href="cssFiles/project.css" rel="stylesheet">
     <link href="cssFiles/registerForm.css" rel="stylesheet">
@@ -54,6 +71,7 @@
 
 </head>
 <body ng-app="ristoApp">
+
 
 <!--<header class="w3-display-container w3-content w3-wide" style="max-width:1600px;min-width:500px" id="home">
     <img class="w3-image" src="http://www.karismahotels.com/gourmetinclusive/images/main/platemain.jpg" alt="Hamburger Catering" width="1600" height="800">
@@ -96,6 +114,8 @@
                 <li id="mostramenu"><a href="#">Mostra il Menu</a></li>
                 <li id="contattaci"><a href="#">Contattaci</a></li>
                 <li id="dovesiamo"><a href="#!dovesiamo">Dove Siamo</a></li>
+
+
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a ng-click="registerClick()" href=""><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
@@ -199,6 +219,7 @@
 </footer>
 
 <script src="js/navbarControl/userAdminChoice.js"></script>
+
 
 
 </body>

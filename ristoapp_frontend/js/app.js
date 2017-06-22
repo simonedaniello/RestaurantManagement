@@ -1,8 +1,5 @@
-/**
- * Created by dandi on 13/05/17.
- */
 
-var myApp = angular.module("ristoApp", ["ngRoute", "ngStorage"]);
+var myApp = angular.module("ristoApp", ["ngRoute", "ngStorage", "pubnub.angular.service"]);
 
 
 myApp.config(function($routeProvider) {
@@ -26,19 +23,31 @@ myApp.config(function($routeProvider) {
         })
         .when("/prendiComanda", {
             templateUrl : "htmlFiles/prendiComanda.html",
-            controller:"prendiComandaController"
+            controller:"PrendiComandaController"
         })
         .when("/comandecuoco", {
             templateUrl : "htmlFiles/RisolviComandeCuoco.html",
-            controller:"prendiComandaController"
+            controller:"RisolviComandeController"
         })
         .when("/cercaPietanza", {
             templateUrl: "htmlFiles/ricercaPietanze.html",
             css : "cssFiles/ricercaPietanzaTabs.css",
             controller: "ricercaPietanzaController"
         })
-        .when("/dovesiamo", {
-            templateUrl: "htmlFiles/dovesiamo.html"
+        /*.when("/dovesiamo", {
+            templateUrl: "htmlFiles/dovesiamo.html",
+            controller: "doveSiamoController"
+        })*/
+        .when('/dovesiamo', {
+            templateUrl: "htmlFiles/dovesiamo.html",
+            controller: 'doveSiamoController'
+            /*resolve: {
+                init: function() {
+                    return function($route) {
+                        console.log('Loading Blog Article ' + $route.current.params.id);
+                    }
+                }
+            }*/
         })
         .otherwise({
             templateUrl : "htmlFiles/mainPage.html"
@@ -52,4 +61,5 @@ myApp.controller('researchController', function($scope) {
         return tag.contains(written);
     }
 });
+
 
