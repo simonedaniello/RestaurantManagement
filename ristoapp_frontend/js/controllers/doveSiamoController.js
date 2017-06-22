@@ -1,3 +1,4 @@
+/*
 
     myApp.directive('doveSiamoController', function () {
         return {
@@ -17,4 +18,4 @@
                 });
             }
         };
-    });
+    });*/
