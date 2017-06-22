@@ -10,6 +10,16 @@
     <link href="cssFiles/generalCSS.css" rel="stylesheet">
     <link rel="stylesheet" href="cssFiles/ricercaPietanzaTabs.css">
 
+
+    <!--roba per le mappe-->
+    <link rel="stylesheet" href="https://openlayers.org/en/v4.2.0/css/ol.css" type="text/css">
+    <!-- The line below is only needed for old environments like Internet Explorer and Android 4.x -->
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
+    <script src="https://openlayers.org/en/v4.2.0/build/ol.js"></script>
+
+
+    <!--roba per le mappe-->
+
     <!-- Script di angularjs e di angularjs-route-->
     <script src="lib/node_modules/angular/angular.js"></script>
     <script src="lib/node_modules/ngstorage/ngStorage.js"></script>
@@ -46,7 +56,7 @@
     <!--inizio script comande-->
     <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.12.0.js"></script>
     <script src="https://cdn.pubnub.com/sdk/pubnub-angular/pubnub-angular-4.0.2.min.js"></script>
-    <script src="js/controllers/PrendiComandaController.js"></script>
+    <script src="js/controllers/prendiComandaController.js"></script>
     <script src="js/controllers/RisolviComandeController.js"></script>
     <!--fine script comande-->
 
@@ -207,16 +217,8 @@
 </footer>
 
 <script src="js/navbarControl/userAdminChoice.js"></script>
-<script src="lib/js/OpenLayers-2.13.1/OpenLayers.js"></script>
-<script>
-    function init()
-    {
-        map = new OpenLayers.Map("demoMap");
-        map.addLayer(new OpenLayers.Layer.OSM());
-        map.zoomToMaxExtent();
-    }
-    init();
-</script>
+
+
 
 </body>
 </html>

@@ -1,6 +1,3 @@
-/**
- * Created by dandi on 13/05/17.
- */
 
 var myApp = angular.module("ristoApp", ["ngRoute", "ngStorage", "pubnub.angular.service"]);
 
@@ -29,7 +26,7 @@ myApp.config(function($routeProvider) {
             controller:"PrendiComandaController"
         })
         .when("/comandecuoco", {
-            templateUrl : "htmlFiles/risolviComandeCuoco.html",
+            templateUrl : "htmlFiles/RisolviComandeCuoco.html",
             controller:"RisolviComandeController"
         })
         .when("/cercaPietanza", {
@@ -42,15 +39,15 @@ myApp.config(function($routeProvider) {
             controller: "doveSiamoController"
         })*/
         .when('/dovesiamo', {
-            controller: 'doveSiamoController',
             templateUrl: "htmlFiles/dovesiamo.html",
-            resolve: {
+            controller: 'doveSiamoController'
+            /*resolve: {
                 init: function() {
-                    return function() {
-                        console.log('Loading Blog');
+                    return function($route) {
+                        console.log('Loading Blog Article ' + $route.current.params.id);
                     }
                 }
-            }
+            }*/
         })
         .otherwise({
             templateUrl : "htmlFiles/mainPage.html"
@@ -64,4 +61,5 @@ myApp.controller('researchController', function($scope) {
         return tag.contains(written);
     }
 });
+
 

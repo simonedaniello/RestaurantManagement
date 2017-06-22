@@ -9,7 +9,8 @@
                             <table class="table table-striped" id="tabellaCuoco">
                                 <tbody>
                                 <tr ng-repeat="prod in selectedProdForChef" >
-                                    <td class="col-sm-9"><p style="font-style: italic">{{prod.nome}} x {{prod.quantita}}</p></td>
+                                    <td class="col-sm-9"><p style="font-style: italic" id="pietanza.{{prod.nome}}" >{{prod.nome}} x {{prod.quantita}}</p></td>
+                                    <td><button type="button" class="btn btn-success" ng-click="selectedProdForChef.splice($index,1)" id="button.{{prod.nome}}">Fatto</button></td>
                                 </tr>
                                 </tbody>
                             </table>

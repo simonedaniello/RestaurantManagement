@@ -1,6 +1,6 @@
 myApp.controller("PrendiComandaController", function($scope, ajaxService, PrendiComandaService, $http, Pubnub) {
 
-
+    $scope.actuallyChecked = [];
 
     var updateListaProdotti = function () {
         //ajaxService.getResource("http://localhost:8080/creaPietanza/getProdotti", null).then(
@@ -34,6 +34,7 @@ myApp.controller("PrendiComandaController", function($scope, ajaxService, Prendi
     $scope.updateSelectedProd = function(nomeProd){
         var checkBox = document.getElementById("check.".concat(nomeProd));
         if(checkBox.checked) {
+            $scope.actuallyChecked.push(checkBox);
             var ingrediente = {nome:nomeProd,       quantita:1};
             $scope.selectedProd.push(ingrediente);
             $scope.selectedProd.sort(function(a, b){
@@ -44,19 +45,6 @@ myApp.controller("PrendiComandaController", function($scope, ajaxService, Prendi
             $scope.selectedProd.splice(i,1);
         }
     };
-
-
-
-    /*
-    $scope.inviaComanda = function(){
-        var jsonComanda = angular.toJson($scope.selectedProd);
-        ajaxService.sendResource("http://localhost:8080/comanda", jsonComanda).then(function (response) {
-            console.log("successo : " + jsonComanda);
-        }, function (response) {
-            console.log("fallimento : " + jsonComanda);
-            console.log(response)
-        });
-    };*/
 
 
     // Inizializzazione delle credenziali per PubNub
@@ -74,30 +62,15 @@ myApp.controller("PrendiComandaController", function($scope, ajaxService, Prendi
             message: jsonComanda
         }, function (status, response){
             console.log(response);
-            alert("COMANDA INVIATA");
+            alert("COMANDA INVIATA : " + status);
         });
+        for(var k in $scope.actuallyChecked){
+            $scope.actuallyChecked[k].checked = false;
+        }
+        $scope.actuallyChecked = [];
+        $scope.selectedProd = [];
     };
 
 
-    $scope.updateListaProdottiForChef = function () {
-        //ajaxService.getResource("http://localhost:8080/creaPietanza/getProdotti", null).then(
-/*
-        $http.get("jsonFiles/menuAttuale.json").then(
-*/
-        ajaxService.getResource("http://localhost:8080/comanda", null).then(
-            function (response) {
-
-                var parsed = JSON.parse((angular.toJson(response)));
-                for(var i in parsed){
-                    console.log(parsed[i]);
-                    $scope.currentItems.push(parsed[i]);
-                }
-
-                $scope.selectedProdForChef = $scope.currentItems;
-            }
-            , function (response) {
-                alert("Couldn't get products");
-            });
-    };
 
 });

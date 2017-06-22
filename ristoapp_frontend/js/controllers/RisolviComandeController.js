@@ -4,6 +4,8 @@
 
 myApp.controller("RisolviComandeController", function ($scope, Pubnub) {
 
+    $scope.currentItems = [];
+    $scope.selectedProdForChef = [];
     // Chiavi di accesso al servizio PubNub
     Pubnub.init({
         publishKey: 'pub-c-18cb2897-1549-41e9-9011-c0c17480a1e4',
@@ -27,8 +29,17 @@ myApp.controller("RisolviComandeController", function ($scope, Pubnub) {
             // Callback riguardante un evento che è stato appena pubblicato
             message: function(response) {
                 var comande = response.message;
+                /*var parsed = JSON.parse(comande);*/
+/*                console.log(parsed);*/
                 var parsed = JSON.parse(comande);
-                console.log(parsed);
+                for(var i in parsed){
+                    /*console.log("prodotto = "  + parsed[i].nome);*/
+                    $scope.currentItems.push(parsed[i]);
+                }
+
+                $scope.selectedProdForChef = $scope.currentItems;
+
+                $scope.$apply();
                 //$scope.selectedProdForChef = comande;
                 //$scope.$apply();
             }
@@ -39,5 +50,9 @@ myApp.controller("RisolviComandeController", function ($scope, Pubnub) {
         });
         alert("SUBSCRIBED!");
     };
+
+    $scope.itemDone = function(){
+
+    }
 
 });
