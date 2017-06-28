@@ -1,14 +1,14 @@
 package uni.isssr.endPoints;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import uni.isssr.dto.ResocontoAnalyticsDto;
 import uni.isssr.dto.ResocontoPietanzaDto;
 import uni.isssr.entities.ResocontoPietanza;
 import uni.isssr.repositories.ResocontoRepository;
 import uni.isssr.service.ResocontoService;
+
+import java.util.List;
 
 /**
  * Created by francesco on 19/06/17.
@@ -36,4 +36,9 @@ public class ResocontoEndPoint {
         resocontoRepository.save(resocontoPietanza);
 
     }
+
+    /*@RequestMapping(method = RequestMethod.GET, value = "/{data}")
+    public List<String> getResoconti(@PathVariable(value = "data") String data){
+        return resocontoRepository.getResocontiByData(data);
+    }*/
 }

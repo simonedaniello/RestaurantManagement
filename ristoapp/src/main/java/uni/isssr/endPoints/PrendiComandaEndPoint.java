@@ -2,8 +2,9 @@ package uni.isssr.endPoints;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.SendTo;
+
+//import org.springframework.messaging.handler.annotation.MessageMapping;
+//import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.web.bind.annotation.*;
 import uni.isssr.entities.Comanda;
 import uni.isssr.repositories.ComandaRepository;
@@ -50,11 +51,11 @@ public class PrendiComandaEndPoint {
 
      */
 
-    @MessageMapping("/nuoveComande")
+    /*@MessageMapping("/nuoveComande")
     @SendTo("/topic/comande")
     public List<Comanda> nuoveComanda(List<Comanda> comande) throws Exception {
         comandaRepository.save(comande);
         return comande;
-    }
+    }*/
 
 }
