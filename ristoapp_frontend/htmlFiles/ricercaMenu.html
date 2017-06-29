@@ -45,7 +45,11 @@
                                     <img class="card-img-top" ng-src="{{menu.immagine}}" style="height: 200px; width: 100%; display: block;">
                                     <div class="card-block">
                                         <h4 class="card-title">{{menu.nomeMenu}}</h4>
-                                        <p class="card-text">{{menu.descrizione}}</p>
+                                        <p class="card-text">
+                                            {{menu.descrizione}}
+                                            <br>
+                                            {{menu.data}}
+                                        </p>
                                         <button type="submit" class="btn btn-primary" ng-click="pickMenu(menu.nomeMenu)">Visualizza</button>
                                     </div>
                                 </div>

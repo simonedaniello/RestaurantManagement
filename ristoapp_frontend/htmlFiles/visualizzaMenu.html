@@ -58,8 +58,12 @@
                                   <div class="menu-item-price">
                                       €{{pietanza.prezzo}}
                                   </div>
-                                  <span class="menu-item-description" ng-repeat="prodotto in pietanza.prodotti">
-                                      {{prodotto}}{{$last ? '' : ', '}}
+                                  <span class="menu-item-description" ng-repeat="ingrediente in pietanza.ingredienti">
+                                      {{ingrediente}}{{$last ? '' : ', '}}
+                                  </span>
+                                  <br>
+                                  <span class="menu-item-tag" ng-repeat="etichetta in pietanza.etichette">
+                                      {{etichetta}}{{$last ? '' : ', '}}
                                   </span>
                               </div>
                               <!-- Item ends -->
@@ -70,7 +74,7 @@
 
                   </div>
 
-                  <div class="panel-footer">* Piatti vegani</div>
+                  <div class="panel-footer"></div>
 
               </div>
 
