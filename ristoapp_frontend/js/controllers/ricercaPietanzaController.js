@@ -8,7 +8,6 @@ myApp.controller("ricercaPietanzaController", function ($scope, ajaxService, Ric
 
     var getPietanzeListPage = function (url, params) {
         ajaxService.getResource(url, params).then(function (response) {
-            console.log(response);
             $scope.listaPietanze = response.content;
             $scope.currentPage = params.page;
             $scope.listaPagine = setPaginationNavbar(response);
