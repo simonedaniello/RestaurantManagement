@@ -40,13 +40,6 @@ public class PietanzaEndPoint {
         pietanzaRepository.delete(id);
     }
 
-
-   @RequestMapping(method = RequestMethod.GET, value = "/pietanze")
-    public @ResponseBody Page<Pietanza> getAllPietanze(Pageable pageable) {
-        Page<Pietanza> pietanze = pietanzaService.listAllByPage(pageable);
-        return pietanze;
-    }
-
     @RequestMapping(method = RequestMethod.GET)
     public @ResponseBody Page<Pietanza> searchPietanza(@RequestParam(value = "nome", defaultValue = "") String nome, @RequestParam(value = "tags", defaultValue = "") String[] tags, Pageable pageable){
         if (tags.length == 0) return pietanzaRepository.findAllByNomeContainingOrderByNome(nome, pageable);
