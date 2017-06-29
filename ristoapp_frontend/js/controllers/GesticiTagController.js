@@ -1,10 +1,41 @@
+myApp.controller("GestisciTagController", function($scope, EtichettaService) {
+
+    $scope.nomeNewTag = "";
+    $scope.nomeUpdateTag = "";
+    $scope.tags = EtichettaService.getTag();
+
+    $scope.saveTag = function(){
+        if ($scope.nomeNewTag === "") {
+            alert("Specificare il nome del tag nuovo da creare.");
+            return;
+        }
+        EtichettaService.postTag($scope.nomeNewTag);
+        $scope.tags = EtichettaService.getTag();
+        $scope.nomeNewTag = "";
+    };
+
+    $scope.modifyTag = function(tagName){
+        var updatedName = document.getElementById(tagName).value;
+        EtichettaService.putTag(tagName, updatedName);
+        $scope.tags = EtichettaService.getTag();
+    };
+
+    $scope.deleteTag = function(tagName){
+        EtichettaService.deleteTag(tagName);
+        $scope.tags = EtichettaService.getTag();
+    };
+});
+
+
+
+/* VECCHIA IMPLEMENTAZIONE SENZA SERVICE E CON TUTTO IN QUESTO FILE
 myApp.controller("GestisciTagController", function($scope, ajaxService, CreaPietanzaService) {
 
     $scope.nomeNewTag = "";
     $scope.nomeUpdateTag = "";
 
     var updateTagList = function() {
-        ajaxService.getResource("http://localhost:8080/tags", null).then(
+        zajaxService.getResource("http://localhost:8080/tags", null).then(
             function (response) {
                 $scope.tags = CreaPietanzaService.parseTagArray(response);
             }
@@ -40,7 +71,7 @@ myApp.controller("GestisciTagController", function($scope, ajaxService, CreaPiet
 
     $scope.modifyTag = function(tagName){
         var updatedName = document.getElementById(tagName).value;
-        //tagName è il nome vecchio, updateName sarebbe il nome nuovo da rimpiazzare al vecchio
+        //tagName è
         //non vado avanti perche non so come implementerete la update
         ajaxService.getResource("http://localhost:8080/tags/update/" + tagName.toString(), null).then(function (response) {
             var i = searchIndex(tagName, $scope.tags);
@@ -52,10 +83,10 @@ myApp.controller("GestisciTagController", function($scope, ajaxService, CreaPiet
     };
 
     $scope.deleteTag = function(tagName){
-        /*var dtoEtichetta = {
-            classificatore: tagName
-        };
-        var jsonEtichetta = JSON.stringify(dtoEtichetta);*/
+        var dtoEtichetta = {
+         classificatore: tagName
+         };
+         var jsonEtichetta = JSON.stringify(dtoEtichetta);
         ajaxService.getResource("http://localhost:8080/tags/delete/" + tagName.toString(), null).then(function (response) {
             var i = searchIndex(tagName, $scope.tags);
             updateTagList();
@@ -65,3 +96,4 @@ myApp.controller("GestisciTagController", function($scope, ajaxService, CreaPiet
         });
     };
 });
+*/
