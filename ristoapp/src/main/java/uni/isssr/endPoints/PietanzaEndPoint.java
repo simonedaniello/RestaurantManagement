@@ -3,6 +3,8 @@ package uni.isssr.endPoints;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 import uni.isssr.dto.PietanzaDto;
 import uni.isssr.entities.Pietanza;
@@ -29,22 +31,19 @@ public class PietanzaEndPoint {
 
     @RequestMapping(method = RequestMethod.POST)
     public void addPietanza(@RequestBody PietanzaDto received){
-        log.info(received.toString());
-        //log.info(received.getNome());
-        //log.info(received.getEtichette().get(0).getClassificatore());
         pietanzaRepository.save(pietanzaService.unmarshall(received));
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/delete/{ID}")
+    @RequestMapping(method = RequestMethod.DELETE, value = "/delete/{ID}")
     public void deletePietanza(@PathVariable(value = "ID") Long id){
         pietanzaRepository.delete(id);
     }
 
 
-   @RequestMapping(method = RequestMethod.GET)
-    public @ResponseBody Iterable<Pietanza> getAllPietanze() {
-
-        return pietanzaRepository.findAll();
+   @RequestMapping(method = RequestMethod.GET, value = "/pietanze")
+    public @ResponseBody Page<Pietanza> getAllPietanze(Pageable pageable) {
+        Page<Pietanza> pietanze = pietanzaService.listAllByPage(pageable);
+        return pietanze;
     }
 
     /*@RequestMapping(method = RequestMethod.GET)
