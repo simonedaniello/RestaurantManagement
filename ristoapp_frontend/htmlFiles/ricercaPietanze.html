@@ -9,7 +9,7 @@
 
                 <div class="form-group">
                     <label class="form-horizontal" for="nome">Nome:</label>
-                    <input type="text" class="form-control" style="max-width: 30%" id="nome" placeholder="Nome pietanza">
+                    <input type="text" class="form-control" style="max-width: 30%" id="nome" ng-model="searchNome" placeholder="Nome pietanza">
                 </div>
                 <div class="input-group" style="max-width: 10%">
                     <span class="input-group-addon" style="background-color:lightskyblue">Tag: </span>
@@ -20,7 +20,7 @@
             </div>
         </div>
         <div class="panel panel-default">
-            <div class="panel-heading">Elenco delle Pietanze</div>
+            <div class="panel-heading" id="top">Elenco delle Pietanze</div>
             <div class="panel-body">
                     <div class="row">
                         <div class="bs-calltoaction bs-calltoaction-default" ng-repeat="pietanza in listaPietanze">

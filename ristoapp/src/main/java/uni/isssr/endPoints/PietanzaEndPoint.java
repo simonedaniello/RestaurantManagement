@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 import uni.isssr.dto.PietanzaDto;
+import uni.isssr.entities.Etichetta;
 import uni.isssr.entities.Pietanza;
 import uni.isssr.repositories.EtichettaRepository;
 import uni.isssr.repositories.PietanzaRepository;
@@ -46,23 +47,11 @@ public class PietanzaEndPoint {
         return pietanze;
     }
 
-    /*@RequestMapping(method = RequestMethod.GET)
-
-    public @ResponseBody
-    List<Pietanza> getAllPietanze() {
-        Etichetta e = new Etichetta("mhgjhghj tPiccante");
-        etichettaRepository.save(e);
-        Pietanza p = new Pietanza("Pasta al sugo",15.0, new ArrayList<Etichetta>() {
-        });
-        Pietanza p1 = new Pietanza("Pasta al pesto", 15.0, new ArrayList<Etichetta>() {
-        });
-        p.addEtichetta(e);
-        p1.addEtichetta(e);
-        pietanzaRepository.save(p);
-        pietanzaRepository.save(p1);
-        e.addPietanza(p);
-        e.addPietanza(p1);
-        return etichettaRepository.findAll().get(0).getPietanze();
-    } */
+    @RequestMapping(method = RequestMethod.GET)
+    public @ResponseBody Page<Pietanza> searchPietanza(@RequestParam(value = "nome", defaultValue = "") String nome, @RequestParam(value = "tags", defaultValue = "") String[] tags, Pageable pageable){
+        if (tags.length == 0) return pietanzaRepository.findAllByNomeContainingOrderByNome(nome, pageable);
+        Etichetta[] etichette = pietanzaService.convertToEtichette(tags);
+        return pietanzaRepository.findDistinctByNomeContainingAndEtichetteIn(nome, etichette,pageable);
+    }
 
 }

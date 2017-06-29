@@ -59,4 +59,14 @@ public class PietanzaService {
     public Page<Pietanza> listAllByPage(Pageable pageable){
         return pietanzaRepository.findAll(pageable);
     }
+
+    public Etichetta[] convertToEtichette(String[] tags){
+        ArrayList<Etichetta> list = new ArrayList<>();
+        for (int i = 0; i < tags.length; i++){
+            Etichetta et = etichettaRepository.findOne(tags[i]);
+            list.add(et);
+        }
+        Etichetta[] array = new Etichetta[list.size()];
+        return list.toArray(array);
+    }
 }
