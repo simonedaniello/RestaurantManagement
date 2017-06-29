@@ -4,6 +4,7 @@ myApp.service('EtichettaService', ['ajaxService', function(ajaxService) {
         var dtoTag = {classificatore: nomeTag};
         var jsonTag = JSON.stringify(dtoTag);
         ajaxService.sendResource("http://localhost:8080/tags", jsonTag).then(function (response) {
+            console.log("posto");
         }, function (response) {
             alert("Couldn't save tag");
         });

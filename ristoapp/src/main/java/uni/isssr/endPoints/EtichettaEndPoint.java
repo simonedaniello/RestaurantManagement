@@ -6,6 +6,8 @@ import uni.isssr.dto.EtichettaDto;
 import uni.isssr.entities.Etichetta;
 import uni.isssr.repositories.EtichettaRepository;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin
 @RequestMapping(path = "/tags")
@@ -28,6 +30,16 @@ public class EtichettaEndPoint {
 
     @RequestMapping(method = RequestMethod.GET)
     public @ResponseBody Iterable<Etichetta> getAllTags(){
-        return etichettaRepository.findAll();
+        List<Etichetta> lista = etichettaRepository.findAll();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        for (Etichetta e : lista) {
+            System.out.println(e.getClassificatore());
+        }
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        return lista;
     }
 }

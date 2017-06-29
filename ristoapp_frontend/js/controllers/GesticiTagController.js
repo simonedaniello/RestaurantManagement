@@ -22,7 +22,9 @@ myApp.controller("GestisciTagController", function($scope, EtichettaService) {
 
     $scope.deleteTag = function(tagName){
         EtichettaService.deleteTag(tagName);
+        console.log("chiamato delete");
         $scope.tags = EtichettaService.getTag();
+        console.log("chiamato get");
     };
 });
 
