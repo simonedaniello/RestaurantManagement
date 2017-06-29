@@ -83,7 +83,7 @@
                         <div class="panel-body" style="overflow-y: auto; height: 420px">
                             <table class="table table-striped">
                                 <tbody>
-                                <tr ng-repeat="prodotto in prodotti">
+                                <tr ng-repeat="prodotto in prodotti | orderBy: 'nome'">
                                     <td>
                                         <div class="menu-item-name">
                                             <b>{{prodotto.nome}}</b>
@@ -109,7 +109,7 @@
                         <div class="panel-body" class="row" style="overflow-y: auto; height: 350px">
                             <table class="table table-striped">
                                 <tbody>
-                                <tr ng-repeat="prod in selectedProd">
+                                <tr ng-repeat="prod in selectedProd | orderBy: 'nomeProdotto'">
                                     <td class="col-sm-9"><p style="font-style: italic">{{prod.nomeProdotto}}</p></td>
                                     <td class="col-sm-3"><input name="quantita" required="" type="number" min="1" class="form-control" step="1" ng-model="prod.quantita"></td>
                                 </tr>

@@ -88,7 +88,6 @@ myApp.controller("creaMenuCtrl", function($scope, ajaxService, creaMenuService, 
         var checkBox = document.getElementById(pietanza.nome);
         if(checkBox.checked) {
             $scope.selected.push(pietanza);
-            $scope.selected.sort(function(a, b){return (a.nome > b.nome) ? 1 : ((b.nome > a.nome) ? -1 : 0)});
         }else{
             var i = searchIndex(pietanza.nome, $scope.selected);
             $scope.selected.splice(i,1);
