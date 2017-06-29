@@ -29,7 +29,7 @@ public class EtichettaEndPoint {
     @RequestMapping(method = RequestMethod.GET)
     public @ResponseBody Iterable<Etichetta> getAllTags(){
         // Inserimenti per test
-        /*Etichetta e1 = new Etichetta();
+        Etichetta e1 = new Etichetta();
         Etichetta e2 = new Etichetta();
         Etichetta e3 = new Etichetta();
         Etichetta e4 = new Etichetta();
@@ -47,7 +47,7 @@ public class EtichettaEndPoint {
         etichettaRepository.save(e3);
         etichettaRepository.save(e4);
         etichettaRepository.save(e5);
-        etichettaRepository.save(e6); */
+        etichettaRepository.save(e6);
         return etichettaRepository.findAll();
     }
 }
