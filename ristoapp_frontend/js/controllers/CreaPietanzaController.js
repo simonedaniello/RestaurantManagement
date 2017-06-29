@@ -77,11 +77,16 @@ myApp.controller("CreaPietanzaController", function($scope, ajaxService, CreaPie
     };
 
     $scope.saveTag = function(){
+        if ($scope.nomeNewTag === "") {
+            alert("Specificare il nome del tag nuovo da creare.");
+            return;
+        }
         var dtoTag = {classificatore:$scope.nomeNewTag};
         var jsonTag = JSON.stringify(dtoTag);
         ajaxService.sendResource("http://localhost:8080/tags", jsonTag).then(function (response) {
             updateTagList();
         }, function (response) {
+            alert("Couldn't save tag");
             console.log(response)
         });
         $scope.nomeNewTag = "";
