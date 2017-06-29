@@ -14,7 +14,7 @@ public class Categoria {
     private String nome;
 
     @OneToMany(cascade = CascadeType.ALL)
-    private List<Pietanza> pientanze;
+    private List<Pietanza> pietanze;
 
     public Categoria() {
 
@@ -23,12 +23,12 @@ public class Categoria {
 
     public Categoria(String nome) {
         this.nome = nome;
-        this.pientanze = new ArrayList<>();
+        this.pietanze = new ArrayList<>();
     }
 
     public Categoria(String nome, List<Pietanza> pietanze) {
         this.nome = nome;
-        this.pientanze = pietanze;
+        this.pietanze = pietanze;
     }
 
     public String getNome() {
@@ -39,19 +39,19 @@ public class Categoria {
         this.nome = nome;
     }
 
-    public List<Pietanza> getPientanze() {
-        return pientanze;
+    public List<Pietanza> getPietanze() {
+        return pietanze;
     }
 
-    public void setPientanze(List<Pietanza> pientanze) {
-        this.pientanze = pientanze;
+    public void setPietanze(List<Pietanza> pietanze) {
+        this.pietanze = pietanze;
     }
 
     public void addPietanza(Pietanza pietanza) {
-        this.pientanze.add(pietanza);
+        this.pietanze.add(pietanza);
     }
 
     public void removePietanza(Pietanza pietanza) {
-        this.pientanze.remove(pietanza);
+        this.pietanze.remove(pietanza);
     }
 }

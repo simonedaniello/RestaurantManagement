@@ -18,6 +18,8 @@ public class MenuItemDto {
         this.categorie = new ArrayList<>();
     }
 
+    public MenuItemDto() {}
+
     public String getNomeMenu() {
         return nomeMenu;
     }

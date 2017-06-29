@@ -10,9 +10,11 @@ public class MenuSearchDto {
     private String nome;
     private String descrizione;
     private String immagine;
-    private Date data;
+    private String data;
 
-    public MenuSearchDto(String nome, String descrizione, String immagine, Date data) {
+    public MenuSearchDto() {}
+
+    public MenuSearchDto(String nome, String descrizione, String immagine, String data) {
         this.nome = nome;
         this.descrizione = descrizione;
         this.immagine = immagine;
@@ -43,11 +45,11 @@ public class MenuSearchDto {
         this.immagine = immagine;
     }
 
-    public Date getData() {
+    public String getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(String data) {
         this.data = data;
     }
 

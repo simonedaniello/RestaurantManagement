@@ -11,10 +11,7 @@ public class CategoriaDto {
     private String nomeCategoria;
     private List<PietanzaDto> pietanze;
 
-    public CategoriaDto(String nomeCategoria) {
-        this.nomeCategoria = nomeCategoria;
-        this.pietanze = new ArrayList<>();
-    }
+    public CategoriaDto() {}
 
     public String getNomeCategoria() {
         return nomeCategoria;

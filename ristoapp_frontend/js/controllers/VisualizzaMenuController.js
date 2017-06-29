@@ -3,19 +3,20 @@
 
 myApp.controller("VisualizzaMenuController", ["$scope", "MenuService", "$routeParams", function ($scope, MenuService, $routeParams) {
 
-    $scope.menu = {nomeMenu: undefined, immagineMenu: undefined, categorie: undefined};
+    $scope.menu = {nomeMenu: null, immagineMenu: null, categorie: null};
 
     // Nome del menù con cui fare la get al backend
     var nomeMenu = $routeParams.nomeMenu;
 
     $scope.visualizza = function () {
-        MenuService.getMenu("jsonFiles/menu_mock.json").then(function (response) {
+        // "jsonFiles/menu_mock.json"
+        MenuService.getMenu("http://localhost:8080/menu/" + nomeMenu).then(function (response) {
             var data = response.data;
             $scope.menu.nomeMenu = data.nomeMenu;
             $scope.menu.immagineMenu = data.immagineMenu;
             $scope.menu.categorie = data.categorie;
         }, function (error) {
-            console.log(error);
+            alert.log(error);
         });
     };
 
@@ -26,14 +27,4 @@ myApp.controller("VisualizzaMenuController", ["$scope", "MenuService", "$routePa
         MenuService.getPdf(id, $scope.menu.nomeMenu);
     };
 
-
-    /*
-     ajaxService.getResource("../jsonFiles/menu_mock.json", nomeMenu).then(function (response) {
-     var data = response.data;
-     $scope.menu.nomeMenu = data.nomeMenu;
-     $scope.menu.categorie = data.categorie;
-     }, function (error) {
-     console.log(error);
-     });
-     */
 }]);
