@@ -2,30 +2,24 @@
  * Created by alberto on 20/06/17.
  */
 
-myApp.controller("ricercaPietanzaController", function ($scope, ajaxService, RicercaPietanzaService, $location, $anchorScroll) {
+myApp.controller("ricercaPietanzaController", function ($scope, ajaxService, RicercaPietanzaService) {
 
     var pageLimit = 5;
 
     var getPietanzeListPage = function (url, params) {
         ajaxService.getResource(url, params).then(function (response) {
+            console.log(response);
             $scope.listaPietanze = response.content;
             $scope.currentPage = params.page;
-            $location.hash('top');
-            $anchorScroll();
             $scope.listaPagine = setPaginationNavbar(response);
         }, function (response) {
             console.log(response);
         });
     };
 
-    var initPage = function () {
-        ajaxService.getResource("http://localhost:8080/dish/pietanze", {page : 0, size : 3}).then(function (response) {
-            $scope.listaPietanze = response.content;
-            $scope.currentPage = 0;
-            $scope.listaPagine = setPaginationNavbar(response);
-        }, function (response) {
-            console.log(response);
-        });
+    var getPietanzeNavigation = function (pagina) {
+        var params = {page : pagina, size : 3, nome : $scope.searchNome, tags : $scope.associatedTags};
+        getPietanzeListPage("http://localhost:8080/dish", params);
     };
 
     var setPaginationNavbar = function (response) {
@@ -54,22 +48,10 @@ myApp.controller("ricercaPietanzaController", function ($scope, ajaxService, Ric
             });
     };
 
-    var getPietanzeNavigation = function (pagina) {
-        var params = {page : pagina, size : 3};
-        getPietanzeListPage("http://localhost:8080/dish/pietanze", pagina);
-    };
-
-    var getPietanzeSearch = function (pagina) {
-        var params = {page : pagina, size : 3, nome : $scope.searchNome, tags : $scope.associatedTags};
-        getPietanzeListPage("http://localhost:8080/dish", params);
-    };
+    updateTagList();
+    getPietanzeNavigation(0);
 
     $scope.updatePietanzePagina = getPietanzeNavigation;
-
-    updateTagList();
-    initPage();
-
-
     $scope.associatedTags = [];
 
     $scope.updateSelectedTag = function(nomeTag){
@@ -91,14 +73,6 @@ myApp.controller("ricercaPietanzaController", function ($scope, ajaxService, Ric
     };
 
     $scope.ricerca = function () {
-        //var url = RicercaPietanzaService.generateSearchURL($scope.searchNome, $scope.associatedTags);
-        ajaxService.getResource("http://localhost:8080/dish", {page : 0, size : 3, nome : $scope.searchNome, tags : $scope.associatedTags}).then(function (response) {
-            $scope.listaPietanze = response.content;
-            $scope.currentPage = 0;
-            $scope.listaPagine = setPaginationNavbar(response);
-            $scope.updatePietanzePagina = getPietanzeSearch;
-        }, function (response) {
-            console.log(response);
-        })
+        getPietanzeNavigation(0);
     }
 });
