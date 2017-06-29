@@ -1,7 +1,5 @@
 package uni.isssr.dto;
 
-import uni.isssr.entities.Ingrediente;
-
 import java.util.List;
 
 /**

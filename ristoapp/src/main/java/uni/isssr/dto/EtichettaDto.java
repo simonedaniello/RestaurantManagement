@@ -8,7 +8,6 @@ public class EtichettaDto {
     private String classificatore;
 
     public EtichettaDto(){
-
     }
 
     public EtichettaDto(String classificatore){

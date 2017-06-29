@@ -7,9 +7,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import uni.isssr.entities.*;
 import uni.isssr.repositories.CategoriaRepository;
-import uni.isssr.repositories.EtichettaRepository;
 import uni.isssr.repositories.MenuRepository;
 import uni.isssr.repositories.PietanzaRepository;
+import uni.isssr.repositories.ProdottoRepository;
+
+import java.util.Arrays;
+import java.util.List;
 
 
 @RestController
@@ -21,10 +24,10 @@ public class Prova {
     private MenuRepository menuRepository;
 
     @Autowired
-    private CategoriaRepository categoriaRepository;
+    private ProdottoRepository prodottoRepository;
 
     @Autowired
-    private EtichettaRepository etichettaRepository;
+    private CategoriaRepository categoriaRepository;
 
     @Autowired
     private PietanzaRepository pietanzaRepository;
@@ -40,57 +43,48 @@ public class Prova {
 
      */
 
-    /*
+
     @GetMapping
     public Iterable<Menu> populateMenu(){
 
-        Ingrediente i1 = new Ingrediente("cozze", 10);
-        Ingrediente i2 = new Ingrediente("vongole", 20);
-        Ingrediente i3 = new Ingrediente("riso", 100);
+        Prodotto pd1 = new Prodotto(1L, "cozze");
+        Prodotto pd2 = new Prodotto(2L, "vongole");
+        Prodotto pd3 = new Prodotto(3L, "riso");
+
+        prodottoRepository.save(pd1);
+        prodottoRepository.save(pd2);
+        prodottoRepository.save(pd3);
+
+        Ingrediente i1 = new Ingrediente(pd1, 10);
+        Ingrediente i2 = new Ingrediente(pd2, 20);
+        Ingrediente i3 = new Ingrediente(pd3, 100);
+
+        List<Ingrediente> ingredienti = Arrays.asList(i1, i2, i3);
 
         Etichetta e1 = new Etichetta("piccante");
         Etichetta e2 = new Etichetta("celiaco");
-        Etichetta e3 = new Etichetta("vegano");
+        //Etichetta e3 = new Etichetta("vegano");
 
         Pietanza p1 = new Pietanza("risotto alla pescatora", 10.00);
-        Pietanza p2 = new Pietanza("pasta alla carbonara", 12.50);
-        Pietanza p3 = new Pietanza("verdure grigliate", 8.00);
-
-
-/*        p1.addIngrediente(i1);
-        p1.addIngrediente(i2);
-        p1.addIngrediente(i3);*/
-
-        /*
-        Equivalentemente posso modificare il db dal non owning side
-        perchè nell'impementazione di addPietanza aggiungo anche dall'owning side
-
-        e1.addPietanza(p1);
-        e1.addPietanza(p2);
-        e2.addPietanza(p2);
-        e3.addPietanza(p3);
-
+        //Pietanza p2 = new Pietanza("pasta alla carbonara", 12.50);
+        //Pietanza p3 = new Pietanza("verdure grigliate", 8.00);
 
         p1.addEtichetta(e1);
-        p2.addEtichetta(e1);
-        p2.addEtichetta(e2);
-        p3.addEtichetta(e3);
+        p1.addEtichetta(e2);
+        p1.setIngredienti(ingredienti);
 
         Categoria categoria1 = new Categoria("Primi");
-        Categoria categoria2 = new Categoria("Secondi");
+        //Categoria categoria2 = new Categoria("Secondi");
 
         categoria1.addPietanza(p1);
-        categoria1.addPietanza(p2);
-        categoria2.addPietanza(p3);
 
         Menu menu1 = new Menu("Menu estivo", "Sapori delicati");
 
         menu1.addCategoria(categoria1);
-        menu1.addCategoria(categoria2);
 
         menuRepository.save(menu1);
 
         return menuRepository.findAll();
-    } */
+    }
 }
 

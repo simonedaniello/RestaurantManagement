@@ -2,7 +2,6 @@ package uni.isssr.endPoints;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import uni.isssr.dto.ResocontoAnalyticsDto;
 import uni.isssr.dto.ResocontoPietanzaDto;
 import uni.isssr.entities.ResocontoPietanza;
 import uni.isssr.repositories.ResocontoRepository;
