@@ -47,9 +47,6 @@ myApp.controller("CreaPietanzaController", function($scope, ajaxService, CreaPie
         if(checkBox.checked) {
             var ingrediente = {nomeProdotto:nomeProd, quantita:1, prodottoId: id};
             $scope.selectedProd.push(ingrediente);
-            $scope.selectedProd.sort(function(a, b){
-                return (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)
-            });
         }else{
             var i = searchIndex(nomeProd);
             $scope.selectedProd.splice(i,1);
@@ -70,18 +67,22 @@ myApp.controller("CreaPietanzaController", function($scope, ajaxService, CreaPie
         var dtoPietanza = {nome: $scope.nomePietanza, prezzo: $scope.prezzoPietanza, etichette: $scope.associatedTags, ingredienti: $scope.selectedProd};
         var jsonPiet = angular.toJson(dtoPietanza);
         ajaxService.sendResource("http://localhost:8080/dish", jsonPiet).then(function (response) {
-            //console.log(response);
         }, function (response) {
             console.log(response)
         });
     };
 
     $scope.saveTag = function(){
+        if ($scope.nomeNewTag === "") {
+            alert("Specificare il nome del tag nuovo da creare.");
+            return;
+        }
         var dtoTag = {classificatore:$scope.nomeNewTag};
         var jsonTag = JSON.stringify(dtoTag);
         ajaxService.sendResource("http://localhost:8080/tags", jsonTag).then(function (response) {
             updateTagList();
         }, function (response) {
+            alert("Couldn't save tag");
             console.log(response)
         });
         $scope.nomeNewTag = "";

@@ -4,14 +4,37 @@
 
 myApp.controller("ricercaPietanzaController", function ($scope, ajaxService, RicercaPietanzaService) {
 
-    $scope.showList = true;
+    var pageLimit = 5;
 
-    var getPietanzeList = function () {
-        ajaxService.getResource("http://localhost:8080/dish", null).then(function (response) {
-            $scope.listaPietanze = response;
+    var getPietanzeListPage = function (url, params) {
+        ajaxService.getResource(url, params).then(function (response) {
+            $scope.listaPietanze = response.content;
+            $scope.currentPage = params.page;
+            $scope.listaPagine = setPaginationNavbar(response);
         }, function (response) {
             console.log(response);
         });
+    };
+
+    var getPietanzeNavigation = function (pagina) {
+        var params = {page : pagina, size : 3, nome : $scope.searchNome, tags : $scope.associatedTags};
+        getPietanzeListPage("http://localhost:8080/dish", params);
+    };
+
+    var setPaginationNavbar = function (response) {
+        var limit = $scope.currentPage + pageLimit;
+        var pagine = [];
+        if (limit < response.totalPages){
+            $scope.nextPage = false;
+            for (var i = $scope.currentPage; i < limit; i++) pagine.push(i);
+        }
+        else {
+            $scope.nextPage = true;
+            var i = $scope.currentPage - (limit -response.totalPages);
+            if (i < 0) i = 0;
+            for (; i < response.totalPages; i++) pagine.push(i);
+        }
+        return pagine;
     };
 
     var updateTagList = function() {
@@ -25,9 +48,9 @@ myApp.controller("ricercaPietanzaController", function ($scope, ajaxService, Ric
     };
 
     updateTagList();
-    getPietanzeList();
+    getPietanzeNavigation(0);
 
-
+    $scope.updatePietanzePagina = getPietanzeNavigation;
     $scope.associatedTags = [];
 
     $scope.updateSelectedTag = function(nomeTag){
@@ -41,11 +64,14 @@ myApp.controller("ricercaPietanzaController", function ($scope, ajaxService, Ric
     };
 
     $scope.deletePietanza = function (id) {
-        console.log("OK");
-        ajaxService.getResource("http://localhost:8080/dish/delete/" + id.toString(), null).then(function (response) {
-            getPietanzeList();
+        ajaxService.deleteResource("http://localhost:8080/dish/delete/" + id.toString(), null).then(function (response) {
+            initPage();
         }, function (response) {
             console.log(response);
         });
     };
+
+    $scope.ricerca = function () {
+        getPietanzeNavigation(0);
+    }
 });

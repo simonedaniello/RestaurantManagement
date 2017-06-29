@@ -2,22 +2,14 @@
 myApp.controller("creaMenuCtrl", function($scope, ajaxService, creaMenuService, CreaPietanzaService) {
     $scope.categorieMenu = [];
     $scope.nomeMenu = "";
-    //$scope.chef = "";
     $scope.nomeCategoria = "";
     $scope.descrizione = "";
     $scope.filtro = "all";
     $scope.selected = [];
     $scope.isModify = 0;
-    /*
-    PROBLEMA
-    se aggiungi una pietanza poi premi modifica, poi chiudi modal senza modificarla, da li in poi puoi aggiugnere duplicati
-    servirebbe eseguire una funzione al dismiss del modal che setta $scope.isModify = 0;
-
-    stesso problema se premi modifica poi fai dismiss del modal e poi premi aggiungi categoria ti sovrascrive quella che avevi premuto modifica prima
-    serve che al dismiss del modal resetti tutto
-     */
 
     $scope.pietanze = creaMenuService.getPietanze();
+
     /*var getPietanzeList = function() {
         ajaxService.getResource("http://localhost:8080/createMenu/getDishes", null).then(
             function (response) {
@@ -96,7 +88,6 @@ myApp.controller("creaMenuCtrl", function($scope, ajaxService, creaMenuService, 
         var checkBox = document.getElementById(pietanza.nome);
         if(checkBox.checked) {
             $scope.selected.push(pietanza);
-            $scope.selected.sort(function(a, b){return (a.nome > b.nome) ? 1 : ((b.nome > a.nome) ? -1 : 0)});
         }else{
             var i = searchIndex(pietanza.nome, $scope.selected);
             $scope.selected.splice(i,1);
@@ -123,7 +114,6 @@ myApp.controller("creaMenuCtrl", function($scope, ajaxService, creaMenuService, 
         uncheckAll();
         $scope.filtro = "all";
         $scope.isModify = 0;
-        delete $scope.errorMessageCat;
     };
 
     $scope.resetActCat = function () {
@@ -170,17 +160,17 @@ myApp.controller("creaMenuCtrl", function($scope, ajaxService, creaMenuService, 
         if ($scope.isModify === 0) {
             for(var i = 0, len = $scope.categorieMenu.length; i < len; i++) {
                 if($scope.categorieMenu[i].nome === $scope.nomeCategoria) {
-                    $scope.errorMessageCat = "La categoria selezionata esiste già nel menu.";
+                    alert("La categoria selezionata esiste già nel menu.");
                     return;
                 }
             }
         }
         if ($scope.nomeCategoria === "") {
-            $scope.errorMessageCat = "Specificare il nome della categoria.";
+            alert("Specificare il nome della categoria.");
             return;
         }
         if ($scope.selected.length === 0) {
-            $scope.errorMessageCat = "Devi selezionare almeno una pietanza che appartiene alla categoria.";
+            alert("Devi selezionare almeno una pietanza che appartiene alla categoria.");
             return;
         }
         var newCategory = {nome: $scope.nomeCategoria, pietanze:$scope.selected};
@@ -193,7 +183,6 @@ myApp.controller("creaMenuCtrl", function($scope, ajaxService, creaMenuService, 
             return;
         }
         $scope.categorieMenu.push(newCategory);
-        delete $scope.errorMessageCat;
     };
 
 
@@ -201,27 +190,25 @@ myApp.controller("creaMenuCtrl", function($scope, ajaxService, creaMenuService, 
         $scope.categorieMenu.splice(0, $scope.categorieMenu.length);
         $scope.nomeCategoria = "";
         $scope.descrizione = "";
-        delete $scope.errorMessageMenu;
     };
 
 
     $scope.saveMenu = function(isAct){
         console.log(isAct);
         if ($scope.categorieMenu.length === 0) {
-            $scope.errorMessageMenu = "Il menu deve contenere almeno una categoria.";
+            alert("Il menu deve contenere almeno una categoria.");
             return;
         }
         if ($scope.nomeMenu === "") {
-            $scope.errorMessageMenu = "Specificare nome del menu.";
+            alert("Specificare nome del menu.");
             return;
         }
-        /*if ($scope.chef === "") {
-            $scope.errorMessageMenu = "Indicare lo chef creatore del menu.";
+        if ($scope.descrizione === "") {
+            alert("Inserire una breve descrizione del menu.");
             return;
-        }*/
+        }
         var dtoMenu = {
             nome:$scope.nomeMenu,
-            //chef: $scope.chef,
             categorie: $scope.categorieMenu,
             isActive: isAct,
             descrizione: $scope.descrizione
@@ -229,9 +216,8 @@ myApp.controller("creaMenuCtrl", function($scope, ajaxService, creaMenuService, 
         var jsonMenu = JSON.stringify(dtoMenu);
         ajaxService.sendResource("http://localhost:8080/menu", jsonMenu).then(function (response) {
             location.href = "#";
-            delete $scope.errorMessageMenu;
         }, function (response) {
-            $scope.errorMessageMenu = "Errore nell'invio dei dati al server.";
+            alert("Errore nell'invio dei dati al server.");
         });
     };
 });

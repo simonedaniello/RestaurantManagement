@@ -6,7 +6,7 @@
       "id": 0
     },
     {
-      "nome": "Pomodoro",
+      "nome": "Pomodoro tondo sugo",
       "descrizione": "Descrizione prodotto bla bla",
       "id": 1
     },
@@ -26,7 +26,7 @@
       "id": 4
     },
     {
-      "nome": "Coscia pollo",
+      "nome": "Pane integrale",
       "descrizione": "Descrizione prodotto bla bla",
       "id": 5
     },
@@ -39,6 +39,41 @@
       "nome": "Banana",
       "descrizione": "Descrizione prodotto bla bla",
       "id": 7
+    },
+    {
+    "nome": "Petto di pollo",
+    "descrizione": "Descrizione prodotto bla bla",
+    "id": 8
+    },
+    {
+      "nome": "Lombata di suino",
+      "descrizione": "Descrizione prodotto bla bla",
+      "id": 9
+    },
+    {
+      "nome": "Straccetti di manzo",
+      "descrizione": "Descrizione prodotto bla bla",
+      "id": 10
+    },
+    {
+      "nome": "Filetto di salmone",
+      "descrizione": "Descrizione prodotto bla bla",
+      "id": 11
+    },
+    {
+      "nome": "Fusi di pollo",
+      "descrizione": "Descrizione prodotto bla bla",
+      "id": 12
+    },
+    {
+      "nome": "Miele",
+      "descrizione": "Descrizione prodotto bla bla",
+      "id": 13
+    },
+    {
+      "nome": "Wurstel",
+      "descrizione": "Descrizione prodotto bla bla",
+      "id": 14
     }
   ]
 }

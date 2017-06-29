@@ -33,14 +33,17 @@
     <script src="js/services/ajaxService.js"></script>
     <script src="js/services/CreaPietanzaService.js"></script>
     <script src="js/controllers/CreaPietanzaController.js"></script>
+    <script src="js/controllers/GesticiTagController.js"></script>
     <script src="js/controllers/creaMenuController.js"></script>
     <script src="js/controllers/headerController.js"></script>
     <script src="js/controllers/ricercaPietanzaController.js"></script>
+    <script src="js/controllers/OrdineMagazzinoCentraleController.js"></script>
     <script src="js/controllers/doveSiamoController.js"></script>
 
     <!-- Inizio script visualizzazione menu -->
     <script src="js/controllers/VisualizzaMenuController.js"></script>
     <script src="js/services/MenuService.js"></script>
+    <script src="js/services/EtichettaService.js"></script>
     <script src="js/services/CreaMenuService.js"></script>
     <script src="js/services/PrendiComandaService.js"></script>
     <script src="js/services/RicercaPietanzaService.js"></script>
@@ -81,7 +84,7 @@
 </header>-->
 
 <div ng-controller="headerController">
-    <nav role="navigation" class="navbar navbar-default">
+    <nav role="navigation" class="navbar navbar-default" id="main">
         <div class="container-fluid">
             <div class="navbar-header">
                 <a class="navbar-brand" href="#">RistoApp</a>
@@ -109,8 +112,10 @@
                     <li><a href="#!cercaPietanza">Le mie Pietanze</a> </li>
                 </ul>
                 </li>
+                <li id="gestioneTag"><a href="#!gestisciEtichette">Gestisci Tag</a></li>
                 <li id="prendicomanda"><a href="#!prendiComanda">Prendi Comanda</a></li>
                 <li id="listacomandecuoco"><a href="#!comandecuoco">Lista Comande Cuoco</a></li>
+                <li id="ordinaMagazzino"><a href="#!ordineMagCentr">Ordine</a></li>
                 <li id="mostramenu"><a href="#">Mostra il Menu</a></li>
                 <li id="contattaci"><a href="#">Contattaci</a></li>
                 <li id="dovesiamo"><a href="#!dovesiamo">Dove Siamo</a></li>

@@ -1,6 +1,8 @@
 package uni.isssr.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import uni.isssr.dto.IngredienteDto;
 import uni.isssr.dto.PietanzaDto;
@@ -9,6 +11,7 @@ import uni.isssr.entities.Ingrediente;
 import uni.isssr.entities.Pietanza;
 import uni.isssr.entities.Prodotto;
 import uni.isssr.repositories.EtichettaRepository;
+import uni.isssr.repositories.PietanzaRepository;
 import uni.isssr.repositories.ProdottoRepository;
 
 import java.util.ArrayList;
@@ -26,6 +29,9 @@ public class PietanzaService {
 
     @Autowired
     private ProdottoRepository prodottoRepository;
+
+    @Autowired
+    private PietanzaRepository pietanzaRepository;
 
 
     public Pietanza unmarshall(PietanzaDto pietanzaDto){
@@ -48,5 +54,19 @@ public class PietanzaService {
         }
         pietanza.setIngredienti(ingredienti);
         return pietanza;
+    }
+
+    public Page<Pietanza> listAllByPage(Pageable pageable){
+        return pietanzaRepository.findAll(pageable);
+    }
+
+    public Etichetta[] convertToEtichette(String[] tags){
+        ArrayList<Etichetta> list = new ArrayList<>();
+        for (int i = 0; i < tags.length; i++){
+            Etichetta et = etichettaRepository.findOne(tags[i]);
+            list.add(et);
+        }
+        Etichetta[] array = new Etichetta[list.size()];
+        return list.toArray(array);
     }
 }
