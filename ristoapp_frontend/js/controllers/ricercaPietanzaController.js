@@ -6,10 +6,10 @@ myApp.controller("ricercaPietanzaController", function ($scope, ajaxService, Ric
 
     var pageLimit = 5;
 
-    var getPietanzeListPage = function (url, pagina) {
-        ajaxService.getResource("http://localhost:8080/dish/pietanze", {page : pagina, size : 3}).then(function (response) {
+    var getPietanzeListPage = function (url, params) {
+        ajaxService.getResource(url, params).then(function (response) {
             $scope.listaPietanze = response.content;
-            $scope.currentPage = pagina;
+            $scope.currentPage = params.page;
             $location.hash('top');
             $anchorScroll();
             $scope.listaPagine = setPaginationNavbar(response);
@@ -55,11 +55,13 @@ myApp.controller("ricercaPietanzaController", function ($scope, ajaxService, Ric
     };
 
     var getPietanzeNavigation = function (pagina) {
+        var params = {page : pagina, size : 3};
         getPietanzeListPage("http://localhost:8080/dish/pietanze", pagina);
     };
 
     var getPietanzeSearch = function (pagina) {
-        getPietanzeListPage("http://localhost:8080/dish", pagina);
+        var params = {page : pagina, size : 3, nome : $scope.searchNome, tags : $scope.associatedTags};
+        getPietanzeListPage("http://localhost:8080/dish", params);
     };
 
     $scope.updatePietanzePagina = getPietanzeNavigation;
