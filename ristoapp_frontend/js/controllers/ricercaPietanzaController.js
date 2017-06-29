@@ -2,7 +2,7 @@
  * Created by alberto on 20/06/17.
  */
 
-myApp.controller("ricercaPietanzaController", function ($scope, ajaxService, RicercaPietanzaService) {
+myApp.controller("ricercaPietanzaController", function ($scope, ajaxService, RicercaPietanzaService, $location, $anchorScroll) {
 
     var pageLimit = 5;
 
@@ -10,6 +10,8 @@ myApp.controller("ricercaPietanzaController", function ($scope, ajaxService, Ric
         ajaxService.getResource("http://localhost:8080/dish/pietanze?page=" + pagina.toString() + "&size=3", null).then(function (response) {
             $scope.listaPietanze = response.content;
             $scope.currentPage = pagina;
+            $location.hash('main');
+            $anchorScroll();
             var limit = $scope.currentPage + pageLimit;
             var pagine = [];
             if (limit < response.totalPages){
