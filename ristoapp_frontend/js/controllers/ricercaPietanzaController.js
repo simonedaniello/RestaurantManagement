@@ -4,11 +4,25 @@
 
 myApp.controller("ricercaPietanzaController", function ($scope, ajaxService, RicercaPietanzaService) {
 
-    $scope.showList = true;
+    var pageLimit = 5;
 
-    var getPietanzeList = function () {
-        ajaxService.getResource("http://localhost:8080/dish", null).then(function (response) {
-            $scope.listaPietanze = response;
+    var getPietanzeList = function (pagina) {
+        ajaxService.getResource("http://localhost:8080/dish/pietanze?page=" + pagina.toString() + "&size=3", null).then(function (response) {
+            $scope.listaPietanze = response.content;
+            $scope.currentPage = pagina;
+            var limit = $scope.currentPage + pageLimit;
+            var pagine = [];
+            if (limit < response.totalPages){
+                $scope.nextPage = false;
+                for (var i = $scope.currentPage; i < limit; i++) pagine.push(i);
+            }
+            else {
+                $scope.nextPage = true;
+                var i = $scope.currentPage - (limit -response.totalPages);
+                if (i < 0) i = 0;
+                for (; i < response.totalPages; i++) pagine.push(i);
+            }
+            $scope.listaPagine = pagine;
         }, function (response) {
             console.log(response);
         });
@@ -24,8 +38,10 @@ myApp.controller("ricercaPietanzaController", function ($scope, ajaxService, Ric
             });
     };
 
+    $scope.updatePietanzePagina = getPietanzeList;
+
     updateTagList();
-    getPietanzeList();
+    getPietanzeList(0);
 
 
     $scope.associatedTags = [];
@@ -42,7 +58,7 @@ myApp.controller("ricercaPietanzaController", function ($scope, ajaxService, Ric
 
     $scope.deletePietanza = function (id) {
         console.log("OK");
-        ajaxService.getResource("http://localhost:8080/dish/delete/" + id.toString(), null).then(function (response) {
+        ajaxService.deleteResource("http://localhost:8080/dish/delete/" + id.toString(), null).then(function (response) {
             getPietanzeList();
         }, function (response) {
             console.log(response);
