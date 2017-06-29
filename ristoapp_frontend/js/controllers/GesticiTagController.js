@@ -9,8 +9,7 @@ myApp.controller("GestisciTagController", function($scope, EtichettaService) {
             alert("Specificare il nome del tag nuovo da creare.");
             return;
         }
-        EtichettaService.postTag($scope.nomeNewTag);
-        $scope.tags = EtichettaService.getTag();
+        $scope.tags = EtichettaService.postTag($scope.nomeNewTag);
         $scope.nomeNewTag = "";
     };
 
@@ -22,9 +21,7 @@ myApp.controller("GestisciTagController", function($scope, EtichettaService) {
 
     $scope.deleteTag = function(tagName){
         EtichettaService.deleteTag(tagName);
-        console.log("chiamato delete");
         $scope.tags = EtichettaService.getTag();
-        console.log("chiamato get");
     };
 });
 
