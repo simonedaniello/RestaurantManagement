@@ -1,6 +1,7 @@
 myApp.controller("PrendiComandaController", function($scope, ajaxService, PrendiComandaService, $http, Pubnub) {
 
     $scope.actuallyChecked = [];
+    $scope.ricercaNome = "";
 
     var updateListaProdotti = function () {
         //ajaxService.getResource("http://localhost:8080/creaPietanza/getProdotti", null).then(
@@ -31,18 +32,27 @@ myApp.controller("PrendiComandaController", function($scope, ajaxService, Prendi
         }
     };
 
+    $scope.numeroTavolo = null;
+
     $scope.updateSelectedProd = function(nomeProd){
-        var checkBox = document.getElementById("check.".concat(nomeProd));
-        if(checkBox.checked) {
-            $scope.actuallyChecked.push(checkBox);
-            var ingrediente = {nome:nomeProd,       quantita:1};
-            $scope.selectedProd.push(ingrediente);
-            $scope.selectedProd.sort(function(a, b){
-                return (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)
-            });
-        }else{
-            var i = searchIndex(nomeProd);
-            $scope.selectedProd.splice(i,1);
+        if($scope.numeroTavolo != null){
+            var checkBox = document.getElementById("check.".concat(nomeProd));
+            if(checkBox.checked) {
+                $scope.actuallyChecked.push(checkBox);
+                var ingrediente = {nome:nomeProd,       quantita:1,         tavolo:$scope.numeroTavolo};
+                $scope.selectedProd.push(ingrediente);
+                $scope.selectedProd.sort(function(a, b){
+                    return (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)
+                });
+            }else{
+                var i = searchIndex(nomeProd);
+                $scope.selectedProd.splice(i,1);
+            }
+        }
+        else {
+            alert("inserisci numero tavolo");
+            var checkBox = document.getElementById("check.".concat(nomeProd));
+            checkBox.checked = false;
         }
     };
 
@@ -70,6 +80,17 @@ myApp.controller("PrendiComandaController", function($scope, ajaxService, Prendi
         $scope.actuallyChecked = [];
         $scope.selectedProd = [];
     };
+
+
+
+    $scope.confermaTavolo = function() {
+        for(var k in $scope.actuallyChecked){
+            $scope.actuallyChecked[k].checked = false;
+        }
+        $scope.actuallyChecked = [];
+        $scope.selectedProd = [];
+        $scope.numeroTavolo = document.getElementById('tavolo').value;
+    }
 
 
 
