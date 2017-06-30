@@ -1,0 +1,36 @@
+<div class="container-fluid">
+    <div class="panel panel-info">
+        <div class="panel-heading"><b>Cassa</b>
+        </div>
+        <div class="panel-body">
+            <label class="col-sm-1" for="addTag">Numero tavolo :</label>
+            <input class="col-sm-9" type="number" id="addTag"  ng-model="numeroTavolo">
+            <button type="button" class="btn col-sm-1" ng-click="inviaRichiesta(numeroTavolo)">Conferma</button>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading"><p><b>Conto</b></p></div>
+        <div class="panel-body" style="overflow-y: auto; height: 420px">
+            <table class="table table-striped">
+                <tbody>
+                <tr ng-repeat="piatanza in pietanze">
+                    <td class="col-sm-9"><p style="font-style: italic">{{pietanza.nome}}</p></td>
+                    <td class="col-sm-3"><p style="font-style: italic">{{pietanza.prezzo}}</p></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="panel panel-info">
+        <div class="panel-heading"><b>Prezzo finale</b>
+        </div>
+        <div class="panel-body">
+            <div class="container-fluid">
+                <div class="form-group">
+                    <label class="col-md-9">$ {{prezzoFinale}}</label>
+                    <button type="button" class="btn col-md-3" ng-click="pagamentoEffettuato()">Conferma</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -45,6 +45,10 @@ myApp.config(function($routeProvider) {
         .when("/modificaPietanza/:idPietanza", {
             templateUrl: "htmlFiles/modificaPietanza.html"
         })
+        .when("/cassa", {
+            templateUrl: "htmlFiles/cassa.html",
+            controller: 'cassaController'
+        })
         .when('/dovesiamo', {
             templateUrl: "htmlFiles/dovesiamo.html",
             controller: 'doveSiamoController'
