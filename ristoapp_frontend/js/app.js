@@ -42,10 +42,9 @@ myApp.config(function($routeProvider) {
             css : "cssFiles/ricercaPietanzaTabs.css",
             controller: "ricercaPietanzaController"
         })
-        /*.when("/dovesiamo", {
-            templateUrl: "htmlFiles/dovesiamo.html",
-            controller: "doveSiamoController"
-        })*/
+        .when("/modificaPietanza/:idPietanza", {
+            templateUrl: "htmlFiles/modificaPietanza.html"
+        })
         .when('/dovesiamo', {
             templateUrl: "htmlFiles/dovesiamo.html",
             controller: 'doveSiamoController'

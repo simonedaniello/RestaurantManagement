@@ -42,6 +42,14 @@ public class Pietanza {
         this.ingredienti = new ArrayList<>();
     }
 
+    public Pietanza(Long id, String nome, double prezzo) {
+        this.id = id;
+        this.nome = nome;
+        this.prezzo = new Double(prezzo);
+        this.etichette = new ArrayList<>();
+        this.ingredienti = new ArrayList<>();
+    }
+
     public Pietanza(String nome, double prezzo, ArrayList<Etichetta> etichette) {
         this.ingredienti = new ArrayList<>();
         this.nome = nome;

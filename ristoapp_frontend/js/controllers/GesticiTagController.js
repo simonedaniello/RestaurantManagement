@@ -2,26 +2,52 @@ myApp.controller("GestisciTagController", function($scope, EtichettaService) {
 
     $scope.nomeNewTag = "";
     $scope.nomeUpdateTag = "";
-    $scope.tags = EtichettaService.getTag();
+
+    var updateTagList = function() {
+        EtichettaService.getTag().then(
+            function (response) {
+                $scope.tags = EtichettaService.parseResponse(response);
+            }
+            , function (response) {
+                alert("Couldn't get tags");
+            });
+    };
+    updateTagList();
 
     $scope.saveTag = function(){
         if ($scope.nomeNewTag === "") {
             alert("Specificare il nome del tag nuovo da creare.");
             return;
         }
-        $scope.tags = EtichettaService.postTag($scope.nomeNewTag);
+        EtichettaService.postTag($scope.nomeNewTag).then(
+            function (response) {
+                updateTagList();
+            }
+            ,function (response) {
+                alert("Couldn't save tag");
+            });
         $scope.nomeNewTag = "";
+    };
+
+    $scope.deleteTag = function(tagName){
+        EtichettaService.deleteTag(tagName).then(
+            function (response) {
+                updateTagList();
+            }
+            ,function (response) {
+                alert("Couldn't delete tag");
+            });
     };
 
     $scope.modifyTag = function(tagName){
         var updatedName = document.getElementById(tagName).value;
-        EtichettaService.putTag(tagName, updatedName);
-        $scope.tags = EtichettaService.getTag();
-    };
-
-    $scope.deleteTag = function(tagName){
-        EtichettaService.deleteTag(tagName);
-        $scope.tags = EtichettaService.getTag();
+        EtichettaService.putTag(tagName, updatedName).then(
+            function (response) {
+                updateTagList();
+            }
+            ,function (response) {
+                alert("Couldn't update tag");
+            });
     };
 });
 

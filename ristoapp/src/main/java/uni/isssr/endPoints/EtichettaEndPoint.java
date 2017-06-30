@@ -30,16 +30,6 @@ public class EtichettaEndPoint {
 
     @RequestMapping(method = RequestMethod.GET)
     public @ResponseBody Iterable<Etichetta> getAllTags(){
-        List<Etichetta> lista = etichettaRepository.findAll();
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        for (Etichetta e : lista) {
-            System.out.println(e.getClassificatore());
-        }
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        return lista;
+        return etichettaRepository.findAll();
     }
 }

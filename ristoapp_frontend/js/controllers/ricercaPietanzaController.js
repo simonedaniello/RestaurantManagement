@@ -2,7 +2,7 @@
  * Created by alberto on 20/06/17.
  */
 
-myApp.controller("ricercaPietanzaController", function ($scope, ajaxService, RicercaPietanzaService) {
+myApp.controller("ricercaPietanzaController", function ($scope, ajaxService, RicercaPietanzaService, $location) {
 
     var pageLimit = 5;
 
@@ -65,13 +65,18 @@ myApp.controller("ricercaPietanzaController", function ($scope, ajaxService, Ric
 
     $scope.deletePietanza = function (id) {
         ajaxService.deleteResource("http://localhost:8080/dish/delete/" + id.toString(), null).then(function (response) {
-            initPage();
+            getPietanzeNavigation(0);
+            alert("Pietanza rimossa");
         }, function (response) {
             console.log(response);
         });
     };
 
+    $scope.modificaPietanza = function (id) {
+        $location.path("modificaPietanza/"+ id.toString());
+    };
+
     $scope.ricerca = function () {
         getPietanzeNavigation(0);
-    }
+    };
 });
