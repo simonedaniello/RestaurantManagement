@@ -34,12 +34,12 @@ myApp.controller("PrendiComandaController", function($scope, ajaxService, Prendi
 
     $scope.numeroTavolo = null;
 
-    $scope.updateSelectedProd = function(nomeProd){
+    $scope.updateSelectedProd = function(nomeProd, prezzoProd){
         if($scope.numeroTavolo != null){
             var checkBox = document.getElementById("check.".concat(nomeProd));
             if(checkBox.checked) {
                 $scope.actuallyChecked.push(checkBox);
-                var ingrediente = {nome:nomeProd,       quantita:1,         tavolo:$scope.numeroTavolo};
+                var ingrediente = {nome:nomeProd,       quantita:1,         tavolo:$scope.numeroTavolo,     prezzo:prezzoProd};
                 $scope.selectedProd.push(ingrediente);
                 $scope.selectedProd.sort(function(a, b){
                     return (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)
