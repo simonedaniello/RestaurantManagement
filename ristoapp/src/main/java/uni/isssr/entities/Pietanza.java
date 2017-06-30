@@ -30,7 +30,7 @@ public class Pietanza {
     @JsonManagedReference (value = "Etichetta")// serve per mostrare le etichette tramite json senza che
     private List<Etichetta> etichette;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Ingrediente> ingredienti;
 
     public Pietanza() {}

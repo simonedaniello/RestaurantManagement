@@ -1,5 +1,5 @@
 
-myApp.controller("creaMenuCtrl", function($scope, ajaxService, creaMenuService, CreaPietanzaService) {
+myApp.controller("creaMenuCtrl", function($scope, ajaxService, CreaPietanzaService) {
     $scope.categorieMenu = [];
     $scope.nomeMenu = "";
     $scope.nomeCategoria = "";
@@ -8,18 +8,16 @@ myApp.controller("creaMenuCtrl", function($scope, ajaxService, creaMenuService, 
     $scope.selected = [];
     $scope.isModify = 0;
 
-    $scope.pietanze = creaMenuService.getPietanze();
-
-    /*var getPietanzeList = function() {
-        ajaxService.getResource("http://localhost:8080/createMenu/getDishes", null).then(
+    var getPietanzeList = function() {
+        ajaxService.getResource("http://localhost:8080/dish/getAll", null).then(
             function (response) {
-                $scope.pietanze = creaMenuService.parsePietanzeArray(response);
+                $scope.pietanze = response.slice();
             }
         , function (response) {
             alert("Couldn't get dishes");
         });
      };
-     getPietanzeList();*/
+     getPietanzeList();
 
     var getTagList = function() {
         ajaxService.getResource("http://localhost:8080/tags", null).then(
@@ -48,7 +46,7 @@ myApp.controller("creaMenuCtrl", function($scope, ajaxService, creaMenuService, 
             return true;
         }
         for(var i = 0, len = element.etichette.length; i < len; i++) {
-            if (element.etichette[i] === $scope.filtro) {
+            if (element.etichette[i].classificatore === $scope.filtro) {
                 return true;
             }
         }
