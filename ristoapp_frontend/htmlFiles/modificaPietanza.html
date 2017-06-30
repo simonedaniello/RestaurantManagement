@@ -1,0 +1,132 @@
+<div ng-controller="modificaPietanzaController">
+    <form name="creaPietanzaForm" class="form-horizontal">
+        <div class="form-group">
+            <div class="container">
+                <div class="row" style="margin-bottom: 10px">
+                    <div class="col-md-12">
+                        <p><div class="input-group">
+                        <span class="input-group-addon">Pietanza</span>
+                        <input required name="nomePietanza" type="text" class="form-control" placeholder="Inserire nome pietanza creata" ng-model="nomePietanza">
+                        <span class="input-group-addon">Prezzo</span>
+                        <input required name="prezzoPietanza" type="number" min="1" class="form-control" style="max-width: 100px" placeholder="€" ng-model="prezzoPietanza">
+                    </div></p>
+                        <p><div class="input-group">
+                        <span class="input-group-addon" style="background-color:lightskyblue">Tag</span>
+                        <span class="input-group-addon" style="background-color:lightcyan" ng-repeat="elem in associatedTags">{{elem}}</span>
+                        <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-default">Gestisci Tag</button>
+                    </div></p>
+
+                        <div id="myModal" class="modal fade">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Gestisci Tag associati</h4>
+                                    </div>
+                                    <div class="modal-body" style="background-color: lightgoldenrodyellow">
+
+                                        <div class="container-fluid">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-heading"><p><b>Seleziona tag</b></p></div>
+                                                        <div class="panel-body" style="overflow-y: auto; height: 420px">
+                                                            <table class="table table-striped">
+                                                                <div class="container-fluid" style="padding-bottom: 10px">
+                                                                    <input id="filterTag" type="text" class="form-control col-sm-1" ng-model ="filterTag" placeholder="Filtra per nome">
+                                                                </div>
+                                                                <tbody>
+                                                                <tr ng-repeat="tag in tags | filter: filterTag">
+                                                                    <td><p style="font-style: italic">{{tag}}</p></td>
+                                                                    <td><div class="checkbox">
+                                                                        <label><input type="checkbox" ng-click="updateSelectedTag(tag)" id="check.{{tag}}"></label>
+                                                                    </div></td>
+                                                                </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-heading"><p><b>Tag selezionati</b></p></div>
+                                                        <div class="panel-body" class="row" style="overflow-y: auto; height: 350px">
+                                                            <table class="table table-striped">
+                                                                <tbody>
+                                                                <tr ng-repeat="elem in associatedTags">
+                                                                    <td><p style="font-style: italic">{{elem}}</p></td>
+                                                                </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                    <div class="container-fluid">
+                                                        <input id="addTag" type="text" class="form-control col-sm-1" ng-model ="nomeNewTag" placeholder="Nome nuovo tag">
+                                                        <button type="button" class="btn btn-primary" ng-click="saveTag()">crea tag</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading"><p><b>Seleziona prodotti</b></p></div>
+                        <div class="panel-body" style="overflow-y: auto; height: 420px">
+                            <table class="table table-striped">
+                                <tbody>
+                                <tr ng-repeat="prodotto in prodotti | orderBy: 'nome'">
+                                    <td>
+                                        <div class="menu-item-name">
+                                            <b>{{prodotto.nome}}</b>
+                                        </div>
+                                        <div>
+                                            <span class="menu-item-description">
+                                                {{prodotto.descrizione}}
+                                            </span>
+                                        </div>
+                                    </td>
+                                    <td><div class="checkbox menu-item-price">
+                                        <label><input type="checkbox" ng-click="updateSelectedProd(prodotto.nome, prodotto.id, 1)" id="check.{{prodotto.id}}"></label>
+                                    </div></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading"><p><b>Prodotti selezionate</b></p></div>
+                        <div class="panel-body" class="row" style="overflow-y: auto; height: 350px">
+                            <table class="table table-striped">
+                                <tbody>
+                                <tr ng-repeat="prod in selectedProd | orderBy: 'nomeProdotto'">
+                                    <td class="col-sm-9"><p style="font-style: italic">{{prod.nomeProdotto}}</p></td>
+                                    <td class="col-sm-3"><input name="quantita" required="" type="number" min="1" class="form-control" step="1" ng-model="prod.quantita"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="container-fluid">
+                        <div class="col-sm-6">
+                            <button ng-disabled="creaPietanzaForm.nomePietanza.$invalid || creaPietanzaForm.prezzoPietanza.$invalid || creaPietanzaForm.quantita.$invalid || selectedProd.length == 0" type="button" class="btn btn-success" ng-click="updateDish()">Modifica</button>
+                        </div>
+                        <div class="col-sm-6">
+                            <button type="button" onclick="window.location.href='#!cercaPietanza'" class="btn btn-danger">Annulla</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

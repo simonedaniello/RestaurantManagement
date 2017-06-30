@@ -35,4 +35,8 @@ myApp.service("ajaxService", function ($q, $http) {
         return ajax("DELETE", url, params);
     };
 
+    this.updateResource = function (url, params) {
+        return ajax("PUT", url, params);
+    };
+
 });
