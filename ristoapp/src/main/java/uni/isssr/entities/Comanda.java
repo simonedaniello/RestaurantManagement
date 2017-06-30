@@ -10,6 +10,7 @@ public class Comanda {
     private Long id;
     private String nome;
     private int quantita;
+    private int numeroTavolo;
 
     public Comanda() {}
 
@@ -44,5 +45,13 @@ public class Comanda {
 
     public void setQuantita(int quantita) {
         this.quantita = quantita;
+    }
+
+    public int getNumeroTavolo() {
+        return numeroTavolo;
+    }
+
+    public void setNumeroTavolo(int numeroTavolo) {
+        this.numeroTavolo = numeroTavolo;
     }
 }

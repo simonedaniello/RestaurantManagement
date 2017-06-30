@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/ristoapp/ristoapp.iml" filepath="$PROJECT_DIR$/ristoapp/ristoapp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ristoapp_frontend/ristoapp_frontend.iml" filepath="$PROJECT_DIR$/ristoapp_frontend/ristoapp_frontend.iml" />
+    </modules>
+  </component>
+</project>

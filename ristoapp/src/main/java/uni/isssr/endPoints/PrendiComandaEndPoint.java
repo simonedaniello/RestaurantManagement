@@ -13,6 +13,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
+
 /*@RequestMapping(path = "/comanda")*/
 public class PrendiComandaEndPoint {
 
@@ -24,14 +25,13 @@ public class PrendiComandaEndPoint {
 /*    @RequestMapping(method = RequestMethod.POST)
     public void addComanda(@RequestBody List<Comanda> listaComande){
 
-        log.info(listaComande.get(0).getNome());
         for (Comanda aListaComande : listaComande) {
             comandaRepository.save(aListaComande);
         }
-    }
+    }*/
 
 
-    @RequestMapping(method = RequestMethod.GET)
+/*    @RequestMapping(method = RequestMethod.GET)
     public @ResponseBody Iterable<Comanda> getAllComande() {
         System.out.println("----------- comande : " + comandaRepository.findAll());
         Iterable<Comanda> c =  comandaRepository.findAll();
