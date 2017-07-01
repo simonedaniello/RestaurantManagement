@@ -11,4 +11,8 @@ import uni.isssr.entities.Pietanza;
 public interface PietanzaRepository extends JpaRepository<Pietanza, Long>{
     Page<Pietanza> findAllByNomeContainingOrderByNome(String nome, Pageable pageable);
     Page<Pietanza> findDistinctByNomeContainingAndEtichetteIn(String nome, Etichetta[] etichette, Pageable pageable);
+
+
+    /* Per cercare una pietanza per nome */
+    Pietanza findByNome(String nome);
 }

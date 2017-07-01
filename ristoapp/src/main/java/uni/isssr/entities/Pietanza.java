@@ -16,6 +16,10 @@ public class Pietanza {
     @GeneratedValue
     private Long id;
 
+    /*
+        Usato per la ricerca di una Pietanza per nome associata ad una ComandaItem
+     */
+    @Column(unique = true)
     private String nome;
 
     private Double prezzo;
@@ -30,7 +34,7 @@ public class Pietanza {
     @JsonManagedReference (value = "Etichetta")// serve per mostrare le etichette tramite json senza che
     private List<Etichetta> etichette;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Ingrediente> ingredienti;
 
     public Pietanza() {}
