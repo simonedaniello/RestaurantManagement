@@ -22,7 +22,7 @@ public class EtichettaEndPoint {
         etichettaRepository.save(etichetta);
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/delete/{ID}")
+    @RequestMapping(method = RequestMethod.DELETE, value = "/{ID}")
     public void deletePietanza(@PathVariable(value = "ID") String id){
         etichettaRepository.deleteEtichetta(id);
     }
