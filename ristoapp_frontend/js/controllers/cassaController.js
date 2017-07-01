@@ -5,7 +5,10 @@ myApp.controller("CassaController", function($scope, CassaService) {
     $scope.prezzoTotale = 0;
 
     $scope.selectComanda = function () {
-        $scope.prezzoTotale = 0;
+        if ($scope.numeroTavolo == null) {
+            alert("Inserire il numero del tavolo!");
+            return;
+        }
         CassaService.getComanda("http://localhost:8080/comanda/tavolo/" + $scope.numeroTavolo).then(function (response) {
             $scope.comandaItems = response.data;
             $scope.prezzoTotale = CassaService.calcolaTotale($scope.comandaItems);
@@ -24,7 +27,7 @@ myApp.controller("CassaController", function($scope, CassaService) {
                 $scope.prezzoTotale = 0;
             }
         }, function (error) {
-            alert("Errore chiudere il conto");
+            alert("Errore chiusura del conto");
         });
     };
 });

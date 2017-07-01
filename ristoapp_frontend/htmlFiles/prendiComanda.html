@@ -5,11 +5,11 @@
             <div class="row">
                 <div class="col-md-6">
                         <label for="tavolo">Inserire numero tavolo:</label>
-                        <input type="text" class="form-control" id="tavolo">
-                        <button type="button" class="btn btn-success" ng-click="confermaTavolo()">Invia</button>
+                        <input type="text" class="form-control" id="tavolo" ng-model="numeroTavolo"><br>
+                        <button type="button" class="btn btn-default" ng-click="confermaTavolo()">Verifica</button>
                 </div>
                 <div class="col-md-6">
-                        <label for="tavolo">Tavolo inserito: {{numeroTavolo}}</label>
+                    <div class="well well-lg"><b>TAVOLO: {{numeroTavolo}}</b></div>
                 </div>
             </div>
             <div class="row">

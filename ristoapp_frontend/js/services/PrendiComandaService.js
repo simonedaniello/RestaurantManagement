@@ -1,5 +1,5 @@
 
-myApp.service("PrendiComandaService", [function () {
+myApp.service("PrendiComandaService", ["$http", function ($http) {
 
     this.parseTagArray = function (array) {
         var tagArray = [];
@@ -7,6 +7,10 @@ myApp.service("PrendiComandaService", [function () {
             tagArray.push(array[i].classificatore);
         }
         return tagArray;
+    };
+
+    this.getTavoli = function (url) {
+        return $http.get(url);
     };
 
 }]);

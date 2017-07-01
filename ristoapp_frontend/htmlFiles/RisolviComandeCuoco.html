@@ -9,7 +9,7 @@
                             <table class="table table-striped" id="tabellaCuoco">
                                 <tbody ng-repeat="prodotti in selectedProdForChef">
                                 <tr>
-                                    <td colspan="2">ORDINAZIONE PER TAVOLO : {{prodotti.tavolo}}</td>
+                                    <td colspan="2">ORDINAZIONE PER TAVOLO: {{prodotti.tavolo}}</td>
                                 </tr>
                                 <tr ng-repeat="prod in prodotti.comandaItems" >
                                     <td class="col-sm-9"><p style="font-style: italic" id="pietanza.{{prod.pietanza}}" >{{prod.pietanza}} x {{prod.quantita}}</p></td>
@@ -21,9 +21,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-sm-6" style="text-align: center; padding: 10px">
-                <button type="button" class="btn btn-success" ng-click="subscribe()">Connetti</button>
             </div>
         </div>
     </form>

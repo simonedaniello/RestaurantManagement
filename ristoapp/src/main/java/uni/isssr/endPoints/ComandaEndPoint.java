@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 //import org.springframework.messaging.handler.annotation.MessageMapping;
 //import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.web.bind.annotation.*;
 import uni.isssr.dto.ComandaItemDto;
 import uni.isssr.dto.ComandaOrderDto;
@@ -18,11 +20,12 @@ public class ComandaEndPoint {
     @Autowired
     private ComandaService comandaService;
 
-
+    /*
     @RequestMapping(value = "/comanda/addComanda", method = RequestMethod.POST)
     public void addComanda(@RequestBody ComandaOrderDto comandaOrderDto){
         comandaService.insertComanda(comandaOrderDto);
     }
+    */
 
     @RequestMapping(value = "/comanda/tavolo/{numero}", method = RequestMethod.GET)
     public List<ComandaItemDto> getComandeAttive(@PathVariable Integer numero){
@@ -41,20 +44,20 @@ public class ComandaEndPoint {
 
 
 
-    /*
-        Se un messaggio viene inviato alla destinazione /nuovaComanda allora viene chiamato
-        il metodo nuovaComanda(). Il payload del messaggio rappresenta un oggetto di tipo ComandaItem.
-
-        Dopo aver processato la comanda, il metodo nuovaComanda() restituisce la comanda. Il valore di
-        ritorno è mandato in broadcast a tutti i client che si sottoscrivono a /topic/comande
-
+    /*  ------------------------- PUBLISH - SUBSCRIBE (STOMP OVER WEBSOCKET) ---------------------------
+        Se un messaggio viene inviato alla destinazione /comanda/publishComanda allora viene chiamato
+        il metodo nuovaComanda(). Il payload del messaggio è un oggetto di tipo ComandaOrderDto.
+        Il valore di ritorno è mandato in broadcast a tutti i client che si sottoscrivono a
+        /topic/comande
      */
 
-    /*@MessageMapping("/nuoveComande")
+    @MessageMapping("/comanda/publishComanda")
     @SendTo("/topic/comande")
-    public List<ComandaItem> nuoveComanda(List<ComandaItem> comande) throws Exception {
-        comandaRepository.save(comande);
-        return comande;
-    }*/
+    public ComandaOrderDto nuovaComanda(ComandaOrderDto comandaOrderDto) throws Exception {
+        // Inserisce l'ordine nel database con lo stato a true di default cioè comanda attiva.
+        comandaService.insertComanda(comandaOrderDto);
+        // Restituisce l'ordine ai subscribers del topic in oggetto (ad esempio il cuoco)
+        return comandaOrderDto;
+    }
 
 }
