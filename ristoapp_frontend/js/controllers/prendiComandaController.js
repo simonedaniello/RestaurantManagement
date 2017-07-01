@@ -25,8 +25,10 @@ myApp.controller("PrendiComandaController", function($scope, ajaxService, Prendi
     $scope.nomeNewTag = "";
 
     var searchIndex = function(searchTerm){
-        for(var i = 0, len = $scope.selectedProd.length; i < len; i++) {
-            if ($scope.selectedProd[i].name === searchTerm) {
+        console.log("sono nell'operazione");
+        for(var i in $scope.selectedProd) {
+            if ($scope.selectedProd[i].pietanza == searchTerm) {
+                console.log("index = " + i);
                 return i;
             }
         }
