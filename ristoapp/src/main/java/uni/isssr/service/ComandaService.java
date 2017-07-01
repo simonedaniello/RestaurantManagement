@@ -27,13 +27,14 @@ public class ComandaService {
     }
 
     // Passa lo stato da attivo a passivo
-    public void updateComanda(int numero) {
+    public boolean updateComanda(int numero) {
         // Preleva l'ordinazione dal db relativa a quel tavolo e a quello stato
         ComandaOrder comandaOrderDb = comandaOrderRepository.findComandaOrderByKey(numero, true);
         if (comandaOrderDb != null) {
             comandaOrderDb.setActive(false); /* E' stato pagato il conto alla cassa */
             comandaOrderRepository.save(comandaOrderDb);
-        }
+            return true;
+        } return false;
     }
 
     /*

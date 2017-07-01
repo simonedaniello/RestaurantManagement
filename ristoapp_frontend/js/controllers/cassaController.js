@@ -1,23 +1,31 @@
-myApp.controller("CassaController", function($scope, cassaService) {
+myApp.controller("CassaController", function($scope, CassaService) {
 
-    $scope.prezzoFinale = 0;
-    $scope.comandaOrder = {comandaItems: [], tavolo: undefined};
+    $scope.numeroTavolo = null;
+    $scope.comandaItems = [];
+    $scope.prezzoTotale = 0;
 
-    $scope.inviaRichiesta = function(numeroTavolo){
+    $scope.selectComanda = function () {
+        $scope.prezzoTotale = 0;
+        CassaService.getComanda("http://localhost:8080/comanda/tavolo/" + $scope.numeroTavolo).then(function (response) {
+            $scope.comandaItems = response.data;
+            $scope.prezzoTotale = CassaService.calcolaTotale($scope.comandaItems);
+        }, function (error) {
+            alert("Errore nel recuparare il conto");
+        });
+    };
 
-        var updateTagList = function() {
-            cassaService.getTag().then(
-                function (response) {
-                    $scope.pietanze = cassaService.parseResponse(response);
-                }
-                , function (response) {
-                    alert("C'è stato un problema con la richiesta");
-                });
-        };
-
-        var pagamentoEffettuato = function() {
-            cassaService.postConsumazioni();
-        }
-    }
+    $scope.chiudiTavolo = function () {
+        if ($scope.prezzoTotale == 0)
+            return;
+        CassaService.updateComanda("http://localhost:8080/comanda/updateComanda/" + $scope.numeroTavolo).then(function (response) {
+            if (response.data == true) {
+                alert("Conto chiuso correttamente!");
+                $scope.comandaItems = [];
+                $scope.prezzoTotale = 0;
+            }
+        }, function (error) {
+            alert("Errore chiudere il conto");
+        });
+    };
 });
 

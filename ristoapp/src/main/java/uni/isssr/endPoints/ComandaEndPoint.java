@@ -30,8 +30,8 @@ public class ComandaEndPoint {
     }
 
     @RequestMapping(value = "/comanda/updateComanda/{numeroTavolo}", method = RequestMethod.PUT)
-    public void upComanda(@PathVariable Integer numeroTavolo){
-        comandaService.updateComanda(numeroTavolo);
+    public boolean upComanda(@PathVariable Integer numeroTavolo){
+        return comandaService.updateComanda(numeroTavolo);
     }
 
     @RequestMapping(value = "/comanda/tavolo/findAllAttivi", method = RequestMethod.GET)

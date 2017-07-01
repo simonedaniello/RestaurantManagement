@@ -1,21 +1,20 @@
-myApp.service('CassaService', ['ajaxService', function(ajaxService) {
+myApp.service('CassaService', ['$http', function($http) {
 
-    this.parseResponse = function(resp) {
-        var array = [];
-        for (x in resp){
-            array.push(resp[x]);
+    this.getComanda = function(url) {
+        return $http.get(url);
+    };
+
+    this.updateComanda = function (url) {
+        return $http.put(url);
+    };
+
+    this.calcolaTotale = function (comandaItems) {
+        var prezzoTotale = 0;
+        for (var i = 0; i < comandaItems.length; i++) {
+            var comandaItem = comandaItems[i];
+            prezzoTotale += comandaItem.prezzo * comandaItem.quantita;
         }
-        return array;
-    };
-
-    this.getConsumazioni = function() {
-        return ajaxService.getResource("http://localhost:8080/xxx", null);
-    };
-
-    this.postConsumazioni = function(){
-        var dtoTag = {status: "OK"};
-        var jsonTag = JSON.stringify(dtoTag);
-        return ajaxService.sendResource("http://localhost:8080/xxx", jsonTag);
+        return prezzoTotale;
     };
 
 }]);
