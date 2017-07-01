@@ -1,4 +1,4 @@
-myApp.service('cassaService', ['ajaxService', function(ajaxService) {
+myApp.service('CassaService', ['ajaxService', function(ajaxService) {
 
     this.parseResponse = function(resp) {
         var array = [];

@@ -47,7 +47,7 @@ myApp.config(function($routeProvider) {
         })
         .when("/cassa", {
             templateUrl: "htmlFiles/cassa.html",
-            controller: 'cassaController'
+            controller: 'CassaController'
         })
         .when('/dovesiamo', {
             templateUrl: "htmlFiles/dovesiamo.html",

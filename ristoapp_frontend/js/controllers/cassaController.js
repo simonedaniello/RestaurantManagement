@@ -1,7 +1,7 @@
-myApp.controller("cassaController", function($scope, cassaService) {
+myApp.controller("CassaController", function($scope, cassaService) {
 
     $scope.prezzoFinale = 0;
-    $scope.pietanze = [];
+    $scope.comandaOrder = {comandaItems: [], tavolo: undefined};
 
     $scope.inviaRichiesta = function(numeroTavolo){
 
