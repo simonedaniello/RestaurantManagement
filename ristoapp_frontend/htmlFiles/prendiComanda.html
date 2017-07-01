@@ -26,9 +26,9 @@
                             <table class="table table-striped">
                                 <tbody>
                                 <tr ng-repeat="prodotto in menuAttuale">
-                                    <td ng-show="(prodotto.nome).indexOf(ricercaNome)!=-1">
+                                    <td ng-show="(prodotto.pietanza).indexOf(ricercaNome)!=-1">
                                         <div class="menu-item-name">
-                                            <b>{{prodotto.nome}}</b>
+                                            <b>{{prodotto.pietanza}}</b>
                                         </div>
                                         <div>
                                             <span class="menu-item-description">
@@ -37,13 +37,13 @@
                                         </div>
                                         <div>
                                             <span class="menu-item-description">
-                                                {{prodotto.prezzo}}
+                                                $ {{prodotto.prezzo}}
                                             </span>
                                         </div>
                                     </td>
-                                    <td ng-show="(prodotto.nome).indexOf(ricercaNome)!=-1">
+                                    <td ng-show="(prodotto.pietanza).indexOf(ricercaNome)!=-1">
                                         <div class="checkbox menu-item-price">
-                                            <label><input type="checkbox" ng-click="updateSelectedProd(prodotto.nome, prodotto.prezzo)" id="check.{{prodotto.nome}}"></label>
+                                            <label><input type="checkbox" ng-click="updateSelectedProd(prodotto.pietanza, prodotto.prezzo)" id="check.{{prodotto.pietanza}}"></label>
                                         </div>
                                     </td>
                                 </tr>
@@ -59,8 +59,8 @@
                             <table class="table table-striped">
                                 <tbody>
                                 <tr ng-repeat="prod in selectedProd">
-                                    <td class="col-sm-9"><p style="font-style: italic">{{prod.nome}}</p></td>
-                                    <td class="col-sm-3"><input required type="number" class="form-control" id="qnt.{{prodotto.nome}}" step="1" ng-model="prod.quantita"></td>
+                                    <td class="col-sm-9"><p style="font-style: italic">{{prod.pietanza}}</p></td>
+                                    <td class="col-sm-3"><input required type="number" class="form-control" id="qnt.{{prodotto.pietanza}}" step="1" ng-model="prod.quantita"></td>
                                 </tr>
                                 </tbody>
                             </table>

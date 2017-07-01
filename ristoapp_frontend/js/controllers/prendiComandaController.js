@@ -39,7 +39,7 @@ myApp.controller("PrendiComandaController", function($scope, ajaxService, Prendi
             var checkBox = document.getElementById("check.".concat(nomeProd));
             if(checkBox.checked) {
                 $scope.actuallyChecked.push(checkBox);
-                var ingrediente = {nome:nomeProd,       quantita:1,         tavolo:$scope.numeroTavolo,     prezzo:prezzoProd};
+                var ingrediente = {pietanza:nomeProd,       quantita:1,     prezzo:prezzoProd};
                 $scope.selectedProd.push(ingrediente);
                 $scope.selectedProd.sort(function(a, b){
                     return (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)
@@ -66,12 +66,13 @@ myApp.controller("PrendiComandaController", function($scope, ajaxService, Prendi
 
     // Manda la comanda
     $scope.publish = function () {
-        var jsonComanda = angular.toJson($scope.selectedProd);
+        var jsonFinale = {comandaItems:$scope.selectedProd,         tavolo:$scope.numeroTavolo};
+        var jsonComanda = angular.toJson(jsonFinale);
+        console.log(jsonComanda);
         Pubnub.publish({
             channel: 'channel_comande',
             message: jsonComanda
         }, function (status, response){
-            console.log(response);
             alert("COMANDA INVIATA : " + status);
         });
         for(var k in $scope.actuallyChecked){

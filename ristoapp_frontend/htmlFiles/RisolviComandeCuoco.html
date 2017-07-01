@@ -7,11 +7,15 @@
                         <div class="panel-heading"><p><b>Pietanze da cucinare</b></p></div>
                         <div class="panel-body" class="row" style="overflow-y: auto; height: 350px">
                             <table class="table table-striped" id="tabellaCuoco">
-                                <tbody>
-                                <tr ng-repeat="prod in selectedProdForChef" >
-                                    <td class="col-sm-9"><p style="font-style: italic" id="pietanza.{{prod.nome}}" >{{prod.nome}} x {{prod.quantita}}, tavolo {{prod.tavolo}}</p></td>
-                                    <td><button type="button" class="btn btn-success" ng-click="selectedProdForChef.splice($index,1)" id="button.{{prod.nome}}">Fatto</button></td>
+                                <tbody ng-repeat="prodotti in selectedProdForChef">
+                                <tr>
+                                    <td colspan="2">ORDINAZIONE PER TAVOLO : {{prodotti.tavolo}}</td>
                                 </tr>
+                                <tr ng-repeat="prod in prodotti.comandaItems" >
+                                    <td class="col-sm-9"><p style="font-style: italic" id="pietanza.{{prod.pietanza}}" >{{prod.pietanza}} x {{prod.quantita}}</p></td>
+                                    <td><input type="checkbox" name="box"></td>
+                                </tr>
+                                <tr><td colspan="2"><button type="button" class="btn btn-success" ng-click="fatto($index)" id="{{prodotti.tavolo}}">Fatto</button></td></tr>
                                 </tbody>
                             </table>
                         </div>

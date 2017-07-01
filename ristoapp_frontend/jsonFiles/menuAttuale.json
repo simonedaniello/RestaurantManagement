@@ -1,102 +1,102 @@
 {
   "menuAttuale": [
     {
-      "nome": "Primo al sugo",
+      "pietanza": "Primo al sugo",
       "descrizione": "Pennette, sugo, pancetta",
-      "prezzo" : "$10.00",
+      "prezzo" : "10.00",
       "id": 0
     },
     {
-      "nome": "Primo bianco",
+      "pietanza": "Primo bianco",
       "descrizione": "Apaghetti, uovo, pancetta",
-      "prezzo" : "$10.00",
+      "prezzo" : "10.00",
       "id": 1
     },
     {
-      "nome": "Secondo di carne",
+      "pietanza": "Secondo di carne",
       "descrizione": "Descrizione prodotto bla bla",
-      "prezzo" : "$10.00",
+      "prezzo" : "10.00",
       "id": 2
     },
     {
-      "nome": "Secondo di pesce",
+      "pietanza": "Secondo di pesce",
       "descrizione": "Descrizione prodotto bla bla",
-      "prezzo" : "$10.00",
+      "prezzo" : "10.00",
       "id": 3
     },
     {
-      "nome": "Contorno vegano",
+      "pietanza": "Contorno vegano",
       "descrizione": "Descrizione prodotto bla bla",
-      "prezzo" : "$10.00",
+      "prezzo" : "10.00",
       "id": 4
     },
     {
-      "nome": "Contorno di prosciutto",
+      "pietanza": "Contorno di prosciutto",
       "descrizione": "Descrizione prodotto bla bla",
-      "prezzo" : "$10.00",
+      "prezzo" : "10.00",
       "id": 5
     },
     {
-      "nome": "Dolce della casa",
+      "pietanza": "Dolce della casa",
       "descrizione": "Descrizione prodotto bla bla",
-      "prezzo" : "$10.00",
+      "prezzo" : "10.00",
       "id": 6
     },
     {
-      "nome": "Dolce esterno",
+      "pietanza": "Dolce esterno",
       "descrizione": "Descrizione prodotto bla bla",
-      "prezzo" : "$10.00",
+      "prezzo" : "10.00",
       "id": 7
     }
   ],
 
   "selectedProdForChef": [
     {
-      "nome": "Primo al sugo",
+      "pietanza": "Primo al sugo",
       "descrizione": "Pennette, sugo, pancetta",
-      "prezzo" : "$10.00",
+      "prezzo" : "10.00",
       "id": 0
     },
     {
-      "nome": "Primo bianco",
+      "pietanza": "Primo bianco",
       "descrizione": "Spaghetti, uovo, pancetta",
-      "prezzo" : "$10.00",
+      "prezzo" : "10.00",
       "id": 1
     },
     {
-      "nome": "Secondo di carne",
+      "pietanza": "Secondo di carne",
       "descrizione": "Descrizione prodotto bla bla",
-      "prezzo" : "$10.00",
+      "prezzo" : "10.00",
       "id": 2
     },
     {
-      "nome": "Secondo di pesce",
+      "pietanza": "Secondo di pesce",
       "descrizione": "Descrizione prodotto bla bla",
-      "prezzo" : "$10.00",
+      "prezzo" : "10.00",
       "id": 3
     },
     {
-      "nome": "Contorno vegano",
+      "pietanza": "Contorno vegano",
       "descrizione": "Descrizione prodotto bla bla",
-      "prezzo" : "$10.00",
+      "prezzo" : "10.00",
       "id": 4
     },
     {
-      "nome": "Contorno di prosciutto",
+      "pietanza": "Contorno di prosciutto",
       "descrizione": "Descrizione prodotto bla bla",
-      "prezzo" : "$10.00",
+      "prezzo" : "10.00",
       "id": 5
     },
     {
-      "nome": "Dolce della casa",
+      "pietanza": "Dolce della casa",
       "descrizione": "Descrizione prodotto bla bla",
-      "prezzo" : "$10.00",
+      "prezzo" : "10.00",
       "id": 6
     },
     {
-      "nome": "Dolce esterno",
+      "pietanza": "Dolce esterno",
       "descrizione": "Descrizione prodotto bla bla",
-      "prezzo" : "$10.00",
+      "prezzo" : "10.00",
       "id": 7
     }
   ]
