@@ -3,11 +3,10 @@ myApp.controller("PrendiComandaController", function($scope, ajaxService, Prendi
     $scope.actuallyChecked = [];
     $scope.ricercaNome = "";
 
+    //raccolta informazioni riguardanti il menu da parte del cameriere
     var updateListaProdotti = function () {
-        //ajaxService.getResource("http://localhost:8080/creaPietanza/getProdotti", null).then(
         $http.get("jsonFiles/menuAttuale.json").then(
             function (response) {
-                //$scope.prodotti = CreaPietanzaService.parseProductList(response);
                 var data = response.data;
                 $scope.menuAttuale = data.menuAttuale;
             }
@@ -34,6 +33,7 @@ myApp.controller("PrendiComandaController", function($scope, ajaxService, Prendi
         }
     };
 
+    //update degli elementi selezionati dal cameriere
     $scope.updateSelectedProd = function(nomeProd, prezzoProd){
         if($scope.numeroTavolo != null){
             var checkBox = document.getElementById("check.".concat(nomeProd));
@@ -61,13 +61,17 @@ myApp.controller("PrendiComandaController", function($scope, ajaxService, Prendi
 
     var stompClient = null;
 
+    //invio comanda al cuoco
     $scope.publish = function () {
 
         if ($scope.numeroTavolo == null) {
             alert("Inserisci numero del tavolo!");
             return;
         }
-
+        if(($scope.selectedProd).length == 0){
+            alert("Non hai inserito pietanze!");
+            return;
+        }
         var jsonFinale = {comandaItems: $scope.selectedProd, tavolo: $scope.numeroTavolo};
         var jsonComanda = angular.toJson(jsonFinale);
         if (stompClient != null) {
@@ -92,5 +96,14 @@ myApp.controller("PrendiComandaController", function($scope, ajaxService, Prendi
         $scope.actuallyChecked = [];
         $scope.selectedProd = [];
     };
+
+    //funzione tasto annulla per pulire le tabelle
+    $scope.annulla = function(){
+        for(var k in $scope.actuallyChecked){
+            $scope.actuallyChecked[k].checked = false;
+        }
+        $scope.actuallyChecked = [];
+        $scope.selectedProd = [];
+    }
 
 });
