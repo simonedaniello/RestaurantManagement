@@ -2,8 +2,10 @@ package uni.isssr.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.hibernate.annotations.*;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.HashSet;

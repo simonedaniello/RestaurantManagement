@@ -2,8 +2,11 @@ package uni.isssr.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.hibernate.annotations.*;
 
 import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -24,7 +27,8 @@ public class Pietanza {
 
     private Double prezzo;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @ManyToMany(fetch = FetchType.EAGER,
+            cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinTable(name = "pietanza_etichette", joinColumns = {
             @JoinColumn(name = "id", updatable = false) },
             inverseJoinColumns = { @JoinColumn(name = "classificatore",
