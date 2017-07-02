@@ -9,8 +9,4 @@ myApp.service("PrendiComandaService", ["$http", function ($http) {
         return tagArray;
     };
 
-    this.getTavoli = function (url) {
-        return $http.get(url);
-    };
-
 }]);

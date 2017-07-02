@@ -22,8 +22,28 @@ public class ComandaService {
 
 
     public void insertComanda(ComandaOrderDto comandaOrderDto) {
-        ComandaOrder comandaOrder = this.comandaOrderDtoToComandaOrder(comandaOrderDto);
-        comandaOrderRepository.save(comandaOrder);
+        ComandaOrder comandaOrderCurrent = this.comandaOrderDtoToComandaOrder(comandaOrderDto);
+
+        int tavolo = comandaOrderCurrent.getTavolo();
+        ComandaOrder comandaOrderOld = comandaOrderRepository.findComandaOrder(tavolo, true);
+        if (comandaOrderOld != null) { /* C'è già una comanda attiva a quel tavolo */
+            for (ComandaItem comandaItemCurrent : comandaOrderCurrent.getComandaItems()) {
+                if (!updateQuantity(comandaItemCurrent, comandaOrderOld))
+                    comandaOrderOld.addComandaItem(comandaItemCurrent);
+            }
+            comandaOrderRepository.save(comandaOrderOld);
+        } else {
+            comandaOrderRepository.save(comandaOrderCurrent);
+        }
+    }
+
+    private boolean updateQuantity(ComandaItem comandaItemCurrent, ComandaOrder comandaOrderOld) {
+        for (ComandaItem comandaItemOld : comandaOrderOld.getComandaItems()) {
+            if (comandaItemCurrent.getNomePietanza().equals(comandaItemOld.getNomePietanza())) {
+                comandaItemOld.setQuantita(comandaItemOld.getQuantita() + comandaItemCurrent.getQuantita());
+                return true;
+            }
+        } return false;
     }
 
     // Passa lo stato da attivo a passivo (da true a false)
@@ -53,14 +73,6 @@ public class ComandaService {
             comandaItemDtos.add(itemDto);
         }
         return comandaItemDtos;
-    }
-
-    /*
-        Restituisce gli interi che rappresentano i tavoli numeri dei tavoli occupati
-        cioè i tavoli tale per cui gli oggetti ComandaOrder hanno stato active = true
-     */
-    public List<Integer> getComandeAttive() {
-        return comandaOrderRepository.findComandeAttive(true);
     }
 
     private ComandaItemDto comandaItemToComandaItemDto(ComandaItem comandaItem) {

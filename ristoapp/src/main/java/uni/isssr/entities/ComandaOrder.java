@@ -14,7 +14,7 @@ public class ComandaOrder {
     @GeneratedValue
     private Long id;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<ComandaItem> comandaItems;
 
     private int tavolo;
@@ -52,5 +52,9 @@ public class ComandaOrder {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public void addComandaItem(ComandaItem comandaItem) {
+        this.comandaItems.add(comandaItem);
     }
 }

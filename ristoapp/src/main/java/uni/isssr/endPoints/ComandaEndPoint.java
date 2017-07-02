@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import uni.isssr.dto.ComandaItemDto;
 import uni.isssr.dto.ComandaOrderDto;
 import uni.isssr.service.ComandaService;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -35,11 +37,6 @@ public class ComandaEndPoint {
     @RequestMapping(value = "/comanda/updateComanda/{numeroTavolo}", method = RequestMethod.PUT)
     public boolean upComanda(@PathVariable Integer numeroTavolo){
         return comandaService.updateComanda(numeroTavolo);
-    }
-
-    @RequestMapping(value = "/comanda/tavolo/findAllAttivi", method = RequestMethod.GET)
-    public List<Integer> findTavoliAttivi() {
-        return comandaService.getComandeAttive();
     }
 
 
