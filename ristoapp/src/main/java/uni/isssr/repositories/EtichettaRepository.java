@@ -13,4 +13,14 @@ public interface EtichettaRepository extends JpaRepository<Etichetta, String>{
     @Modifying
     @Query("delete from Etichetta where classificatore = ?1")
     public void deleteEtichetta(String classificatore);
+
+    /*@Transactional
+    @Modifying
+    @Query("update Etichetta set classificatore = ?1 where classificatore = ?2")
+    public void updateEtichetta(String newClassificatore, String oldClassificatore);*/
+
+    /*@Transactional
+    @Modifying
+    @Query("update Pietanza set etichette.classificatore = ?1 where etichette.classificatore = ?2")
+    public void updateEtichettaPietanza(String classificatore, String oldClassificatore);*/
 }
