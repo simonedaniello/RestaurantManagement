@@ -34,8 +34,6 @@ myApp.controller("PrendiComandaController", function($scope, ajaxService, Prendi
         }
     };
 
-    $scope.numeroTavolo = null;
-
     $scope.updateSelectedProd = function(nomeProd, prezzoProd){
         if($scope.numeroTavolo != null){
             var checkBox = document.getElementById("check.".concat(nomeProd));
@@ -53,48 +51,21 @@ myApp.controller("PrendiComandaController", function($scope, ajaxService, Prendi
         }
         else {
             alert("Inserisci numero tavolo");
-            var checkBox = document.getElementById("check.".concat(nomeProd));
-            checkBox.checked = false;
+            var checkBox1 = document.getElementById("check.".concat(nomeProd));
+            checkBox1.checked = false;
         }
     };
 
-    /*
-
-    // Inizializzazione delle credenziali per PubNub
-
-    Pubnub.init({
-        publishKey: 'pub-c-18cb2897-1549-41e9-9011-c0c17480a1e4',
-        subscribeKey: 'sub-c-23206a28-56ae-11e7-97fe-02ee2ddab7fe'
-    });
-
-    // Manda la comanda
-    $scope.publish = function () {
-        var jsonFinale = {comandaItems:$scope.selectedProd,         tavolo:$scope.numeroTavolo};
-        var jsonComanda = angular.toJson(jsonFinale);
-        console.log(jsonComanda);
-        Pubnub.publish({
-            channel: 'channel_comande',
-            message: jsonComanda
-        }, function (status, response){
-            alert("COMANDA INVIATA : " + status);
-        });
-        for(var k in $scope.actuallyChecked){
-            $scope.actuallyChecked[k].checked = false;
-        }
-        $scope.actuallyChecked = [];
-        $scope.selectedProd = [];
-    };
-
-    */
 
     $scope.numeroTavolo = null;
+    var isTavoloSelected = false;
 
     var stompClient = null;
 
     $scope.publish = function () {
 
-        if ($scope.numeroTavolo == null) {
-            alert("Inserisci il numero del tavolo!");
+        if ($scope.numeroTavolo == null || isTavoloSelected == false) {
+            alert("Verifica il numero del tavolo!");
             return;
         }
 
@@ -122,6 +93,7 @@ myApp.controller("PrendiComandaController", function($scope, ajaxService, Prendi
         }
         $scope.actuallyChecked = [];
         $scope.selectedProd = [];
+        isTavoloSelected = false;
     };
 
 
@@ -141,9 +113,11 @@ myApp.controller("PrendiComandaController", function($scope, ajaxService, Prendi
             if (isInArray($scope.numeroTavolo, tavoli)) { // E' presente!
                 alert("Il tavolo selezionato è già occupato!");
                 $scope.numeroTavolo = null;
+                isTavoloSelected = false;
             }
             else {
                 alert("Tavolo disponibile!");
+                isTavoloSelected = true;
                 for (var k in $scope.actuallyChecked) {
                     $scope.actuallyChecked[k].checked = false;
                 }
@@ -160,18 +134,6 @@ myApp.controller("PrendiComandaController", function($scope, ajaxService, Prendi
                     return true;
             } return false;
         }
-
-
-        /*
-        for(var k in $scope.actuallyChecked){
-            $scope.actuallyChecked[k].checked = false;
-        }
-        $scope.actuallyChecked = [];
-        $scope.selectedProd = [];
-        $scope.numeroTavolo = document.getElementById('tavolo').value;
-        */
     }
-
-
 
 });
