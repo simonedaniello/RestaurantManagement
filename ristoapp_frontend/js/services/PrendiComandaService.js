@@ -1,5 +1,5 @@
 
-myApp.service("PrendiComandaService", [function () {
+myApp.service("PrendiComandaService", ["$http", function ($http) {
 
     this.parseTagArray = function (array) {
         var tagArray = [];

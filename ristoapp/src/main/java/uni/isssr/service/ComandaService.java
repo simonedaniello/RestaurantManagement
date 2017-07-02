@@ -22,14 +22,34 @@ public class ComandaService {
 
 
     public void insertComanda(ComandaOrderDto comandaOrderDto) {
-        ComandaOrder comandaOrder = this.comandaOrderDtoToComandaOrder(comandaOrderDto);
-        comandaOrderRepository.save(comandaOrder);
+        ComandaOrder comandaOrderCurrent = this.comandaOrderDtoToComandaOrder(comandaOrderDto);
+
+        int tavolo = comandaOrderCurrent.getTavolo();
+        ComandaOrder comandaOrderOld = comandaOrderRepository.findComandaOrder(tavolo, true);
+        if (comandaOrderOld != null) { /* C'è già una comanda attiva a quel tavolo */
+            for (ComandaItem comandaItemCurrent : comandaOrderCurrent.getComandaItems()) {
+                if (!updateQuantity(comandaItemCurrent, comandaOrderOld))
+                    comandaOrderOld.addComandaItem(comandaItemCurrent);
+            }
+            comandaOrderRepository.save(comandaOrderOld);
+        } else {
+            comandaOrderRepository.save(comandaOrderCurrent);
+        }
     }
 
-    // Passa lo stato da attivo a passivo
+    private boolean updateQuantity(ComandaItem comandaItemCurrent, ComandaOrder comandaOrderOld) {
+        for (ComandaItem comandaItemOld : comandaOrderOld.getComandaItems()) {
+            if (comandaItemCurrent.getNomePietanza().equals(comandaItemOld.getNomePietanza())) {
+                comandaItemOld.setQuantita(comandaItemOld.getQuantita() + comandaItemCurrent.getQuantita());
+                return true;
+            }
+        } return false;
+    }
+
+    // Passa lo stato da attivo a passivo (da true a false)
     public boolean updateComanda(int numero) {
-        // Preleva l'ordinazione dal db relativa a quel tavolo e a quello stato
-        ComandaOrder comandaOrderDb = comandaOrderRepository.findComandaOrderByKey(numero, true);
+        // Preleva l'ordinazione relativa a quel tavolo e che è attiva
+        ComandaOrder comandaOrderDb = comandaOrderRepository.findComandaOrder(numero, true);
         if (comandaOrderDb != null) {
             comandaOrderDb.setActive(false); /* E' stato pagato il conto alla cassa */
             comandaOrderRepository.save(comandaOrderDb);
@@ -38,13 +58,13 @@ public class ComandaService {
     }
 
     /*
-        Cerca la lista delle ordinazioni fatte da un tavolo e che sono attive cioè
+        Cerca la lista delle ordinazioni attive fatte da un tavolo cioè
         il conto associato è aperto e deve essere chiuso al pagamento
      */
 
     public List<ComandaItemDto> getComandaByTavolo(int numero) {
         List<ComandaItemDto> comandaItemDtos = new ArrayList<>();
-        ComandaOrder comandaOrder = comandaOrderRepository.findComandaOrderByKey(numero, true);
+        ComandaOrder comandaOrder = comandaOrderRepository.findComandaOrder(numero, true);
         if (comandaOrder == null)
             return comandaItemDtos;
         List<ComandaItem> comandaItems = comandaOrder.getComandaItems();
@@ -53,14 +73,6 @@ public class ComandaService {
             comandaItemDtos.add(itemDto);
         }
         return comandaItemDtos;
-    }
-
-    /*
-        Restituisce gli interi che rappresentano i tavoli numeri dei tavoli occupati
-        cioè i tavoli tale per cui gli oggetti ComandaOrder hanno stato active = true
-     */
-    public List<Integer> getComandeAttive() {
-        return comandaOrderRepository.findComandeAttive(true);
     }
 
     private ComandaItemDto comandaItemToComandaItemDto(ComandaItem comandaItem) {

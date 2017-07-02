@@ -1,13 +1,12 @@
-myApp.controller("PrendiComandaController", function($scope, ajaxService, PrendiComandaService, $http, Pubnub) {
+myApp.controller("PrendiComandaController", function($scope, ajaxService, PrendiComandaService, $http) {
 
     $scope.actuallyChecked = [];
     $scope.ricercaNome = "";
 
+    //raccolta informazioni riguardanti il menu da parte del cameriere
     var updateListaProdotti = function () {
-        //ajaxService.getResource("http://localhost:8080/creaPietanza/getProdotti", null).then(
         $http.get("jsonFiles/menuAttuale.json").then(
             function (response) {
-                //$scope.prodotti = CreaPietanzaService.parseProductList(response);
                 var data = response.data;
                 $scope.menuAttuale = data.menuAttuale;
             }
@@ -25,21 +24,22 @@ myApp.controller("PrendiComandaController", function($scope, ajaxService, Prendi
     $scope.nomeNewTag = "";
 
     var searchIndex = function(searchTerm){
-        for(var i = 0, len = $scope.selectedProd.length; i < len; i++) {
-            if ($scope.selectedProd[i].name === searchTerm) {
+        console.log("sono nell'operazione");
+        for(var i in $scope.selectedProd) {
+            if ($scope.selectedProd[i].pietanza == searchTerm) {
+                console.log("index = " + i);
                 return i;
             }
         }
     };
 
-    $scope.numeroTavolo = null;
-
+    //update degli elementi selezionati dal cameriere
     $scope.updateSelectedProd = function(nomeProd, prezzoProd){
         if($scope.numeroTavolo != null){
             var checkBox = document.getElementById("check.".concat(nomeProd));
             if(checkBox.checked) {
                 $scope.actuallyChecked.push(checkBox);
-                var ingrediente = {nome:nomeProd,       quantita:1,         tavolo:$scope.numeroTavolo,     prezzo:prezzoProd};
+                var ingrediente = {pietanza:nomeProd,       quantita:1,     prezzo:prezzoProd};
                 $scope.selectedProd.push(ingrediente);
                 $scope.selectedProd.sort(function(a, b){
                     return (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)
@@ -50,30 +50,46 @@ myApp.controller("PrendiComandaController", function($scope, ajaxService, Prendi
             }
         }
         else {
-            alert("inserisci numero tavolo");
-            var checkBox = document.getElementById("check.".concat(nomeProd));
-            checkBox.checked = false;
+            alert("Inserisci numero tavolo");
+            var checkBox1 = document.getElementById("check.".concat(nomeProd));
+            checkBox1.checked = false;
         }
     };
 
 
-    // Inizializzazione delle credenziali per PubNub
+    $scope.numeroTavolo = null;
 
-    Pubnub.init({
-        publishKey: 'pub-c-18cb2897-1549-41e9-9011-c0c17480a1e4',
-        subscribeKey: 'sub-c-23206a28-56ae-11e7-97fe-02ee2ddab7fe'
-    });
+    var stompClient = null;
 
-    // Manda la comanda
+    //invio comanda al cuoco
     $scope.publish = function () {
-        var jsonComanda = angular.toJson($scope.selectedProd);
-        Pubnub.publish({
-            channel: 'channel_comande',
-            message: jsonComanda
-        }, function (status, response){
-            console.log(response);
-            alert("COMANDA INVIATA : " + status);
-        });
+
+        if ($scope.numeroTavolo == null) {
+            alert("Inserisci numero del tavolo!");
+            return;
+        }
+        if(($scope.selectedProd).length == 0){
+            alert("Non hai inserito pietanze!");
+            return;
+        }
+        var jsonFinale = {comandaItems: $scope.selectedProd, tavolo: $scope.numeroTavolo};
+        var jsonComanda = angular.toJson(jsonFinale);
+        if (stompClient != null) {
+
+            stompClient.send("/app/comanda/publishComanda", {}, jsonComanda);
+            alert("Comanda inviata correttamente!");
+
+        } else {
+
+            var socket = new SockJS('http://localhost:8080/websocket');
+            stompClient = Stomp.over(socket);
+            stompClient.connect({}, function (frame) {
+                console.log('Connected: ' + frame);
+                stompClient.send("/app/comanda/publishComanda", {}, jsonComanda);
+                alert("Comanda inviata correttamente!");
+            });
+
+        }
         for(var k in $scope.actuallyChecked){
             $scope.actuallyChecked[k].checked = false;
         }
@@ -81,17 +97,13 @@ myApp.controller("PrendiComandaController", function($scope, ajaxService, Prendi
         $scope.selectedProd = [];
     };
 
-
-
-    $scope.confermaTavolo = function() {
+    //funzione tasto annulla per pulire le tabelle
+    $scope.annulla = function(){
         for(var k in $scope.actuallyChecked){
             $scope.actuallyChecked[k].checked = false;
         }
         $scope.actuallyChecked = [];
         $scope.selectedProd = [];
-        $scope.numeroTavolo = document.getElementById('tavolo').value;
     }
-
-
 
 });

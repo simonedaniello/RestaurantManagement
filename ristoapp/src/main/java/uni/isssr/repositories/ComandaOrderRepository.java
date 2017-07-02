@@ -16,7 +16,7 @@ import java.util.List;
 public interface ComandaOrderRepository extends JpaRepository<ComandaOrder, Long> {
 
     @Query("SELECT c FROM ComandaOrder c WHERE c.tavolo = :tavolo AND c.active = :stato")
-    ComandaOrder findComandaOrderByKey(@Param("tavolo") Integer tavolo, @Param("stato") Boolean stato);
+    ComandaOrder findComandaOrder(@Param("tavolo") Integer tavolo, @Param("stato") Boolean stato);
 
     @Query("SELECT c.tavolo FROM ComandaOrder c WHERE c.active = :stato")
     List<Integer> findComandeAttive(@Param("stato") Boolean stato);
