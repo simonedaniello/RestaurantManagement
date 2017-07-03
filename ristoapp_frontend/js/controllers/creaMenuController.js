@@ -96,9 +96,12 @@ myApp.controller("creaMenuCtrl", function($scope, ajaxService, CreaPietanzaServi
 
     var uncheckAll = function(){
         for(var i = 0, len = $scope.selected.length; i < len; i++) {
-            //se la selezionata ha il filtro
+            if ($scope.filtro === "all") {
+                document.getElementById($scope.selected[i].pietanzaDto.nome).checked = false;
+                continue;
+            }
             for(var j = 0, lenJ = $scope.selected[i].pietanzaDto.etichette.length; j < lenJ; j++) {
-                if ($scope.selected[i].pietanzaDto.etichette[j] === $scope.filtro || $scope.filtro === "all") {
+                if ($scope.selected[i].pietanzaDto.etichette[j] === $scope.filtro) {
                     document.getElementById($scope.selected[i].pietanzaDto.nome).checked = false;
                     break;
                 }
