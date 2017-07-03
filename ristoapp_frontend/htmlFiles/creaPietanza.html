@@ -9,6 +9,8 @@
                         <input required name="nomePietanza" type="text" class="form-control" placeholder="Inserire nome pietanza creata" ng-model="nomePietanza">
                         <span class="input-group-addon">Prezzo</span>
                         <input required name="prezzoPietanza" type="number" min="1" class="form-control" style="max-width: 100px" placeholder="€" ng-model="prezzoPietanza">
+                        <span class="input-group-addon">Prezzo totale dei prodotti</span>
+                        <input  readonly class="form-control" style="max-width: 100px" placeholder="€" ng-model="prodottiTot">
                     </div></p>
                         <p><div class="input-group">
                         <span class="input-group-addon" style="background-color:lightskyblue">Tag</span>
@@ -95,7 +97,7 @@
                                         </div>
                                     </td>
                                     <td><div class="checkbox menu-item-price">
-                                        <label><input type="checkbox" ng-click="updateSelectedProd(prodotto.nome, prodotto.id)" id="check.{{prodotto.nome}}"></label>
+                                        <label><input type="checkbox" ng-click="updateSelectedProd(prodotto.nome, prodotto.id, prodotto.prezzo)" id="check.{{prodotto.nome}}"></label>
                                     </div></td>
                                 </tr>
                                 </tbody>
@@ -111,7 +113,7 @@
                                 <tbody>
                                 <tr ng-repeat="prod in selectedProd | orderBy: 'nomeProdotto'">
                                     <td class="col-sm-9"><p style="font-style: italic">{{prod.nomeProdotto}}</p></td>
-                                    <td class="col-sm-3"><input name="quantita" required="" type="number" min="1" class="form-control" step="1" ng-model="prod.quantita"></td>
+                                    <td class="col-sm-3"><input name="quantita" required id ="quant.{{prod.nomeProdotto}}" type="number" min="1" onkeydown="return false" class="form-control" step="1" ng-model="prod.quantita" ng-change="changeQnt(prod.nomeProdotto)"></td>
                                 </tr>
                                 </tbody>
                             </table>

@@ -191,8 +191,7 @@ myApp.controller("creaMenuCtrl", function($scope, ajaxService, CreaPietanzaServi
     };
 
 
-    $scope.saveMenu = function(isAct){
-        console.log(isAct);
+    $scope.saveMenu = function(){
         if ($scope.categorieMenu.length === 0) {
             alert("Il menu deve contenere almeno una categoria.");
             return;
@@ -204,6 +203,10 @@ myApp.controller("creaMenuCtrl", function($scope, ajaxService, CreaPietanzaServi
         if ($scope.descrizione === "") {
             alert("Inserire una breve descrizione del menu.");
             return;
+        }
+        var isAct = false;
+        if (document.getElementById(active).checked = true) {
+            isAct = true;
         }
         var dtoMenu = {
             nome:$scope.nomeMenu,

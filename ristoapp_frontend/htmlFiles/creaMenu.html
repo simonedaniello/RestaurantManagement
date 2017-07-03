@@ -9,7 +9,7 @@
                     <div class="form-group">
                         <label class="col-sm-2" for="name">Nome menu:</label>
                         <div>
-                            <input class="col-sm-10" type="text" class="form-control" id="name" placeholder="Inserisci nome" ng-model="nomeMenu">
+                            <input class="col-sm-10" type="text" id="name" placeholder="Inserisci nome" ng-model="nomeMenu">
                         </div>
                     </div>
                 </div>
@@ -19,7 +19,17 @@
                     <div class="form-group">
                         <label class="col-sm-2" for="description">Descrizione:</label>
                         <div>
-                            <input class="col-sm-10" type="text" class="form-control" id="description" placeholder="Inserisci breve descrizione" ng-model="descrizione">
+                            <input class="col-sm-10" type="text" id="description" placeholder="Inserisci breve descrizione" ng-model="descrizione">
+                        </div>
+                    </div>
+                </div>
+                </p>
+                <p>
+                <div class="row">
+                    <div class="form-group">
+                        <label class="col-sm-2" for="active">Attivo:</label>
+                        <div>
+                            <label><input type="checkbox" id="active"></label>
                         </div>
                     </div>
                 </div>
@@ -151,10 +161,9 @@
                     </p>
                     <p>
                         <div class="row">
-                            <button type="button" class="btn btn-success col-sm-3" ng-click="saveMenu(0)">Salva menu</button>
-                            <button type="button" class="btn btn-success col-sm-3" ng-click="saveMenu(1)">Salva menu e rendi attivo</button>
-                            <button type="button" class="btn btn-default col-sm-3" ng-click="resetCat()">Reset</button>
-                            <button type="button" class="btn btn-danger col-sm-3" onclick="location.href = '#';">Annulla</button>
+                            <button type="button" class="btn btn-success col-sm-4" ng-click="saveMenu()">Salva menu</button>
+                            <button type="button" class="btn btn-default col-sm-4" ng-click="resetCat()">Reset</button>
+                            <button type="button" class="btn btn-danger col-sm-4" onclick="location.href = '#';">Annulla</button>
                         </div>
                     </p>
                 </div>
