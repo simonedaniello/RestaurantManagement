@@ -83,9 +83,17 @@
                     <div class="panel panel-default">
                         <div class="panel-heading"><p><b>Seleziona prodotti</b></p></div>
                         <div class="panel-body" style="overflow-y: auto; height: 420px">
+                            <p><div class="input-group">
+                            <span class="input-group-addon">Mostra</span>
+                            <select class="btn btn-default dropdown-toggle" data-ng-model="filtro">
+                                <option selected value="all">Mostra tutti i prodotti</option>
+                                <option value="cibo">solo cibarie</option>
+                                <option value="bibite">solo bibite</option>
+                            </select>
+                        </div></p>
                             <table class="table table-striped">
                                 <tbody>
-                                <tr ng-repeat="prodotto in prodotti | orderBy: 'nome'">
+                                <tr ng-repeat="prodotto in prodotti | filter: filterProdotti | orderBy: 'nome'">
                                     <td>
                                         <div class="menu-item-name">
                                             <b>{{prodotto.nome}}</b>

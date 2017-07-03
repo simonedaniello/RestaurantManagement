@@ -35,6 +35,7 @@ myApp.controller("CreaPietanzaController", function($scope, ajaxService, CreaPie
     $scope.nomeNewTag = "";
     $scope.prodottiTot = 0;
     $scope.prod = [];
+    $scope.filtro = "all";
 
     var searchIndex = function(searchTerm, array){
         for(var i = 0, len = array.length; i < len; i++) {
@@ -44,20 +45,26 @@ myApp.controller("CreaPietanzaController", function($scope, ajaxService, CreaPie
         }
     };
 
+    $scope.filterProdotti = function(element) {
+        if ($scope.filtro === "all") {
+            return true;
+        }
+        else if (element.tipo === $scope.filtro) {
+            return true;
+        }
+        return false;
+    };
+
     $scope.changeQnt = function(nomeProd) {
         var qnt = document.getElementById("quant.".concat(nomeProd)).value;
         var j = searchIndex(nomeProd, $scope.prod);
         var prezzoUn = $scope.prod[j].prezzo;
-        console.log("actual qnt, old qnt, price");
-        console.log(qnt);
-        console.log($scope.prod[j].qnt);
-        console.log(prezzoUn);
         var diff = $scope.prod[j].qnt - qnt;
         $scope.prod[j].qnt = qnt;
         if (diff < 0) { //aggiunto
-            $scope.prodottiTot += prezzoUn;
+            $scope.prodottiTot = ($scope.prodottiTot*10 + prezzoUn*10)/10;
         } else { //tolto
-            $scope.prodottiTot -= prezzoUn;
+            $scope.prodottiTot = ($scope.prodottiTot*10 - prezzoUn*10)/10;
         }
     };
 
@@ -68,12 +75,13 @@ myApp.controller("CreaPietanzaController", function($scope, ajaxService, CreaPie
             $scope.selectedProd.push(ingrediente);
             var p = {prezzo: prezzo, nomeProdotto: nomeProd, qnt: 1};
             $scope.prod.push(p);
-            $scope.prodottiTot += prezzo;
+            $scope.prodottiTot = ($scope.prodottiTot*10 + prezzo*10)/10;
         }else{
             var i = searchIndex(nomeProd, $scope.selectedProd);
             $scope.selectedProd.splice(i,1);
             var j = searchIndex(nomeProd, $scope.prod);
             $scope.prod.splice(j,1);
+            $scope.prodottiTot = ($scope.prodottiTot*10 - prezzo*$scope.prod[j].qnt*10)/10;
             $scope.prodottiTot -= prezzo*$scope.prod[j].qnt;
         }
     };
