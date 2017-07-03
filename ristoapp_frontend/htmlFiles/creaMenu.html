@@ -25,6 +25,16 @@
                 </div>
                 </p>
                 <p>
+                <div class="row">
+                    <div class="form-group">
+                        <label class="col-sm-2" for="active">Attivo:</label>
+                        <div>
+                            <label><input type="checkbox" id="active"></label>
+                        </div>
+                    </div>
+                </div>
+                </p>
+                <p>
                     <div class="row" ng-repeat="categoria in categorieMenu">
                         <div class="panel panel-default">
                             <div class="panel-heading">
@@ -151,10 +161,9 @@
                     </p>
                     <p>
                         <div class="row">
-                            <button type="button" class="btn btn-success col-sm-3" ng-click="saveMenu(false)">Salva menu</button>
-                            <button type="button" class="btn btn-success col-sm-3" ng-click="saveMenu(true)">Salva menu e rendi attivo</button>
-                            <button type="button" class="btn btn-default col-sm-3" ng-click="resetCat()">Reset</button>
-                            <button type="button" class="btn btn-danger col-sm-3" onclick="location.href = '#';">Annulla</button>
+                            <button type="button" class="btn btn-success col-sm-4" ng-click="saveMenu()">Salva menu</button>
+                            <button type="button" class="btn btn-default col-sm-4" ng-click="resetCat()">Reset</button>
+                            <button type="button" class="btn btn-danger col-sm-4" onclick="location.href = '#';">Annulla</button>
                         </div>
                     </p>
                 </div>

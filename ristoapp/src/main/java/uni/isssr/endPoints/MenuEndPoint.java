@@ -52,6 +52,7 @@ public class MenuEndPoint {
 
     @RequestMapping(method = RequestMethod.POST)
     public void saveMenu(@RequestBody MenuDto menuDto) {
+        System.out.println(menuDto.isActive());
         menuService.saveMenu(menuDto);
     }
 

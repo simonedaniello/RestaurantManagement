@@ -42,11 +42,12 @@ myApp.controller("creaMenuCtrl", function($scope, ajaxService, CreaPietanzaServi
     getCatNamesList();
 
     $scope.filterPietanze = function(element) {
+        console.log(element);
         if ($scope.filtro === "all") {
             return true;
         }
-        for(var i = 0, len = element.etichette.length; i < len; i++) {
-            if (element.etichette[i].classificatore === $scope.filtro) {
+        for(var i = 0, len = element.pietanzaDto.etichette.length; i < len; i++) {
+            if (element.pietanzaDto.etichette[i] === $scope.filtro) {
                 return true;
             }
         }
@@ -171,7 +172,8 @@ myApp.controller("creaMenuCtrl", function($scope, ajaxService, CreaPietanzaServi
             alert("Devi selezionare almeno una pietanza che appartiene alla categoria.");
             return;
         }
-        var newCategory = {nome: $scope.nomeCategoria, pietanze:$scope.selected};
+        console.log($scope.nomeCategoria);
+        var newCategory = {nomeCategoria: $scope.nomeCategoria, pietanze:$scope.selected};
         resetActualCategory();
         if ($scope.isModify === 1) {
             var j = searchIndex($scope.nomeCategoria, $scope.categorieMenu);
@@ -205,7 +207,7 @@ myApp.controller("creaMenuCtrl", function($scope, ajaxService, CreaPietanzaServi
             return;
         }
         var isAct = false;
-        if (document.getElementById(active).checked = true) {
+        if (document.getElementById("active").checked === true) {
             isAct = true;
         }
         var dtoMenu = {
