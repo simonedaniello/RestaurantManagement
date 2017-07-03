@@ -53,7 +53,7 @@ myApp.controller("GestisciTagController", function($scope, ajaxService) {
         var updatedName = document.getElementById(tagName).value;
         var dtoTag = {classificatore: updatedName};
         var jsonTag = JSON.stringify(dtoTag);
-        ajaxService.sendResource("http://localhost:8080/tags/" + tagName.toString(), jsonTag).then(
+        ajaxService.updateResource("http://localhost:8080/tags/" + tagName.toString(), jsonTag).then(
             function (response) {
                 updateTagList();
             }
