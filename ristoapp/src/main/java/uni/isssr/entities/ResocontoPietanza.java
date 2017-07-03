@@ -4,6 +4,8 @@ import uni.isssr.utilities.IdResoconto;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import java.util.Date;
 
 /**
@@ -23,20 +25,22 @@ public class ResocontoPietanza {
     public ResocontoPietanza() {
     }
 
-    public ResocontoPietanza(Long prodottoId, Long preparato) {
-        this.id = new IdResoconto(prodottoId);
+    public ResocontoPietanza(Pietanza pietanza, Long preparato) {
+        this.id = new IdResoconto(pietanza);
         this.preparato = preparato;
         this.venduto = new Long(0);
     }
 
-    public ResocontoPietanza(Long prodottoID){
-        this.id = new IdResoconto(prodottoID);
+    public ResocontoPietanza(Pietanza pietanza){
+        this.id = new IdResoconto(pietanza);
         this.preparato = this.venduto = new Long(0);
     }
 
-    public Long getProdottoId() {
-        return id.getProdottoId();
+    public Pietanza getPietanza() {
+        return id.getPietanza();
     }
+
+    public Long getPietanzaId(){return this.id.getPietanza().getId();}
 
 
     public String getData() {

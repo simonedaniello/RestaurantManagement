@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 import uni.isssr.entities.Categoria;
+import uni.isssr.entities.Pietanza;
 import uni.isssr.entities.ResocontoPietanza;
 import uni.isssr.utilities.IdResoconto;
 
@@ -15,14 +16,15 @@ import java.util.List;
  */
 public interface ResocontoRepository extends JpaRepository<ResocontoPietanza, IdResoconto> {
 
-    /*@Transactional
-    @Query("select all " +
-            "from Menu as M join M.categorie as C join C.pietanze as P join Resoconto as R")
-    public List<String> getResocontiByData(String data);*/
+    @Transactional
+    @Query("select p from ResocontoPietanza r inner join r.id.pietanza p")
+    public List<Pietanza> getPietanzaByData();
+
     /*,sum(R.venduto),sum(R.preparato)
      +
             + "group by C.nome +
             " where M.isActive = true and M.categorie = C.id and C.pietanze = P.id and R.prodottoId = P.id" +
             " and R.data = ?1 ""
     * */
+    public List<ResocontoPietanza> findByData(String data);
 }

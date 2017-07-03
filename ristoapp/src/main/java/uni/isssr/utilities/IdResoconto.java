@@ -1,6 +1,9 @@
 package uni.isssr.utilities;
 
+import uni.isssr.entities.Pietanza;
+
 import javax.persistence.Embeddable;
+import javax.persistence.ManyToOne;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -12,7 +15,8 @@ import java.util.Date;
 @Embeddable
 public class IdResoconto implements Serializable {
 
-    private Long prodottoId;
+    @ManyToOne
+    private Pietanza pietanza; // è id della pietanza
 
     private String data;
 
@@ -20,17 +24,18 @@ public class IdResoconto implements Serializable {
 
     }
 
-    public IdResoconto(Long prodottoId) {
-        this.prodottoId = prodottoId;
+    public IdResoconto(Pietanza pietanza) {
+        //this.prodottoId = prodottoId;
+        this.pietanza = pietanza;
         this.data = new SimpleDateFormat("yyyy-dd-MM").format(new Date());
     }
 
-    public Long getProdottoId() {
-        return prodottoId;
+    public Pietanza getPietanza() {
+        return this.pietanza;
     }
 
-    public void setProdottoId(Long prodottoId) {
-        this.prodottoId = prodottoId;
+    public void setPietanza(Pietanza pietanza) {
+        this.pietanza = pietanza;
     }
 
     public String getData() {

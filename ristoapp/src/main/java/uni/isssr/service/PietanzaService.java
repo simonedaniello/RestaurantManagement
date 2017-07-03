@@ -96,7 +96,7 @@ public class PietanzaService {
         return list.toArray(array);
     }
 
-    private PietanzaMenuDto marshall(Pietanza pietanza){
+    public PietanzaMenuDto marshall(Pietanza pietanza){
         List<IngredienteDto> ingredienti = new ArrayList<>();
         for (Ingrediente ingrediente:pietanza.getIngredienti()){
             IngredienteDto ingredienteDto = menuService.ingredienteToIngredienteDto(ingrediente);
