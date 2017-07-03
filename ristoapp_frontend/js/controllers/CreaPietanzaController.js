@@ -33,23 +33,48 @@ myApp.controller("CreaPietanzaController", function($scope, ajaxService, CreaPie
     $scope.associatedTags = [];
     $scope.nomePietanza = "";
     $scope.nomeNewTag = "";
+    $scope.prodottiTot = 0;
+    $scope.prod = [];
 
-    var searchIndex = function(searchTerm){
-        for(var i = 0, len = $scope.selectedProd.length; i < len; i++) {
-            if ($scope.selectedProd[i].name === searchTerm) {
+    var searchIndex = function(searchTerm, array){
+        for(var i = 0, len = array.length; i < len; i++) {
+            if (array[i].nomeProdotto === searchTerm) {
                 return i;
             }
         }
     };
 
-    $scope.updateSelectedProd = function(nomeProd, id){
+    $scope.changeQnt = function(nomeProd) {
+        var qnt = document.getElementById("quant.".concat(nomeProd)).value;
+        var j = searchIndex(nomeProd, $scope.prod);
+        var prezzoUn = $scope.prod[j].prezzo;
+        console.log("actual qnt, old qnt, price");
+        console.log(qnt);
+        console.log($scope.prod[j].qnt);
+        console.log(prezzoUn);
+        var diff = $scope.prod[j].qnt - qnt;
+        $scope.prod[j].qnt = qnt;
+        if (diff < 0) { //aggiunto
+            $scope.prodottiTot += prezzoUn;
+        } else { //tolto
+            $scope.prodottiTot -= prezzoUn;
+        }
+    };
+
+    $scope.updateSelectedProd = function(nomeProd, id, prezzo){
         var checkBox = document.getElementById("check.".concat(nomeProd));
         if(checkBox.checked) {
             var ingrediente = {nomeProdotto:nomeProd, quantita:1, prodottoId: id};
             $scope.selectedProd.push(ingrediente);
+            var p = {prezzo: prezzo, nomeProdotto: nomeProd, qnt: 1};
+            $scope.prod.push(p);
+            $scope.prodottiTot += prezzo;
         }else{
-            var i = searchIndex(nomeProd);
+            var i = searchIndex(nomeProd, $scope.selectedProd);
             $scope.selectedProd.splice(i,1);
+            var j = searchIndex(nomeProd, $scope.prod);
+            $scope.prod.splice(j,1);
+            $scope.prodottiTot -= prezzo*$scope.prod[j].qnt;
         }
     };
 
