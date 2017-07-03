@@ -1,4 +1,4 @@
-myApp.controller("CreaPietanzaController", function($scope, ajaxService, CreaPietanzaService, $http) {
+myApp.controller("CreaPietanzaController", function($scope, ajaxService, CreaPietanzaService, $http, $location) {
 
 
     var updateListaProdotti = function () {
@@ -92,6 +92,7 @@ myApp.controller("CreaPietanzaController", function($scope, ajaxService, CreaPie
         var dtoPietanza = {nome: $scope.nomePietanza, prezzo: $scope.prezzoPietanza, etichette: $scope.associatedTags, ingredienti: $scope.selectedProd};
         var jsonPiet = angular.toJson(dtoPietanza);
         ajaxService.sendResource("http://localhost:8080/dish", jsonPiet).then(function (response) {
+            $location.path("/cercaPietanza");
         }, function (response) {
             console.log(response)
         });

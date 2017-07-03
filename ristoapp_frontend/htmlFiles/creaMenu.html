@@ -9,7 +9,7 @@
                     <div class="form-group">
                         <label class="col-sm-2" for="name">Nome menu:</label>
                         <div>
-                            <input class="col-sm-10" type="text" id="name" placeholder="Inserisci nome" ng-model="nomeMenu">
+                            <input class="col-sm-10" type="text" class="form-control" id="name" placeholder="Inserisci nome" ng-model="nomeMenu">
                         </div>
                     </div>
                 </div>
@@ -19,17 +19,7 @@
                     <div class="form-group">
                         <label class="col-sm-2" for="description">Descrizione:</label>
                         <div>
-                            <input class="col-sm-10" type="text" id="description" placeholder="Inserisci breve descrizione" ng-model="descrizione">
-                        </div>
-                    </div>
-                </div>
-                </p>
-                <p>
-                <div class="row">
-                    <div class="form-group">
-                        <label class="col-sm-2" for="active">Attivo:</label>
-                        <div>
-                            <label><input type="checkbox" id="active"></label>
+                            <input class="col-sm-10" type="text" class="form-control" id="description" placeholder="Inserisci breve descrizione" ng-model="descrizione">
                         </div>
                     </div>
                 </div>
@@ -56,15 +46,15 @@
                                         <div class="row" ng-repeat="pietanza in categoria.pietanze | orderBy: 'nome'">
                                             <div class="container-fluid">
                                                 <div class="menu-item-name col-sm-11">
-                                                    <b>{{pietanza.nome}}</b>
+                                                    <b>{{pietanza.pietanzaDto.nome}}</b>
                                                 </div>
                                                 <div class="col-sm-10">
-                                                    <span class="menu-item-description" ng-repeat="ingrediente in pietanza.ingredienti">
-                                                        {{ingrediente.nome}}{{$last ? '' : ', '}}
+                                                    <span class="menu-item-description" ng-repeat="ingrediente in pietanza.pietanzaDto.ingredienti">
+                                                        {{ingrediente.nomeProdotto}}{{$last ? '' : ', '}}
                                                     </span>
                                                 </div>
                                                 <div class=" menu-item-price col-sm-1">
-                                                    {{pietanza.prezzo}} €
+                                                    {{pietanza.pietanzaDto.prezzo}} €
                                                 </div>
                                             </div>
                                         </div>
@@ -110,21 +100,21 @@
                                                         <div class="panel-body" style="overflow-y: auto; height: 420px">
                                                             <table class="table table-striped">
                                                                 <tbody>
-                                                                <tr ng-repeat="pietanza in pietanze | filter: filterPietanze | orderBy: 'nome'">
+                                                                <tr ng-repeat="pietanza in pietanze | filter: filterPietanze | orderBy: 'pietanzaDto.nome'">
                                                                     <td>
                                                                         <div class="container-fluid">
                                                                             <div class="menu-item-name">
-                                                                                <b>{{pietanza.nome}}</b>
+                                                                                <b>{{pietanza.pietanzaDto.nome}}</b>
                                                                             </div>
                                                                             <div>
-                                                                                <span class="menu-item-description" ng-repeat="ingrediente in pietanza.ingredienti">
-                                                                                    {{ingrediente.prodotto.nome}}{{$last ? '' : ', '}}
+                                                                                <span class="menu-item-description" ng-repeat="ingrediente in pietanza.pietanzaDto.ingredienti">
+                                                                                    {{ingrediente.nomeProdotto}}{{$last ? '' : ', '}}
                                                                                 </span>
                                                                             </div>
                                                                         </div>
                                                                     </td>
                                                                     <td><div class="checkbox">
-                                                                        <label><input type="checkbox" ng-click="updateSelected(pietanza)" id="{{pietanza.nome}}"></label>
+                                                                        <label><input type="checkbox" ng-click="updateSelected(pietanza)" id="{{pietanza.pietanzaDto.nome}}"></label>
                                                                             {{updateCheckboxFiltered(pietanza)}}
                                                                     </div></td>
                                                                 </tr>
@@ -139,9 +129,9 @@
                                                     <div class="panel-body" style="overflow-y: auto; height: 350px">
                                                         <table class="table table-striped">
                                                             <tbody>
-                                                                <tr ng-repeat="selezionata in selected | orderBy: 'nome'">
-                                                                    <td class="col-sm-9"><p style="font-style: italic">{{selezionata.nome}}</p></td>
-                                                                    <td class="col-sm-3"><p style="font-style: italic">{{selezionata.prezzo}} €</p></td>
+                                                                <tr ng-repeat="selezionata in selected | orderBy: 'pietanzaDto.nome'">
+                                                                    <td class="col-sm-9"><p style="font-style: italic">{{selezionata.pietanzaDto.nome}}</p></td>
+                                                                    <td class="col-sm-3"><p style="font-style: italic">{{selezionata.pietanzaDto.prezzo}} €</p></td>
                                                                 </tr>
                                                             </tbody>
                                                         </table>
@@ -161,9 +151,10 @@
                     </p>
                     <p>
                         <div class="row">
-                            <button type="button" class="btn btn-success col-sm-4" ng-click="saveMenu()">Salva menu</button>
-                            <button type="button" class="btn btn-default col-sm-4" ng-click="resetCat()">Reset</button>
-                            <button type="button" class="btn btn-danger col-sm-4" onclick="location.href = '#';">Annulla</button>
+                            <button type="button" class="btn btn-success col-sm-3" ng-click="saveMenu(false)">Salva menu</button>
+                            <button type="button" class="btn btn-success col-sm-3" ng-click="saveMenu(true)">Salva menu e rendi attivo</button>
+                            <button type="button" class="btn btn-default col-sm-3" ng-click="resetCat()">Reset</button>
+                            <button type="button" class="btn btn-danger col-sm-3" onclick="location.href = '#';">Annulla</button>
                         </div>
                     </p>
                 </div>

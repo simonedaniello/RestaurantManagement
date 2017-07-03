@@ -65,16 +65,16 @@ myApp.controller("creaMenuCtrl", function($scope, ajaxService, CreaPietanzaServi
     $scope.updateCheckboxFiltered = function(pietanza) {
         for(var i = 0, len = $scope.selected.length; i < len; i++) {
             //se la pietanza è tra le selezionate
-            if ($scope.selected[i].nome === pietanza.nome) {
+            if ($scope.selected[i].pietanzaDto.nome === pietanza.pietanzaDto.nome) {
                 //e il filtro è all sarà visibile e la devo chekkare
                 if ($scope.filtro === "all") {
-                    document.getElementById(pietanza.nome).checked = true;
+                    document.getElementById(pietanza.pietanzaDto.nome).checked = true;
                     return;
                 }
                 //oppure se ha il filtro selezionato sarà visibile e la devo chekkare
-                for(var j = 0, lenT = $scope.selected[i].etichette.length; j < lenT; j++) {
-                    if ($scope.selected[i].etichette[j] === $scope.filtro) {
-                        document.getElementById(pietanza.nome).checked = true;
+                for(var j = 0, lenT = $scope.selected[i].pietanzaDto.etichette.length; j < lenT; j++) {
+                    if ($scope.selected[i].pietanzaDto.etichette[j] === $scope.filtro) {
+                        document.getElementById(pietanza.pietanzaDto.nome).checked = true;
                         return;
                     }
                 }
@@ -83,11 +83,11 @@ myApp.controller("creaMenuCtrl", function($scope, ajaxService, CreaPietanzaServi
     };
 
     $scope.updateSelected = function(pietanza){
-        var checkBox = document.getElementById(pietanza.nome);
+        var checkBox = document.getElementById(pietanza.pietanzaDto.nome);
         if(checkBox.checked) {
             $scope.selected.push(pietanza);
         }else{
-            var i = searchIndex(pietanza.nome, $scope.selected);
+            var i = searchIndex(pietanza.pietanzaDto.nome, $scope.selected);
             $scope.selected.splice(i,1);
         }
     };
@@ -96,9 +96,9 @@ myApp.controller("creaMenuCtrl", function($scope, ajaxService, CreaPietanzaServi
     var uncheckAll = function(){
         for(var i = 0, len = $scope.selected.length; i < len; i++) {
             //se la selezionata ha il filtro
-            for(var j = 0, lenJ = $scope.selected[i].etichette.length; j < lenJ; j++) {
-                if ($scope.selected[i].etichette[j] === $scope.filtro || $scope.filtro === "all") {
-                    document.getElementById($scope.selected[i].nome).checked = false;
+            for(var j = 0, lenJ = $scope.selected[i].pietanzaDto.etichette.length; j < lenJ; j++) {
+                if ($scope.selected[i].pietanzaDto.etichette[j] === $scope.filtro || $scope.filtro === "all") {
+                    document.getElementById($scope.selected[i].pietanzaDto.nome).checked = false;
                     break;
                 }
             }
@@ -124,7 +124,7 @@ myApp.controller("creaMenuCtrl", function($scope, ajaxService, CreaPietanzaServi
         $scope.nomeCategoria = $scope.categorieMenu[i].nome;
         $scope.selected = $scope.categorieMenu[i].pietanze.slice();
         for(var j = 0, len = $scope.categorieMenu[i].pietanze.length; j < len; j++) {
-            document.getElementById($scope.categorieMenu[i].pietanze[j].nome).checked = true;
+            document.getElementById($scope.categorieMenu[i].pietanze[j].pietanzaDto.nome).checked = true;
         }
         $scope.isModify = 1;
     };
