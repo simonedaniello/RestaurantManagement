@@ -33,7 +33,7 @@ public class AnalyticService {
     public AnalyticsDto getReport(Date data){
 
         AnalyticsDto analyticsDto = new AnalyticsDto(data);
-        List<ResocontoPietanza> resocontoPietanze = resocontoRepository.findByData(new SimpleDateFormat("yyyy-dd-MM").format(data));
+        List<ResocontoPietanza> resocontoPietanze = resocontoRepository.findAllByData(new SimpleDateFormat("yyyy-dd-MM").format(data));
         List<PietanzaAnalyticsDto> pietanzaAnalyticsDtos = new ArrayList<>();
         for (ResocontoPietanza rp:resocontoPietanze) {
                pietanzaAnalyticsDtos.add(new PietanzaAnalyticsDto(

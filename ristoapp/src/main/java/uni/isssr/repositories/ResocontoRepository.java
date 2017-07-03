@@ -26,5 +26,8 @@ public interface ResocontoRepository extends JpaRepository<ResocontoPietanza, Id
             " where M.isActive = true and M.categorie = C.id and C.pietanze = P.id and R.prodottoId = P.id" +
             " and R.data = ?1 ""
     * */
-    public List<ResocontoPietanza> findByData(String data);
+
+    @Transactional
+    @Query("select r from ResocontoPietanza r where r.id.data = ?1")
+    public List<ResocontoPietanza> findAllByData(String data);
 }

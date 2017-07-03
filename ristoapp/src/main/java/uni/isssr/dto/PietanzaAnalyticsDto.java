@@ -7,9 +7,9 @@ public class PietanzaAnalyticsDto {
 
     private PietanzaMenuDto pietanzaMenuDto;
 
-    private Integer venduto;
+    private Long venduto;
 
-    private Integer preparato;
+    private Long preparato;
 
     private String categoria;
 
@@ -29,19 +29,19 @@ public class PietanzaAnalyticsDto {
 
 
 
-    public Integer getVenduto() {
+    public Long getVenduto() {
         return venduto;
     }
 
-    public void setVenduto(Integer venduto) {
+    public void setVenduto(Long venduto) {
         this.venduto = venduto;
     }
 
-    public Integer getPreparato() {
+    public Long getPreparato() {
         return preparato;
     }
 
-    public void setPreparato(Integer preparato) {
+    public void setPreparato(Long preparato) {
         this.preparato = preparato;
     }
 
