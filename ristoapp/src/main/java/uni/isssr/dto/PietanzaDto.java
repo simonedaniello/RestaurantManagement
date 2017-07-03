@@ -16,16 +16,6 @@ public class PietanzaDto {
 
     private List<IngredienteDto> ingredienti;
 
-
-    public List<IngredienteDto> getIngredienti() {
-        return ingredienti;
-    }
-
-    public void setIngredienti(List<IngredienteDto> ingredienti) {
-        this.ingredienti = ingredienti;
-    }
-
-
     public PietanzaDto(){
     }
 
@@ -58,5 +48,13 @@ public class PietanzaDto {
 
     public void setEtichette(List<String> etichette) {
         this.etichette = etichette;
+    }
+
+    public List<IngredienteDto> getIngredienti() {
+        return ingredienti;
+    }
+
+    public void setIngredienti(List<IngredienteDto> ingredienti) {
+        this.ingredienti = ingredienti;
     }
 }

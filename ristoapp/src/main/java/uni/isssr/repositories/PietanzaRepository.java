@@ -15,6 +15,7 @@ public interface PietanzaRepository extends JpaRepository<Pietanza, Long>{
     Page<Pietanza> findAllByNomeContainingOrderByNome(String nome, Pageable pageable);
     Page<Pietanza> findDistinctByNomeContainingAndEtichetteIn(String nome, Etichetta[] etichette, Pageable pageable);
 
+    //prendo le pietanze di cui devo fare update dell'etichetta
     @Query(" select p from Pietanza p where ?1 in  " +
             "(select e from Pietanza d join d.etichette e where d.id = p.id)")
     List<Pietanza> findToUpdate(String etichetta);

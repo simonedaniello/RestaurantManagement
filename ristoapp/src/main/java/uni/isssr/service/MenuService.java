@@ -6,6 +6,7 @@ import uni.isssr.dto.*;
 import uni.isssr.entities.*;
 import uni.isssr.entities.Menu;
 import uni.isssr.repositories.MenuRepository;
+import uni.isssr.repositories.PietanzaRepository;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -22,6 +23,8 @@ public class MenuService {
     @Autowired
     private MenuRepository menuRepository;
 
+    @Autowired
+    private PietanzaRepository pietanzaRepository;
     /*
         Search di tutti i menu presenti nel database
      */
@@ -138,12 +141,38 @@ public class MenuService {
         return pietanzaDto;
     }
 
-    private IngredienteDto ingredienteToIngredienteDto(Ingrediente ingrediente) {
+    public IngredienteDto ingredienteToIngredienteDto(Ingrediente ingrediente) {
         IngredienteDto ingredienteDto = new IngredienteDto();
         ingredienteDto.setNomeProdotto(ingrediente.getProdotto().getNome());
         ingredienteDto.setProdottoId(ingrediente.getProdotto().getId());
         ingredienteDto.setQuantita(ingrediente.getQuantita());
         return ingredienteDto;
+    }
+
+
+
+    //salvataggio del menu
+    private Menu unmarshallMenuDto(MenuDto menuDto){
+        Menu menu = new Menu(menuDto.getNome(), menuDto.getDescrizione());
+        menu.setIsActive(menuDto.isActive());
+        List<Categoria> categorie = new ArrayList<>();
+        for (CategoriaMenuDto categoriaDto:menuDto.getCategorie()) {
+            Categoria categoria = new Categoria(categoriaDto.getNomeCategoria());
+            List<Long> pietanzeId = new ArrayList<>();
+            for (PietanzaMenuDto p:categoriaDto.getPietanze()) {
+                PietanzaMenuDto pietanzaMenuDto = (PietanzaMenuDto)p;
+                pietanzeId.add(pietanzaMenuDto.getId());
+            }
+            categoria.setPietanze(pietanzaRepository.findAll(pietanzeId));
+            categorie.add(categoria);
+        }
+        menu.setCategorie(categorie);
+        return menu;
+    }
+
+    public void saveMenu(MenuDto menuDto){
+        Menu menu = this.unmarshallMenuDto(menuDto);
+        menuRepository.save(menu);
     }
 
 }

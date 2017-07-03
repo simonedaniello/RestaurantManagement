@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import uni.isssr.dto.IngredienteDto;
 import uni.isssr.dto.PietanzaDto;
+import uni.isssr.dto.PietanzaMenuDto;
 import uni.isssr.entities.Etichetta;
 import uni.isssr.entities.Ingrediente;
 import uni.isssr.entities.Pietanza;
@@ -32,6 +33,9 @@ public class PietanzaService {
 
     @Autowired
     private PietanzaRepository pietanzaRepository;
+
+    @Autowired
+    private MenuService menuService;
 
 
     public Pietanza unmarshall(PietanzaDto pietanzaDto){
@@ -90,5 +94,29 @@ public class PietanzaService {
         }
         Etichetta[] array = new Etichetta[list.size()];
         return list.toArray(array);
+    }
+
+    private PietanzaMenuDto marshall(Pietanza pietanza){
+        List<IngredienteDto> ingredienti = new ArrayList<>();
+        for (Ingrediente ingrediente:pietanza.getIngredienti()){
+            IngredienteDto ingredienteDto = menuService.ingredienteToIngredienteDto(ingrediente);
+            ingredienti.add(ingredienteDto);
+            System.out.println(ingredienteDto.getNomeProdotto());
+        }
+        List<String> etichette = new ArrayList<>();
+        for (Etichetta etichetta:pietanza.getEtichette()){
+            etichette.add(etichetta.getClassificatore());
+        }
+        return new PietanzaMenuDto(pietanza.getId(), pietanza.getNome(), pietanza.getPrezzo(),
+                etichette, ingredienti);
+    }
+
+    public List<PietanzaMenuDto> findAll(){
+        List<Pietanza> pietanze = pietanzaRepository.findAll();
+        List<PietanzaMenuDto> pietanzaMenuDtos = new ArrayList<>();
+        for(Pietanza pietanza: pietanze){
+            pietanzaMenuDtos.add(this.marshall(pietanza));
+        }
+        return pietanzaMenuDtos;
     }
 }

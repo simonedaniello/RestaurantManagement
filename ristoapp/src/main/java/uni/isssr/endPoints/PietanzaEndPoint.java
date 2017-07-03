@@ -7,11 +7,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 import uni.isssr.dto.PietanzaDto;
+import uni.isssr.dto.PietanzaMenuDto;
 import uni.isssr.entities.Etichetta;
 import uni.isssr.entities.Pietanza;
 import uni.isssr.repositories.EtichettaRepository;
 import uni.isssr.repositories.PietanzaRepository;
 import uni.isssr.service.PietanzaService;
+
+import java.util.List;
 
 
 @RestController
@@ -51,8 +54,8 @@ public class PietanzaEndPoint {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/getAll")
-    public @ResponseBody Iterable<Pietanza> getAllPietanze(){
-        return pietanzaRepository.findAll();
+    public @ResponseBody List<PietanzaMenuDto> getAllPietanze(){
+        return pietanzaService.findAll();
     }
 
     @RequestMapping(method = RequestMethod.GET)
