@@ -156,8 +156,11 @@ public class MenuService {
         Menu menu = new Menu(menuDto.getNome(), menuDto.getDescrizione());
         menu.setIsActive(menuDto.getIsActive());
         List<Categoria> categorie = new ArrayList<>();
+        Integer posizioneCategoria = new Integer(1);
         for (CategoriaMenuDto categoriaDto:menuDto.getCategorie()) {
             Categoria categoria = new Categoria(categoriaDto.getNomeCategoria());
+            categoria.setPosizione(posizioneCategoria);
+            posizioneCategoria+=1;
             List<Long> pietanzeId = new ArrayList<>();
             for (PietanzaMenuDto p:categoriaDto.getPietanze()) {
                 PietanzaMenuDto pietanzaMenuDto = (PietanzaMenuDto)p;

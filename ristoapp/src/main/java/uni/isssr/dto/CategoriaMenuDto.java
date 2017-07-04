@@ -11,6 +11,16 @@ public class CategoriaMenuDto {
 
     private List<PietanzaMenuDto> pietanze;
 
+    private  Integer posizione;
+
+    public Integer getPosizione() {
+        return posizione;
+    }
+
+    public void setPosizione(Integer posizione) {
+        this.posizione = posizione;
+    }
+
     public CategoriaMenuDto() {}
 
     public String getNomeCategoria() {

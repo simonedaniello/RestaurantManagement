@@ -13,6 +13,16 @@ public class Categoria {
 
     private String nome;
 
+    private Integer posizione;
+
+    public Integer getPosizione() {
+        return posizione;
+    }
+
+    public void setPosizione(Integer posizione) {
+        this.posizione = posizione;
+    }
+
     @ManyToMany
     private List<Pietanza> pietanze;
 

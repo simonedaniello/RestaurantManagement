@@ -9,6 +9,11 @@ import java.util.List;
 public class CategoriaDto {
 
     private String nomeCategoria;
+
+    private Integer posizione;
+
+
+
     private List<PietanzaDto> pietanze;
 
     public CategoriaDto() {}
@@ -17,6 +22,13 @@ public class CategoriaDto {
         return nomeCategoria;
     }
 
+    public Integer getPosizione() {
+        return posizione;
+    }
+
+    public void setPosizione(Integer posizione) {
+        this.posizione = posizione;
+    }
     public void setNomeCategoria(String nomeCategoria) {
         this.nomeCategoria = nomeCategoria;
     }
