@@ -109,9 +109,8 @@ myApp.controller("CreaPietanzaController", function($scope, ajaxService, CreaPie
     $scope.saveDish = function(){
         var dtoPietanza = {nome: $scope.nomePietanza, prezzo: $scope.prezzoPietanza, etichette: $scope.associatedTags, ingredienti: $scope.selectedProd};
         var jsonPiet = angular.toJson(dtoPietanza);
-        console.log(jsonPiet);
         ajaxService.sendResource("http://localhost:8080/dish", jsonPiet).then(function (response) {
-            //$location.path("/cercaPietanza");
+            $location.path("/cercaPietanza");
         }, function (response) {
             console.log(response)
         });
