@@ -46,6 +46,9 @@ public class ResocontoEndPoint {
         return resocontoRepository.getResocontiByData(data);
     }*/
 
+
+
+    //la data va specificata come AAAA-DD-MM (ad esempio 2017-25-01)
     @RequestMapping(method = RequestMethod.GET, value = "/{data}")
     public AnalyticsDto getReport(@PathVariable(value = "data") String data){
         return analyticService.getReport(data);
