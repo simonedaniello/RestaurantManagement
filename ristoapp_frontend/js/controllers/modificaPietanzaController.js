@@ -8,6 +8,7 @@ myApp.controller("modificaPietanzaController", function($scope, ajaxService, Cre
                 //$scope.prodotti = CreaPietanzaService.parseProductList(response);
                 var data = response.data;
                 $scope.prodotti = data.prodotti;
+                console.log($scope.prodotti);
                 updateTagList();
             }
             , function (response) {
@@ -38,7 +39,8 @@ myApp.controller("modificaPietanzaController", function($scope, ajaxService, Cre
             for (i in response.ingredienti){
                 var checkBox = document.getElementById("check.".concat(response.ingredienti[i].prodotto.id));
                 checkBox.checked = true;
-                $scope.updateSelectedProd(response.ingredienti[i].prodotto.nome,response.ingredienti[i].prodotto.id, response.ingredienti[i].quantita);
+                console.log(response.ingredienti[i])
+                $scope.updateSelectedProd(response.ingredienti[i].prodotto.nome,response.ingredienti[i].prodotto.id, response.ingredienti[i].quantita, response.ingredienti[i].prezzo);
             }
             for (i in response.etichette){
                 var checkBox = document.getElementById("check.".concat(response.etichette[i].classificatore));
@@ -54,23 +56,41 @@ myApp.controller("modificaPietanzaController", function($scope, ajaxService, Cre
     $scope.associatedTags = [];
     $scope.nomePietanza = "";
     $scope.nomeNewTag = "";
+    $scope.prodottiTot = 0;
 
-    var searchIndex = function(searchTerm){
-        for(var i = 0, len = $scope.selectedProd.length; i < len; i++) {
-            if ($scope.selectedProd[i].name === searchTerm) {
+
+    var searchIndex = function(searchTerm, array){
+        for(var i = 0, len = array.length; i < len; i++) {
+            if (array[i].nome === searchTerm) {
                 return i;
             }
         }
     };
 
-    $scope.updateSelectedProd = function(nomeProd, id, q){
+    $scope.updateSelectedProd = function(nomeProd, id, q, prezzo){
         var checkBox = document.getElementById("check.".concat(id));
         if(checkBox.checked) {
-            var ingrediente = {nomeProdotto:nomeProd, quantita:q, prodottoId: id};
+            var ingrediente = {nome:nomeProd, quantita:q, prodottoId: id};
             $scope.selectedProd.push(ingrediente);
+            console.log($scope.prodottiTot);
+            $scope.prodottiTot = ($scope.prodottiTot*10 + prezzo*10)/10;
         }else{
-            var i = searchIndex(nomeProd);
-            $scope.selectedProd.splice(i,1);
+            var j = searchIndex(nomeProd, $scope.selectedProd);
+            $scope.prodottiTot = ($scope.prodottiTot*10 - prezzo*($scope.prod[j].qnt)*10)/10;
+            $scope.selectedProd.splice(j,1);
+        }
+    };
+
+    $scope.changeQnt = function(nomeProd) {
+        var qnt = document.getElementById("quant.".concat(nomeProd)).value;
+        var j = searchIndex(nomeProd, $scope.prod);
+        var prezzoUn = $scope.prod[j].prezzo;
+        var diff = $scope.prod[j].qnt - qnt;
+        $scope.prod[j].qnt = qnt;
+        if (diff < 0) { //aggiunto
+            $scope.prodottiTot = ($scope.prodottiTot*10 + prezzoUn*10)/10;
+        } else { //tolto
+            $scope.prodottiTot = ($scope.prodottiTot*10 - prezzoUn*10)/10;
         }
     };
 
