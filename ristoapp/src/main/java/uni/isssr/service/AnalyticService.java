@@ -30,10 +30,10 @@ public class AnalyticService {
     @Autowired
     private PietanzaService pietanzaService;
 
-    public AnalyticsDto getReport(Date data){
+    public AnalyticsDto getReport(String data){
 
         AnalyticsDto analyticsDto = new AnalyticsDto(data);
-        List<ResocontoPietanza> resocontoPietanze = resocontoRepository.findAllByData(new SimpleDateFormat("yyyy-dd-MM").format(data));
+        List<ResocontoPietanza> resocontoPietanze = resocontoRepository.findAllByData(data);
         List<PietanzaAnalyticsDto> pietanzaAnalyticsDtos = new ArrayList<>();
         for (ResocontoPietanza rp:resocontoPietanze) {
                pietanzaAnalyticsDtos.add(new PietanzaAnalyticsDto(

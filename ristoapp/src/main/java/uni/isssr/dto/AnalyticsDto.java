@@ -8,7 +8,7 @@ import java.util.List;
  */
 public class AnalyticsDto {
 
-    private Date data;
+    private String data;
 
     private final String location = "prova";
 
@@ -16,15 +16,15 @@ public class AnalyticsDto {
 
     public AnalyticsDto(){}
 
-    public AnalyticsDto(Date data) {
+    public AnalyticsDto(String data) {
         this.data = data;
     }
 
-    public Date getData() {
+    public String getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(String data) {
         this.data = data;
     }
 
