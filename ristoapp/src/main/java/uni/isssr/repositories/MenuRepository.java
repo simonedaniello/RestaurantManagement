@@ -10,12 +10,14 @@ import java.util.List;
 
 public interface MenuRepository extends JpaRepository<Menu, String> {
 
-    @Query("SELECT men FROM Menu men " +
+    Menu findOneByIsActive(Boolean bool);
+
+    @Query("SELECT distinct men FROM Menu men " +
             "JOIN men.categorie cat JOIN cat.pietanze pie JOIN pie.ingredienti ing JOIN ing.prodotto pro " +
             "WHERE pro.nome = :nomeIngrediente")
     List<Menu> findMenuByIngrediente(@Param("nomeIngrediente") String nomeIngrediente);
 
-    @Query("SELECT men FROM Menu men " +
+    @Query("SELECT distinct men FROM Menu men " +
             "JOIN men.categorie cat JOIN cat.pietanze pie JOIN pie.etichette eti " +
             "WHERE eti.classificatore = :nomeEtichetta")
     List<Menu> findMenuByEtichetta(@Param("nomeEtichetta") String nomeEtichetta);

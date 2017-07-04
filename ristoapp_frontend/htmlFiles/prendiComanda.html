@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-md-6">
                         <label for="tavolo">Inserire numero tavolo:</label>
-                        <input type="text" class="form-control" id="tavolo" ng-model="numeroTavolo"><br>
+                        <input type="number" class="form-control" id="tavolo" ng-model="numeroTavolo"><br>
                 </div>
                 <div class="col-md-6">
                     <div class="well well-lg"><b>TAVOLO: {{numeroTavolo}}</b></div>
@@ -42,7 +42,7 @@
                                     </td>
                                     <td ng-show="(prodotto.pietanza).indexOf(ricercaNome)!=-1">
                                         <div class="checkbox menu-item-price">
-                                            <label><input type="checkbox" ng-click="updateSelectedProd(prodotto.pietanza, prodotto.prezzo)" id="check.{{prodotto.pietanza}}"></label>
+                                            <label><input type="checkbox" ng-click="updateSelectedProd(prodotto.pietanza, prodotto.prezzo, prodotto.id)" id="check.{{prodotto.pietanza}}"></label>
                                         </div>
                                     </td>
                                 </tr>

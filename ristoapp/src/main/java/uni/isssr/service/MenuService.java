@@ -154,7 +154,7 @@ public class MenuService {
     //salvataggio del menu
     private Menu unmarshallMenuDto(MenuDto menuDto){
         Menu menu = new Menu(menuDto.getNome(), menuDto.getDescrizione());
-        menu.setIsActive(menuDto.isActive());
+        menu.setIsActive(menuDto.getIsActive());
         List<Categoria> categorie = new ArrayList<>();
         for (CategoriaMenuDto categoriaDto:menuDto.getCategorie()) {
             Categoria categoria = new Categoria(categoriaDto.getNomeCategoria());
@@ -171,7 +171,16 @@ public class MenuService {
     }
 
     public void saveMenu(MenuDto menuDto){
+        System.out.println(menuDto.getIsActive());
         Menu menu = this.unmarshallMenuDto(menuDto);
+        System.out.println(menu.getIsActive());
+        if (menu.getIsActive()) {
+            Menu menuAttivo = menuRepository.findOneByIsActive(true);
+            if (menuAttivo != null){
+                menuAttivo.setIsActive(false);
+                menuRepository.save(menuAttivo);
+            }
+        }
         menuRepository.save(menu);
     }
 

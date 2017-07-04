@@ -34,12 +34,14 @@ myApp.controller("PrendiComandaController", function($scope, ajaxService, Prendi
     };
 
     //update degli elementi selezionati dal cameriere
-    $scope.updateSelectedProd = function(nomeProd, prezzoProd){
+    $scope.updateSelectedProd = function(nomeProd, prezzoProd, id){
+        console.log(id);
         if($scope.numeroTavolo != null){
             var checkBox = document.getElementById("check.".concat(nomeProd));
             if(checkBox.checked) {
                 $scope.actuallyChecked.push(checkBox);
-                var ingrediente = {pietanza:nomeProd,       quantita:1,     prezzo:prezzoProd};
+                var ingrediente = {pietanza:nomeProd,       quantita:1,     prezzo:prezzoProd, id: id};
+                console.log(ingrediente);
                 $scope.selectedProd.push(ingrediente);
                 $scope.selectedProd.sort(function(a, b){
                     return (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)

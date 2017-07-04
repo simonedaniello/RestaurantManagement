@@ -140,7 +140,7 @@ myApp.controller("creaMenuCtrl", function($scope, ajaxService, CreaPietanzaServi
 
 
     $scope.removeFromMenu = function(nomeCat){
-        var i = searchIndex(nomeCat, $scope.categorieMenu);
+        var i = searchCategoriaIndex(nomeCat, $scope.categorieMenu);
         $scope.categorieMenu.splice(i,1);
     };
 
@@ -149,6 +149,7 @@ myApp.controller("creaMenuCtrl", function($scope, ajaxService, CreaPietanzaServi
         var i = searchCategoriaIndex(nomeCat, $scope.categorieMenu);
         if (i === 0) return;
         var temp = $scope.categorieMenu[i];
+        console.log("MOVE UP");
         console.log($scope.categorieMenu);
         console.log(i);
         $scope.categorieMenu[i] = $scope.categorieMenu[i-1];
@@ -166,6 +167,7 @@ myApp.controller("creaMenuCtrl", function($scope, ajaxService, CreaPietanzaServi
     };
 
     var searchCategoriaIndex = function(searchTerm, array){
+        console.log("CAT INDEX");
         console.log(searchTerm);
         for(var i = 0, len = array.length; i < len; i++) {
             console.log(array[i].nomeCategoria);

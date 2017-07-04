@@ -51,6 +51,10 @@ myApp.controller("GestisciTagController", function($scope, ajaxService) {
 
     $scope.modifyTag = function(tagName){
         var updatedName = document.getElementById(tagName).value;
+        if (updatedName === "") {
+            alert("Specificare un nome non vuoto per la modifica.");
+            return;
+        }
         var dtoTag = {classificatore: updatedName};
         var jsonTag = JSON.stringify(dtoTag);
         ajaxService.updateResource("http://localhost:8080/tags/" + tagName.toString(), jsonTag).then(

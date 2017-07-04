@@ -59,7 +59,7 @@
                                       €{{pietanza.prezzo}}
                                   </div>
                                   <span class="menu-item-description" ng-repeat="ingrediente in pietanza.ingredienti">
-                                      {{ingrediente.nomeProdotto}}{{$last ? '' : ', '}}
+                                      {{ingrediente.nome}}{{$last ? '' : ', '}}
                                   </span>
                                   <br>
                                   <span class="menu-item-tag" ng-repeat="etichetta in pietanza.etichette">
