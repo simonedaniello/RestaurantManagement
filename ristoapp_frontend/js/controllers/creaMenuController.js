@@ -11,6 +11,9 @@ myApp.controller("creaMenuCtrl", function($scope, ajaxService, CreaPietanzaServi
     var getPietanzeList = function() {
         ajaxService.getResource("http://localhost:8080/dish/getAll", null).then(
             function (response) {
+                console.log("ricevuto");
+                console.log(response);
+                console.log("ricevuto");
                 $scope.pietanze = response.slice();
             }
         , function (response) {
@@ -42,7 +45,6 @@ myApp.controller("creaMenuCtrl", function($scope, ajaxService, CreaPietanzaServi
     getCatNamesList();
 
     $scope.filterPietanze = function(element) {
-        console.log(element);
         if ($scope.filtro === "all") {
             return true;
         }
@@ -57,13 +59,14 @@ myApp.controller("creaMenuCtrl", function($scope, ajaxService, CreaPietanzaServi
 
     var searchIndex = function(searchTerm, array){
         for(var i = 0, len = array.length; i < len; i++) {
-            if (array[i].nome === searchTerm) {
+            if (array[i].pietanzaDto.nome === searchTerm) {
                 return i;
             }
         }
     };
 
     $scope.updateCheckboxFiltered = function(pietanza) {
+        console.log("UPDATE CHECKEBOX FILTERED");
         for(var i = 0, len = $scope.selected.length; i < len; i++) {
             //se la pietanza è tra le selezionate
             if ($scope.selected[i].pietanzaDto.nome === pietanza.pietanzaDto.nome) {
@@ -84,11 +87,13 @@ myApp.controller("creaMenuCtrl", function($scope, ajaxService, CreaPietanzaServi
     };
 
     $scope.updateSelected = function(pietanza){
+        console.log("SELECTED");
         var checkBox = document.getElementById(pietanza.pietanzaDto.nome);
         if(checkBox.checked) {
             $scope.selected.push(pietanza);
         }else{
             var i = searchIndex(pietanza.pietanzaDto.nome, $scope.selected);
+            console.log(i);
             $scope.selected.splice(i,1);
         }
     };
@@ -141,20 +146,33 @@ myApp.controller("creaMenuCtrl", function($scope, ajaxService, CreaPietanzaServi
 
 
     $scope.moveUp = function(nomeCat){
-        var i = searchIndex(nomeCat, $scope.categorieMenu);
+        var i = searchCategoriaIndex(nomeCat, $scope.categorieMenu);
         if (i === 0) return;
         var temp = $scope.categorieMenu[i];
+        console.log($scope.categorieMenu);
+        console.log(i);
         $scope.categorieMenu[i] = $scope.categorieMenu[i-1];
         $scope.categorieMenu[i-1] = temp;
+        console.log($scope.categorieMenu);
     };
 
 
     $scope.moveDown = function(nomeCat){
-        var i = searchIndex(nomeCat, $scope.categorieMenu);
+        var i = searchCategoriaIndex(nomeCat, $scope.categorieMenu);
         if (i === $scope.categorieMenu.length-1) return;
         var temp = $scope.categorieMenu[i];
         $scope.categorieMenu[i] = $scope.categorieMenu[i+1];
         $scope.categorieMenu[i+1] = temp;
+    };
+
+    var searchCategoriaIndex = function(searchTerm, array){
+        console.log(searchTerm);
+        for(var i = 0, len = array.length; i < len; i++) {
+            console.log(array[i].nomeCategoria);
+            if (array[i].nomeCategoria === searchTerm) {
+                return i;
+            }
+        }
     };
 
     $scope.addToMenu = function(){
@@ -179,7 +197,7 @@ myApp.controller("creaMenuCtrl", function($scope, ajaxService, CreaPietanzaServi
         var newCategory = {nomeCategoria: $scope.nomeCategoria, pietanze:$scope.selected};
         resetActualCategory();
         if ($scope.isModify === 1) {
-            var j = searchIndex($scope.nomeCategoria, $scope.categorieMenu);
+            var j = searchCategoriaIndex($scope.nomeCategoria, $scope.categorieMenu);
             $scope.categorieMenu.splice(j,1);
             $scope.categorieMenu.splice(j,0,newCategory);
             $scope.isModify = 0;

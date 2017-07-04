@@ -91,11 +91,8 @@ myApp.controller("CreaPietanzaController", function($scope, ajaxService, CreaPie
             var i = searchIndex(nomeProd, $scope.selectedProd);
             $scope.selectedProd.splice(i,1);
             var j = searchIndex(nomeProd, $scope.prod);
-            console.log(j);
-            console.log($scope.prod[j]);
-            $scope.prod.splice(j,1);
             $scope.prodottiTot = ($scope.prodottiTot*10 - prezzo*($scope.prod[j].qnt)*10)/10;
-            $scope.prodottiTot -= prezzo*($scope.prod[j].qnt);
+            $scope.prod.splice(j,1);
         }
     };
 
@@ -112,8 +109,9 @@ myApp.controller("CreaPietanzaController", function($scope, ajaxService, CreaPie
     $scope.saveDish = function(){
         var dtoPietanza = {nome: $scope.nomePietanza, prezzo: $scope.prezzoPietanza, etichette: $scope.associatedTags, ingredienti: $scope.selectedProd};
         var jsonPiet = angular.toJson(dtoPietanza);
+        console.log(jsonPiet);
         ajaxService.sendResource("http://localhost:8080/dish", jsonPiet).then(function (response) {
-            $location.path("/cercaPietanza");
+            //$location.path("/cercaPietanza");
         }, function (response) {
             console.log(response)
         });

@@ -46,10 +46,9 @@ public class PietanzaService {
         }
         List<Ingrediente> ingredienti = new ArrayList<>();
         for ( IngredienteDto ingredienteDto: pietanzaDto.getIngredienti()) {
-
             Prodotto prodotto = prodottoRepository.findOne(ingredienteDto.getProdottoId());
             if(prodotto == null){
-                prodotto = new Prodotto(ingredienteDto.getProdottoId(), ingredienteDto.getNomeProdotto());
+                prodotto = new Prodotto(ingredienteDto.getProdottoId(), ingredienteDto.getNome());
                 prodottoRepository.save(prodotto);
             }
 
@@ -71,7 +70,7 @@ public class PietanzaService {
 
             Prodotto prodotto = prodottoRepository.findOne(ingredienteDto.getProdottoId());
             if(prodotto == null){
-                prodotto = new Prodotto(ingredienteDto.getProdottoId(), ingredienteDto.getNomeProdotto());
+                prodotto = new Prodotto(ingredienteDto.getProdottoId(), ingredienteDto.getNome());
                 prodottoRepository.save(prodotto);
             }
 
@@ -101,7 +100,7 @@ public class PietanzaService {
         for (Ingrediente ingrediente:pietanza.getIngredienti()){
             IngredienteDto ingredienteDto = menuService.ingredienteToIngredienteDto(ingrediente);
             ingredienti.add(ingredienteDto);
-            System.out.println(ingredienteDto.getNomeProdotto());
+            System.out.println(ingredienteDto.getNome());
         }
         List<String> etichette = new ArrayList<>();
         for (Etichetta etichetta:pietanza.getEtichette()){

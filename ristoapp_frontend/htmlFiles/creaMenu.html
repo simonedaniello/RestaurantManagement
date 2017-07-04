@@ -40,7 +40,7 @@
                             <div class="panel-heading">
                                 <div class="container-fluid">
                                     <div class="col-sm-7">
-                                        <b>{{categoria.nome}}</b>
+                                        <b>{{categoria.nomeCategoria}}</b>
                                     </div>
                                     <div class="col-sm-5">
                                         <button type="button" class="btn btn-default" ng-click="modifyCat(categoria.nome)" data-toggle="modal" data-target="#categoryModal">Modifica</button>
@@ -60,7 +60,7 @@
                                                 </div>
                                                 <div class="col-sm-10">
                                                     <span class="menu-item-description" ng-repeat="ingrediente in pietanza.pietanzaDto.ingredienti">
-                                                        {{ingrediente.nomeProdotto}}{{$last ? '' : ', '}}
+                                                        {{ingrediente.nome}}{{$last ? '' : ', '}}
                                                     </span>
                                                 </div>
                                                 <div class=" menu-item-price col-sm-1">
@@ -118,7 +118,7 @@
                                                                             </div>
                                                                             <div>
                                                                                 <span class="menu-item-description" ng-repeat="ingrediente in pietanza.pietanzaDto.ingredienti">
-                                                                                    {{ingrediente.nomeProdotto}}{{$last ? '' : ', '}}
+                                                                                    {{ingrediente.nome}}{{$last ? '' : ', '}}
                                                                                 </span>
                                                                             </div>
                                                                         </div>

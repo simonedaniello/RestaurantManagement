@@ -143,7 +143,7 @@ public class MenuService {
 
     public IngredienteDto ingredienteToIngredienteDto(Ingrediente ingrediente) {
         IngredienteDto ingredienteDto = new IngredienteDto();
-        ingredienteDto.setNomeProdotto(ingrediente.getProdotto().getNome());
+        ingredienteDto.setNome(ingrediente.getProdotto().getNome());
         ingredienteDto.setProdottoId(ingrediente.getProdotto().getId());
         ingredienteDto.setQuantita(ingrediente.getQuantita());
         return ingredienteDto;

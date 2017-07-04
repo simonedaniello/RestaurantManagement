@@ -5,7 +5,7 @@ package uni.isssr.dto;
  */
 public class IngredienteDto {
 
-    private String nomeProdotto;
+    private String nome;
 
     private Double quantita;
 
@@ -15,17 +15,17 @@ public class IngredienteDto {
     }
 
     public IngredienteDto(String nomeProdotto, double quantita, long prodottoId) {
-        this.nomeProdotto = nomeProdotto;
+        this.nome = nomeProdotto;
         this.quantita = new Double(quantita);
         this.prodottoId = new Long(prodottoId);
     }
 
-    public String getNomeProdotto() {
-        return nomeProdotto;
+    public String getNome() {
+        return nome;
     }
 
-    public void setNomeProdotto(String nomeProdotto) {
-        this.nomeProdotto = nomeProdotto;
+    public void setNome(String nomeProdotto) {
+        this.nome = nomeProdotto;
     }
 
     public double getQuantita() {
