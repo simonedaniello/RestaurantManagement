@@ -88,9 +88,9 @@
                             <select class="btn btn-default dropdown-toggle" data-ng-model="filtro">
                                 <option selected value="all">Mostra tutti i prodotti</option>
                                 <option value="cibo">solo cibarie</option>
-                                <option value="bibite">solo bibite</option>
+                                <option value="bevanda">solo bibite</option>
                             </select>
-                        </div></p>
+                            </div></p>
                             <table class="table table-striped">
                                 <tbody>
                                 <tr ng-repeat="prodotto in prodotti | filter: filterProdotti | orderBy: 'nome'">
@@ -106,6 +106,7 @@
                                     </td>
                                     <td><div class="checkbox menu-item-price">
                                         <label><input type="checkbox" ng-click="updateSelectedProd(prodotto.nome, prodotto.id, prodotto.prezzo)" id="check.{{prodotto.nome}}"></label>
+                                        {{updateCheckboxFiltered(prodotto)}}
                                     </div></td>
                                 </tr>
                                 </tbody>
@@ -119,9 +120,9 @@
                         <div class="panel-body" class="row" style="overflow-y: auto; height: 350px">
                             <table class="table table-striped">
                                 <tbody>
-                                <tr ng-repeat="prod in selectedProd | orderBy: 'nomeProdotto'">
-                                    <td class="col-sm-9"><p style="font-style: italic">{{prod.nomeProdotto}}</p></td>
-                                    <td class="col-sm-3"><input name="quantita" required id ="quant.{{prod.nomeProdotto}}" type="number" min="1" onkeydown="return false" class="form-control" step="1" ng-model="prod.quantita" ng-change="changeQnt(prod.nomeProdotto)"></td>
+                                <tr ng-repeat="prod in selectedProd | orderBy: 'nome'">
+                                    <td class="col-sm-9"><p style="font-style: italic">{{prod.nome}}</p></td>
+                                    <td class="col-sm-3"><input name="quantita" required id ="quant.{{prod.nome}}" type="number" min="1" onkeydown="return false" class="form-control" step="1" ng-model="prod.quantita" ng-change="changeQnt(prod.nome)"></td>
                                 </tr>
                                 </tbody>
                             </table>

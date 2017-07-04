@@ -39,7 +39,7 @@ myApp.controller("CreaPietanzaController", function($scope, ajaxService, CreaPie
 
     var searchIndex = function(searchTerm, array){
         for(var i = 0, len = array.length; i < len; i++) {
-            if (array[i].nomeProdotto === searchTerm) {
+            if (array[i].nome === searchTerm) {
                 return i;
             }
         }
@@ -53,6 +53,17 @@ myApp.controller("CreaPietanzaController", function($scope, ajaxService, CreaPie
             return true;
         }
         return false;
+    };
+
+    $scope.updateCheckboxFiltered = function(prodotto) {
+        for(var i = 0, len = $scope.selectedProd.length; i < len; i++) {
+            if ($scope.selectedProd[i].nome === prodotto.nome) {
+                if ($scope.filtro === "all" || prodotto.tipo === $scope.filtro) {
+                    document.getElementById("check.".concat(prodotto.nome)).checked = true;
+                    return;
+                }
+            }
+        }
     };
 
     $scope.changeQnt = function(nomeProd) {
@@ -71,18 +82,20 @@ myApp.controller("CreaPietanzaController", function($scope, ajaxService, CreaPie
     $scope.updateSelectedProd = function(nomeProd, id, prezzo){
         var checkBox = document.getElementById("check.".concat(nomeProd));
         if(checkBox.checked) {
-            var ingrediente = {nomeProdotto:nomeProd, quantita:1, prodottoId: id};
+            var ingrediente = {nome:nomeProd, quantita:1, prodottoId: id};
             $scope.selectedProd.push(ingrediente);
-            var p = {prezzo: prezzo, nomeProdotto: nomeProd, qnt: 1};
+            var p = {prezzo: prezzo, nome: nomeProd, qnt: 1};
             $scope.prod.push(p);
             $scope.prodottiTot = ($scope.prodottiTot*10 + prezzo*10)/10;
         }else{
             var i = searchIndex(nomeProd, $scope.selectedProd);
             $scope.selectedProd.splice(i,1);
             var j = searchIndex(nomeProd, $scope.prod);
+            console.log(j);
+            console.log($scope.prod[j]);
             $scope.prod.splice(j,1);
-            $scope.prodottiTot = ($scope.prodottiTot*10 - prezzo*$scope.prod[j].qnt*10)/10;
-            $scope.prodottiTot -= prezzo*$scope.prod[j].qnt;
+            $scope.prodottiTot = ($scope.prodottiTot*10 - prezzo*($scope.prod[j].qnt)*10)/10;
+            $scope.prodottiTot -= prezzo*($scope.prod[j].qnt);
         }
     };
 
@@ -117,7 +130,6 @@ myApp.controller("CreaPietanzaController", function($scope, ajaxService, CreaPie
             updateTagList();
         }, function (response) {
             alert("Couldn't save tag");
-            console.log(response)
         });
         $scope.nomeNewTag = "";
     }
