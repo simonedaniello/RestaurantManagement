@@ -25,8 +25,4 @@ public interface PietanzaRepository extends JpaRepository<Pietanza, Long>{
     /* Per cercare una pietanza per nome */
     Pietanza findByNome(String nome);
 
-    @Transactional
-    @Modifying
-    @Query("delete from Pietanza where id = ?1")
-    public void deletePietanza(Long nome);
 }
