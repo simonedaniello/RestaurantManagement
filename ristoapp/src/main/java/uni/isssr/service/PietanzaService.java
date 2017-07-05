@@ -7,10 +7,8 @@ import org.springframework.stereotype.Service;
 import uni.isssr.dto.IngredienteDto;
 import uni.isssr.dto.PietanzaDto;
 import uni.isssr.dto.PietanzaMenuDto;
-import uni.isssr.entities.Etichetta;
-import uni.isssr.entities.Ingrediente;
-import uni.isssr.entities.Pietanza;
-import uni.isssr.entities.Prodotto;
+import uni.isssr.entities.*;
+import uni.isssr.repositories.CategoriaRepository;
 import uni.isssr.repositories.EtichettaRepository;
 import uni.isssr.repositories.PietanzaRepository;
 import uni.isssr.repositories.ProdottoRepository;
@@ -36,6 +34,9 @@ public class PietanzaService {
 
     @Autowired
     private MenuService menuService;
+
+    @Autowired
+    private CategoriaRepository categoriaRepository;
 
     @Autowired
     private IngredienteService ingredienteService;
@@ -123,5 +124,17 @@ public class PietanzaService {
             pietanzaMenuDtos.add(this.marshall(pietanza));
         }
         return pietanzaMenuDtos;
+    }
+
+    public void deletePietanza(Long id){
+        // prendo le categorie da aggiornare
+        List<Categoria> categorie = categoriaRepository.selectToDeletePietanza(id);
+        // prendo la pietanza da eliminare
+        Pietanza pietanza = pietanzaRepository.findOne(id);
+        for(Categoria categoria : categorie){
+            categoria.getPietanze().remove(pietanza);
+            categoriaRepository.save(categoria);
+        }
+        pietanzaRepository.delete(pietanza);
     }
 }

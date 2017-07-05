@@ -48,7 +48,7 @@ public class PietanzaEndPoint {
     //eliminazione di una pietanza
     @RequestMapping(method = RequestMethod.DELETE, value = "/delete/{ID}")
     public void deletePietanza(@PathVariable(value = "ID") Long id){
-        pietanzaRepository.deletePietanza(id);
+        pietanzaService.deletePietanza(id);
     }
 
     //Retrieve di una pietanza tramite il suo ID
