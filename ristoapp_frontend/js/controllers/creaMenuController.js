@@ -122,9 +122,9 @@ myApp.controller("creaMenuCtrl", function($scope, ajaxService, CreaPietanzaServi
     };
 
     $scope.modifyCat = function(nomeCat){
-        var i = searchIndex(nomeCat, $scope.categorieMenu);
+        var i = searchCategoriaIndex(nomeCat, $scope.categorieMenu);
         resetActualCategory();
-        $scope.nomeCategoria = $scope.categorieMenu[i].nome;
+        $scope.nomeCategoria = $scope.categorieMenu[i].nomeCategoria;
         $scope.selected = $scope.categorieMenu[i].pietanze.slice();
         for(var j = 0, len = $scope.categorieMenu[i].pietanze.length; j < len; j++) {
             document.getElementById($scope.categorieMenu[i].pietanze[j].pietanzaDto.nome).checked = true;
@@ -166,8 +166,8 @@ myApp.controller("creaMenuCtrl", function($scope, ajaxService, CreaPietanzaServi
 
     $scope.addToMenu = function(){
         if ($scope.isModify === 0) {
-            for(var i = 0, len = $scope.categorieMenu.length; i < len; i++) {
-                if($scope.categorieMenu[i].nome === $scope.nomeCategoria) {
+            for (var i = 0, len = $scope.categorieMenu.length; i < len; i++) {
+                if ($scope.categorieMenu[i].nomeCategoria === $scope.nomeCategoria) {
                     alert("La categoria selezionata esiste già nel menu.");
                     return;
                 }
@@ -182,15 +182,20 @@ myApp.controller("creaMenuCtrl", function($scope, ajaxService, CreaPietanzaServi
             return;
         }
         var newCategory = {nomeCategoria: $scope.nomeCategoria, pietanze:$scope.selected};
-        resetActualCategory();
         if ($scope.isModify === 1) {
             var j = searchCategoriaIndex($scope.nomeCategoria, $scope.categorieMenu);
+            console.log(j);
+            console.log($scope.categorieMenu);
             $scope.categorieMenu.splice(j,1);
+            console.log($scope.categorieMenu);
             $scope.categorieMenu.splice(j,0,newCategory);
+            console.log($scope.categorieMenu);
             $scope.isModify = 0;
+            resetActualCategory();
             return;
         }
         $scope.categorieMenu.push(newCategory);
+        resetActualCategory();
     };
 
 
