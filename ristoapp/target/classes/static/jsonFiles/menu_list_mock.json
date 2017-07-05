@@ -2,11 +2,13 @@
   {
     "nomeMenu": "Menu estivo",
     "descrizione": "Descrizione del menu estivo dai sapori eleganti e decisi",
-    "immagine": "imgFiles/menu_background.jpg"
+    "immagine": "imgFiles/menu_background.jpg",
+    "data" : "29/06/2017"
   },
   {
     "nomeMenu": "Menu autunnale",
     "descrizione": "Descrizione del menu autunnale",
-    "immagine": "imgFiles/default.svg"
+    "immagine": "imgFiles/default.svg",
+    "data" : "27/05/2017"
   }
 ]

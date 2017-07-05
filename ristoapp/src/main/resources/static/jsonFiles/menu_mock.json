@@ -8,17 +8,20 @@
         {
           "nomePietanza": "Spaghetti allo scoglio",
           "prezzo": 13,
-          "prodotti": ["spaghetti", "cozze", "seppie", "calamari", "gamberetti", "aglio", "prezzemolo"]
+          "ingredienti": ["spaghetti", "cozze", "seppie", "calamari", "gamberetti", "aglio", "prezzemolo"],
+          "etichette" : ["piccante"]
         },
         {
           "nomePietanza": "Tagliatelle ai funghi porcini",
           "prezzo": 12,
-          "prodotti": ["pasta all'uovo", "funghi porcini", "panna", "prezzemolo"]
+          "ingredienti": ["pasta all'uovo", "funghi porcini", "panna", "prezzemolo"],
+          "etichette" : ["vegetariano"]
         },
         {
           "nomePietanza": "Pasta al pesto",
           "prezzo": 7,
-          "prodotti": ["pasta", "basilico", "pinoli", "parmigiano", "olio d'oliva"]
+          "ingredienti": ["pasta", "basilico", "pinoli", "parmigiano", "olio d'oliva"],
+          "etichette" : ["vegetariano", "piccante"]
         }
       ]
     },
@@ -28,17 +31,20 @@
         {
           "nomePietanza": "Cotoletta alla milanese",
           "prezzo": 12,
-          "prodotti": ["vitello", "pomodori", "rucola"]
+          "ingredienti": ["vitello", "pomodori", "rucola"],
+          "etichette" : []
         },
         {
           "nomePietanza": "Fritto misto di mare",
           "prezzo": 16,
-          "prodotti": ["totani", "gamberi", "scampi", "seppie"]
+          "ingredienti": ["totani", "gamberi", "scampi", "seppie"],
+          "etichette" : []
         },
         {
-          "nomePietanza": "Fritto misto di verdure*",
+          "nomePietanza": "Fritto misto di verdure",
           "prezzo": 7,
-          "prodotti": ["zucchine", "carote", "cavoli", "melanzana"]
+          "ingredienti": ["zucchine", "carote", "cavoli", "melanzana"],
+          "etichette" : ["vegano"]
         }
       ]
     },
@@ -48,12 +54,14 @@
         {
           "nomePietanza": "Tiramisù",
           "prezzo": 4,
-          "prodotti": ["savoiardi", "caffè", "cacao in polvere", "mascarpone"]
+          "ingredienti": ["savoiardi", "caffè", "cacao in polvere", "mascarpone"],
+          "etichette" : []
         },
         {
           "nomePietanza": "Crostata ai frutti di bosco",
           "prezzo": 5,
-          "prodotti": ["pastafrolla", "mirtilli", "lamponi", "more", "crema"]
+          "ingredienti": ["pastafrolla", "mirtilli", "lamponi", "more", "crema"],
+          "etichette" : []
         }
       ]
     }

@@ -27,7 +27,7 @@
   <body>
 
   <!-- Page Content -->
-  <div class="MenuContainer" ng-controller="MenuController" ng-style="{'background-image':'url(' + menu.immagineMenu + ')'}">
+  <div class="MenuContainer" ng-controller="VisualizzaMenuController" ng-style="{'background-image':'url(' + menu.immagineMenu + ')'}">
       <div class="row">
           <div class="col-md-2"></div>
 
@@ -53,13 +53,17 @@
                               <!-- Pietanza starts -->
                               <div class="menu-item" ng-repeat="pietanza in categoria.pietanze">
                                   <div class="menu-item-name">
-                                      {{pietanza.nomePietanza}}
+                                      {{pietanza.nome}}
                                   </div>
                                   <div class="menu-item-price">
                                       €{{pietanza.prezzo}}
                                   </div>
-                                  <span class="menu-item-description" ng-repeat="prodotto in pietanza.prodotti">
-                                      {{prodotto}}{{$last ? '' : ', '}}
+                                  <span class="menu-item-description" ng-repeat="ingrediente in pietanza.ingredienti">
+                                      {{ingrediente.nome}}{{$last ? '' : ', '}}
+                                  </span>
+                                  <br>
+                                  <span class="menu-item-tag" ng-repeat="etichetta in pietanza.etichette">
+                                      {{etichetta}}{{$last ? '' : ', '}}
                                   </span>
                               </div>
                               <!-- Item ends -->
@@ -70,7 +74,7 @@
 
                   </div>
 
-                  <div class="panel-footer">* Piatti vegani</div>
+                  <div class="panel-footer"></div>
 
               </div>
 

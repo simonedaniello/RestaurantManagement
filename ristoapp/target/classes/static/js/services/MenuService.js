@@ -16,7 +16,7 @@ myApp.service('MenuService', ["$http", function($http) {
                 var docDefinition = {
                     content: [{
                         image: myImage,
-                        width: 495
+                        width: 450
                     }]
                 };
                 pdfMake.createPdf(docDefinition).download(nomeMenu + ".pdf");

@@ -1,28 +1,64 @@
-/**
- * Created by dandi on 13/05/17.
- */
 
-var myApp = angular.module("ristoApp", ["ngRoute", "ngStorage"]);
+var myApp = angular.module("ristoApp", ["ngRoute", "ngStorage", "pubnub.angular.service"]);
 
 
 myApp.config(function($routeProvider) {
     $routeProvider
-        .when("/table", {
+        .when("/ricercaMenu", {
             templateUrl : "htmlFiles/ricercaMenu.html",
             controller:"RicercaMenuController"
         })
-        .when("/table/:nomeMenu", {
+        .when("/ricercaMenu/:nomeMenu", {
             templateUrl : "htmlFiles/visualizzaMenu.html",
             css : "cssFiles/menu.css",
-            controller : "MenuController"
+            controller : "VisualizzaMenuController"
         })
         .when("/creamenu", {
             templateUrl : "htmlFiles/creaMenu.html",
-            controller:"creaCtrl"
+            controller:"creaMenuCtrl"
         })
         .when("/creaPietanza", {
             templateUrl : "htmlFiles/creaPietanza.html",
             controller:"CreaPietanzaController"
+        })
+        .when("/gestisciEtichette", {
+            templateUrl : "htmlFiles/gestisciTag.html",
+            controller:"GestisciTagController"
+        })
+        .when("/prendiComanda", {
+            templateUrl : "htmlFiles/prendiComanda.html",
+            controller:"PrendiComandaController"
+        })
+        .when("/comandecuoco", {
+            templateUrl : "htmlFiles/RisolviComandeCuoco.html",
+            controller:"RisolviComandeController"
+        })
+        .when("/ordineMagCentr", {
+            templateUrl : "htmlFiles/ordineMagazzinoCentrale.html",
+            controller:"OrdineMagazzinoCentraleController"
+        })
+        .when("/cercaPietanza", {
+            templateUrl: "htmlFiles/ricercaPietanze.html",
+            css : "cssFiles/ricercaPietanzaTabs.css",
+            controller: "ricercaPietanzaController"
+        })
+        .when("/modificaPietanza/:idPietanza", {
+            templateUrl: "htmlFiles/modificaPietanza.html"
+        })
+        .when("/cassa", {
+            templateUrl: "htmlFiles/cassa.html",
+            controller: 'CassaController'
+        })
+        .when('/dovesiamo', {
+            templateUrl: "htmlFiles/dovesiamo.html",
+            controller: 'doveSiamoController'
+            /*resolve: {
+                init: function() {
+                    return function($route) {
+                        console.log('Loading Blog Article ' + $route.current.params.id);
+                    }
+                }
+            }*/
         })
         .otherwise({
             templateUrl : "htmlFiles/mainPage.html"
@@ -36,4 +72,5 @@ myApp.controller('researchController', function($scope) {
         return tag.contains(written);
     }
 });
+
 

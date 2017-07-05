@@ -1,4 +1,7 @@
-
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css">
+</head>
 
 <body>
 
@@ -6,27 +9,48 @@
     <div class="row content" ng-controller="RicercaMenuController">
 
         <div class="col-sm-4">
-        <div class="panel panel-default">
-            <div class="panel-heading">Ricerca Menu</div>
-            <div class="panel-body">
-
-                <div class="form-group">
-                    <label for="nome">Nome:</label>
-                    <input type="text" class="form-control" id="nome">
-                </div>
-                <div class="form-group">
-                    <label for="usr2">Ingredienti:</label>
-                    <input type="text" class="form-control" id="usr2">
-                </div>
-                <div class="form-group">
-                    <label for="usr4">Chef:</label>
-                    <input type="text" class="form-control" id="usr4">
-                </div>
-                <button type="submit" ng-click="ricerca()" class="btn btn-primary">Cerca</button>
 
 
+            <div class="panel panel-default">
+                <div class="panel-heading">Ricerca Menu</div>
+                <div class="panel-body">
+
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="nome" ng-model="search.nome" placeholder="Ricerca per Nome" required>
+                    </div>
+                    <button type="submit" ng-click="ricercaNome()" class="btn btn-primary">Cerca</button>
+                </div>
             </div>
-        </div>
+
+
+
+            <div class="panel panel-default">
+                <div class="panel-heading">Ricerca Menu</div>
+                <div class="panel-body">
+
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="ingrediente" ng-model="search.ingrediente" placeholder="Ricerca per Ingrediente" required>
+                    </div>
+                    <button type="submit" ng-click="ricercaIngrediente()" class="btn btn-primary">Cerca</button>
+                </div>
+            </div>
+
+
+
+            <div class="panel panel-default">
+                <div class="panel-heading">Ricerca Menu</div>
+                <div class="panel-body">
+
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="etichetta" ng-model="search.etichetta" placeholder="Ricerca per Etichetta" required>
+                    </div>
+                    <button type="submit" ng-click="ricercaEtichetta()" class="btn btn-primary">Cerca</button>
+                </div>
+            </div>
+
+
+            <button type="submit" ng-click="findAll()" class="btn btn-primary">Cerca tutti</button>
+
         </div>
 
         <div class="col-sm-8">
@@ -38,12 +62,18 @@
                             <br>
                             <div class="col-md-8 col-md-offset-2">
 
-                                <a href="#/table/:nomeMenu" class="card" ng-repeat="menu in listaMenu">
+                                <div class="card" style="width: 35rem;" ng-repeat="menu in listaMenu">
                                     <img class="card-img-top" ng-src="{{menu.immagine}}" style="height: 200px; width: 100%; display: block;">
                                     <div class="card-block">
-                                        <p class="card-text">{{menu.descrizione}}</p>
+                                        <h4 class="card-title">{{menu.nome}}</h4>
+                                        <p class="card-text">
+                                            {{menu.descrizione}}
+                                            <br>
+                                            {{menu.data}}
+                                        </p>
+                                        <button type="submit" class="btn btn-primary" ng-click="pickMenu(menu.nome)">Visualizza</button>
                                     </div>
-                                </a>
+                                </div>
 
                             </div>
 
@@ -56,4 +86,7 @@
 </div>
 
 
+</body>
+
+</html>
 

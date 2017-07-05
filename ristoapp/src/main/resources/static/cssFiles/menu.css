@@ -41,6 +41,12 @@
     line-height: 1.5em;
 }
 
+.menu-item-tag {
+    font-style: italic;
+    font-size: .7em;
+    line-height: 1.0em;
+}
+
 .menu-item-price{
     float: right;
     font-weight: bold;

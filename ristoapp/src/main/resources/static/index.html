@@ -8,6 +8,16 @@
 
     <link href="cssFiles/sidebarBootstrap.css" rel="stylesheet">
     <link href="cssFiles/generalCSS.css" rel="stylesheet">
+    <link rel="stylesheet" href="cssFiles/ricercaPietanzaTabs.css">
+
+
+    <!--roba per le mappe-->
+    <link rel="stylesheet" href="https://openlayers.org/en/v4.2.0/css/ol.css" type="text/css">
+    <!-- The line below is only needed for old environments like Internet Explorer and Android 4.x -->
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
+
+
+    <!--roba per le mappe-->
 
     <!-- Script di angularjs e di angularjs-route-->
     <script src="lib/node_modules/angular/angular.js"></script>
@@ -20,23 +30,41 @@
     <script src="js/app.js"></script>
 
     <script src="js/services/ajaxService.js"></script>
+    <script src="js/services/CreaPietanzaService.js"></script>
     <script src="js/controllers/CreaPietanzaController.js"></script>
+    <script src="js/controllers/GesticiTagController.js"></script>
     <script src="js/controllers/creaMenuController.js"></script>
-    <script src="js/controllers/CreaCategoriaController.js"></script>
     <script src="js/controllers/headerController.js"></script>
+    <script src="js/controllers/ricercaPietanzaController.js"></script>
+    <script src="js/controllers/OrdineMagazzinoCentraleController.js"></script>
+    <script src="js/controllers/modificaPietanzaController.js"></script>
+    <script src="js/controllers/cassaController.js"></script>
+    <script src="js/services/cassaService.js"></script>
 
     <!-- Inizio script visualizzazione menu -->
-    <script src="js/controllers/MenuController.js"></script>
+    <script src="js/controllers/VisualizzaMenuController.js"></script>
     <script src="js/services/MenuService.js"></script>
+    <script src="js/services/RicercaPietanzaService.js"></script>
     <script src="lib/js/html2canvas.js"></script>
     <script src="lib/js/pdfmake.min.js"></script>
     <script src="lib/js/vfs_fonts.js"></script>
-    <script src="js/controllers/CreaCategoriaController.js"></script>
     <!-- Fine script visualizzazione menu -->
 
     <!-- Inizio script ricerca menu -->
     <script src="js/controllers/RicercaMenuController.js"></script>
     <!-- Fine script ricerca menu -->
+
+    <!--inizio script comande-->
+
+    <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.12.0.js"></script>
+    <script src="https://cdn.pubnub.com/sdk/pubnub-angular/pubnub-angular-4.0.2.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/sockjs/1/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.js"></script>
+    <script src="js/services/PrendiComandaService.js"></script>
+    <script src="js/controllers/prendiComandaController.js"></script>
+    <script src="js/controllers/RisolviComandeController.js"></script>
+    <!--fine script comande-->
 
     <link href="cssFiles/menu.css" rel="stylesheet">
     <link href="cssFiles/project.css" rel="stylesheet">
@@ -47,20 +75,19 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-
 </head>
 <body ng-app="ristoApp">
 
-<header class="w3-display-container w3-content w3-wide" style="max-width:1600px;min-width:500px" id="home">
+
+<!--<header class="w3-display-container w3-content w3-wide" style="max-width:1600px;min-width:500px" id="home">
     <img class="w3-image" src="http://www.karismahotels.com/gourmetinclusive/images/main/platemain.jpg" alt="Hamburger Catering" width="1600" height="800">
     <div class="w3-display-bottomleft w3-padding-large w3-opacity">
         <h1 class="w3-xxlarge">RistoApp</h1>
     </div>
-</header>
-
+</header>-->
 
 <div ng-controller="headerController">
-    <nav role="navigation" class="navbar navbar-default">
+    <nav role="navigation" class="navbar navbar-default" id="main">
         <div class="container-fluid">
             <div class="navbar-header">
                 <a class="navbar-brand" href="#">RistoApp</a>
@@ -68,16 +95,42 @@
             </div>
             <ul class="nav navbar-nav">
                 <li class="active"><a href="#">Home</a></li>
-                <li><a href="#!monday">Categories</a></li>
-                <li><a href="#!table">Menu</a></li>
-                <li><a href="#!creamenu">Crea Menu</a></li>
-                <li><a href="#!creaPietanza">Crea Pietanza</a></li>
+                <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown"
+                                        href="" id="useradmin">
+                    <span class="caret"></span> </a>
+                    <ul class="dropdown-menu">
+                        <li><input type="radio" name="utenteadmin" id="utente"
+                                   onclick="utenteadminfunzione();">Utente</input></li>
+                        <li><input type="radio" name="utenteadmin" id="cuoco"
+                                   onclick="utenteadminfunzione();">Cuoco</input></li>
+                        <li><input type="radio" name="utenteadmin" id="cameriere"
+                                   onclick="utenteadminfunzione();">Cameriere</input></li>
+                    </ul>
+                <li id="menu"><a href="#!ricercaMenu" >Menu</a></li>
+                <li id="creamenu"><a href="#!creamenu">Crea Menu</a></li>
+                <li class="dropdown" id="pietanze"><a class="dropdown-toggle" data-toggle="dropdown" href="">Pietanze
+                <span class="caret"></span> </a>
+                <ul class="dropdown-menu">
+                    <li><a href="#!creaPietanza">Crea Pietanza</a></li>
+                    <li><a href="#!cercaPietanza">Le mie Pietanze</a> </li>
+                </ul>
+                </li>
+                <li id="gestioneTag"><a href="#!gestisciEtichette">Gestisci Tag</a></li>
+                <li id="prendicomanda"><a href="#!prendiComanda">Prendi Comanda</a></li>
+                <li id="listacomandecuoco"><a href="#!comandecuoco">Lista Comande Cuoco</a></li>
+                <li id="ordinaMagazzino"><a href="#!ordineMagCentr">Ordine</a></li>
+                <li id="mostramenu"><a href="#">Mostra il Menu</a></li>
+                <li id="contattaci"><a href="#">Contattaci</a></li>
+                <li id="dovesiamo"><a href="#!dovesiamo">Dove Siamo</a></li>
+                <li id="cassa"><a href="#!cassa">Cassa</a></li>
+
+
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a ng-click="registerClick()" href=""><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
                 <li><a ng-click="loginClick()" href=""><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             </ul>
-            <form class="navbar-form navbar-right">
+            <!--<form class="navbar-form navbar-right">
                 <div class="input-group">
                     <input type="text" class="form-control search-input" placeholder="Search">
                     <div class="input-group-btn">
@@ -86,7 +139,7 @@
                         </button>
                     </div>
                 </div>
-            </form>
+            </form>-->
         </div>
         <div ng-hide="loghide" ng-click="checkBounds()" id="myDropdown" class="dropdown-content-login">
             <div class="wrapper">
@@ -173,6 +226,9 @@
     <i class="fa fa-twitter w3-hover-opacity"></i>
     <i class="fa fa-linkedin w3-hover-opacity"></i>
 </footer>
+
+<script src="js/navbarControl/userAdminChoice.js"></script>
+
 
 
 </body>
