@@ -1,4 +1,4 @@
-<div ng-controller="modificaPietanzaController">
+<div ng-controller="CreaPietanzaController">
     <form name="creaPietanzaForm" class="form-horizontal">
         <div class="form-group">
             <div class="container">
@@ -85,7 +85,7 @@
                         <div class="panel-body" style="overflow-y: auto; height: 420px">
                             <table class="table table-striped">
                                 <tbody>
-                                <tr ng-repeat="prodotto in prodotti | orderBy: 'nome'">
+                                <tr ng-repeat="prodotto in prodotti | filter: filterProdotti | orderBy: 'nome'">
                                     <td>
                                         <div class="menu-item-name">
                                             <b>{{prodotto.nome}}</b>
@@ -97,7 +97,8 @@
                                         </div>
                                     </td>
                                     <td><div class="checkbox menu-item-price">
-                                        <label><input type="checkbox" ng-click="updateSelectedProd(prodotto.nome, prodotto.id, 1)" id="check.{{prodotto.id}}"></label>
+                                        <label><input type="checkbox" ng-click="updateSelectedProd(prodotto.nome, prodotto.id, prodotto.prezzo, 1)" id="check.{{prodotto.nome}}"></label>
+                                        {{updateCheckboxFiltered(prodotto)}}
                                     </div></td>
                                 </tr>
                                 </tbody>
@@ -107,7 +108,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="panel panel-default">
-                        <div class="panel-heading"><p><b>Prodotti selezionate</b></p></div>
+                        <div class="panel-heading"><p><b>Prodotti selezionati</b></p></div>
                         <div class="panel-body" class="row" style="overflow-y: auto; height: 350px">
                             <table class="table table-striped">
                                 <tbody>

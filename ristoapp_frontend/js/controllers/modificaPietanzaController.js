@@ -37,10 +37,11 @@ myApp.controller("modificaPietanzaController", function($scope, ajaxService, Cre
             $scope.nomePietanza = response.nome;
             $scope.prezzoPietanza = response.prezzo;
             for (i in response.ingredienti){
-                var checkBox = document.getElementById("check.".concat(response.ingredienti[i].prodotto.id));
+                var checkBox = document.getElementById("check.".concat(i.prodotto.id));
                 checkBox.checked = true;
-                console.log(response.ingredienti[i])
-                $scope.updateSelectedProd(response.ingredienti[i].prodotto.nome,response.ingredienti[i].prodotto.id, response.ingredienti[i].quantita, response.ingredienti[i].prezzo);
+                console.log(i)
+                $scope.updateSelectedProd(i.prodotto.nome,
+                    response.ingredienti[i].prodotto.id, response.ingredienti[i].quantita, response.ingredienti[i].prezzo);
             }
             for (i in response.etichette){
                 var checkBox = document.getElementById("check.".concat(response.etichette[i].classificatore));
@@ -53,6 +54,7 @@ myApp.controller("modificaPietanzaController", function($scope, ajaxService, Cre
     };
 
     $scope.selectedProd = [];
+    $scope.prod = [];
     $scope.associatedTags = [];
     $scope.nomePietanza = "";
     $scope.nomeNewTag = "";
@@ -70,14 +72,29 @@ myApp.controller("modificaPietanzaController", function($scope, ajaxService, Cre
     $scope.updateSelectedProd = function(nomeProd, id, q, prezzo){
         var checkBox = document.getElementById("check.".concat(id));
         if(checkBox.checked) {
-            var ingrediente = {nome:nomeProd, quantita:q, prodottoId: id};
+            var ingrediente = {nome:nomeProd, quantita:1, prodottoId: id};
             $scope.selectedProd.push(ingrediente);
-            console.log($scope.prodottiTot);
+            var p = {prezzo: prezzo, nome: nomeProd, qnt: 1};
+            $scope.prod.push(p);
             $scope.prodottiTot = ($scope.prodottiTot*10 + prezzo*10)/10;
         }else{
-            var j = searchIndex(nomeProd, $scope.selectedProd);
+            var i = searchIndex(nomeProd, $scope.selectedProd);
+            $scope.selectedProd.splice(i,1);
+            var j = searchIndex(nomeProd, $scope.prod);
             $scope.prodottiTot = ($scope.prodottiTot*10 - prezzo*($scope.prod[j].qnt)*10)/10;
-            $scope.selectedProd.splice(j,1);
+            $scope.prod.splice(j,1);
+        /*
+             var ingrediente = {nome:nomeProd, quantita:q, prodottoId: id};
+             $scope.selectedProd.push(ingrediente);
+             console.log($scope.prodottiTot);
+             $scope.prodottiTot = ($scope.prodottiTot*10 + prezzo*10)/10;
+             }else{
+             var j = searchIndex(nomeProd, $scope.selectedProd);
+             $scope.prodottiTot = ($scope.prodottiTot*10 - prezzo*($scope.prod[j].qnt)*10)/10;
+
+             $scope.selectedProd.splice(j,1);
+             console.log($scope.selectedProd);
+             }*/
         }
     };
 
@@ -126,9 +143,10 @@ myApp.controller("modificaPietanzaController", function($scope, ajaxService, Cre
             updateTagList();
         }, function (response) {
             alert("Couldn't save tag");
-            console.log(response)
         });
         $scope.nomeNewTag = "";
     };
 
 });
+
+

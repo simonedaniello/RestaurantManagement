@@ -90,8 +90,8 @@ public class Pietanza {
         this.nome = nome;
     }
 
-    public double getPrezzo() {
-        return prezzo.doubleValue();
+    public Double getPrezzo() {
+        return this.prezzo;
     }
 
     public void setPrezzo(Double prezzo) {
