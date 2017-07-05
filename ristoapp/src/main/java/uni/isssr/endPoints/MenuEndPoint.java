@@ -9,6 +9,7 @@ import uni.isssr.dto.MenuSearchDto;
 import uni.isssr.entities.Categoria;
 import uni.isssr.entities.Menu;
 import uni.isssr.entities.Pietanza;
+import uni.isssr.repositories.MenuRepository;
 import uni.isssr.service.MenuService;
 
 import java.util.List;
@@ -25,9 +26,8 @@ public class MenuEndPoint {
     @Autowired
     private MenuService menuService;
 
-
     @RequestMapping(value = "/attivo", method = RequestMethod.GET)
-    public List<CategoriaMenuDto> getMenuAttivo() {
+    public List<CategoriaMenuDto> getCategorieMenuAttivo() {
         return menuService.searchMenuAttivo();
     }
 
@@ -56,10 +56,25 @@ public class MenuEndPoint {
         return menuService.searchAllMenu();
     }
 
+    @RequestMapping(value = "/findMenuAttivo", method = RequestMethod.GET)
+    public List<MenuSearchDto> getMenuAttivo() {
+        return menuService.getMenuAttivo();
+    }
+
     @RequestMapping(method = RequestMethod.POST)
     public void saveMenu(@RequestBody MenuDto menuDto) {
         System.out.println(menuDto.getIsActive());
         menuService.saveMenu(menuDto);
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "/{ID}")
+    public void deletePietanza(@PathVariable(value = "ID") String id){
+        menuService.deleteMenu(id);
+    }
+
+    @RequestMapping(method = RequestMethod.PUT, value = "/{ID}")
+    public void attivaMenu(@PathVariable(value = "ID") String id){
+        menuService.attivaMenu(id);
     }
 
 

@@ -4,7 +4,7 @@
 
 // Controller per la ricerca dei menu sulla base di filtri di ricerca e visualizzazione dell'elenco dei menu.
 
-myApp.controller("RicercaMenuController", ["$scope", "MenuService", "$location", function ($scope, MenuService, $location) {
+myApp.controller("RicercaMenuController", ["$scope", "MenuService", "$location", "ajaxService", function ($scope, MenuService, $location, ajaxService) {
 
     $scope.showList = false;
 
@@ -28,6 +28,10 @@ myApp.controller("RicercaMenuController", ["$scope", "MenuService", "$location",
         search("/findAll");
     };
 
+    $scope.findMenuAttivo = function(){
+        search("/findMenuAttivo");
+    }
+
     $scope.search = {nome: "", ingrediente: "", etichetta: ""};
 
     $scope.ricercaNome = function () {
@@ -49,6 +53,33 @@ myApp.controller("RicercaMenuController", ["$scope", "MenuService", "$location",
         // Parsa la stringa del nome del menù togliendo gli spazi bianchi e facendone il lower case;
         //var requestedMenu = nomeMenu.toString().toLowerCase().replace(" ", "");
         $location.path("/ricercaMenu/" + nomeMenu);
+    };
+
+    $scope.deleteMenu = function (nomeMenu) {
+        ajaxService.deleteResource("http://localhost:8080/menu/" + nomeMenu, null).then(function (response) {
+            var index = searchIndex(nomeMenu, $scope.listaMenu);
+            $scope.listaMenu.splice(index, 1);
+        }, function (error) {
+            alert("Errore nell'eliminazione");
+            console.log(error);
+        });;
+    }
+
+    $scope.attivaMenu = function (nomeMenu) {
+        ajaxService.updateResource("http://localhost:8080/menu/" + nomeMenu, null).then(function (response) {
+            alert("Menu reso attivo con successo");
+        }, function (error) {
+            alert("Errore nell'operazione");
+            console.log(error);
+        });;
+    }
+
+    var searchIndex = function(searchTerm, array){
+        for(var i = 0, len = array.length; i < len; i++) {
+            if (array[i].nome === searchTerm) {
+                return i;
+            }
+        }
     };
 
 }]);

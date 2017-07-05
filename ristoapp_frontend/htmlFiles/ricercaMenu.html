@@ -50,6 +50,7 @@
 
 
             <button type="submit" ng-click="findAll()" class="btn btn-primary">Cerca tutti</button>
+            <button type="submit" ng-click="findMenuAttivo()" class="btn btn-primary">Menu Attivo</button>
 
         </div>
 
@@ -72,6 +73,8 @@
                                             {{menu.data}}
                                         </p>
                                         <button type="submit" class="btn btn-primary" ng-click="pickMenu(menu.nome)">Visualizza</button>
+                                        <button type="submit" class="btn btn-danger" ng-click="deleteMenu(menu.nome)">Elimina</button>
+                                        <button type="submit" class="btn btn-success" ng-click="attivaMenu(menu.nome)">Rendi Attivo</button>
                                     </div>
                                 </div>
 

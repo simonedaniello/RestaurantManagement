@@ -201,13 +201,43 @@ public class MenuService {
     public void saveMenu(MenuDto menuDto){
         Menu menu = this.unmarshallMenuDto(menuDto);
         if (menu.getIsActive()) {
-            Menu menuAttivo = menuRepository.findOneByIsActive(true);
-            if (menuAttivo != null){
-                menuAttivo.setIsActive(false);
-                menuRepository.save(menuAttivo);
-            }
+            this.disattivaMenu();
         }
         menuRepository.save(menu);
+    }
+
+    //elimina il menu col nome dato
+    public void deleteMenu(String nome){
+        menuRepository.delete(nome);
+    }
+
+
+    //rende attivo il menu (ne setta l'attributo a true) il cui nome è passato per parametro e rende inattivo il menu correntemente attivo se presente
+    public void attivaMenu(String nome){
+        this.disattivaMenu();
+        Menu menuAttivo= menuRepository.findOne(nome);
+        menuAttivo.setIsActive(true);
+        menuRepository.save(menuAttivo);
+    }
+
+
+    //disattiva il menu attivo
+    private void disattivaMenu(){
+        Menu menuAttivo = menuRepository.findOneByIsActive(true);
+        if (menuAttivo != null){
+            menuAttivo.setIsActive(false);
+            menuRepository.save(menuAttivo);
+        }
+    }
+
+    //per dettagli vedi findByNAme
+    public List<MenuSearchDto> getMenuAttivo(){
+        Menu menu = menuRepository.findOneByIsActive(true);
+        List<MenuSearchDto> menuSearchDtos = new ArrayList<MenuSearchDto>();
+        if (menu == null)
+            return menuSearchDtos;
+        menuSearchDtos.add(this.menuToMenuSearchDto(menu));
+        return menuSearchDtos;
     }
 
 }

@@ -15,14 +15,6 @@ public class Categoria {
 
     private Integer posizione;
 
-    public Integer getPosizione() {
-        return posizione;
-    }
-
-    public void setPosizione(Integer posizione) {
-        this.posizione = posizione;
-    }
-
     @ManyToMany
     private List<Pietanza> pietanze;
 
@@ -64,4 +56,13 @@ public class Categoria {
     public void removePietanza(Pietanza pietanza) {
         this.pietanze.remove(pietanza);
     }
+
+    public Integer getPosizione() {
+        return posizione;
+    }
+
+    public void setPosizione(Integer posizione) {
+        this.posizione = posizione;
+    }
+
 }
