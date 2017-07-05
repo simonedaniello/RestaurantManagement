@@ -8,7 +8,7 @@ public class ComandaItemDto {
     private String pietanza;
     private int quantita;
     private double prezzo;
-    private int id;
+    private Long id;
 
 
     public ComandaItemDto() {}
@@ -37,11 +37,11 @@ public class ComandaItemDto {
         this.prezzo = prezzo;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 }

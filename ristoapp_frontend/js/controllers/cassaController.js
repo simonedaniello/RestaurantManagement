@@ -1,4 +1,4 @@
-myApp.controller("CassaController", function($scope, CassaService) {
+myApp.controller("CassaController", function($scope, CassaService, ajaxService) {
 
     $scope.numeroTavolo = null;
     $scope.comandaItems = [];
@@ -20,8 +20,23 @@ myApp.controller("CassaController", function($scope, CassaService) {
     $scope.chiudiTavolo = function () {
         if ($scope.prezzoTotale == 0)
             return;
+
+        for (var j=0;  j<$scope.comandaItems.length; j++) {
+            console.log($scope.comandaItems[j]);
+            var pietanzaResocontoDto = {value: $scope.comandaItems[j].quantita,
+                prodottoId: $scope.comandaItems[j].id};
+            var json = JSON.stringify(pietanzaResocontoDto);
+            console.log(pietanzaResocontoDto);
+            ajaxService.sendResource("http://localhost:8080/resoconto/venduto", json).then(
+                function (response) {
+                }
+                ,function (response) {
+                    alert("Couldn't send report");
+                });
+        }
+
         CassaService.updateComanda("http://localhost:8080/comanda/updateComanda/" + $scope.numeroTavolo).then(function (response) {
-            if (response.data == true) {
+            if (response.data === true) {
                 alert("Conto chiuso correttamente!");
                 $scope.comandaItems = [];
                 $scope.prezzoTotale = 0;

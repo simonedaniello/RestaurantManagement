@@ -6,7 +6,9 @@ import uni.isssr.dto.ComandaItemDto;
 import uni.isssr.dto.ComandaOrderDto;
 import uni.isssr.entities.ComandaItem;
 import uni.isssr.entities.ComandaOrder;
+import uni.isssr.entities.Pietanza;
 import uni.isssr.repositories.ComandaOrderRepository;
+import uni.isssr.repositories.PietanzaRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +21,9 @@ public class ComandaService {
 
     @Autowired
     private ComandaOrderRepository comandaOrderRepository;
+
+    @Autowired
+    private PietanzaRepository pietanzaRepository;
 
 
     public void insertComanda(ComandaOrderDto comandaOrderDto) {
@@ -80,6 +85,7 @@ public class ComandaService {
         comandaItemDto.setQuantita(comandaItem.getQuantita());
         comandaItemDto.setPietanza(comandaItem.getNomePietanza());
         comandaItemDto.setPrezzo(comandaItem.getPrezzoPietanza());
+        comandaItemDto.setId(pietanzaRepository.findByNome(comandaItem.getNomePietanza()).getId());
         return comandaItemDto;
     }
 
