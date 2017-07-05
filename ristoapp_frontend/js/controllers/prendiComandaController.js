@@ -5,6 +5,21 @@ myApp.controller("PrendiComandaController", function($scope, ajaxService, Prendi
 
     //raccolta informazioni riguardanti il menu da parte del cameriere
     var updateListaProdotti = function () {
+        ajaxService.getResource("http://localhost:8080/menu/attivo", null).then(
+            function (response) {
+                console.log("ricevuto");
+                console.log(response);
+                console.log("ricevuto");
+                if(response.length === 0) {
+                    alert("Non c'è nessun menu attivo nel sistema.");
+                    return;
+                }
+                $scope.menuAttuale = response;
+            }
+            , function (response) {
+                alert("Couldn't get dishes");
+            });
+        /*
         $http.get("jsonFiles/menuAttuale.json").then(
             function (response) {
                 var data = response.data;
@@ -12,7 +27,7 @@ myApp.controller("PrendiComandaController", function($scope, ajaxService, Prendi
             }
             , function (response) {
                 alert("Couldn't get products");
-            });
+            });*/
     };
 
     updateListaProdotti();

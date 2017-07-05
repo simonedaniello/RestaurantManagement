@@ -17,7 +17,8 @@ myApp.controller("RicercaMenuController", ["$scope", "MenuService", "$location",
         MenuService.getMenu("http://localhost:8080/menu" + params).then(function (response) {
             $scope.listaMenu = response.data;
         }, function (error) {
-            alert.log(error);
+            alert("Errore nella richiesta");
+            console.log(error);
         });
         $scope.showList = true;
     }

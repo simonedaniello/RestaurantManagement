@@ -23,6 +23,12 @@ public class CategoriaMenuDto {
 
     public CategoriaMenuDto() {}
 
+    public CategoriaMenuDto(String nomeCategoria, List<PietanzaMenuDto> pietanze, Integer posizione) {
+        this.nomeCategoria = nomeCategoria;
+        this.pietanze = pietanze;
+        this.posizione = posizione;
+    }
+
     public String getNomeCategoria() {
         return nomeCategoria;
     }

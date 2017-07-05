@@ -2,6 +2,7 @@ package uni.isssr.endPoints;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import uni.isssr.dto.CategoriaMenuDto;
 import uni.isssr.dto.MenuDto;
 import uni.isssr.dto.MenuItemDto;
 import uni.isssr.dto.MenuSearchDto;
@@ -24,6 +25,11 @@ public class MenuEndPoint {
     @Autowired
     private MenuService menuService;
 
+
+    @RequestMapping(value = "/attivo", method = RequestMethod.GET)
+    public List<CategoriaMenuDto> getMenuAttivo() {
+        return menuService.searchMenuAttivo();
+    }
 
     @RequestMapping(value = "/{nomeMenu}", method = RequestMethod.GET)
     public MenuItemDto getMenu(@PathVariable String nomeMenu) {

@@ -137,7 +137,7 @@ myApp.controller("CreaPietanzaController", function($scope, ajaxService, CreaPie
 
     var fillParametersToModify = function () {
         var id = $routeParams.idPietanza;
-        ajaxService.getResource("http://localhost:8080/dish/getById?id=" + id.toString(), null).then(function (response) {
+        ajaxService.getResource("http://localhost:8080/dish/getById?id=" + id, null).then(function (response) {
             $scope.nomePietanza = response.nome;
             $scope.prezzoPietanza = response.prezzo;
             console.log(response.prezzo);

@@ -13,15 +13,20 @@
                         <div class="panel-heading"><p><b>Pietanze da cucinare</b></p></div>
                         <div class="panel-body" class="row" style="overflow-y: auto; height: 700px">
                             <table class="table table-striped" id="tabellaCuoco">
-                                <tbody ng-repeat="prodotti in selectedProdForChef">
+                                <tbody ng-repeat="comandaOrder in selectedProdForChef">
                                 <tr>
                                     <td colspan="2">ORDINAZIONE PER TAVOLO: {{prodotti.tavolo}}</td>
                                 </tr>
-                                <tr ng-repeat="prod in prodotti.comandaItems" >
-                                    <td class="col-sm-9"><p style="font-style: italic" id="pietanza.{{prod.pietanza}}" >{{prod.pietanza}} x {{prod.quantita}}</p></td>
-                                    <td><input type="checkbox" name="box" id="checkbox.{{prod.pietanza}}"></td>
+                                <tr ng-repeat="comandaItem in comandaOrder.comandaItems" >
+                                    <td class="col-sm-9"><p style="font-style: italic">{{comandaItem.pietanza}} x {{comandaItem.quantita}}</p></td>
+                                    <td>
+                                        <div class="container-fluid">
+                                                <span class="col-sm-5">uscito</span>
+                                                <input class="col-sm-2" type="checkbox" name="box">
+                                        </div>
+                                    </td>
                                 </tr>
-                                <tr><td colspan="2"><button type="button" class="btn btn-success" ng-click="fatto($index)" id="{{prodotti.tavolo}}">Fatto</button></td></tr>
+                                <tr><td colspan="2"><button type="button" class="btn btn-success" ng-click="fatto($index)">Risolvi comanda</button></td></tr>
                                 <tr bgcolor="#006400"><th colspan="2">   </th></tr>
                                 </tbody>
                             </table>

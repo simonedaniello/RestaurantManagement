@@ -26,6 +26,10 @@ public class PietanzaDto {
         this.ingredienti = ingredienti;
     }
 
+    public PietanzaDto(String nome){
+        this.nome = nome;
+    }
+
     public String getNome() {
         return nome;
     }

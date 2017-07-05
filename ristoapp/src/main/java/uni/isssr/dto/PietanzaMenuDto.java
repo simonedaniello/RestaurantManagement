@@ -34,6 +34,11 @@ public class PietanzaMenuDto {
         this.pietanzaDto = new PietanzaDto(nome, prezzo, etichette, ingredienti);
     }
 
+    public PietanzaMenuDto(String nome, Long id){
+        this.id = id;
+        this.pietanzaDto = new PietanzaDto(nome);
+    }
+
     public Long getId() {
         return id;
     }

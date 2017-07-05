@@ -173,10 +173,33 @@ public class MenuService {
         return menu;
     }
 
+    public List<CategoriaMenuDto> searchMenuAttivo() {
+        Menu menuAttivo = menuRepository.findOneByIsActive(true);
+        List<CategoriaMenuDto> categoriaMenuDtos = new ArrayList<>();
+        if (menuAttivo == null){
+            return categoriaMenuDtos;
+        }
+
+        for (Categoria categoria : menuAttivo.getCategorie()) {
+            CategoriaMenuDto categoriaMenuDto = new CategoriaMenuDto();
+            categoriaMenuDto.setNomeCategoria(categoria.getNome());
+            List<PietanzaMenuDto> pietanzaMenuDtos = new ArrayList<>();
+            for (Pietanza pietanza : categoria.getPietanze()) {
+                PietanzaMenuDto pietanzaMenuDto = new PietanzaMenuDto(pietanza.getNome(), pietanza.getId());
+                pietanzaMenuDtos.add(pietanzaMenuDto);
+            }
+            categoriaMenuDto.setPietanze(pietanzaMenuDtos);
+            categoriaMenuDto.setPosizione(categoria.getPosizione());
+
+            categoriaMenuDtos.add(categoriaMenuDto);
+        }
+        return categoriaMenuDtos;
+
+    }
+
+
     public void saveMenu(MenuDto menuDto){
-        System.out.println(menuDto.getIsActive());
         Menu menu = this.unmarshallMenuDto(menuDto);
-        System.out.println(menu.getIsActive());
         if (menu.getIsActive()) {
             Menu menuAttivo = menuRepository.findOneByIsActive(true);
             if (menuAttivo != null){
