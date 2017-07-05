@@ -37,14 +37,18 @@ public class PietanzaService {
     @Autowired
     private MenuService menuService;
 
+    @Autowired
+    private IngredienteService ingredienteService;
 
+
+    //trasformazione di un pietanzaDto in Pietanza
     public Pietanza unmarshall(PietanzaDto pietanzaDto){
         Pietanza pietanza = new Pietanza(pietanzaDto.getNome(), pietanzaDto.getPrezzo());
         for ( String etichettaId: pietanzaDto.getEtichette()) {
             Etichetta etichetta = etichettaRepository.findOne(etichettaId);
             pietanza.addEtichetta(etichetta);
         }
-        List<Ingrediente> ingredienti = new ArrayList<>();
+        /*List<Ingrediente> ingredienti = new ArrayList<>();
         for ( IngredienteDto ingredienteDto: pietanzaDto.getIngredienti()) {
             Prodotto prodotto = prodottoRepository.findOne(ingredienteDto.getProdottoId());
             if(prodotto == null){
@@ -54,13 +58,13 @@ public class PietanzaService {
 
             Ingrediente ingrediente = new Ingrediente(prodotto, ingredienteDto.getQuantita());
             ingredienti.add(ingrediente);
-        }
-        pietanza.setIngredienti(ingredienti);
+        }*/
+        pietanza.setIngredienti(ingredienteService.marshal(pietanzaDto.getIngredienti()));
         return pietanza;
     }
 
     public Pietanza unmarshall(Long id, PietanzaDto pietanzaDto){
-        Pietanza pietanza = new Pietanza(id, pietanzaDto.getNome(), pietanzaDto.getPrezzo());
+        Pietanza pietanza = this.unmarshall(pietanzaDto);       /*new Pietanza(id, pietanzaDto.getNome(), pietanzaDto.getPrezzo());
         for ( String etichettaId: pietanzaDto.getEtichette()) {
             Etichetta etichetta = etichettaRepository.findOne(etichettaId);
             pietanza.addEtichetta(etichetta);
@@ -77,9 +81,11 @@ public class PietanzaService {
             Ingrediente ingrediente = new Ingrediente(prodotto, ingredienteDto.getQuantita());
             ingredienti.add(ingrediente);
         }
-        pietanza.setIngredienti(ingredienti);
+        pietanza.setIngredienti(ingredienteService.marshal(pietanzaDto.getIngredienti()));*/
+        pietanza.setId(id);
         return pietanza;
     }
+
 
     public Page<Pietanza> listAllByPage(Pageable pageable){
         return pietanzaRepository.findAll(pageable);

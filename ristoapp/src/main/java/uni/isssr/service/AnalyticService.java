@@ -25,7 +25,7 @@ public class AnalyticService {
     private ResocontoRepository resocontoRepository;
 
     @Autowired
-    private CategoriaRepository categoriaRepository;
+    private CategoriaRepository categoriaRepository;    /*PERCHÉ CRISTO DA ERRORE!?*/
 
     @Autowired
     private PietanzaService pietanzaService;
@@ -33,9 +33,9 @@ public class AnalyticService {
     public AnalyticsDto getReport(String data){
 
         AnalyticsDto analyticsDto = new AnalyticsDto(data);
-        List<ResocontoPietanza> resocontoPietanze = resocontoRepository.findAllByData(data);
+        List<ResocontoPietanza> resocontoPietanze = resocontoRepository.findAllByData(data);    //retrieve di tutti risoconti avvenuti in Data
         List<PietanzaAnalyticsDto> pietanzaAnalyticsDtos = new ArrayList<>();
-        for (ResocontoPietanza rp:resocontoPietanze) {
+        for (ResocontoPietanza rp:resocontoPietanze) {              //trasformazione di ogni ResocontoPietanza in PietanzaAbnalyticsDto
                pietanzaAnalyticsDtos.add(new PietanzaAnalyticsDto(
                        pietanzaService.marshall(rp.getPietanza()), rp.getVenduto(), rp.getPreparato()));
 

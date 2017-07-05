@@ -27,6 +27,7 @@ public class ResocontoEndPoint {
     @Autowired
     private AnalyticService analyticService;
 
+    //Aggiorna il numero di pietanze vendute per una data Pietanza
     @RequestMapping(method = RequestMethod.POST, path = "/venduto")
     public void aggiornaResocontoVenduto(@RequestBody ResocontoPietanzaDto resocontoPietanzaDto){
         ResocontoPietanza resocontoPietanza = resocontoService.updateVenduto(resocontoPietanzaDto);
@@ -34,6 +35,7 @@ public class ResocontoEndPoint {
 
     }
 
+    //aggiorna il numero di pietanze prodotte per una data Pietanza
     @RequestMapping(method = RequestMethod.POST, path = "/preparato")
     public void aggiornaResocontoPreparato(@RequestBody ResocontoPietanzaDto resocontoPietanzaDto){
         ResocontoPietanza resocontoPietanza = resocontoService.updatePreparato(resocontoPietanzaDto);
@@ -49,6 +51,9 @@ public class ResocontoEndPoint {
 
 
     //la data va specificata come AAAA-DD-MM (ad esempio 2017-25-01)
+    /*Ritorna il report relativo ad una data. Esso è composto da tutte le pietanze vendute e prodotte in tale data inclusi
+      gli ingredientin e i tag con relativi valori per venduto e prodotto.
+     */
     @RequestMapping(method = RequestMethod.GET, value = "/{data}")
     public AnalyticsDto getReport(@PathVariable(value = "data") String data){
         return analyticService.getReport(data);

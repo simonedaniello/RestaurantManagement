@@ -27,6 +27,7 @@ public class ResocontoService {
         ResocontoPietanza resocontoPietanza = resocontoRepository.findOne(
                 new IdResoconto(pietanzaRepository.findOne(resocontoPietanzaDto.getProdottoId())));
         if(resocontoPietanza == null){
+            //se è null significa non esiste ancora nel database il record e viene quindi creato da zero
             resocontoPietanza = new ResocontoPietanza(pietanzaRepository.findOne(
                     resocontoPietanzaDto.getProdottoId()));
         }

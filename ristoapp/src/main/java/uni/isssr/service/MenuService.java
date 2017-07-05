@@ -33,7 +33,7 @@ public class MenuService {
         List<MenuSearchDto> menuDtos = new ArrayList<>();
 
         List<Menu> menuList = menuRepository.findAll();
-        for (Menu menu : menuList)
+        for (Menu menu : menuList)          //trasformazione dei Menu in MenuDto
             menuDtos.add(this.menuToMenuSearchDto(menu));
 
         return menuDtos;
@@ -53,7 +53,7 @@ public class MenuService {
 
     /*
         Search di un menù per nome, restituito in una lista per compatibilità
-        con le altre seach che restiuiscono una lista.
+        con le altre search che restiuiscono una lista.
      */
 
     public List<MenuSearchDto> searchMenuByName(String nomeMenu) {
