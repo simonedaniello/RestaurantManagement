@@ -7,9 +7,6 @@ myApp.controller("PrendiComandaController", function($scope, ajaxService, Prendi
     var updateListaProdotti = function () {
         ajaxService.getResource("http://localhost:8080/menu/attivo", null).then(
             function (response) {
-                console.log("ricevuto");
-                console.log(response);
-                console.log("ricevuto");
                 if(response.length === 0) {
                     alert("Non c'è nessun menu attivo nel sistema.");
                     return;
@@ -39,10 +36,8 @@ myApp.controller("PrendiComandaController", function($scope, ajaxService, Prendi
     $scope.nomeNewTag = "";
 
     var searchIndex = function(searchTerm){
-        console.log("sono nell'operazione");
         for(var i in $scope.selectedProd) {
-            if ($scope.selectedProd[i].pietanza == searchTerm) {
-                console.log("index = " + i);
+            if ($scope.selectedProd[i].pietanza === searchTerm) {
                 return i;
             }
         }
@@ -50,13 +45,11 @@ myApp.controller("PrendiComandaController", function($scope, ajaxService, Prendi
 
     //update degli elementi selezionati dal cameriere
     $scope.updateSelectedProd = function(nomeProd, prezzoProd, id){
-        console.log(id);
-        if($scope.numeroTavolo != null){
-            var checkBox = document.getElementById("check.".concat(nomeProd));
+        if($scope.numeroTavolo !== null){
+            var checkBox = document.getElementById("check.".concat(id));
             if(checkBox.checked) {
                 $scope.actuallyChecked.push(checkBox);
                 var ingrediente = {pietanza:nomeProd,       quantita:1,     prezzo:prezzoProd, id: id};
-                console.log(ingrediente);
                 $scope.selectedProd.push(ingrediente);
                 $scope.selectedProd.sort(function(a, b){
                     return (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)
@@ -68,7 +61,7 @@ myApp.controller("PrendiComandaController", function($scope, ajaxService, Prendi
         }
         else {
             alert("Inserisci numero tavolo");
-            var checkBox1 = document.getElementById("check.".concat(nomeProd));
+            var checkBox1 = document.getElementById("check.".concat(id));
             checkBox1.checked = false;
         }
     };
@@ -81,17 +74,17 @@ myApp.controller("PrendiComandaController", function($scope, ajaxService, Prendi
     //invio comanda al cuoco
     $scope.publish = function () {
 
-        if ($scope.numeroTavolo == null) {
+        if ($scope.numeroTavolo === null) {
             alert("Inserisci numero del tavolo!");
             return;
         }
-        if(($scope.selectedProd).length == 0){
+        if(($scope.selectedProd).length === 0){
             alert("Non hai inserito pietanze!");
             return;
         }
         var jsonFinale = {comandaItems: $scope.selectedProd, tavolo: $scope.numeroTavolo};
         var jsonComanda = angular.toJson(jsonFinale);
-        if (stompClient != null) {
+        if (stompClient !== null) {
 
             stompClient.send("/app/comanda/publishComanda", {}, jsonComanda);
             alert("Comanda inviata correttamente!");

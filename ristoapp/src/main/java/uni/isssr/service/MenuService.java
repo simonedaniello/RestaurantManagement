@@ -179,13 +179,17 @@ public class MenuService {
         if (menuAttivo == null){
             return categoriaMenuDtos;
         }
-
         for (Categoria categoria : menuAttivo.getCategorie()) {
             CategoriaMenuDto categoriaMenuDto = new CategoriaMenuDto();
             categoriaMenuDto.setNomeCategoria(categoria.getNome());
             List<PietanzaMenuDto> pietanzaMenuDtos = new ArrayList<>();
             for (Pietanza pietanza : categoria.getPietanze()) {
-                PietanzaMenuDto pietanzaMenuDto = new PietanzaMenuDto(pietanza.getNome(), pietanza.getId());
+                List<IngredienteDto> ingredientiDtos = new ArrayList<>();
+                for (Ingrediente ingrediente : pietanza.getIngredienti()) {
+                    IngredienteDto ingredienteDto = new IngredienteDto(ingrediente.getProdotto().getNome(), ingrediente.getQuantita(), ingrediente.getId());
+                    ingredientiDtos.add(ingredienteDto);
+                }
+                    PietanzaMenuDto pietanzaMenuDto = new PietanzaMenuDto(pietanza.getId(), pietanza.getNome(), pietanza.getPrezzo(), ingredientiDtos);
                 pietanzaMenuDtos.add(pietanzaMenuDto);
             }
             categoriaMenuDto.setPietanze(pietanzaMenuDtos);

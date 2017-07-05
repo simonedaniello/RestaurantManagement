@@ -26,8 +26,10 @@ public class PietanzaDto {
         this.ingredienti = ingredienti;
     }
 
-    public PietanzaDto(String nome){
+    public PietanzaDto(String nome, double prezzo, List<IngredienteDto> ingredienti){
         this.nome = nome;
+        this.prezzo = new Double(prezzo);
+        this.ingredienti = ingredienti;
     }
 
     public String getNome() {

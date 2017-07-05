@@ -34,9 +34,9 @@ public class PietanzaMenuDto {
         this.pietanzaDto = new PietanzaDto(nome, prezzo, etichette, ingredienti);
     }
 
-    public PietanzaMenuDto(String nome, Long id){
+    public PietanzaMenuDto(Long id, String nome, double prezzo, List<IngredienteDto> ingredienti){
         this.id = id;
-        this.pietanzaDto = new PietanzaDto(nome);
+        this.pietanzaDto = new PietanzaDto(nome, prezzo, ingredienti);
     }
 
     public Long getId() {

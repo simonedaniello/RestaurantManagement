@@ -15,7 +15,7 @@
                             <table class="table table-striped" id="tabellaCuoco">
                                 <tbody ng-repeat="comandaOrder in selectedProdForChef">
                                 <tr>
-                                    <td colspan="2">ORDINAZIONE PER TAVOLO: {{prodotti.tavolo}}</td>
+                                    <td colspan="2">ORDINAZIONE PER TAVOLO: {{comandaOrder.tavolo}}</td>
                                 </tr>
                                 <tr ng-repeat="comandaItem in comandaOrder.comandaItems" >
                                     <td class="col-sm-9"><p style="font-style: italic">{{comandaItem.pietanza}} x {{comandaItem.quantita}}</p></td>
