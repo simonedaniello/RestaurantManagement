@@ -7,6 +7,7 @@ myApp.controller("creaMenuCtrl", function($scope, ajaxService, CreaPietanzaServi
     $scope.filtro = "all";
     $scope.selected = [];
     $scope.isModify = 0;
+    $scope.cateToModifiy = "";
 
     var getPietanzeList = function() {
         ajaxService.getResource("http://localhost:8080/dish/getAll", null).then(
@@ -115,6 +116,7 @@ myApp.controller("creaMenuCtrl", function($scope, ajaxService, CreaPietanzaServi
         uncheckAll();
         $scope.filtro = "all";
         $scope.isModify = 0;
+        $scope.cateToModifiy = "";
     };
 
     $scope.resetActCat = function () {
@@ -130,6 +132,7 @@ myApp.controller("creaMenuCtrl", function($scope, ajaxService, CreaPietanzaServi
             document.getElementById($scope.categorieMenu[i].pietanze[j].pietanzaDto.nome).checked = true;
         }
         $scope.isModify = 1;
+        $scope.cateToModifiy = nomeCat;
     };
 
 
@@ -173,6 +176,14 @@ myApp.controller("creaMenuCtrl", function($scope, ajaxService, CreaPietanzaServi
                 }
             }
         }
+        if ($scope.isModify === 1) {
+            for (i = 0, len = $scope.categorieMenu.length; i < len; i++) {
+                if ($scope.categorieMenu[i].nomeCategoria === $scope.nomeCategoria && !($scope.categorieMenu[i].nomeCategoria === $scope.cateToModifiy)) {
+                    alert("La categoria selezionata esiste già nel menu.");
+                    return;
+                }
+            }
+        }
         if ($scope.nomeCategoria === "") {
             alert("Specificare il nome della categoria.");
             return;
@@ -184,13 +195,8 @@ myApp.controller("creaMenuCtrl", function($scope, ajaxService, CreaPietanzaServi
         var newCategory = {nomeCategoria: $scope.nomeCategoria, pietanze:$scope.selected};
         if ($scope.isModify === 1) {
             var j = searchCategoriaIndex($scope.nomeCategoria, $scope.categorieMenu);
-            console.log(j);
-            console.log($scope.categorieMenu);
             $scope.categorieMenu.splice(j,1);
-            console.log($scope.categorieMenu);
             $scope.categorieMenu.splice(j,0,newCategory);
-            console.log($scope.categorieMenu);
-            $scope.isModify = 0;
             resetActualCategory();
             return;
         }
