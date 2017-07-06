@@ -11,6 +11,8 @@ public class MenuItemDto {
     private String nomeMenu;
     private String immagineMenu;
     private List<CategoriaDto> categorie;
+    private String descrizione;
+    private boolean isActive;
 
     public MenuItemDto(String nomeMenu, String immagineMenu) {
         this.nomeMenu = nomeMenu;
@@ -46,6 +48,22 @@ public class MenuItemDto {
 
     public void addCategoria(CategoriaDto categoriaDto) {
         this.categorie.add(categoriaDto);
+    }
+
+    public String getDescrizione() {
+        return descrizione;
+    }
+
+    public void setDescrizione(String descrizione) {
+        this.descrizione = descrizione;
+    }
+
+    public boolean getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(boolean active) {
+        isActive = active;
     }
 }
 

@@ -109,6 +109,8 @@ public class MenuService {
         MenuItemDto menuItemDto = new MenuItemDto();
         menuItemDto.setNomeMenu(menu.getNome());
         menuItemDto.setImmagineMenu("imgFiles/menu_background.jpg");
+        menuItemDto.setDescrizione(menu.getDescrizione());
+        menuItemDto.setIsActive(menu.getIsActive());
         List<CategoriaDto> categorie = new ArrayList<>();
         for (Categoria categoria : menu.getCategorie())
             categorie.add(this.categoriaToCategoriaDto(categoria));
@@ -119,6 +121,7 @@ public class MenuService {
     private CategoriaDto categoriaToCategoriaDto(Categoria categoria) {
         CategoriaDto categoriaDto = new CategoriaDto();
         categoriaDto.setNomeCategoria(categoria.getNome());
+        categoriaDto.setPosizione(categoria.getPosizione());
         List<PietanzaDto> pietanze = new ArrayList<>();
         for (Pietanza pietanza : categoria.getPietanze())
             pietanze.add(this.pietanzaToPietanzaDto(pietanza));
@@ -130,6 +133,7 @@ public class MenuService {
         PietanzaDto pietanzaDto = new PietanzaDto();
         pietanzaDto.setNome(pietanza.getNome());
         pietanzaDto.setPrezzo(pietanza.getPrezzo());
+        pietanzaDto.setId(pietanza.getId());
         List<String> etichette = new ArrayList<>();
         for (Etichetta etichetta : pietanza.getEtichette())
             etichette.add(etichetta.getClassificatore());

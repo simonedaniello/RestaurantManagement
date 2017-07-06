@@ -13,6 +13,9 @@ myApp.controller("creaMenuCtrl", function($scope, ajaxService, CreaPietanzaServi
         ajaxService.getResource("http://localhost:8080/dish/getAll", null).then(
             function (response) {
                 $scope.pietanze = response.slice();
+                console.log("come dovrebbe essere pietanze list");
+                console.log($scope.pietanze);
+                console.log("fine");
             }
         , function (response) {
             alert("Couldn't get dishes");
@@ -42,35 +45,35 @@ myApp.controller("creaMenuCtrl", function($scope, ajaxService, CreaPietanzaServi
     };
     getCatNamesList();
 
+    /*var parseCategorie = function (categorieList) {
+        $scope.categorieMenu = [];
+        for (var i = 0, len = categorieList.length; i < len; i++) {
+            var nome = categorieList[i].nomeCategoria;
+            var newCategory = {nomeCategoria: $scope.nomeCategoria, pietanze:$scope.selected};
+            for (var j = 0, lenJ = categorieList[i].pietanze.length; j < len; j++) {
+                var pietDto = {etichette: "", id: "", ingredienti:"", nome:"", prezzo:""};
+                var pietanza = {pietanzaDto: categorieList[i].pietanze[j].nome, id: categorieList[i].pietanze[j].id};
+                $scope.categorieMenu.push(newCategory);
+            }
+        }
+    };*/
+
     var fillParametersToModify = function () {
         var nameMenu = $routeParams.nomeMenu;
         if (nameMenu === undefined) return;
-        console.log("aaa");
-        ajaxService.getResource("http://localhost:8080/menu/nome/" + nameMenu, null).then(function (response) {
-            console.log("ok");
+        ajaxService.getResource("http://localhost:8080/menu/" + nameMenu, null).then(function (response) {
+            console.log("ricevuto");
             console.log(response);
-            console.log("okk");
-            $scope.categorieMenu = [];
-            $scope.nomeMenu = "";
-            $scope.nomeCategoria = "";
+            console.log("ricevutooo");
+            $scope.nomeMenu = response.nomeMenu;
             $scope.descrizione = response.descrizione;
-            $scope.selected = [];
-
-            $scope.nomePietanza = response.nome;
-            $scope.prezzoPietanza = response.prezzo;
-            for (i in response.ingredienti){
-                var checkBox = document.getElementById("check.".concat(response.ingredienti[i].prodotto.nome));
-                checkBox.checked = true;
-                var index = searchIndexById(response.ingredienti[i].prodotto.id, $scope.prodotti);
-                $scope.updateSelectedProd(response.ingredienti[i].prodotto.nome,
-                    response.ingredienti[i].prodotto.id, $scope.prodotti[index].prezzo*response.ingredienti[i].quantita, response.ingredienti[i].quantita);
-            }
-            for (i in response.etichette){
-                var checkBox = document.getElementById("check.".concat(response.etichette[i].classificatore));
-                checkBox.checked = true;
-                $scope.updateSelectedTag(response.etichette[i].classificatore);
+            //parseCategorie(response.categorie);
+            $scope.categorieMenu = response.categorie;
+            if (response.isActive) {
+                document.getElementById("active").checked = true;
             }
         }, function (response) {
+            alert("Couldn't fill parameters");
             console.log(response);
         })
     };
@@ -226,6 +229,9 @@ myApp.controller("creaMenuCtrl", function($scope, ajaxService, CreaPietanzaServi
             return;
         }
         var newCategory = {nomeCategoria: $scope.nomeCategoria, pietanze:$scope.selected};
+        console.log("cosi dovreebbero essere le pietanze lista in categoria");
+        console.log($scope.selected);
+        console.log("fine");
         if ($scope.isModify === 1) {
             var j = searchCategoriaIndex($scope.nomeCategoria, $scope.categorieMenu);
             $scope.categorieMenu.splice(j,1);
@@ -268,6 +274,8 @@ myApp.controller("creaMenuCtrl", function($scope, ajaxService, CreaPietanzaServi
             isActive: isAct,
             descrizione: $scope.descrizione
         };
+        console.log("mando");
+        console.log(dtoMenu);
         var jsonMenu = JSON.stringify(dtoMenu);
         ajaxService.sendResource("http://localhost:8080/menu", jsonMenu).then(function (response) {
             location.href = "#";

@@ -12,6 +12,8 @@ public class PietanzaDto {
 
     private Double prezzo;
 
+    private Long id;
+
     private List<String> etichette;
 
     private List<IngredienteDto> ingredienti;
@@ -62,5 +64,13 @@ public class PietanzaDto {
 
     public void setIngredienti(List<IngredienteDto> ingredienti) {
         this.ingredienti = ingredienti;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }
