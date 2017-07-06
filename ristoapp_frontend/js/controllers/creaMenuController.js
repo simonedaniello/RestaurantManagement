@@ -14,9 +14,6 @@ myApp.controller("creaMenuCtrl", function($scope, ajaxService, CreaPietanzaServi
         ajaxService.getResource("http://localhost:8080/dish/getAll", null).then(
             function (response) {
                 $scope.pietanze = response.slice();
-                console.log("come dovrebbe essere pietanze list");
-                console.log($scope.pietanze);
-                console.log("fine");
             }
         , function (response) {
             alert("Couldn't get dishes");
@@ -48,26 +45,10 @@ myApp.controller("creaMenuCtrl", function($scope, ajaxService, CreaPietanzaServi
     };
     getCatNamesList();
 
-    /*var parseCategorie = function (categorieList) {
-        $scope.categorieMenu = [];
-        for (var i = 0, len = categorieList.length; i < len; i++) {
-            var nome = categorieList[i].nomeCategoria;
-            var newCategory = {nomeCategoria: $scope.nomeCategoria, pietanze:$scope.selected};
-            for (var j = 0, lenJ = categorieList[i].pietanze.length; j < len; j++) {
-                var pietDto = {etichette: "", id: "", ingredienti:"", nome:"", prezzo:""};
-                var pietanza = {pietanzaDto: categorieList[i].pietanze[j].nome, id: categorieList[i].pietanze[j].id};
-                $scope.categorieMenu.push(newCategory);
-            }
-        }
-    };*/
-
     var fillParametersToModify = function () {
         var nameMenu = $routeParams.nomeMenu;
         if (nameMenu === undefined) return;
         ajaxService.getResource("http://localhost:8080/menu/" + nameMenu, null).then(function (response) {
-            console.log("ricevuto");
-            console.log(response);
-            console.log("ricevutooo");
             $scope.nomeMenu = response.nomeMenu;
             $scope.descrizione = response.descrizione;
             //parseCategorie(response.categorie);
@@ -77,7 +58,6 @@ myApp.controller("creaMenuCtrl", function($scope, ajaxService, CreaPietanzaServi
             }
         }, function (response) {
             alert("Couldn't fill parameters");
-            console.log(response);
         })
     };
     fillParametersToModify();
@@ -232,9 +212,6 @@ myApp.controller("creaMenuCtrl", function($scope, ajaxService, CreaPietanzaServi
             return;
         }
         var newCategory = {nomeCategoria: $scope.nomeCategoria, pietanze:$scope.selected};
-        console.log("cosi dovreebbero essere le pietanze lista in categoria");
-        console.log($scope.selected);
-        console.log("fine");
         if ($scope.isModify === 1) {
             var j = searchCategoriaIndex($scope.nomeCategoria, $scope.categorieMenu);
             $scope.categorieMenu.splice(j,1);
@@ -285,8 +262,6 @@ myApp.controller("creaMenuCtrl", function($scope, ajaxService, CreaPietanzaServi
             isActive: isAct,
             descrizione: $scope.descrizione
         };
-        console.log("mando");
-        console.log(dtoMenu);
         var jsonMenu = JSON.stringify(dtoMenu);
         ajaxService.sendResource("http://localhost:8080/menu", jsonMenu).then(function (response) {
             location.href = "#";
@@ -313,6 +288,5 @@ myApp.controller("creaMenuCtrl", function($scope, ajaxService, CreaPietanzaServi
             alert("Errore nell'invio dei dati al server.");
         });
     }
-
 
 });
