@@ -53,16 +53,16 @@
                               <!-- Pietanza starts -->
                               <div class="menu-item" ng-repeat="pietanza in categoria.pietanze">
                                   <div class="menu-item-name">
-                                      {{pietanza.pietanzeDto.nome}}
+                                      {{pietanza.pietanzaDto.nome}}
                                   </div>
                                   <div class="menu-item-price">
-                                      €{{pietanza.pietanzeDto.prezzo}}
+                                      €{{pietanza.pietanzaDto.prezzo}}
                                   </div>
-                                  <span class="menu-item-description" ng-repeat="ingrediente in pietanza.ingredienti">
+                                  <span class="menu-item-description" ng-repeat="ingrediente in pietanza.pietanzaDto.ingredienti">
                                       {{ingrediente.nome}}{{$last ? '' : ', '}}
                                   </span>
                                   <br>
-                                  <span class="menu-item-tag" ng-repeat="etichetta in pietanza.etichette">
+                                  <span class="menu-item-tag" ng-repeat="etichetta in pietanza.pietanzaDto.etichette">
                                       {{etichetta}}{{$last ? '' : ', '}}
                                   </span>
                               </div>
