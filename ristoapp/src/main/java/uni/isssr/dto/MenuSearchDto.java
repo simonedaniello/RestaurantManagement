@@ -11,6 +11,7 @@ public class MenuSearchDto {
     private String descrizione;
     private String immagine;
     private String data;
+    private boolean isActive;
 
     public MenuSearchDto() {}
 
@@ -53,4 +54,11 @@ public class MenuSearchDto {
         this.data = data;
     }
 
+    public boolean getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(boolean active) {
+        isActive = active;
+    }
 }

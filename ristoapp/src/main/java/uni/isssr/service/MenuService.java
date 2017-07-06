@@ -42,6 +42,7 @@ public class MenuService {
     private MenuSearchDto menuToMenuSearchDto(Menu menu) {
         MenuSearchDto menuSearchDto = new MenuSearchDto();
         menuSearchDto.setNome(menu.getNome());
+        menuSearchDto.setIsActive(menu.getIsActive());
         menuSearchDto.setDescrizione(menu.getDescrizione());
         menuSearchDto.setImmagine("imgFiles/menu_background.jpg"); /* Da cambiare !!! */
         Date date = menu.getDataCreazione();
