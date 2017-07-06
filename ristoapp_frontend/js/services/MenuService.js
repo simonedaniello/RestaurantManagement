@@ -1,9 +1,5 @@
 
-myApp.service('MenuService', ["$http", function($http) {
-
-    this.getMenu = function(url) {
-        return $http.get(url);
-    };
+myApp.service('MenuService', [function() {
 
     this.getPdf = function (div, nomeMenu) {
         html2canvas(div, {
@@ -16,7 +12,7 @@ myApp.service('MenuService', ["$http", function($http) {
                 var docDefinition = {
                     content: [{
                         image: myImage,
-                        width: 450
+                        width: 460
                     }]
                 };
                 pdfMake.createPdf(docDefinition).download(nomeMenu + ".pdf");

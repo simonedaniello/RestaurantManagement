@@ -1,7 +1,7 @@
 
 // Controller per la visualizzazione del menu e salvataggio come pdf.
 
-myApp.controller("VisualizzaMenuController", ["$scope", "MenuService", "$routeParams", function ($scope, MenuService, $routeParams) {
+myApp.controller("VisualizzaMenuController", ["$scope", "MenuService", "ajaxService", "$routeParams", function ($scope, MenuService, ajaxService, $routeParams) {
 
     $scope.menu = {nomeMenu: null, immagineMenu: null, categorie: null};
 
@@ -10,12 +10,10 @@ myApp.controller("VisualizzaMenuController", ["$scope", "MenuService", "$routePa
 
     $scope.visualizza = function () {
         // "jsonFiles/menu_mock.json"
-        MenuService.getMenu("http://localhost:8080/menu/" + nomeMenu).then(function (response) {
-            var data = response.data;
-            console.log(response.data);
-            $scope.menu.nomeMenu = data.nomeMenu;
-            $scope.menu.immagineMenu = data.immagineMenu;
-            $scope.menu.categorie = data.categorie;
+        ajaxService.getResource("http://localhost:8080/menu/" + nomeMenu, null).then(function (response) {
+            $scope.menu.nomeMenu = response.nomeMenu;
+            $scope.menu.immagineMenu = response.immagineMenu;
+            $scope.menu.categorie = response.categorie;
         }, function (error) {
             alert.log(error);
         });
