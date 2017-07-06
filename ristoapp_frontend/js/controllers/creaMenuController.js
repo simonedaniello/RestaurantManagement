@@ -8,6 +8,7 @@ myApp.controller("creaMenuCtrl", function($scope, ajaxService, CreaPietanzaServi
     $scope.selected = [];
     $scope.isModify = 0;
     $scope.cateToModifiy = "";
+    $scope.categorie = [];
 
     var getPietanzeList = function() {
         ajaxService.getResource("http://localhost:8080/dish/getAll", null).then(
@@ -37,7 +38,9 @@ myApp.controller("creaMenuCtrl", function($scope, ajaxService, CreaPietanzaServi
     var getCatNamesList = function() {
         ajaxService.getResource("http://localhost:8080/categoriesNames", null).then(
             function (response) {
-                $scope.categorie = response;
+                for (i in response){
+                    $scope.categorie.push(response[i].nome);
+                }
             }
             , function (response) {
                 alert("Couldn't get categories names");
