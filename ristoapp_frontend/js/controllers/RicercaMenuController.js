@@ -4,7 +4,7 @@
 
 // Controller per la ricerca dei menu sulla base di filtri di ricerca e visualizzazione dell'elenco dei menu.
 
-myApp.controller("RicercaMenuController", ["$scope", "MenuService", "$location", "ajaxService", function ($scope, MenuService, $location, ajaxService) {
+myApp.controller("RicercaMenuController", ["$scope", "$location", "ajaxService", function ($scope, $location, ajaxService) {
 
     $scope.showList = false;
 
@@ -14,8 +14,9 @@ myApp.controller("RicercaMenuController", ["$scope", "MenuService", "$location",
      */
 
     function search(params) {
-        MenuService.getMenu("http://localhost:8080/menu" + params).then(function (response) {
-            $scope.listaMenu = response.data;
+        $scope.par = params;
+        ajaxService.getResource("http://localhost:8080/menu" + params, null).then(function (response) {
+            $scope.listaMenu = response;
         }, function (error) {
             alert("Errore nella richiesta");
             console.log(error);
@@ -72,6 +73,7 @@ myApp.controller("RicercaMenuController", ["$scope", "MenuService", "$location",
     $scope.attivaMenu = function (nomeMenu) {
         ajaxService.updateResource("http://localhost:8080/menu/" + nomeMenu, null).then(function (response) {
             alert("Menu reso attivo con successo");
+            search($scope.par);
         }, function (error) {
             alert("Errore nell'operazione");
             console.log(error);
