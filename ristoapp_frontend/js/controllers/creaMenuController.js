@@ -254,22 +254,30 @@ myApp.controller("creaMenuCtrl", function($scope, ajaxService, CreaPietanzaServi
     };
 
 
-    $scope.saveMenu = function(){
+    var checkFields = function () {
         if ($scope.categorieMenu.length === 0) {
             alert("Il menu deve contenere almeno una categoria.");
-            return;
+            return null;
         }
         if ($scope.nomeMenu === "") {
             alert("Specificare nome del menu.");
-            return;
+            return null;
         }
         if ($scope.descrizione === "") {
             alert("Inserire una breve descrizione del menu.");
-            return;
+            return null;
         }
         var isAct = false;
         if (document.getElementById("active").checked === true) {
             isAct = true;
+        }
+        return isAct;
+    };
+
+    $scope.saveMenu = function(){
+        var isAct = checkFields();
+        if (isAct === null) {
+            return;
         }
         var dtoMenu = {
             nome:$scope.nomeMenu,
@@ -286,4 +294,25 @@ myApp.controller("creaMenuCtrl", function($scope, ajaxService, CreaPietanzaServi
             alert("Errore nell'invio dei dati al server.");
         });
     };
+
+    $scope.updateMenu = function () {
+        var isAct = checkFields();
+        if (isAct === null) {
+            return;
+        }
+        var dtoMenu = {
+            nome:$scope.nomeMenu,
+            categorie: $scope.categorieMenu,
+            isActive: isAct,
+            descrizione: $scope.descrizione
+        };
+        var jsonMenu = JSON.stringify(dtoMenu);
+        ajaxService.updateResource("http://localhost:8080/menu", jsonMenu).then(function (response) {
+            location.href = "#";
+        }, function (response) {
+            alert("Errore nell'invio dei dati al server.");
+        });
+    }
+
+
 });

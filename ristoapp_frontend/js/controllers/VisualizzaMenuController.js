@@ -12,6 +12,7 @@ myApp.controller("VisualizzaMenuController", ["$scope", "MenuService", "$routePa
         // "jsonFiles/menu_mock.json"
         MenuService.getMenu("http://localhost:8080/menu/" + nomeMenu).then(function (response) {
             var data = response.data;
+            console.log(response.data);
             $scope.menu.nomeMenu = data.nomeMenu;
             $scope.menu.immagineMenu = data.immagineMenu;
             $scope.menu.categorie = data.categorie;

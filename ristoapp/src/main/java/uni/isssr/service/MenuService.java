@@ -122,14 +122,33 @@ public class MenuService {
         CategoriaDto categoriaDto = new CategoriaDto();
         categoriaDto.setNomeCategoria(categoria.getNome());
         categoriaDto.setPosizione(categoria.getPosizione());
-        List<PietanzaDto> pietanze = new ArrayList<>();
+        List<PietanzaMenuDto> pietanze = new ArrayList<>();
         for (Pietanza pietanza : categoria.getPietanze())
-            pietanze.add(this.pietanzaToPietanzaDto(pietanza));
+            pietanze.add(this.pietanzaToPietanzaMenuDto(pietanza));
         categoriaDto.setPietanze(pietanze);
         return categoriaDto;
     }
 
-    private PietanzaDto pietanzaToPietanzaDto(Pietanza pietanza) {
+    private PietanzaMenuDto pietanzaToPietanzaMenuDto(Pietanza pietanza) {
+        PietanzaMenuDto pietanzaMenuDto = new PietanzaMenuDto();
+        pietanzaMenuDto.setId(pietanza.getId());
+        PietanzaDto pietanzaDto = new PietanzaDto();
+        List<String> etichette = new ArrayList<>();
+        for (Etichetta etichetta : pietanza.getEtichette())
+            etichette.add(etichetta.getClassificatore());
+        List<IngredienteDto> ingredienti = new ArrayList<>();
+        for (Ingrediente ingrediente : pietanza.getIngredienti())
+            ingredienti.add(this.ingredienteToIngredienteDto(ingrediente));
+        pietanzaDto.setEtichette(etichette);
+        pietanzaDto.setIngredienti(ingredienti);
+        pietanzaDto.setId(pietanza.getId());
+        pietanzaDto.setNome(pietanza.getNome());
+        pietanzaDto.setPrezzo(pietanza.getPrezzo());
+        pietanzaMenuDto.setPietanzaDto(pietanzaDto);
+        return pietanzaMenuDto;
+    }
+
+    /*private PietanzaDto pietanzaToPietanzaDto(Pietanza pietanza) {
         PietanzaDto pietanzaDto = new PietanzaDto();
         pietanzaDto.setNome(pietanza.getNome());
         pietanzaDto.setPrezzo(pietanza.getPrezzo());
@@ -143,7 +162,7 @@ public class MenuService {
         pietanzaDto.setEtichette(etichette);
         pietanzaDto.setIngredienti(ingredienti);
         return pietanzaDto;
-    }
+    }*/
 
     public IngredienteDto ingredienteToIngredienteDto(Ingrediente ingrediente) {
         IngredienteDto ingredienteDto = new IngredienteDto();

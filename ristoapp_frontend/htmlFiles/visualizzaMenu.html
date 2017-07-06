@@ -48,15 +48,15 @@
                       <!-- Menu starts -->
                       <div class="menu-body" id="toPdf">
                           <!-- Categoria starts -->
-                          <div class="menu-category" ng-repeat="categoria in menu.categorie">
+                          <div class="menu-category" ng-repeat="categoria in menu.categorie | orderBy: 'posizione'">
                               <h2 class="menu-category-title">{{categoria.nomeCategoria}}</h2>
                               <!-- Pietanza starts -->
                               <div class="menu-item" ng-repeat="pietanza in categoria.pietanze">
                                   <div class="menu-item-name">
-                                      {{pietanza.nome}}
+                                      {{pietanza.pietanzeDto.nome}}
                                   </div>
                                   <div class="menu-item-price">
-                                      €{{pietanza.prezzo}}
+                                      €{{pietanza.pietanzeDto.prezzo}}
                                   </div>
                                   <span class="menu-item-description" ng-repeat="ingrediente in pietanza.ingredienti">
                                       {{ingrediente.nome}}{{$last ? '' : ', '}}

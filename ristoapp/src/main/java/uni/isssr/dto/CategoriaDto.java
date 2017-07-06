@@ -14,7 +14,7 @@ public class CategoriaDto {
 
 
 
-    private List<PietanzaDto> pietanze;
+    private List<PietanzaMenuDto> pietanze;
 
     public CategoriaDto() {}
 
@@ -33,15 +33,15 @@ public class CategoriaDto {
         this.nomeCategoria = nomeCategoria;
     }
 
-    public List<PietanzaDto> getPietanze() {
+    public List<PietanzaMenuDto> getPietanze() {
         return pietanze;
     }
 
-    public void setPietanze(List<PietanzaDto> pietanze) {
+    public void setPietanze(List<PietanzaMenuDto> pietanze) {
         this.pietanze = pietanze;
     }
 
-    public void addPietanza(PietanzaDto pietanzaDto) {
+    public void addPietanza(PietanzaMenuDto pietanzaDto) {
         this.pietanze.add(pietanzaDto);
     }
 }
