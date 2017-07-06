@@ -114,7 +114,7 @@ myApp.controller("CreaPietanzaController", function($scope, ajaxService, CreaPie
         ajaxService.sendResource("http://localhost:8080/dish", jsonPiet).then(function (response) {
             $location.path("/cercaPietanza");
         }, function (response) {
-            console.log(response)
+            alert("Errore nella creazione: nome pietanza già esistente");
         });
     };
 
@@ -166,7 +166,7 @@ myApp.controller("CreaPietanzaController", function($scope, ajaxService, CreaPie
             alert("Pietanza modificata con successo");
             $location.path("cercaPietanza")
         }, function (response) {
-            console.log(response)
+            alert("Errore nell'aggiornamento della pietanza: nome pietanza già esistente");
         });
     };
 
