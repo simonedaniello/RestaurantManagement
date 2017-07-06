@@ -9,6 +9,7 @@
     <link href="cssFiles/sidebarBootstrap.css" rel="stylesheet">
     <link href="cssFiles/generalCSS.css" rel="stylesheet">
     <link rel="stylesheet" href="cssFiles/ricercaPietanzaTabs.css">
+    <link rel="stylesheet" href="cssFiles/mainMenu.css">
 
 
     <!--roba per le mappe-->
@@ -79,12 +80,15 @@
 <body ng-app="ristoApp">
 
 
-<!--<header class="w3-display-container w3-content w3-wide" style="max-width:1600px;min-width:500px" id="home">
+<header class="w3-display-container w3-content w3-wide" style="max-width:1600px;min-width:500px" id="home">
+<!--
+    <img class="w3-image" src="http://www.karismahotels.com/gourmetinclusive/images/main/platemain.jpg" alt="Hamburger Catering" width="1600" height="800">
+-->
     <img class="w3-image" src="http://www.karismahotels.com/gourmetinclusive/images/main/platemain.jpg" alt="Hamburger Catering" width="1600" height="800">
     <div class="w3-display-bottomleft w3-padding-large w3-opacity">
         <h1 class="w3-xxlarge">RistoApp</h1>
     </div>
-</header>-->
+</header>
 
 <div ng-controller="headerController">
     <nav role="navigation" class="navbar navbar-default" id="main">
@@ -99,8 +103,8 @@
                                         href="" id="useradmin">
                     <span class="caret"></span> </a>
                     <ul class="dropdown-menu">
-                        <li><input type="radio" name="utenteadmin" id="utente"
-                                   onclick="utenteadminfunzione();">Utente</input></li>
+                        <li><input type="radio" name="utenteadmin" id="cassiere"
+                                   onclick="utenteadminfunzione();">Cassiere</input></li>
                         <li><input type="radio" name="utenteadmin" id="cuoco"
                                    onclick="utenteadminfunzione();">Cuoco</input></li>
                         <li><input type="radio" name="utenteadmin" id="cameriere"
@@ -116,13 +120,10 @@
                 </ul>
                 </li>
                 <li id="gestioneTag"><a href="#!gestisciEtichette">Gestisci Tag</a></li>
-                <li id="prendicomanda"><a href="#!prendiComanda">Prendi Comanda</a></li>
+                <li id="prendicomanda" style="display: none"><a href="#!prendiComanda">Prendi Comanda</a></li>
                 <li id="listacomandecuoco"><a href="#!comandecuoco">Lista Comande Cuoco</a></li>
                 <li id="ordinaMagazzino"><a href="#!ordineMagCentr">Ordine</a></li>
-                <li id="mostramenu"><a href="#">Mostra il Menu</a></li>
-                <li id="contattaci"><a href="#">Contattaci</a></li>
-                <li id="dovesiamo"><a href="#!dovesiamo">Dove Siamo</a></li>
-                <li id="cassa"><a href="#!cassa">Cassa</a></li>
+                <li id="cassa" style="display: none"><a href="#!cassa">Cassa</a></li>
 
 
             </ul>
