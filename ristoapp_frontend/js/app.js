@@ -17,6 +17,10 @@ myApp.config(function($routeProvider) {
             templateUrl : "htmlFiles/creaMenu.html",
             controller:"creaMenuCtrl"
         })
+        .when("/modificaMenu/:nomeMenu", {
+            templateUrl: "htmlFiles/modificaMenu.html",
+            controller: "creaMenuCtrl"
+        })
         .when("/creaPietanza", {
             templateUrl : "htmlFiles/creaPietanza.html",
             controller:"CreaPietanzaController"
@@ -43,7 +47,8 @@ myApp.config(function($routeProvider) {
             controller: "ricercaPietanzaController"
         })
         .when("/modificaPietanza/:idPietanza", {
-            templateUrl: "htmlFiles/modificaPietanza.html"
+            templateUrl: "htmlFiles/modificaPietanza.html",
+            controller: "CreaPietanzaController"
         })
         .when("/cassa", {
             templateUrl: "htmlFiles/cassa.html",

@@ -1,5 +1,5 @@
 
-myApp.controller("creaMenuCtrl", function($scope, ajaxService, CreaPietanzaService) {
+myApp.controller("creaMenuCtrl", function($scope, ajaxService, CreaPietanzaService, $routeParams) {
     $scope.categorieMenu = [];
     $scope.nomeMenu = "";
     $scope.nomeCategoria = "";
@@ -42,6 +42,40 @@ myApp.controller("creaMenuCtrl", function($scope, ajaxService, CreaPietanzaServi
     };
     getCatNamesList();
 
+    var fillParametersToModify = function () {
+        var nameMenu = $routeParams.nomeMenu;
+        if (nameMenu === undefined) return;
+        console.log("aaa");
+        ajaxService.getResource("http://localhost:8080/menu/nome/" + nameMenu, null).then(function (response) {
+            console.log("ok");
+            console.log(response);
+            console.log("okk");
+            $scope.categorieMenu = [];
+            $scope.nomeMenu = "";
+            $scope.nomeCategoria = "";
+            $scope.descrizione = response.descrizione;
+            $scope.selected = [];
+
+            $scope.nomePietanza = response.nome;
+            $scope.prezzoPietanza = response.prezzo;
+            for (i in response.ingredienti){
+                var checkBox = document.getElementById("check.".concat(response.ingredienti[i].prodotto.nome));
+                checkBox.checked = true;
+                var index = searchIndexById(response.ingredienti[i].prodotto.id, $scope.prodotti);
+                $scope.updateSelectedProd(response.ingredienti[i].prodotto.nome,
+                    response.ingredienti[i].prodotto.id, $scope.prodotti[index].prezzo*response.ingredienti[i].quantita, response.ingredienti[i].quantita);
+            }
+            for (i in response.etichette){
+                var checkBox = document.getElementById("check.".concat(response.etichette[i].classificatore));
+                checkBox.checked = true;
+                $scope.updateSelectedTag(response.etichette[i].classificatore);
+            }
+        }, function (response) {
+            console.log(response);
+        })
+    };
+    fillParametersToModify();
+
     $scope.filterPietanze = function(element) {
         if ($scope.filtro === "all") {
             return true;
@@ -53,7 +87,6 @@ myApp.controller("creaMenuCtrl", function($scope, ajaxService, CreaPietanzaServi
         }
         return false;
     };
-
 
     var searchIndex = function(searchTerm, array){
         for(var i = 0, len = array.length; i < len; i++) {

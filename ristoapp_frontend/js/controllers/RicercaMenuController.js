@@ -30,7 +30,7 @@ myApp.controller("RicercaMenuController", ["$scope", "MenuService", "$location",
 
     $scope.findMenuAttivo = function(){
         search("/findMenuAttivo");
-    }
+    };
 
     $scope.search = {nome: "", ingrediente: "", etichetta: ""};
 
@@ -62,8 +62,12 @@ myApp.controller("RicercaMenuController", ["$scope", "MenuService", "$location",
         }, function (error) {
             alert("Errore nell'eliminazione");
             console.log(error);
-        });;
-    }
+        });
+    };
+
+    $scope.modificaMenu = function (nomeMenu) {
+        $location.path("modificaMenu/"+ nomeMenu.toString());
+    };
 
     $scope.attivaMenu = function (nomeMenu) {
         ajaxService.updateResource("http://localhost:8080/menu/" + nomeMenu, null).then(function (response) {
@@ -71,8 +75,8 @@ myApp.controller("RicercaMenuController", ["$scope", "MenuService", "$location",
         }, function (error) {
             alert("Errore nell'operazione");
             console.log(error);
-        });;
-    }
+        });
+    };
 
     var searchIndex = function(searchTerm, array){
         for(var i = 0, len = array.length; i < len; i++) {
