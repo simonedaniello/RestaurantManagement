@@ -86,9 +86,9 @@ myApp.controller("CreaPietanzaController", function($scope, ajaxService, CreaPie
         if(checkBox.checked) {
             var ingrediente = {nome:nomeProd, quantita:quantita, prodottoId: id};
             $scope.selectedProd.push(ingrediente);
-            var p = {prezzo: prezzo, nome: nomeProd, qnt: quantita};
-            $scope.prod.push(p);
             $scope.prodottiTot = ($scope.prodottiTot*10 + prezzo*10)/10;
+            var p = {prezzo: prezzo/quantita, nome: nomeProd, qnt: quantita};
+            $scope.prod.push(p);
         }else{
             var i = searchIndex(nomeProd, $scope.selectedProd);
             $scope.selectedProd.splice(i,1);
@@ -131,20 +131,19 @@ myApp.controller("CreaPietanzaController", function($scope, ajaxService, CreaPie
             alert("Couldn't save tag");
         });
         $scope.nomeNewTag = "";
-    }
+    };
 
 
 
     var fillParametersToModify = function () {
         var id = $routeParams.idPietanza;
+        if (id === undefined) return;
         ajaxService.getResource("http://localhost:8080/dish/getById?id=" + id, null).then(function (response) {
             $scope.nomePietanza = response.nome;
             $scope.prezzoPietanza = response.prezzo;
-            console.log(response.prezzo);
             for (i in response.ingredienti){
                 var checkBox = document.getElementById("check.".concat(response.ingredienti[i].prodotto.nome));
                 checkBox.checked = true;
-                console.log(response.ingredienti[i].prodotto.id);
                 var index = searchIndexById(response.ingredienti[i].prodotto.id, $scope.prodotti);
                 $scope.updateSelectedProd(response.ingredienti[i].prodotto.nome,
                     response.ingredienti[i].prodotto.id, $scope.prodotti[index].prezzo*response.ingredienti[i].quantita, response.ingredienti[i].quantita);
