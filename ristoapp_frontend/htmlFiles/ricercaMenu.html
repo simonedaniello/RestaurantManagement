@@ -66,8 +66,8 @@
                                 <div class="card" style="width: 35rem;" ng-repeat="menu in listaMenu">
                                     <img class="card-img-top" ng-src="{{menu.immagine}}" style="height: 200px; width: 100%; display: block;">
                                     <div class="card-block">
-                                        <h4 class="card-title" ng-show="!menu.isActive">{{menu.nome}}</h4>
-                                        <h4 class="card-title" style="color: #47a447" ng-show="menu.isActive">{{menu.nome}}</h4>
+                                        <h4 class="card-title">{{menu.nome}}</h4>
+                                        <h4 class="card-title" style="color: #47a447" ng-show="listaMenu">{{menu.nome}}</h4>
                                         <p class="card-text">
                                             {{menu.descrizione}}
                                             <br>

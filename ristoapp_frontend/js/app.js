@@ -54,19 +54,9 @@ myApp.config(function($routeProvider) {
             templateUrl: "htmlFiles/cassa.html",
             controller: 'CassaController'
         })
-        .when('/dovesiamo', {
-            templateUrl: "htmlFiles/dovesiamo.html",
-            controller: 'doveSiamoController'
-            /*resolve: {
-                init: function() {
-                    return function($route) {
-                        console.log('Loading Blog Article ' + $route.current.params.id);
-                    }
-                }
-            }*/
-        })
         .otherwise({
-            templateUrl : "htmlFiles/mainPage.html"
+            templateUrl : "htmlFiles/mainPage.html",
+            controller: "mainPageController"
         });
 });
 

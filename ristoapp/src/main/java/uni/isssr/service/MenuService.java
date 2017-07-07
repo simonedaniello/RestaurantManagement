@@ -123,6 +123,7 @@ public class MenuService {
         CategoriaDto categoriaDto = new CategoriaDto();
         categoriaDto.setNomeCategoria(categoria.getNome());
         categoriaDto.setPosizione(categoria.getPosizione());
+        categoriaDto.setId(categoria.getId());
         List<PietanzaMenuDto> pietanze = new ArrayList<>();
         for (Pietanza pietanza : categoria.getPietanze())
             pietanze.add(this.pietanzaToPietanzaMenuDto(pietanza));
@@ -183,6 +184,9 @@ public class MenuService {
         Integer posizioneCategoria = new Integer(1);
         for (CategoriaMenuDto categoriaDto:menuDto.getCategorie()) {
             Categoria categoria = new Categoria(categoriaDto.getNomeCategoria());
+            categoria.setId(categoriaDto.getId());
+            System.out.println("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
+            System.out.println(categoria.getId());
             categoria.setPosizione(posizioneCategoria);
             posizioneCategoria+=1;
             List<Long> pietanzeId = new ArrayList<>();

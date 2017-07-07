@@ -12,7 +12,7 @@ public class CategoriaDto {
 
     private Integer posizione;
 
-
+    private Long id;
 
     private List<PietanzaMenuDto> pietanze;
 
@@ -43,5 +43,13 @@ public class CategoriaDto {
 
     public void addPietanza(PietanzaMenuDto pietanzaDto) {
         this.pietanze.add(pietanzaDto);
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

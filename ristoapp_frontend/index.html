@@ -34,7 +34,7 @@
     <script src="js/services/CreaPietanzaService.js"></script>
     <script src="js/controllers/CreaPietanzaController.js"></script>
     <script src="js/controllers/GesticiTagController.js"></script>
-    <script src="js/controllers/creaMenuController.js"></script>
+    <script src="js/controllers/gestisciMenuController.js"></script>
     <script src="js/controllers/headerController.js"></script>
     <script src="js/controllers/ricercaPietanzaController.js"></script>
     <script src="js/controllers/OrdineMagazzinoCentraleController.js"></script>
@@ -65,6 +65,7 @@
     <script src="js/services/PrendiComandaService.js"></script>
     <script src="js/controllers/prendiComandaController.js"></script>
     <script src="js/controllers/RisolviComandeController.js"></script>
+    <script src="js/controllers/mainPageController.js"></script>
     <!--fine script comande-->
 
     <link href="cssFiles/menu.css" rel="stylesheet">
@@ -78,17 +79,6 @@
 
 </head>
 <body ng-app="ristoApp">
-
-
-<header class="w3-display-container w3-content w3-wide" style="max-width:1600px;min-width:500px" id="home">
-<!--
-    <img class="w3-image" src="http://www.karismahotels.com/gourmetinclusive/images/main/platemain.jpg" alt="Hamburger Catering" width="1600" height="800">
--->
-    <img class="w3-image" src="http://www.karismahotels.com/gourmetinclusive/images/main/platemain.jpg" alt="Hamburger Catering" width="1600" height="800">
-    <div class="w3-display-bottomleft w3-padding-large w3-opacity">
-        <h1 class="w3-xxlarge">RistoApp</h1>
-    </div>
-</header>
 
 <div ng-controller="headerController">
     <nav role="navigation" class="navbar navbar-default" id="main">
@@ -219,14 +209,6 @@
 
 <div ng-view></div>
 
-<footer class="w3-container w3-padding-64 w3-light-grey w3-center w3-large">
-    <i class="fa fa-facebook-official w3-hover-opacity"></i>
-    <i class="fa fa-instagram w3-hover-opacity"></i>
-    <i class="fa fa-snapchat w3-hover-opacity"></i>
-    <i class="fa fa-pinterest-p w3-hover-opacity"></i>
-    <i class="fa fa-twitter w3-hover-opacity"></i>
-    <i class="fa fa-linkedin w3-hover-opacity"></i>
-</footer>
 
 <script src="js/navbarControl/userAdminChoice.js"></script>
 

@@ -211,9 +211,10 @@ myApp.controller("creaMenuCtrl", function($scope, ajaxService, CreaPietanzaServi
             alert("Devi selezionare almeno una pietanza che appartiene alla categoria.");
             return;
         }
-        var newCategory = {nomeCategoria: $scope.nomeCategoria, pietanze:$scope.selected};
+        var newCategory = {nomeCategoria: $scope.nomeCategoria, pietanze:$scope.selected, id: null};
         if ($scope.isModify === 1) {
             var j = searchCategoriaIndex($scope.nomeCategoria, $scope.categorieMenu);
+            newCategory.id = $scope.categorieMenu[j].id;
             $scope.categorieMenu.splice(j,1);
             $scope.categorieMenu.splice(j,0,newCategory);
             resetActualCategory();
@@ -281,6 +282,7 @@ myApp.controller("creaMenuCtrl", function($scope, ajaxService, CreaPietanzaServi
             isActive: isAct,
             descrizione: $scope.descrizione
         };
+        console.log(dtoMenu);
         var jsonMenu = JSON.stringify(dtoMenu);
         ajaxService.updateResource("http://localhost:8080/menu", jsonMenu).then(function (response) {
             location.href = "#";
