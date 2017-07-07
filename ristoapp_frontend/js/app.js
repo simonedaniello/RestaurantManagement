@@ -55,8 +55,7 @@ myApp.config(function($routeProvider) {
             controller: 'CassaController'
         })
         .otherwise({
-            templateUrl : "htmlFiles/mainPage.html",
-            controller: "mainPageController"
+            templateUrl : "htmlFiles/mainPage.html"
         });
 });
 
