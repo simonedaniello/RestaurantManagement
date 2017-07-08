@@ -33,8 +33,8 @@ function utenteadminfunzione(){
     }else if(document.getElementById('cuoco').checked) {
         it = 'Cuoco';
         button.innerText = button.textContent = it;
-        document.getElementById('menu-box').style.display = "block";
         document.getElementById('creamenu-box').style.display = "block";
+        document.getElementById('menu-box').style.display = "block";
         document.getElementById('creapietanze-box').style.display = "block";
         document.getElementById('lemiepietanze-box').style.display = "block";
         document.getElementById('gestiscitag-box').style.display = "block";

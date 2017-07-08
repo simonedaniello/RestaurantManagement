@@ -55,11 +55,16 @@ myApp.config(function($routeProvider) {
             controller: 'CassaController'
         })
         .otherwise({
-            templateUrl : "htmlFiles/mainPage.html"
+            templateUrl : "htmlFiles/mainPage.html",
+            controller: 'backController'
         });
 });
 
 
+myApp.controller('backController', function() {
+    document.getElementById('cuoco').checked = true;
+    utenteadminfunzione();
+});
 
 myApp.controller('researchController', function($scope) {
     $scope.researchInText = function(tag, written) {
