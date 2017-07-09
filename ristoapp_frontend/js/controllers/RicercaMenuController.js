@@ -15,7 +15,7 @@ myApp.controller("RicercaMenuController", ["$scope", "$location", "ajaxService",
 
     function search(params) {
         $scope.par = params;
-        ajaxService.getResource("http://localhost:8080/menu" + params, null).then(function (response) {
+        ajaxService.getResource("https://localhost:8080/menu" + params, null).then(function (response) {
             $scope.listaMenu = response;
         }, function (error) {
             alert("Errore nella richiesta");
@@ -57,7 +57,7 @@ myApp.controller("RicercaMenuController", ["$scope", "$location", "ajaxService",
     };
 
     $scope.deleteMenu = function (nomeMenu) {
-        ajaxService.deleteResource("http://localhost:8080/menu/" + nomeMenu, null).then(function (response) {
+        ajaxService.deleteResource("https://localhost:8080/menu/" + nomeMenu, null).then(function (response) {
             var index = searchIndex(nomeMenu, $scope.listaMenu);
             $scope.listaMenu.splice(index, 1);
         }, function (error) {
@@ -71,7 +71,7 @@ myApp.controller("RicercaMenuController", ["$scope", "$location", "ajaxService",
     };
 
     $scope.attivaMenu = function (nomeMenu) {
-        ajaxService.updateResource("http://localhost:8080/menu/" + nomeMenu, null).then(function (response) {
+        ajaxService.updateResource("https://localhost:8080/menu/" + nomeMenu, null).then(function (response) {
             alert("Menu reso attivo con successo");
             search($scope.par);
         }, function (error) {

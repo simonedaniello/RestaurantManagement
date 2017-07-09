@@ -18,7 +18,7 @@ myApp.controller("ricercaPietanzaController", function ($scope, ajaxService, Ric
 
     var getPietanzeNavigation = function (pagina) {
         var params = {page : pagina, size : 3, nome : $scope.searchNome, tags : $scope.associatedTags};
-        getPietanzeListPage("http://localhost:8080/dish", params);
+        getPietanzeListPage("https://localhost:8080/dish", params);
     };
 
     var setPaginationNavbar = function (response) {
@@ -38,7 +38,7 @@ myApp.controller("ricercaPietanzaController", function ($scope, ajaxService, Ric
     };
 
     var updateTagList = function() {
-        ajaxService.getResource("http://localhost:8080/tags", null).then(
+        ajaxService.getResource("https://localhost:8080/tags", null).then(
             function (response) {
                 $scope.tags = RicercaPietanzaService.parseTagArray(response);
             }
@@ -64,7 +64,7 @@ myApp.controller("ricercaPietanzaController", function ($scope, ajaxService, Ric
     };
 
     $scope.deletePietanza = function (id) {
-        ajaxService.deleteResource("http://localhost:8080/dish/delete/" + id.toString(), null).then(function (response) {
+        ajaxService.deleteResource("https://localhost:8080/dish/delete/" + id.toString(), null).then(function (response) {
             getPietanzeNavigation(0);
             alert("Pietanza rimossa");
         }, function (response) {

@@ -10,7 +10,7 @@ myApp.controller("VisualizzaMenuController", ["$scope", "MenuService", "ajaxServ
 
     $scope.visualizza = function () {
         // "jsonFiles/menu_mock.json"
-        ajaxService.getResource("http://localhost:8080/menu/" + nomeMenu, null).then(function (response) {
+        ajaxService.getResource("https://localhost:8080/menu/" + nomeMenu, null).then(function (response) {
             $scope.menu.nomeMenu = response.nomeMenu;
             $scope.menu.immagineMenu = response.immagineMenu;
             $scope.menu.categorie = response.categorie;

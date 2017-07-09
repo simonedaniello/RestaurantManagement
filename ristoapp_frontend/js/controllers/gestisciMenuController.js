@@ -11,7 +11,7 @@ myApp.controller("creaMenuCtrl", function($scope, ajaxService, CreaPietanzaServi
     $scope.categorie = [];
 
     var getPietanzeList = function() {
-        ajaxService.getResource("http://localhost:8080/dish/getAll", null).then(
+        ajaxService.getResource("https://localhost:8080/dish/getAll", null).then(
             function (response) {
                 $scope.pietanze = response.slice();
             }
@@ -22,7 +22,7 @@ myApp.controller("creaMenuCtrl", function($scope, ajaxService, CreaPietanzaServi
      getPietanzeList();
 
     var getTagList = function() {
-        ajaxService.getResource("http://localhost:8080/tags", null).then(
+        ajaxService.getResource("https://localhost:8080/tags", null).then(
             function (response) {
                 $scope.etichette = CreaPietanzaService.parseTagArray(response);
             }
@@ -33,7 +33,7 @@ myApp.controller("creaMenuCtrl", function($scope, ajaxService, CreaPietanzaServi
     getTagList();
 
     var getCatNamesList = function() {
-        ajaxService.getResource("http://localhost:8080/categoriesNames", null).then(
+        ajaxService.getResource("https://localhost:8080/categoriesNames", null).then(
             function (response) {
                 for (i in response){
                     $scope.categorie.push(response[i].nome);
@@ -48,7 +48,7 @@ myApp.controller("creaMenuCtrl", function($scope, ajaxService, CreaPietanzaServi
     var fillParametersToModify = function () {
         var nameMenu = $routeParams.nomeMenu;
         if (nameMenu === undefined) return;
-        ajaxService.getResource("http://localhost:8080/menu/" + nameMenu, null).then(function (response) {
+        ajaxService.getResource("https://localhost:8080/menu/" + nameMenu, null).then(function (response) {
             $scope.nomeMenu = response.nomeMenu;
             $scope.descrizione = response.descrizione;
             //parseCategorie(response.categorie);
@@ -264,7 +264,7 @@ myApp.controller("creaMenuCtrl", function($scope, ajaxService, CreaPietanzaServi
             descrizione: $scope.descrizione
         };
         var jsonMenu = JSON.stringify(dtoMenu);
-        ajaxService.sendResource("http://localhost:8080/menu", jsonMenu).then(function (response) {
+        ajaxService.sendResource("https://localhost:8080/menu", jsonMenu).then(function (response) {
             location.href = "#";
         }, function (response) {
             alert("Errore nell'invio dei dati al server.");
@@ -284,7 +284,7 @@ myApp.controller("creaMenuCtrl", function($scope, ajaxService, CreaPietanzaServi
         };
         console.log(dtoMenu);
         var jsonMenu = JSON.stringify(dtoMenu);
-        ajaxService.updateResource("http://localhost:8080/menu", jsonMenu).then(function (response) {
+        ajaxService.updateResource("https://localhost:8080/menu", jsonMenu).then(function (response) {
             location.href = "#";
         }, function (response) {
             alert("Errore nell'invio dei dati al server.");

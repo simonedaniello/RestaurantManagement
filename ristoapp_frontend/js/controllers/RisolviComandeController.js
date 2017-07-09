@@ -6,7 +6,7 @@ myApp.controller("RisolviComandeController", function ($scope,ajaxService) {
     $scope.tavolo = null;
 
     function subscribe() {
-        var socket = new SockJS('http://localhost:8080/websocket');
+        var socket = new SockJS('https://localhost:8080/websocket');
         var stompClient = Stomp.over(socket);
         stompClient.connect({}, function (frame) {
             console.log('Connected: ' + frame);
@@ -37,7 +37,7 @@ myApp.controller("RisolviComandeController", function ($scope,ajaxService) {
                 prodottoId: $scope.selectedProdForChef[indx].comandaItems[j].id};
             var json = JSON.stringify(pietanzaResocontoDto);
             console.log(pietanzaResocontoDto);
-            ajaxService.sendResource("http://localhost:8080/resoconto/preparato", json).then(
+            ajaxService.sendResource("https://localhost:8080/resoconto/preparato", json).then(
                 function (response) {
                 }
                 ,function (response) {

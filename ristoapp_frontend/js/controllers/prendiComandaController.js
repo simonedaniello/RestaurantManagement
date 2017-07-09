@@ -5,7 +5,7 @@ myApp.controller("PrendiComandaController", function($scope, ajaxService, Prendi
 
     //raccolta informazioni riguardanti il menu da parte del cameriere
     var updateListaProdotti = function () {
-        ajaxService.getResource("http://localhost:8080/menu/attivo", null).then(
+        ajaxService.getResource("https://localhost:8080/menu/attivo", null).then(
             function (response) {
                 if(response.length === 0) {
                     alert("Non c'è nessun menu attivo nel sistema.");

@@ -39,7 +39,7 @@ myApp.controller("OrdineMagazzinoCentraleController", function($scope, ajaxServi
         var dtoOrdine = {
             prodotti: $scope.selectedProd};
         var jsonOrdine = angular.toJson(dtoOrdine);
-        ajaxService.sendResource("http://localhost:8080/order", jsonOrdine).then(function (response) {
+        ajaxService.sendResource("https://localhost:8080/order", jsonOrdine).then(function (response) {
         }, function (response) {
             alert("Couldn't send order.        Bisogna collegare l'app");
             console.log(response)

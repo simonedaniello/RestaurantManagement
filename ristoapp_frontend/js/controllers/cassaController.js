@@ -9,7 +9,7 @@ myApp.controller("CassaController", function($scope, CassaService, ajaxService) 
             alert("Inserire il numero del tavolo!");
             return;
         }
-        CassaService.getComanda("http://localhost:8080/comanda/tavolo/" + $scope.numeroTavolo).then(function (response) {
+        CassaService.getComanda("https://localhost:8080/comanda/tavolo/" + $scope.numeroTavolo).then(function (response) {
             $scope.comandaItems = response.data;
             $scope.prezzoTotale = CassaService.calcolaTotale($scope.comandaItems);
         }, function (error) {
@@ -27,7 +27,7 @@ myApp.controller("CassaController", function($scope, CassaService, ajaxService) 
                 prodottoId: $scope.comandaItems[j].id};
             var json = JSON.stringify(pietanzaResocontoDto);
             console.log(pietanzaResocontoDto);
-            ajaxService.sendResource("http://localhost:8080/resoconto/venduto", json).then(
+            ajaxService.sendResource("https://localhost:8080/resoconto/venduto", json).then(
                 function (response) {
                 }
                 ,function (response) {
@@ -35,7 +35,7 @@ myApp.controller("CassaController", function($scope, CassaService, ajaxService) 
                 });
         }
 
-        CassaService.updateComanda("http://localhost:8080/comanda/updateComanda/" + $scope.numeroTavolo).then(function (response) {
+        CassaService.updateComanda("https://localhost:8080/comanda/updateComanda/" + $scope.numeroTavolo).then(function (response) {
             if (response.data === true) {
                 alert("Conto chiuso correttamente!");
                 $scope.comandaItems = [];

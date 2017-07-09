@@ -12,7 +12,7 @@ myApp.controller("GestisciTagController", function($scope, ajaxService) {
     };
 
     var updateTagList = function() {
-        ajaxService.getResource("http://localhost:8080/tags", null).then(
+        ajaxService.getResource("https://localhost:8080/tags", null).then(
             function (response) {
                 $scope.tags = parseResponse(response);
             }
@@ -29,7 +29,7 @@ myApp.controller("GestisciTagController", function($scope, ajaxService) {
         }
         var dtoTag = {classificatore: $scope.nomeNewTag};
         var jsonTag = JSON.stringify(dtoTag);
-        ajaxService.sendResource("http://localhost:8080/tags", jsonTag).then(
+        ajaxService.sendResource("https://localhost:8080/tags", jsonTag).then(
             function (response) {
                 updateTagList();
             }
@@ -40,7 +40,7 @@ myApp.controller("GestisciTagController", function($scope, ajaxService) {
     };
 
     $scope.deleteTag = function(tagName){
-        ajaxService.deleteResource("http://localhost:8080/tags/" + tagName.toString(), null).then(
+        ajaxService.deleteResource("https://localhost:8080/tags/" + tagName.toString(), null).then(
             function (response) {
                 updateTagList();
             }
@@ -57,7 +57,7 @@ myApp.controller("GestisciTagController", function($scope, ajaxService) {
         }
         var dtoTag = {classificatore: updatedName};
         var jsonTag = JSON.stringify(dtoTag);
-        ajaxService.updateResource("http://localhost:8080/tags/" + tagName.toString(), jsonTag).then(
+        ajaxService.updateResource("https://localhost:8080/tags/" + tagName.toString(), jsonTag).then(
             function (response) {
                 updateTagList();
             }

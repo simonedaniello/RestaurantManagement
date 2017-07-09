@@ -19,9 +19,9 @@ myApp.controller("CreaPietanzaController", function($scope, ajaxService, CreaPie
 
 
     var updateTagList = function() {
-        ajaxService.getResource("http://localhost:8080/tags", null).then(
+        $http.get("https://localhost:8080/tags").then(
             function (response) {
-                $scope.tags = CreaPietanzaService.parseTagArray(response);
+                $scope.tags = CreaPietanzaService.parseTagArray(response.data);
                 fillParametersToModify();
             }
             , function (response) {
@@ -111,7 +111,7 @@ myApp.controller("CreaPietanzaController", function($scope, ajaxService, CreaPie
     $scope.saveDish = function(){
         var dtoPietanza = {nome: $scope.nomePietanza, prezzo: $scope.prezzoPietanza, etichette: $scope.associatedTags, ingredienti: $scope.selectedProd};
         var jsonPiet = angular.toJson(dtoPietanza);
-        ajaxService.sendResource("http://localhost:8080/dish", jsonPiet).then(function (response) {
+        ajaxService.sendResource("https://localhost:8080/dish", jsonPiet).then(function (response) {
             $location.path("/cercaPietanza");
         }, function (response) {
             alert("Errore nella creazione: nome pietanza già esistente");
@@ -125,7 +125,7 @@ myApp.controller("CreaPietanzaController", function($scope, ajaxService, CreaPie
         }
         var dtoTag = {classificatore:$scope.nomeNewTag};
         var jsonTag = JSON.stringify(dtoTag);
-        ajaxService.sendResource("http://localhost:8080/tags", jsonTag).then(function (response) {
+        ajaxService.sendResource("https://localhost:8080/tags", jsonTag).then(function (response) {
             updateTagList();
         }, function (response) {
             alert("Couldn't save tag");
@@ -138,7 +138,7 @@ myApp.controller("CreaPietanzaController", function($scope, ajaxService, CreaPie
     var fillParametersToModify = function () {
         var id = $routeParams.idPietanza;
         if (id === undefined) return;
-        ajaxService.getResource("http://localhost:8080/dish/getById?id=" + id, null).then(function (response) {
+        ajaxService.getResource("https://localhost:8080/dish/getById?id=" + id, null).then(function (response) {
             $scope.nomePietanza = response.nome;
             $scope.prezzoPietanza = response.prezzo;
             for (i in response.ingredienti){
@@ -162,7 +162,7 @@ myApp.controller("CreaPietanzaController", function($scope, ajaxService, CreaPie
     $scope.updateDish = function(){
         var dtoPietanza = {nome: $scope.nomePietanza, prezzo: $scope.prezzoPietanza, etichette: $scope.associatedTags, ingredienti: $scope.selectedProd};
         var jsonPiet = angular.toJson(dtoPietanza);
-        ajaxService.updateResource("http://localhost:8080/dish/" + $routeParams.idPietanza, jsonPiet).then(function (response) {
+        ajaxService.updateResource("https://localhost:8080/dish/" + $routeParams.idPietanza, jsonPiet).then(function (response) {
             alert("Pietanza modificata con successo");
             $location.path("cercaPietanza")
         }, function (response) {

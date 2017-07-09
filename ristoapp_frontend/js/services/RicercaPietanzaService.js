@@ -15,7 +15,7 @@ myApp.service("RicercaPietanzaService", [function () {
     };
 
     this.generateSearchURL = function (nome, arrayTags) {
-        var url = "http://localhost:8080/dish?nome="+nome;
+        var url = "https://localhost:8080/dish?nome="+nome;
         for (i in arrayTags){
             var temp = "&tags=" + arrayTags[i];
             url += temp;
