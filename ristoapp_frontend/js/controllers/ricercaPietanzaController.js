@@ -17,7 +17,7 @@ myApp.controller("ricercaPietanzaController", function ($scope, ajaxService, Ric
     };
 
     var getPietanzeNavigation = function (pagina) {
-        var params = {page : pagina, size : 3, nome : $scope.searchNome, tags : $scope.associatedTags};
+        var params = {page : pagina, size : 5, nome : $scope.searchNome, tags : $scope.associatedTags};
         getPietanzeListPage("https://localhost:8080/dish", params);
     };
 
