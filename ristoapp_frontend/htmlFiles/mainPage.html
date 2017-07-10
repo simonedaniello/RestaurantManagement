@@ -1,59 +1,56 @@
-<!--
- Page content
-<div class="w3-content" style="max-width:1100px">
+<div class="container" ng-controller="mainPageController">
+    <div ng-if="logged === false" class="w3-content" style="max-width:1100px">
 
-    <div class="w3-row w3-padding-64" id="about">
-        <div class="w3-col m6 w3-padding-large w3-hide-small">
-            <img src="http://www.darumasushi.com/2015/wp-content/uploads/2015/12/Nigiri-gourmet.jpg" class="w3-round w3-image w3-opacity-min" alt="Table Setting" width="600" height="600">
+        <div class="w3-row w3-padding-64" id="about">
+            <div class="w3-col m6 w3-padding-large w3-hide-small">
+                <img src="http://www.darumasushi.com/2015/wp-content/uploads/2015/12/Nigiri-gourmet.jpg" class="w3-round w3-image w3-opacity-min" alt="Table Setting" width="600" height="600">
+            </div>
+
+            <div class="w3-col m6 w3-padding-large">
+                <h1 class="w3-center">The essence of innovation</h1>
+                <hr><br>
+                <h5 class="w3-center">the odd journey through senses</h5>
+                <p class="w3-large"> Our chef is working to find another way to enjoy the food,
+                    looking for new dishes but loving the tradition. There's something unusual in this kind
+                    of work and now I'm writing something that I don't know only to fill this section.
+                    In the edn of this text there is a grey part that is very beautiful
+                <p class="w3-large w3-text-grey w3-hide-medium">Our chef is working to find another way to enjoy the food,
+                    looking for new dishes but loving the tradition. There's something unusual in this kind
+                    of work and now I'm writing something that I don't know only to fill this section.
+                    In the edn of this text there is a grey part that is very beautiful</p>
+            </div>
         </div>
 
-        <div class="w3-col m6 w3-padding-large">
-            <h1 class="w3-center">The essence of innovation</h1>
-            <hr><br>
-            <h5 class="w3-center">the odd journey through senses</h5>
-            <p class="w3-large"> Our chef is working to find another way to enjoy the food,
-                looking for new dishes but loving the tradition. There's something unusual in this kind
-                of work and now I'm writing something that I don't know only to fill this section.
-                In the edn of this text there is a grey part that is very beautiful
-            <p class="w3-large w3-text-grey w3-hide-medium">Our chef is working to find another way to enjoy the food,
-            looking for new dishes but loving the tradition. There's something unusual in this kind
-            of work and now I'm writing something that I don't know only to fill this section.
-            In the edn of this text there is a grey part that is very beautiful</p>
+
+        <div class="w3-row w3-padding-64" id="menu">
+            <div class="w3-col l6 w3-padding-large">
+                <h1 class="w3-center">The love for tradition</h1>
+                <hr><br>
+                <h5 class="w3-center">A look in the past to see the future</h5>
+                <p class="w3-large"> Our chef is working to find another way to enjoy the food,
+                    looking for new dishes but loving the tradition. There's something unusual in this kind
+                    of work and now I'm writing something that I don't know only to fill this section.
+                    In the edn of this text there is a grey part that is very beautiful
+                <p class="w3-large w3-text-grey w3-hide-medium">Our chef is working to find another way to enjoy the food,
+                    looking for new dishes but loving the tradition. There's something unusual in this kind
+                    of work and now I'm writing something that I don't know only to fill this section.
+                    In the edn of this text there is a grey part that is very beautiful</p>
+            </div>
+
+            <div class="w3-col l6 w3-padding-large">
+                <img src="https://www.terrelucane.com/img/pasta_white.jpg" class="w3-round w3-image w3-opacity-min" alt="Menu" width="500" height="750">
+            </div>
         </div>
+
+        <hr>
     </div>
-
-
-    <div class="w3-row w3-padding-64" id="menu">
-        <div class="w3-col l6 w3-padding-large">
-            <h1 class="w3-center">The love for tradition</h1>
-            <hr><br>
-            <h5 class="w3-center">A look in the past to see the future</h5>
-            <p class="w3-large"> Our chef is working to find another way to enjoy the food,
-                looking for new dishes but loving the tradition. There's something unusual in this kind
-                of work and now I'm writing something that I don't know only to fill this section.
-                In the edn of this text there is a grey part that is very beautiful
-            <p class="w3-large w3-text-grey w3-hide-medium">Our chef is working to find another way to enjoy the food,
-                looking for new dishes but loving the tradition. There's something unusual in this kind
-                of work and now I'm writing something that I don't know only to fill this section.
-                In the edn of this text there is a grey part that is very beautiful</p>
-        </div>
-
-        <div class="w3-col l6 w3-padding-large">
-            <img src="https://www.terrelucane.com/img/pasta_white.jpg" class="w3-round w3-image w3-opacity-min" alt="Menu" width="500" height="750">
-        </div>
-    </div>
-
-    <hr>
-</div>-->
-
-<div class="container">
-    <div class="main">
+    <div ng-show="logged" class="main">
 
 <!--
          CUOCO
 -->
-        <a href="#!ricercaMenu">
-        <div class="box" id="menu-box">
+        <a href="#!ricercaMenu" ng-hide="cuocoFunctionHide">
+        <div ng-hide="cuocoFunctionHide" class="box" id="menu-box">
             <img src="imgFiles/menu.jpg"/>
             <div class="overlay">
             </div>
@@ -61,8 +58,8 @@
         </div>
             </a>
 
-        <a href="#!creamenu">
-        <div class="box" id="creamenu-box">
+        <a href="#!creamenu" ng-hide="cuocoFunctionHide">
+        <div ng-hide="cuocoFunctionHide" class="box" id="creamenu-box">
             <img src="imgFiles/creamenu.jpg" />
             <div class="overlay">
             </div>
@@ -70,8 +67,8 @@
         </div>
             </a>
 
-        <a href="#!creaPietanza">
-        <div class="box" id="creapietanze-box">
+        <a href="#!creaPietanza" ng-hide="cuocoFunctionHide">
+        <div ng-hide="cuocoFunctionHide" class="box" id="creapietanze-box">
             <img src="imgFiles/creapietanza.jpg" />
             <div class="overlay">
             </div>
@@ -79,8 +76,8 @@
         </div>
             </a>
 
-        <a href="#!cercaPietanza">
-        <div class="box" id="lemiepietanze-box">
+        <a href="#!cercaPietanza" ng-hide="cuocoFunctionHide">
+        <div ng-hide="cuocoFunctionHide" class="box" id="lemiepietanze-box">
             <img src="imgFiles/lemiepietanze.png" />
             <div class="overlay">
             </div>
@@ -88,8 +85,8 @@
         </div>
             </a>
 
-        <a href="#!gestisciEtichette">
-        <div class="box" id="gestiscitag-box">
+        <a href="#!gestisciEtichette" ng-hide="cuocoFunctionHide">
+        <div ng-hide="cuocoFunctionHide" class="box" id="gestiscitag-box">
             <img src="imgFiles/tag.jpg" />
             <div class="overlay">
             </div>
@@ -97,8 +94,8 @@
         </div>
             </a>
 
-        <a href="#!comandecuoco">
-        <div class="box" id="listacomandecuoco-box">
+        <a href="#!comandecuoco" ng-hide="cuocoFunctionHide">
+        <div ng-hide="cuocoFunctionHide" class="box" id="listacomandecuoco-box">
             <img src="imgFiles/comande.jpg" />
             <div class="overlay">
             </div>
@@ -106,8 +103,8 @@
         </div>
             </a>
 
-        <a href="#!ordineMagCentr">
-        <div class="box" id="ordine-box">
+        <a href="#!ordineMagCentr" ng-hide="cuocoFunctionHide">
+        <div ng-hide="cuocoFunctionHide" class="box" id="ordine-box">
             <img src="imgFiles/magazzino.jpg" />
             <div class="overlay">
             </div>
@@ -122,8 +119,8 @@
         <!--gestisci tag incluso in cuoco-->
         <!--ordine in cuoco-->
 
-        <a href="#!prendiComanda">
-        <div class="box" id="prendicomanda-box" style="display: none">
+        <a href="#!prendiComanda" ng-hide="cameriereFunctionHide">
+        <div ng-hide="cameriereFunctionHide" class="box" id="prendicomanda-box">
             <img href="#!prendiComanda" src="imgFiles/prendicomanda.jpg" />
             <div class="overlay">
             </div>
@@ -135,8 +132,8 @@
         CASSIERE
 -->
 
-        <a href="#!cassa">
-        <div class="box" id="cassa-box" style="display: none">
+        <a href="#!cassa" ng-hide="cassiereFunctionHide">
+        <div ng-hide="cassiereFunctionHide" class="box" id="cassa-box">
             <img src="imgFiles/cassa.png" />
             <div class="overlay">
             </div>

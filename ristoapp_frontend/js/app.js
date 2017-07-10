@@ -6,65 +6,72 @@ myApp.config(function($routeProvider) {
     $routeProvider
         .when("/ricercaMenu", {
             templateUrl : "htmlFiles/ricercaMenu.html",
-            controller:"RicercaMenuController"
+            controller:"RicercaMenuController",
+            activetab: "menu"
         })
         .when("/ricercaMenu/:nomeMenu", {
             templateUrl : "htmlFiles/visualizzaMenu.html",
             css : "cssFiles/menu.css",
-            controller : "VisualizzaMenuController"
+            controller : "VisualizzaMenuController",
+            activetab: "menu"
         })
         .when("/creamenu", {
             templateUrl : "htmlFiles/creaMenu.html",
-            controller:"creaMenuCtrl"
+            controller:"creaMenuCtrl",
+            activetab: "creamenu"
         })
         .when("/modificaMenu/:nomeMenu", {
             templateUrl: "htmlFiles/modificaMenu.html",
-            controller: "creaMenuCtrl"
+            controller: "creaMenuCtrl",
+            activetab: "menu"
         })
         .when("/creaPietanza", {
             templateUrl : "htmlFiles/creaPietanza.html",
-            controller:"CreaPietanzaController"
+            controller:"CreaPietanzaController",
+            activetab: "pietanze"
         })
         .when("/gestisciEtichette", {
             templateUrl : "htmlFiles/gestisciTag.html",
-            controller:"GestisciTagController"
+            controller:"GestisciTagController",
+            activetab: "gestiscitag"
         })
         .when("/prendiComanda", {
             templateUrl : "htmlFiles/prendiComanda.html",
-            controller:"PrendiComandaController"
+            controller:"PrendiComandaController",
+            activetab: "prendicomanda"
         })
         .when("/comandecuoco", {
             templateUrl : "htmlFiles/RisolviComandeCuoco.html",
-            controller:"RisolviComandeController"
+            controller:"RisolviComandeController",
+            activetab: "listacomandecuoco"
         })
         .when("/ordineMagCentr", {
             templateUrl : "htmlFiles/ordineMagazzinoCentrale.html",
-            controller:"OrdineMagazzinoCentraleController"
+            controller:"OrdineMagazzinoCentraleController",
+            activetab: "ordine"
         })
         .when("/cercaPietanza", {
             templateUrl: "htmlFiles/ricercaPietanze.html",
             css : "cssFiles/ricercaPietanzaTabs.css",
-            controller: "ricercaPietanzaController"
+            controller: "ricercaPietanzaController",
+            activetab: "pietanze"
         })
         .when("/modificaPietanza/:idPietanza", {
             templateUrl: "htmlFiles/modificaPietanza.html",
-            controller: "CreaPietanzaController"
+            controller: "CreaPietanzaController",
+            activetab: "pietanze"
         })
         .when("/cassa", {
             templateUrl: "htmlFiles/cassa.html",
-            controller: 'CassaController'
+            controller: 'CassaController',
+            activetab: "cassa"
         })
         .otherwise({
             templateUrl : "htmlFiles/mainPage.html",
-            controller: 'backController'
+            activetab: "home"
         });
 });
 
-
-myApp.controller('backController', function() {
-    document.getElementById('cuoco').checked = true;
-    utenteadminfunzione();
-});
 
 myApp.controller('researchController', function($scope) {
     $scope.researchInText = function(tag, written) {
