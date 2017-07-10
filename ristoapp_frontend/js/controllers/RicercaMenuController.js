@@ -37,16 +37,28 @@ myApp.controller("RicercaMenuController", ["$scope", "$location", "ajaxService",
     $scope.search = {nome: "", ingrediente: "", etichetta: ""};
 
     $scope.ricercaNome = function () {
+        if ($scope.search.nome === "") {
+            alert("Specificare nome del menu");
+            return;
+        }
         var nome = $scope.search.nome;
         search("/nome/" + nome);
     };
 
     $scope.ricercaEtichetta = function () {
+        if ($scope.search.etichetta === "") {
+            alert("Specificare il nome dell'etichetta");
+            return;
+        }
         var etichetta = $scope.search.etichetta;
         search("/etichetta/" + etichetta);
     };
 
     $scope.ricercaIngrediente = function () {
+        if ($scope.search.ingrediente === "") {
+            alert("Specificare il nome dell'ingrediente");
+            return;
+        }
         var ingrediente = $scope.search.ingrediente;
         search("/ingrediente/" + ingrediente);
     };

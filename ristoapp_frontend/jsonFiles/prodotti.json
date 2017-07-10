@@ -127,21 +127,21 @@
       "id": 17
     },
     {
-      "nome": "Vino Rosso: Primitivo di Manduria ",
+      "nome": "Primitivo di Manduria ",
       "descrizione": "Descrizione prodotto bla bla",
       "tipo": "bevanda",
       "prezzo": 5,
       "id": 18
     },
     {
-      "nome": "Vino Bianco: Campi Flegrei",
+      "nome": "Campi Flegrei",
       "descrizione": "Descrizione prodotto bla bla",
       "tipo": "bevanda",
       "prezzo": 6,
       "id": 19
     },
     {
-      "nome": "Vino Bianco: Fiano di Avellino",
+      "nome": "Fiano di Avellino",
       "descrizione": "Descrizione prodotto bla bla",
       "tipo": "bevanda",
       "prezzo": 8,
