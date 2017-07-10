@@ -17,6 +17,7 @@ myApp.controller("RicercaMenuController", ["$scope", "$location", "ajaxService",
         $scope.par = params;
         ajaxService.getResource("https://localhost:8080/menu" + params, null).then(function (response) {
             $scope.listaMenu = response;
+            console.log(response);
         }, function (error) {
             alert("Errore nella richiesta");
             console.log(error);
