@@ -91,7 +91,7 @@ myApp.controller("PrendiComandaController", function($scope, ajaxService, Prendi
 
         } else {
 
-            var socket = new SockJS('http://localhost:8080/websocket');
+            var socket = new SockJS('https://localhost:8080/websocket');
             stompClient = Stomp.over(socket);
             stompClient.connect({}, function (frame) {
                 console.log('Connected: ' + frame);
