@@ -16,15 +16,11 @@ import java.util.List;
 public class EtichettaEndPoint {
 
     @Autowired
-    private EtichettaRepository etichettaRepository;
-
-    @Autowired
     private EtichettaService etichettaService;
 
     @RequestMapping(method = RequestMethod.POST)
     public void addTag(@RequestBody EtichettaDto etichettaDto){
-        Etichetta etichetta = new Etichetta(etichettaDto.getClassificatore());
-        etichettaRepository.save(etichetta);
+        etichettaService.save(etichettaDto);
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/{ID}")
@@ -34,12 +30,12 @@ public class EtichettaEndPoint {
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/{ID}")
     public void deletePietanza(@PathVariable(value = "ID") String id){
-        etichettaRepository.deleteEtichetta(id);
+        etichettaService.deleteEtichetta(id);
     }
 
 
     @RequestMapping(method = RequestMethod.GET)
     public @ResponseBody Iterable<Etichetta> getAllTags(){
-        return etichettaRepository.findAll();
+        return etichettaService.findAll();
     }
 }

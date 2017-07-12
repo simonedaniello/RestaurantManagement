@@ -27,9 +27,6 @@ public class PietanzaService {
     private EtichettaRepository etichettaRepository;
 
     @Autowired
-    private ProdottoRepository prodottoRepository;
-
-    @Autowired
     private PietanzaRepository pietanzaRepository;
 
     @Autowired
@@ -40,6 +37,24 @@ public class PietanzaService {
 
     @Autowired
     private IngredienteService ingredienteService;
+
+    public void save(PietanzaDto pietanzaDto) {
+        pietanzaRepository.save(this.unmarshall(pietanzaDto));
+    }
+
+    public void update(Long id, PietanzaDto pietanzaDto) {
+        pietanzaRepository.save(this.unmarshall(id, pietanzaDto));
+    }
+
+    public Pietanza select(Long id) {
+        return pietanzaRepository.findOne(id);
+    }
+
+    public Page<Pietanza> search(String nome, String[] tags, Pageable pageable) {
+        if (tags.length == 0) return pietanzaRepository.findAllByNomeContainingOrderByNome(nome, pageable);
+        Etichetta[] etichette = this.convertToEtichette(tags);
+        return pietanzaRepository.findDistinctByNomeContainingAndEtichetteIn(nome, etichette,pageable);
+    }
 
 
     //trasformazione di un pietanzaDto in Pietanza

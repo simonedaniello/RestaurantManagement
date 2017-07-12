@@ -2,6 +2,7 @@ package uni.isssr.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import uni.isssr.dto.EtichettaDto;
 import uni.isssr.entities.Etichetta;
 import uni.isssr.entities.Pietanza;
 import uni.isssr.repositories.EtichettaRepository;
@@ -30,4 +31,19 @@ public class EtichettaService {
         }
         etichettaRepository.deleteEtichetta(oldClassificatore);
     }
+
+    public void save(EtichettaDto etichettaDto) {
+        Etichetta etichetta = new Etichetta(etichettaDto.getClassificatore());
+        etichettaRepository.save(etichetta);
+    }
+
+    public void deleteEtichetta(String id) {
+        etichettaRepository.deleteEtichetta(id);
+    }
+
+    public Iterable<Etichetta> findAll() {
+        return etichettaRepository.findAll();
+    }
+
+
 }

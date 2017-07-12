@@ -22,12 +22,6 @@ import java.util.List;
 public class PietanzaEndPoint {
 
     @Autowired
-    private PietanzaRepository pietanzaRepository;
-
-    @Autowired
-    private EtichettaRepository etichettaRepository;
-
-    @Autowired
     private PietanzaService pietanzaService;
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
@@ -36,13 +30,13 @@ public class PietanzaEndPoint {
     //Salvataggio di una nuova Pietanza: avviene prima una trasformazione da PietanzaDto a Pietanza
     @RequestMapping(method = RequestMethod.POST)
     public void addPietanza(@RequestBody PietanzaDto received){
-        pietanzaRepository.save(pietanzaService.unmarshall(received));
+        pietanzaService.save(received);
     }
 
     //Aggiornamento di una pietanza
     @RequestMapping(method = RequestMethod.PUT, value = "/{ID}")
     public void updatePietanza(@RequestBody PietanzaDto received, @PathVariable(value = "ID") Long id){
-        pietanzaRepository.save(pietanzaService.unmarshall(id, received));
+        pietanzaService.update(id, received);
     }
 
     //eliminazione di una pietanza
@@ -54,7 +48,7 @@ public class PietanzaEndPoint {
     //Retrieve di una pietanza tramite il suo ID
     @RequestMapping(method = RequestMethod.GET, value = "/getById")
     public @ResponseBody Pietanza getPietanzaById(@RequestParam(value = "id") Long id){
-        return pietanzaRepository.findOne(id);
+        return pietanzaService.select(id);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/getAll")
@@ -66,9 +60,7 @@ public class PietanzaEndPoint {
     @RequestMapping(method = RequestMethod.GET)
     public @ResponseBody Page<Pietanza> searchPietanza(@RequestParam(value = "nome", defaultValue = "") String nome,
                                                        @RequestParam(value = "tags", defaultValue = "") String[] tags, Pageable pageable){
-        if (tags.length == 0) return pietanzaRepository.findAllByNomeContainingOrderByNome(nome, pageable);
-        Etichetta[] etichette = pietanzaService.convertToEtichette(tags);
-        return pietanzaRepository.findDistinctByNomeContainingAndEtichetteIn(nome, etichette,pageable);
+        return pietanzaService.search(nome, tags, pageable);
     }
 
 }

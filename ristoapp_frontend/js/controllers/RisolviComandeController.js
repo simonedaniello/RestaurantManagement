@@ -29,10 +29,8 @@ myApp.controller("RisolviComandeController", function ($scope,ajaxService) {
 
 
     $scope.fatto = function(indx){
-        console.log("sto entrando");
         console.log($scope.selectedProdForChef[indx]);
         for (var j=0;  j<$scope.selectedProdForChef[indx].comandaItems.length; j++) {
-            console.log("sono entrando");
             var pietanzaResocontoDto = {value: $scope.selectedProdForChef[indx].comandaItems[j].quantita,
                 prodottoId: $scope.selectedProdForChef[indx].comandaItems[j].id};
             var json = JSON.stringify(pietanzaResocontoDto);

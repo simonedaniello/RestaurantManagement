@@ -1,5 +1,5 @@
 
-var myApp = angular.module("ristoApp", ["ngRoute", "ngStorage", "pubnub.angular.service"]);
+var myApp = angular.module("ristoApp", ["ngRoute", "ngStorage"]);
 
 
 myApp.config(function($routeProvider) {
