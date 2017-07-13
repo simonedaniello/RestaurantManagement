@@ -42,6 +42,8 @@ myApp.controller("GestioneDipendentiController", function($scope, ajaxService) {
                 alert("Non sono riuscito a salvare il dipendente");
             });
         $scope.nomeDipendente = "";
+        $scope.cognomeDipendente = "";
+        $scope.ruoloDipendente = "";
     };
 
     $scope.deleteDipendente = function(nome){
@@ -55,13 +57,14 @@ myApp.controller("GestioneDipendentiController", function($scope, ajaxService) {
     };
 
     $scope.modificaDipendente = function(dipendente){
-        var ruolodipendente = document.getElementById("ruolo." + dipendente.cognome);
-        if (ruolodipendente === "") {
+        var ruolodipendente = document.getElementById("ruolo." + dipendente.cognome).value;
+        if (ruolodipendente.value === "") {
             alert("Specificare un nome non vuoto per la modifica.");
             return;
         }
-        var dtoDipendente = {noe: dipendente.nome, cognome: dipendente.cognome, ruolo: ruolodipendente};
+        var dtoDipendente = {nome: dipendente.nome, cognome: dipendente.cognome, ruolo: ruolodipendente};
         var jsonDipendente = JSON.stringify(dtoDipendente);
+        console.log("Stringa = " + jsonDipendente);
         ajaxService.updateResource("https://localhost:8080/dipendenti/" + dipendente.cognome.toString(), jsonDipendente).then(
             function (response) {
                 updateDipendenti();
