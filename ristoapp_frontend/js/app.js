@@ -66,6 +66,10 @@ myApp.config(function($routeProvider) {
             controller: 'CassaController',
             activetab: "cassa"
         })
+        .when("/gestionePersonale", {
+            templateUrl: "htmlFiles/gestioneDipendenti.html",
+            controller: 'GestioneDipendentiController'
+        })
         .otherwise({
             templateUrl : "htmlFiles/mainPage.html",
             activetab: "home"

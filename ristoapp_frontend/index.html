@@ -40,6 +40,7 @@
     <script src="js/controllers/ricercaPietanzaController.js"></script>
     <script src="js/controllers/OrdineMagazzinoCentraleController.js"></script>
     <script src="js/controllers/cassaController.js"></script>
+    <script src="js/controllers/gestioneDipendentiController.js"></script>
     <script src="js/services/cassaService.js"></script>
 
     <!-- Inizio script visualizzazione menu -->
@@ -88,6 +89,7 @@
                 <li ng-class="{active: $route.current.activetab == 'home'}"><a href="#">Home</a></li>
                 <li ng-class="{active: $route.current.activetab == 'menu'}" id="menu" ng-hide="cuocoFunctionHide"><a href="#!ricercaMenu" >Menu</a></li>
                 <li ng-class="{active: $route.current.activetab == 'creamenu'}" id="creamenu" ng-hide="cuocoFunctionHide"><a href="#!creamenu">Crea Menu</a></li>
+                <li ng-class="{active: $route.current.activetab == 'gestionePersonale'}" id="gestionePersonale" ng-hide="cuocoFunctionHide"><a href="#!gestionePersonale">Personale</a></li>
                 <li ng-class="{active: $route.current.activetab == 'pietanze'}" class="dropdown" id="pietanze" ng-hide="cuocoFunctionHide"><a class="dropdown-toggle" data-toggle="dropdown" href="">Pietanze
                 <span class="caret"></span> </a>
                 <ul class="dropdown-menu">
@@ -97,7 +99,7 @@
                 </li>
                 <li ng-class="{active: $route.current.activetab == 'gestiscitag'}" id="gestioneTag" ng-hide="cuocoFunctionHide"><a href="#!gestisciEtichette">Gestisci Tag</a></li>
                 <li ng-class="{active: $route.current.activetab == 'prendicomanda'}" id="prendicomanda" ng-hide="cameriereFunctionHide"><a href="#!prendiComanda">Prendi Comanda</a></li>
-                <li ng-class="{active: $route.current.activetab == 'listacomandecuoco'}" id="listacomandecuoco" ng-hide="cuocoFunctionHide"><a href="#!comandecuoco">Lista Comande Cuoco</a></li>
+                <li ng-class="{active: $route.current.activetab == 'listacomandecuoco'}" id="listacomandecuoco" ng-hide="cuocoFunctionHide"><a href="#!comandecuoco">Lista Comande</a></li>
                 <li ng-class="{active: $route.current.activetab == 'ordine'}" id="ordinaMagazzino" ng-hide="cuocoFunctionHide"><a href="#!ordineMagCentr">Ordine</a></li>
                 <li ng-class="{active: $route.current.activetab == 'cassa'}" id="cassa" ng-hide="cassiereFunctionHide"><a href="#!cassa">Cassa</a></li>
 
