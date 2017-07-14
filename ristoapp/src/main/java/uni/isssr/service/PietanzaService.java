@@ -64,40 +64,12 @@ public class PietanzaService {
             Etichetta etichetta = etichettaRepository.findOne(etichettaId);
             pietanza.addEtichetta(etichetta);
         }
-        /*List<Ingrediente> ingredienti = new ArrayList<>();
-        for ( IngredienteDto ingredienteDto: pietanzaDto.getIngredienti()) {
-            Prodotto prodotto = prodottoRepository.findOne(ingredienteDto.getProdottoId());
-            if(prodotto == null){
-                prodotto = new Prodotto(ingredienteDto.getProdottoId(), ingredienteDto.getNome());
-                prodottoRepository.save(prodotto);
-            }
-
-            Ingrediente ingrediente = new Ingrediente(prodotto, ingredienteDto.getQuantita());
-            ingredienti.add(ingrediente);
-        }*/
         pietanza.setIngredienti(ingredienteService.marshal(pietanzaDto.getIngredienti()));
         return pietanza;
     }
 
     public Pietanza unmarshall(Long id, PietanzaDto pietanzaDto){
-        Pietanza pietanza = this.unmarshall(pietanzaDto);       /*new Pietanza(id, pietanzaDto.getNome(), pietanzaDto.getPrezzo());
-        for ( String etichettaId: pietanzaDto.getEtichette()) {
-            Etichetta etichetta = etichettaRepository.findOne(etichettaId);
-            pietanza.addEtichetta(etichetta);
-        }
-        List<Ingrediente> ingredienti = new ArrayList<>();
-        for ( IngredienteDto ingredienteDto: pietanzaDto.getIngredienti()) {
-
-            Prodotto prodotto = prodottoRepository.findOne(ingredienteDto.getProdottoId());
-            if(prodotto == null){
-                prodotto = new Prodotto(ingredienteDto.getProdottoId(), ingredienteDto.getNome());
-                prodottoRepository.save(prodotto);
-            }
-
-            Ingrediente ingrediente = new Ingrediente(prodotto, ingredienteDto.getQuantita());
-            ingredienti.add(ingrediente);
-        }
-        pietanza.setIngredienti(ingredienteService.marshal(pietanzaDto.getIngredienti()));*/
+        Pietanza pietanza = this.unmarshall(pietanzaDto);
         pietanza.setId(id);
         return pietanza;
     }

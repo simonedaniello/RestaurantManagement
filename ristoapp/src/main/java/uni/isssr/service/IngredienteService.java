@@ -17,14 +17,9 @@ import java.util.List;
  */
 @Service
 public class IngredienteService {
-    @Autowired
-    private EtichettaRepository etichettaRepository;
 
     @Autowired
     private ProdottoRepository prodottoRepository;
-
-    @Autowired
-    private PietanzaRepository pietanzaRepository;
 
 
     //trasforma gli ingredientiDto di una pietanza in Ingredienti

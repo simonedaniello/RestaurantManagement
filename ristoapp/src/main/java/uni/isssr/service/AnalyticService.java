@@ -25,9 +25,6 @@ public class AnalyticService {
     private ResocontoRepository resocontoRepository;
 
     @Autowired
-    private CategoriaRepository categoriaRepository;    /*PERCHÉ CRISTO DA ERRORE!?*/
-
-    @Autowired
     private PietanzaService pietanzaService;
 
     public AnalyticsDto getReport(String data){

@@ -44,7 +44,7 @@ public class MenuService {
         menuSearchDto.setNome(menu.getNome());
         menuSearchDto.setIsActive(menu.getIsActive());
         menuSearchDto.setDescrizione(menu.getDescrizione());
-        menuSearchDto.setImmagine("imgFiles/menu_background.jpg"); /* Da cambiare !!! */
+        menuSearchDto.setImmagine("imgFiles/menu_background.jpg");
         Date date = menu.getDataCreazione();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         String stringDate = sdf.format(date);
@@ -185,8 +185,6 @@ public class MenuService {
         for (CategoriaMenuDto categoriaDto:menuDto.getCategorie()) {
             Categoria categoria = new Categoria(categoriaDto.getNomeCategoria());
             categoria.setId(categoriaDto.getId());
-            System.out.println("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
-            System.out.println(categoria.getId());
             categoria.setPosizione(posizioneCategoria);
             posizioneCategoria+=1;
             List<Long> pietanzeId = new ArrayList<>();
