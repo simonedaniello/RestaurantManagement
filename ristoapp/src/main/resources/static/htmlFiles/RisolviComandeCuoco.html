@@ -1,0 +1,39 @@
+<style>
+    th {
+        background-color: #4CAF50;
+        color: white;
+    }
+</style>
+<div>
+    <form class="form-horizontal">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading"><p><b>Pietanze da cucinare</b></p></div>
+                        <div class="panel-body" class="row" style="overflow-y: auto; height: 700px">
+                            <table class="table table-striped" id="tabellaCuoco">
+                                <tbody ng-repeat="comandaOrder in selectedProdForChef">
+                                <tr>
+                                    <td colspan="2">ORDINAZIONE PER TAVOLO: {{comandaOrder.tavolo}}</td>
+                                </tr>
+                                <tr ng-repeat="comandaItem in comandaOrder.comandaItems" >
+                                    <td class="col-sm-9"><p style="font-style: italic">{{comandaItem.pietanza}} x {{comandaItem.quantita}}</p></td>
+                                    <td>
+                                        <div class="container-fluid">
+                                                <span class="col-sm-5">uscito</span>
+                                                <input class="col-sm-2" type="checkbox" name="box">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr><td colspan="2"><button type="button" class="btn btn-success" ng-click="fatto($index)">Risolvi comanda</button></td></tr>
+                                <tr bgcolor="#006400"><th colspan="2">   </th></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

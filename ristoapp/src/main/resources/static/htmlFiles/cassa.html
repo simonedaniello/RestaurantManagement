@@ -1,0 +1,54 @@
+<div class="container-fluid">
+    <div class="col-md-2"></div>
+
+    <div class="col-md-8">
+    <div class="panel panel-info">
+        <div class="panel-heading"><b>Tavolo</b>
+        </div>
+        <div class="panel-body">
+            <form class="form-inline">
+                <div class="form-group">
+                    <input type="number" class="form-control" placeholder="Numero del tavolo" ng-model="numeroTavolo">
+                    <button type="submit" class="btn btn-default" ng-click="selectComanda()">Seleziona</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading"><p><b>Conto</b></p></div>
+        <div class="panel-body" style="overflow-y: auto; height: 420px">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Pietanza</th>
+                    <th>Quantità</th>
+                    <th>Prezzo</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="comandaItem in comandaItems">
+                    <td class="col-sm-9"><p style="font-style: italic">{{comandaItem.pietanza}}</p></td>
+                    <td class="col-sm-3"><p style="font-style: italic">{{comandaItem.quantita}}</p></td>
+                    <td class="col-sm-3"><p style="font-style: italic">{{comandaItem.prezzo}} €</p></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="panel panel-info">
+        <div class="panel-heading"><b>Prezzo finale</b>
+        </div>
+        <div class="panel-body">
+            <div class="container-fluid">
+                <div class="form-group">
+                    <div class="well well-lg" style="font-size: large"><b>{{prezzoTotale}} €</b></div>
+                    <button type="submit" class="btn btn-default" ng-click="chiudiTavolo()">Chiudi</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Fine col centrale -->
+    </div>
+    <div class="col-md-2"></div>
+</div>

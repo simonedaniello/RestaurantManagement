@@ -1,0 +1,129 @@
+
+<div class="container-fluid">
+<div class="row content container" style="width:1400px; margin:0 auto;">
+
+    <div class="col-md-12">
+        <div class="panel panel-default form-group">
+            <div class="panel-heading">Ricerca Pietanza</div>
+            <div class="panel-body">
+
+                <div class="form-group">
+                    <label class="form-horizontal" for="nome">Nome:</label>
+                    <input type="text" class="form-control" style="max-width: 30%" id="nome" ng-model="searchNome" placeholder="Nome pietanza">
+                </div>
+                <div class="input-group" style="max-width: 10%">
+                    <span class="input-group-addon" style="background-color:lightskyblue">Tag: </span>
+                    <span class="input-group-addon" style="background-color:lightcyan;" ng-repeat="elem in associatedTags">{{elem}}</span>
+                    <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-default">Seleziona Tag</button>
+                </div>
+                <button type="submit" ng-click="ricerca()" class="btn btn-primary" style="margin-top: 10px">Cerca</button>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" id="top">Elenco delle Pietanze</div>
+            <div class="panel-body">
+                    <div class="row">
+                        <div class="bs-calltoaction bs-calltoaction-default" ng-repeat="pietanza in listaPietanze">
+                            <div class="panel-heading">
+                                <div class="input-group" style="max-width: 10%">
+                                    <span class="input-group-addon" style="background-color:lightskyblue">Tag: </span>
+                                    <span class="input-group-addon" style="background-color:lightcyan;" ng-repeat="tag in pietanza.etichette">{{tag.classificatore}}</span>
+                                    <span class="input-group-addon" style="background-color: yellow;">Prezzo: {{pietanza.prezzo}}€</span>
+                                </div>
+                                </div>
+                            <div class="row">
+                                <div class="col-md-10 cta-contents">
+                                    <h1 class="cta-title">{{pietanza.nome}}</h1>
+                                    <div class="cta-desc" ng-repeat="ingrediente in pietanza.ingredienti">
+                                        <ul>
+                                            <li>{{ingrediente.prodotto.nome}} {{ingrediente.quantita}}</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-md-2 cta-button">
+                                    <a ng-click="modificaPietanza(pietanza.id)" class="btn btn-lg btn-block btn-default bs-calltoaction bs-calltoaction-success">Modifica</a>
+                                    <a ng-click="deletePietanza(pietanza.id)" class="btn btn-lg btn-block btn-default bs-calltoaction bs-calltoaction-danger">Rimuovi</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <div class="row">
+                    <div class="text-center">
+                        <nav>
+                        <ul class="pagination pagination-lg">
+                            <li class="page-item">
+                                <a class="page-link" ng-if="currentPage != 0" ng-click="updatePietanzePagina(currentPage - 1)" href="" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                            </li>
+                            <li ng-repeat="pagina in listaPagine" class="page-item" ng-class="{'active' : (currentPage === pagina)}"><a href="" ng-click="updatePietanzePagina(pagina)">{{pagina + 1}}</a></li>
+                            <li class="page-item">
+                                <a class="page-link" ng-hide="nextPage" ng-click="updatePietanzePagina(currentPage + 1)" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </li>
+                        </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="myModal" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Gestisci Tag associati</h4>
+                    </div>
+                    <div class="modal-body" style="background-color: lightgoldenrodyellow">
+
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading"><p><b>Seleziona tag</b></p></div>
+                                        <div class="panel-body" style="overflow-y: auto; height: 420px">
+                                            <table class="table table-striped">
+                                                <div class="container-fluid" style="padding-bottom: 10px">
+                                                    <input id="filterTag" type="text" class="form-control col-sm-1" ng-model ="filterTag" placeholder="Filtra per nome">
+                                                </div>
+                                                <tbody>
+                                                <tr ng-repeat="tag in tags | filter: filterTag">
+                                                    <td><p style="font-style: italic">{{tag}}</p></td>
+                                                    <td><div class="checkbox">
+                                                        <label><input type="checkbox" ng-click="updateSelectedTag(tag)" id="check.{{tag}}"></label>
+                                                    </div></td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading"><p><b>Tag selezionati</b></p></div>
+                                        <div class="panel-body" class="row" style="overflow-y: auto; height: 350px">
+                                            <table class="table table-striped">
+                                                <tbody>
+                                                <tr ng-repeat="elem in associatedTags">
+                                                    <td><p style="font-style: italic">{{elem}}</p></td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="container-fluid">
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal" style="width: 100px; background-color: green">Ok</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+</div>
+</div>

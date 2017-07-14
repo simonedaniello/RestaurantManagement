@@ -94,7 +94,6 @@ public class PietanzaService {
         for (Ingrediente ingrediente:pietanza.getIngredienti()){
             IngredienteDto ingredienteDto = menuService.ingredienteToIngredienteDto(ingrediente);
             ingredienti.add(ingredienteDto);
-            System.out.println(ingredienteDto.getNome());
         }
         List<String> etichette = new ArrayList<>();
         for (Etichetta etichetta:pietanza.getEtichette()){

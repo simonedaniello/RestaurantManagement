@@ -1,0 +1,83 @@
+<div>
+
+    <form class="form-horizontal">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                        <label for="tavolo">Inserire numero tavolo:</label>
+                        <input type="number" class="form-control" id="tavolo" ng-model="numeroTavolo"><br>
+                </div>
+                <div class="col-md-6">
+                    <div class="well well-lg"><b>TAVOLO: {{numeroTavolo}}</b></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6" style="padding: 10px">
+                    <label for="ricercaNome">Ricerca:</label>
+                    <input type="text" class="form-control" id="RicercaNome" ng-model="ricercaNome">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading"><p><b>Seleziona pietanze</b></p></div>
+                        <div class="panel-body" style="overflow-y: auto; height: 420px">
+                            <table class="table table-striped" ng-repeat="categoria in menuAttuale | orderBy: 'categoria.posizione'">
+                                <tbody>
+                                <tr>
+                                    <th style="font-size: large; text-align: center">{{categoria.nomeCategoria}}</th>
+                                </tr>
+                                <tr ng-repeat="pietanza in categoria.pietanze | orderBy: 'pietanza.pietanzaDto.nome'">
+                                    <td>
+                                        <div class="menu-item-name">
+                                            <b>{{pietanza.pietanzaDto.nome}}</b>
+                                        </div>
+                                        <div>
+                                            <span class="menu-item-description" ng-repeat="ingrediente in pietanza.pietanzaDto.ingredienti">
+                                                {{ingrediente.nome}}{{$last ? '' : ', '}}
+                                            </span>
+                                        </div>
+                                        <div>
+                                            <span class="menu-item-description">
+                                                € {{pietanza.pietanzaDto.prezzo}}
+                                            </span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="checkbox menu-item-price">
+                                            <label><input type="checkbox" id ="check.{{pietanza.id}}" ng-click="updateSelectedProd(pietanza.pietanzaDto.nome, pietanza.pietanzaDto.prezzo, pietanza.id)"></label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading"><p><b>Pietanze selezionate</b></p></div>
+                        <div class="panel-body" class="row" style="overflow-y: auto; height: 350px">
+                            <table class="table table-striped">
+                                <tbody>
+                                <tr ng-repeat="prod in selectedProd">
+                                    <td class="col-sm-9"><p style="font-style: italic">{{prod.pietanza}}</p></td>
+                                    <td class="col-sm-3"><input required type="number" class="form-control" id="qnt.{{prodotto.pietanza}}" step="1" ng-model="prod.quantita"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="container-fluid">
+                        <div class="col-sm-6">
+                            <button type="button" class="btn btn-success" ng-click="publish()">Invia</button>
+                        </div>
+                        <div class="col-sm-6">
+                            <button type="button" class="btn btn-danger" ng-click="annulla()">Annulla</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

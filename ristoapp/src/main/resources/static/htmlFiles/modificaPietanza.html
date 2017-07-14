@@ -1,4 +1,4 @@
-<div class="container">
+<div>
     <form name="creaPietanzaForm" class="form-horizontal">
         <div class="form-group">
             <div class="container">
@@ -61,10 +61,6 @@
                                                             </table>
                                                         </div>
                                                     </div>
-                                                    <div class="container-fluid">
-                                                        <input id="addTag" type="text" class="form-control col-sm-1" ng-model ="nomeNewTag" placeholder="Nome nuovo tag">
-                                                        <button type="button" class="btn btn-primary" ng-click="saveTag()">crea tag</button>
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -83,14 +79,6 @@
                     <div class="panel panel-default">
                         <div class="panel-heading"><p><b>Seleziona prodotti</b></p></div>
                         <div class="panel-body" style="overflow-y: auto; height: 420px">
-                            <p><div class="input-group">
-                            <span class="input-group-addon">Mostra</span>
-                            <select class="btn btn-default dropdown-toggle" data-ng-model="filtro">
-                                <option selected value="all">Mostra tutti i prodotti</option>
-                                <option value="cibo">solo cibarie</option>
-                                <option value="bevanda">solo bibite</option>
-                            </select>
-                            </div></p>
                             <table class="table table-striped">
                                 <tbody>
                                 <tr ng-repeat="prodotto in prodotti | filter: filterProdotti | orderBy: 'nome'">
@@ -122,7 +110,7 @@
                                 <tbody>
                                 <tr ng-repeat="prod in selectedProd | orderBy: 'nome'">
                                     <td class="col-sm-9"><p style="font-style: italic">{{prod.nome}}</p></td>
-                                    <td class="col-sm-3"><input name="quantita" required id ="quant.{{prod.nome}}" type="number" min="1" onkeydown="return false" class="form-control" step="1" ng-model="prod.quantita" ng-change="changeQnt(prod.nome)"></td>
+                                    <td class="col-sm-3"><input name="quantita" id ="quant.{{prod.nome}}" required="" type="number" min="1" class="form-control" step="1" ng-model="prod.quantita" ng-change="changeQnt(prod.nome)"></td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -130,7 +118,10 @@
                     </div>
                     <div class="container-fluid">
                         <div class="col-sm-6">
-                            <button ng-disabled="creaPietanzaForm.nomePietanza.$invalid || creaPietanzaForm.prezzoPietanza.$invalid || creaPietanzaForm.quantita.$invalid || selectedProd.length == 0" type="button" class="btn btn-success" ng-click="saveDish()">Salva</button>
+                            <button ng-disabled="creaPietanzaForm.nomePietanza.$invalid || creaPietanzaForm.prezzoPietanza.$invalid || creaPietanzaForm.quantita.$invalid || selectedProd.length == 0" type="button" class="btn btn-success" ng-click="updateDish()">Modifica</button>
+                        </div>
+                        <div class="col-sm-6">
+                            <button type="button" onclick="window.location.href='#!cercaPietanza'" class="btn btn-danger">Annulla</button>
                         </div>
                     </div>
                 </div>

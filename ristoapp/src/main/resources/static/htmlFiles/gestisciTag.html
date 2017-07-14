@@ -1,0 +1,40 @@
+<div class="container-fluid">
+    <div class="panel panel-info">
+        <div class="panel-heading"><b>Crea una nuova etichetta</b>
+        </div>
+        <div class="panel-body">
+            <div class="container-fluid">
+                <div class="form-group">
+                    <label class="col-sm-1" for="addTag">Nome:</label>
+                    <input class="col-sm-9" type="text" id="addTag" placeholder="Inserisci nome del nuovo tag" ng-model="nomeNewTag">
+                    <button type="button" class="btn col-sm-1" ng-click="saveTag(tag)">Crea Tag</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading"><p><b>Gestisci etichette esistenti</b></p></div>
+        <div class="panel-body" style="overflow-y: auto">
+            <table class="table table-striped">
+                <div class="container-fluid" style="padding-bottom: 10px">
+                    <input id="filterTag" type="text" class="form-control" ng-model ="filterTag" placeholder="Filtra per nome">
+                </div>
+                <tbody>
+                <tr ng-repeat="tag in tags | filter: filterTag">
+                    <td class="col-sm-3"><p style="font-style: italic">{{tag}}</p></td>
+                    <td class="col-sm-1">
+                        <button type="button" class="btn" ng-click="deleteTag(tag)">Elimina</button>
+                    </td>
+                    <td class="col-sm-8">
+                        <div class="form-group">
+                            <label class="col-sm-2" for="{{tag}}">Modifica:</label>
+                            <input class="col-sm-7" type="text" id="{{tag}}" placeholder="Cambia il nome del tag">
+                            <button type="button" class="col-sm-2 btn" ng-click="modifyTag(tag)">Modifica</button>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
